@@ -5,3 +5,7 @@ body{
 form{
     margin:0px;
 }
+.row{
+    margin-right:0px !important;
+    margin-left:0px !important;
+}
