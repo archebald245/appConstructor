@@ -2,10 +2,42 @@ body{
     margin:0;
     padding:0px 0 15px 0;
 }
+
 form{
     margin:0px;
 }
 .row{
     margin-right:0px !important;
     margin-left:0px !important;
+}
+.classHide {
+    display: none;
+}
+.classMenu{
+    background:#969696;
+    position:fixed;
+    height:30px;
+    z-index:1000;
+    width:100%;
+}
+.top-menu-icon{
+    width:30px;
+    height:30px;
+    background:url(../images/menuIcon.png) no-repeat 0 0;
+    background-size:contain;
+    display:block;
+    text-indent:-9999px;
+}
+ .classDropdownList{
+    color: black;
+    position:absolute;
+    z-index: 10000;
+    padding:5%;
+    background:#969696;
+}
+.classDropdownList > div{
+    margin:3px 0 3px 0;
+}
+#container{
+    padding-top:35px;
 }
