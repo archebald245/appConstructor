@@ -24,13 +24,14 @@ function SearchValueImages(jsonObject, storePath) {
                     fileName = resources[iterator].split('/');
                     console.log(fileName);
                     console.log(resources);
-                     console.log(fileName.length);
+                    console.log(fileName.length);
                     fileName = fileName[fileName.length-1];
                     console.log(fileName);
                    
                     
                     jsonObject.Pages[i].Rows[p].CellContents[j].Value = replacementValueImages(jsonObject.Pages[i].Rows[p].CellContents[j].Value, fileName, storePath);
-                    jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses[0].Link = storePath + fileName;
+                    // jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses[0].Link = storePath + fileName;
+                     console.log(jsonObject.Pages[i].Rows[p].CellContents[j].Value);
                 }
             }
         }
@@ -40,18 +41,22 @@ function SearchValueImages(jsonObject, storePath) {
 
 function replacementValueImages(jsonObjectValue, fileName, storePath) {
     var value = jsonObjectValue.split('src=');
-    var src = value[1].split('\"')
+    var src = value[1].split('\'')
+     console.log(src[1]);
     console.log("ClassStore " + storePath);
     src[1] = storePath + fileName;
-    value[1] = src.join('\"');
+    console.log(src[1]);
+    value[1] = src.join('\'');
+    console.log(value[1]);
+    console.log(value.join('src='));
     return  value.join('src=');
 }
 
 function deleteImage(imagePath) {
     var remoteFile = encodeURI(imagePath);
-        var localFileName = encodeURI("PhonegapImages/" + remoteFile.substring(remoteFile.lastIndexOf('/')+1));
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-    fileSystem.root.getFile(localFileName, {create:false}, function(fileEntry){
+        var localFileName = encodeURI("Phonegap/" + remoteFile.substring(remoteFile.lastIndexOf('/')+1));
+  
+    window.myFileSystem.root.getFile(localFileName, {create:false}, function(fileEntry){
         fileEntry.remove(function(file){
             console.log("File removed!");
         },function(){
@@ -60,20 +65,11 @@ function deleteImage(imagePath) {
         },function(){
             console.log("file does not exist");
         });
-    },function(evt){
-        console.log(evt.target.error.code);
-});
+
 }
 
 function renderingPage(index) {
     indexPage= index;
-     $("#container").empty();
-            reactRender();
-            
+    $("#container").empty();
+    reactRender();      
 }
-
-function doMenu(){
-    
-}
-
-

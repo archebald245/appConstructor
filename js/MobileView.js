@@ -24,8 +24,8 @@ var Rows = React.createClass({
 		// 		console.error(status, err.toString());
 		// 	}.bind(this)
 		// });
-        this.setState({data: data.Pages[indexPage].Rows})
-        console.log(data.Pages[0].Rows)
+        this.setState({data: applicationData.Pages[indexPage].Rows})
+       
 	},
 	render: function render() {
 		var rowModels = this.state.data.map(function (row) {
@@ -87,6 +87,3 @@ var CellContent = React.createClass({
 ReactDOM.render(React.createElement(Rows, null), document.getElementById('container'));
 }
 
-(function() {
-  reactRender();
-})();

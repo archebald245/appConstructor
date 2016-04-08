@@ -3,6 +3,9 @@ var store;
 var fileNameImage;
 var resources;
 var indexPage = 0;
+var applicationData;
+var countFileDownload = 0;
+var countFileDownloadFail = 0;
 
 function initSwipe(){
     $(document).swipe( {
@@ -10,49 +13,71 @@ function initSwipe(){
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
             if((direction == "right")&(indexPage>0)){
                 renderingPage(indexPage - 1);
-            }else if((direction == "left")&(indexPage<data.Pages.length-1)){
+            }else if((direction == "left")&(indexPage<applicationData.Pages.length-1)){
                 renderingPage(indexPage + 1);
             }
         }
     });
 }
 
+function init(){
+    document.addEventListener("deviceready", onDeviceReady, false);
+    $(".classDropdownList").addClass("classHide");
+    initSwipe();
+}
+
 function onDeviceReady() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-         fileSystem.root.getDirectory("PhonegapImages", {create: true, exclusive: false}, onGetDirectorySuccess, onGetDirectoryFail); 
-         store = fileSystem.root.nativeURL + "PhonegapImages/" ;
+        window.myFileSystem=fileSystem;
+         fileSystem.root.getDirectory("Phonegap", {create: true, exclusive: false}, onGetDirectorySuccess, onGetDirectoryFail); 
+         onCheckJson();
+         store = fileSystem.root.nativeURL + "Phonegap/" ;
          console.log(store);
+         
      });
      
-    resources = resourcesFromJson(data);
     
-    for(var i = 0;i<resources.length;i++){
-        fileNameImage = resources[i];
-        console.log(fileNameImage);
-        download();
-    }
+    
     console.log("indexStore " + store);
     appStart();    
 }
 
 function download() {
     var remoteFile = encodeURI(fileNameImage);
-    var localFileName = encodeURI("PhonegapImages/" + remoteFile.substring(remoteFile.lastIndexOf('/')+1));
+    var localFileName = encodeURI("Phonegap/" + remoteFile.substring(remoteFile.lastIndexOf('/')+1));
     var localPath;
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-
-        fileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
+    var resourcesArr = [];
+    for(var i = 0, iterator = 0;i<resources.length; i++, iterator++){
+        if(resources[i]!="undefined"){
+            resourcesArr[iterator] = resources[i];
+        }
+    }
+    resources = resourcesArr;
+    
+        window.myFileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
+            
              localPath = fileEntry.toURL();
             console.log( localPath );
             var ft = new FileTransfer();
             ft.download(remoteFile,
                 localPath, function(entry) {
+                   countFileDownload = countFileDownload+1;
+                   if((countFileDownload+countFileDownloadFail) === resources.length){
+                     callback();  
+                   }
                    
-                }, fail);
+                   
+                   
+                }, failDownload);
         }, fail);
-    }, fail);
 }
-    
+ 
+ function failDownload(error) {
+     countFileDownloadFail = countFileDownloadFail+1;
+     
+    console.log(error.code);
+}
+ 
 function fail(error) {
     console.log(error.code);
 }
@@ -68,18 +93,17 @@ function onGetDirectoryFail(error) {
 function appStart() {
     console.log("add" + store)
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-      store = fileSystem.root.nativeURL + "PhonegapImages/" ;
-        data = SearchValueImages(data, store);
-        createMenu();
+      
+       
     });
 }
     
 function createMenu(){
     var div;
     var label;
-    for(var i =0;i<data.Pages.length;i++){
+    for(var i =0;i<applicationData.Pages.length;i++){
         div = $('<div class="classPageLink" id ='+ i+' onClick="clickPageOnDropdownMenu(event)"></div>');
-         label = $('<label>' + data.Pages[i].Name + '</label>');
+         label = $('<label>' + applicationData.Pages[i].Name + '</label>');
          label.appendTo(div);
        div.appendTo('div.classDropdownList');
     }  
@@ -96,12 +120,30 @@ function addListener(){
   
 function addClassHide(){
     $(".classPageLink").addClass("classHide");
+    $(".classDropdownList").addClass("classHide");
     console.log("classHide");
 }
 function removeClassHide(){
     $(".classPageLink").removeClass("classHide");
+    $(".classDropdownList").removeClass("classHide");
 }
   
 function onClickButtonMenu(){
   removeClassHide();
+}
+
+function blockUi(){
+     $.blockUI({ css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+        } }); 
+}
+
+function unBlockUi(){
+    $.unblockUI;
 }
