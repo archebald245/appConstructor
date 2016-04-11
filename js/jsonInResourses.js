@@ -74,5 +74,12 @@ function renderingPage(index) {
     $("#container").empty();
     slideUp();
     
-    reactRender();      
+    reactRender();
+    
+    $("a").each(function(i, e){
+        var hrefVal = $(e).attr("href");
+        $(e).click(function(){
+            window.open(hrefVal, '_system');
+        });
+    });
 }

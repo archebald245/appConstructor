@@ -16,7 +16,8 @@ function initSwipe(){
             }else if((direction == "left")&(indexPage<applicationData.Pages.length-1)){
                 renderingPage(indexPage + 1);
             }
-        }
+        },
+        allowPageScroll:"vertical"
     });
 }
 
