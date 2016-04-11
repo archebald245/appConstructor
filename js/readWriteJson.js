@@ -54,6 +54,7 @@ function callback(){
     store = window.myFileSystem.root.nativeURL + "Phonegap/" ;
     applicationData = SearchValueImages(applicationData, store);
     console.log("app" + applicationData);
+     $.jStorage.set('appData', jsonString);
       
 }
 

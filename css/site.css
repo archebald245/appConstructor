@@ -50,3 +50,8 @@ form{
 #container{
     padding-top:40px;
 }
+.blockMsg{
+    width:80% !important;
+    left:50% !important;
+    margin-left:-40% !important;
+}
