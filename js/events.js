@@ -21,6 +21,7 @@ function initSwipe(){
 }
 
 function init(){
+    replaceData();
     document.addEventListener("deviceready", onDeviceReady, false);
     $(".classDropdownList").addClass("classHide");
     initSwipe();

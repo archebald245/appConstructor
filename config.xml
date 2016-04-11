@@ -1,18 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-    <widget xmlns   = "http://www.w3.org/ns/widgets"
-        xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "com.phonegap.example"
-        versionCode = "10" 
-        version     = "1.0.0" >
-
-    <!-- versionCode is optional and Android only -->
-
-    <name>PhoneGap Example</name>
-
-    <description>
-        An example for phonegap build docs. 
-    </description>
-    
+<?xml version="1.0"?>
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="com.phonegap.ssdcsdvczz" version="0.0.1">
+  <name>123as</name>
+  <description>321ads</description>
   <plugin name="com.fantasyskiracer.inappbrowser" spec="1.0.4" source="pgb" />
   <plugin name="org.apache.cordova.file-transfer" spec="0.5.0" source="pgb" />
   <plugin name="cordova-plugin-whitelist" spec="" source="npm" />
@@ -28,9 +17,6 @@
   <feature name="FileTransfer">
     <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
   </feature>
-
-    <content src="index.html" />
-    
-    <gap:platform name="android" />
-    <gap:platform name="winphone" />
+  <gap:platform name="android" />
+  <gap:platform name="winphone" />
 </widget>

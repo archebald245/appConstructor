@@ -8,7 +8,13 @@ function onCheckJson(){
     }else{
         applicationData = JSON.parse(data);
         downloadResources();
-        
+        if(resources.length==0){
+            var jsonString = JSON.stringify(applicationData);
+             console.log(jsonString);
+            $.jStorage.set('appData', jsonString);
+            createMenu();
+            reactRender();
+        }
       
     }
     console.log($.jStorage.get('appData'));
@@ -30,6 +36,11 @@ function downloadResources() {
         fileNameImage = resources[i];
         console.log(fileNameImage);
         download();
+        var jsonString = JSON.stringify(applicationData);
+    console.log(jsonString);
+    $.jStorage.set('appData', jsonString);
+    createMenu();
+    reactRender();
     }
     
     
@@ -41,10 +52,16 @@ function callback(){
     store = window.myFileSystem.root.nativeURL + "Phonegap/" ;
     applicationData = SearchValueImages(applicationData, store);
     console.log("app" + applicationData);
-    var jsonString = JSON.stringify(applicationData);
-    console.log(jsonString);
-    $.jStorage.set('appData', jsonString);
-    createMenu();
-    reactRender();
-   
+      
+}
+
+function replaceData(){
+    console.log(data);
+    data = data.replace(/\n/g,'');
+    data = data.replace(/\t/g,'');
+    data = data.replace(/\b/g,'');
+    data = data.replace(/\r/g,'');
+    data = data.replace(/\v/g,'');
+    data = data.replace(/\f/g,'');
+    console.log(data);
 }
