@@ -70,6 +70,9 @@ function deleteImage(imagePath) {
 
 function renderingPage(index) {
     indexPage= index;
+    showActivePageInMenu(index);
     $("#container").empty();
+    slideUp();
+    
     reactRender();      
 }

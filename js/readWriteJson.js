@@ -6,6 +6,7 @@ function onCheckJson(){
         createMenu();
         reactRender();
     }else{
+        replaceData();
         applicationData = JSON.parse(data);
         downloadResources();
         if(resources.length==0){
@@ -17,6 +18,7 @@ function onCheckJson(){
         }
       
     }
+    unBlockUi();
     console.log($.jStorage.get('appData'));
     
         

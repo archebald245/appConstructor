@@ -21,7 +21,7 @@ function initSwipe(){
 }
 
 function init(){
-    replaceData();
+    blockUi()
     document.addEventListener("deviceready", onDeviceReady, false);
     $(".classDropdownList").addClass("classHide");
     initSwipe();
@@ -101,6 +101,7 @@ function appStart() {
     
 function createMenu(){
     var div;
+    $("div.classDropdownList").html("");
     var label;
     for(var i =0;i<applicationData.Pages.length;i++){
         div = $('<div class="classPageLink" id ='+ i+' onClick="clickPageOnDropdownMenu(event)"></div>');
@@ -108,29 +109,36 @@ function createMenu(){
          label.appendTo(div);
        div.appendTo('div.classDropdownList');
     }  
-    addClassHide();
-    addListener();      
+    addListener();   
+    slideUp(); 
+    showActivePageInMenu(0);
 }
 
 function clickPageOnDropdownMenu(event){
-     renderingPage(event.currentTarget.id);
+    slideUp();
+    renderingPage(event.currentTarget.id);
 }
 function addListener(){
-  document.querySelector('body').addEventListener('click',addClassHide,true);
+    document.querySelector('body').addEventListener('click',slideUp,true);
 }  
-  
-function addClassHide(){
-    $(".classPageLink").addClass("classHide");
-    $(".classDropdownList").addClass("classHide");
-    console.log("classHide");
+
+function slideUp(){
+     $( ".classDropdownList" ).slideUp( "fast");
 }
-function removeClassHide(){
-    $(".classPageLink").removeClass("classHide");
-    $(".classDropdownList").removeClass("classHide");
+
+function slideDown(){
+    if ( $(".classDropdownList").is( ":hidden" ) ) {
+    $(".classDropdownList").slideDown( "fast" );
+    }
+}
+
+function showActivePageInMenu(page){
+    $(".classPageLink").removeClass("activePage");
+    $("#"+ page +"").addClass("activePage");
 }
   
 function onClickButtonMenu(){
-  removeClassHide();
+  slideDown()
 }
 
 function blockUi(){
@@ -146,5 +154,5 @@ function blockUi(){
 }
 
 function unBlockUi(){
-    $.unblockUI;
+    $.unblockUI();
 }
