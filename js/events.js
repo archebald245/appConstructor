@@ -14,7 +14,7 @@ function initSwipe(){
             if((direction == "right")&(indexPage>0)){
                 renderingPage(indexPage - 1);
             }else if((direction == "left")&(indexPage<applicationData.Pages.length-1)){
-                renderingPage(indexPage + 1);
+                renderingPage(Number(indexPage) + 1);
             }
         },
         allowPageScroll:"vertical"
@@ -25,7 +25,7 @@ function init(){
     blockUi()
     document.addEventListener("deviceready", onDeviceReady, false);
     $(".classDropdownList").addClass("classHide");
-    initSwipe();
+    //initSwipe();
 }
 
 function onDeviceReady() {
