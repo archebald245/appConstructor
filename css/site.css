@@ -29,6 +29,7 @@ form{
     display:block;
     text-indent:-9999px;
     margin-left:10px;
+    cursor:pointer;
 }
  .classDropdownList{
     color: black;
