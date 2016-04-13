@@ -32,7 +32,7 @@ function onDeviceReady() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
         window.myFileSystem=fileSystem;
          fileSystem.root.getDirectory("Phonegap", {create: true, exclusive: false}, onGetDirectorySuccess, onGetDirectoryFail); 
-         onCheckJson();
+         checkConnection();
          store = fileSystem.root.nativeURL + "Phonegap/" ;
          console.log(store);
          

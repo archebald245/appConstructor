@@ -1,7 +1,9 @@
 function resourcesFromJson(jsonObject) {
     //var jsonObject = JSON.parse(data);
     var resourcesArray = new Array();
+    var resourcesToDownload;
     var fileName;
+    var storePath = window.myFileSystem.root.nativeURL + "Phonegap/" ;
     for (var i = 0, iterator = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             for (var j = 0; j < jsonObject.Pages[i].Rows[p].CellContents.length; j++ , iterator++) {
@@ -11,11 +13,19 @@ function resourcesFromJson(jsonObject) {
             }
         }
     }
-    return resourcesArray;
+     if($.jStorage.get('resources')!=null){
+       resourcesToDownload = compareResouces($.jStorage.get('resources'),resourcesArray, storePath);
+    }else{
+        resourcesToDownload = resourcesArray;
+    }
+    
+    $.jStorage.set('resources',resourcesArray);
+    return resourcesToDownload;
 }
 
 function SearchValueImages(jsonObject, storePath) {
      var fileName;
+     
     for (var i = 0, iterator = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             for (var j = 0; j < jsonObject.Pages[i].Rows[p].CellContents.length; j++ , iterator++) {
@@ -36,17 +46,49 @@ function SearchValueImages(jsonObject, storePath) {
             }
         }
     }
+   
     return jsonObject;
+}
+
+function compareResouces(oldResources, newResources, storePath){
+    var equalResources=[];
+    var deleteOldResources = [];
+    for(var i=0;i<oldResources.length;i++){
+        for(var j=0;j<newResources.length;j++){
+            if(oldResources[i]==newResources[j]){
+                equalResources.push(newResources[j]);
+                newResources[j] = null;
+                oldResources[i] = null;
+            }
+        }
+    }
+            for(var i=0;i<oldResources.length;i++){
+        if(oldResources[i] != null){
+            deleteOldResources.push(oldResources[i]);
+        }
+    }
+             $.jStorage.set('oldResources', deleteOldResources);
+           
+    
+  
+    
+    for(var i=0;i<newResources.length;i++){
+        if(newResources[i] != null){
+            equalResources.push(newResources[i]);
+        }
+    }
+    return equalResources;
+    
 }
 
 function replacementValueImages(jsonObjectValue, fileName, storePath) {
     var value = jsonObjectValue.split('src=');
-    var src = value[1].split('\'')
+    var src = value[1].split('\"')
      console.log(src[1]);
     console.log("ClassStore " + storePath);
     src[1] = storePath + fileName;
     console.log(src[1]);
-    value[1] = src.join('\'');
+    value[1] = src.join('\"');
     console.log(value[1]);
     console.log(value.join('src='));
     return  value.join('src=');
@@ -82,4 +124,17 @@ function renderingPage(index) {
             window.open(hrefVal, '_system');
         });
     });
+}
+
+function deleteResources(){
+    var oldResources =  $.jStorage.get('oldResources');
+    if (oldResources != null) {
+        for (var i = 0; i < oldResources.length; i++) {
+            if (oldResources[i] != null) {
+                deleteImage(oldResources[i]);
+            }
+        }
+    }
+    deleteImage("Phonegap/undefined");
+    deleteImage("Phonegap/null");
 }
