@@ -92,6 +92,15 @@ function replacementValueImages(jsonObjectValue, fileName, storePath) {
     console.log(value[1]);
     console.log(value.join('src='));
     return  value.join('src=');
+    /*
+    var m,
+    urls = [], 
+    str = '<img src="http://site.org/one.jpg />',
+    rex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
+
+    m = rex.exec( str );
+    str = str.replace(m[1], "test");
+    */
 }
 
 function deleteImage(imagePath) {
