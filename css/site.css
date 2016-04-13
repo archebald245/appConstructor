@@ -16,10 +16,11 @@ form{
 .classMenu{
     background:#E5E5E5;
     position:fixed;
-    height:70px;
-    padding:15px 0 5px 0;
+    height:80px;
+    padding:25px 0 5px 0;
     z-index:1000;
     width:100%;
+    margin-top:-1px;
 }
 .top-menu-icon{
     width:96px;
@@ -37,7 +38,7 @@ form{
     z-index: 10000;
     width:100%;
     background:#E5E5E5;
-    top:70px;
+    top:80px;
 }
 .classDropdownList > div{
     padding:7px 10px 7px 10px;
@@ -49,7 +50,7 @@ form{
     background:#C5C5C5;
 }
 #container{
-    padding-top:75px;
+    padding-top:85px;
 }
 .blockMsg{
     width:80% !important;
