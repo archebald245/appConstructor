@@ -26,7 +26,7 @@ function reactRender() {
    });*/
 			this.setState({ data: applicationData.Pages[indexPage].Rows });
 			setTimeout('initPhotoSwipeFromDOM(".my-gallery")', 1000);
-			setTimeout('cutImageOfYoutubeContainer()', 1000);
+			setTimeout('cutImageOfYoutubeContainer()', 100);
 		},
 		render: function render() {
 			var rowModels = this.state.data.map(function (row) {
