@@ -57,3 +57,39 @@ form{
     left:50% !important;
     margin-left:-40% !important;
 }
+.youtube-container {
+    position: relative;
+}
+.difficult-button {
+    position: relative;
+}
+.text-bottom, .text-top, .text-center{
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    opacity: 0.8;
+    min-height: fit-content !important;
+    display: block;
+    padding: 10px 0 10px 0;
+    color: #000;
+    text-align: center;
+}
+.text-bottom a, .text-top a, .text-center a {
+    display: block;
+    padding: 10px 0 10px 0;
+    color: #000;
+    text-align: center;
+}
+.text-top {
+    top: 10%;
+}
+.text-bottom {
+    bottom: 10%;
+}
+.text-center {
+    top: 50%;
+    margin-top: -10px;
+}
+.gallery-image{
+	max-width:100%;
+}

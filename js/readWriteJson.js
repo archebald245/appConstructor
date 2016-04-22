@@ -20,6 +20,7 @@ function onCheckJson(){
         downloadResources();
         if(resources.length==0){
             var jsonString = JSON.stringify(applicationData);
+            cutImageOfYoutubeContainer();
              console.log(jsonString);
             $.jStorage.set('appData', jsonString);
             createMenu();

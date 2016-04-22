@@ -157,3 +157,64 @@ function blockUi(){
 function unBlockUi(){
     $.unblockUI();
 }
+
+function cutImageOfYoutubeContainer(){
+    $(".youtube-image").remove();
+    
+    // var val;
+    // for (var i = 0, iterator = 0; i < applicationData.Pages.length; i++) {
+    //     for (var p = 0; p < applicationData.Pages[i].Rows.length; p++) {
+    //         for (var j = 0; j < applicationData.Pages[i].Rows[p].CellContents.length; j++ , iterator++) {
+    //             if (applicationData.Pages[i].Rows[p].CellContents[j].ContentTypeId == 7) {
+    //                 val = applicationData.Pages[i].Rows[p].CellContents[j].Value.split('<img');  
+    //                 applicationData.Pages[i].Rows[p].CellContents[j].Value = val[0] + "</div>";                    
+    //             }
+    //         }
+    //     }
+    // }
+}
+
+function getPositionMenu(positionMenuX, positionMenuY)
+{
+
+    switch(positionMenuX, positionMenuY)
+    {
+
+        case 'left': 
+        case 'top':
+        $('span.top-menu-icon').show().addClass('top-menu-icon-left');
+        $('.classMenu').show();
+        break;
+
+        case 'left': 
+        case 'center':
+        $('span.top-menu-icon').show().addClass('side-menu-left');
+        $('.classMenu').show();
+        break;
+
+        case 'left': 
+        case 'down':
+        $('span.top-menu-icon').show().addClass('top-menu-icon-left');
+        $('.classMenu').show().addClass('classDownMenu');
+        break;
+
+        case 'right': 
+        case 'top':
+        $('span.top-menu-icon').show().addClass('top-menu-icon-right');
+         $('.classMenu').show();
+        break;
+
+        case 'right': 
+        case 'center':
+        $('span.top-menu-icon').show().addClass('side-menu-right');
+         $('.classMenu').show();
+        break;
+
+        case 'right': 
+        case 'down':
+        $('span.top-menu-icon').show().addClass('top-menu-icon-right');
+        $('.classMenu').show().addClass('classDownMenu');
+        break;
+        
+    }
+}

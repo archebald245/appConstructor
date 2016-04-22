@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 function reactRender() {
 	var Rows = React.createClass({
-		displayName: "Rows",
+		displayName: 'Rows',
 
 		getInitialState: function getInitialState() {
 			return { data: [] };
@@ -26,41 +26,42 @@ function reactRender() {
    });*/
 			this.setState({ data: applicationData.Pages[indexPage].Rows });
 			setTimeout('initPhotoSwipeFromDOM(".my-gallery")', 1000);
+			setTimeout('cutImageOfYoutubeContainer()', 1000);
 		},
 		render: function render() {
 			var rowModels = this.state.data.map(function (row) {
 				return React.createElement(CellContainer, { data: row, key: row.Id });
 			});
 			return React.createElement(
-				"div",
-				{ className: "container-fluid" },
+				'div',
+				{ className: 'container-fluid' },
 				rowModels
 			);
 		}
 	});
 
 	var CellContainer = React.createClass({
-		displayName: "CellContainer",
+		displayName: 'CellContainer',
 
 		render: function render() {
 			var cellModels = this.props.data.CellContents.map(function (cell) {
 				return React.createElement(CellContent, { data: cell, key: cell.Id });
 			});
 			return React.createElement(
-				"div",
-				{ className: "row" },
+				'div',
+				{ className: 'row' },
 				cellModels
 			);
 		}
 	});
 
 	var GalleryContainer = React.createClass({
-		displayName: "GalleryContainer",
+		displayName: 'GalleryContainer',
 
 		render: function render() {
 			return React.createElement(
-				"div",
-				{ className: "my-gallery" },
+				'div',
+				{ className: 'my-gallery' },
 				this.createItems(this.props.data)
 			);
 		},
@@ -69,22 +70,22 @@ function reactRender() {
 			for (var i = 0; i < items.length; i++) {
 				if (i == 0) {
 					output.push(React.createElement(
-						"figure",
+						'figure',
 						{ key: items[i].Id },
 						React.createElement(
-							"a",
-							{ href: items[i].Link, itemprop: "contentUrl", "data-size": "964x1024" },
-							React.createElement("img", { src: items[i].Link, alt: "Image description" })
+							'a',
+							{ href: items[i].Link, itemProp: 'contentUrl', 'data-size': '964x1024' },
+							React.createElement('img', { src: items[i].Link, alt: 'Image description', className: 'gallery-image' })
 						)
 					));
 				} else {
 					output.push(React.createElement(
-						"figure",
-						{ className: "hidden", key: items[i].Id },
+						'figure',
+						{ className: 'hidden', key: items[i].Id },
 						React.createElement(
-							"a",
-							{ href: items[i].Link, itemprop: "contentUrl", "data-size": "964x1024" },
-							React.createElement("img", { src: items[i].Link, alt: "Image description" })
+							'a',
+							{ href: items[i].Link, itemProp: 'contentUrl', 'data-size': '964x1024' },
+							React.createElement('img', { src: items[i].Link, alt: 'Image description', className: 'gallery-image' })
 						)
 					));
 				}
@@ -94,42 +95,42 @@ function reactRender() {
 	});
 
 	var CellContent = React.createClass({
-		displayName: "CellContent",
+		displayName: 'CellContent',
 
 
 		render: function render() {
 			var data = this.props.data;
 
 			if (data.ContentTypeId == 3) {
-				return React.createElement("div", { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+				return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
 			}
 			if (data.ContentTypeId == 4) {
-				return React.createElement("div", { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+				return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
 			}
 			if (data.ContentTypeId == 5) {
-				return React.createElement("div", { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+				return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
 			}
 			if (data.ContentTypeId == 6) {
-				return React.createElement("div", { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+				return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
 			}
 			if (data.ContentTypeId == 2) {
-				return React.createElement("div", { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+				return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
 			}
 			if (data.ContentTypeId == 1) {
-				return React.createElement("div", { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+				return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
 			}
 			if (data.ContentTypeId == 8) {
 				return React.createElement(
-					"div",
+					'div',
 					{ className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
 					React.createElement(GalleryContainer, { data: data.Resourceses })
 				);
 			}
 			if (data.ContentTypeId == 7) {
-				return React.createElement("div", { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
+				return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
 			}
 			if (data.ContentTypeId == 9) {
-				return React.createElement("div", { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
+				return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
 			}
 		}
 	});

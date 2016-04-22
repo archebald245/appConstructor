@@ -30,18 +30,17 @@ function SearchValueImages(jsonObject, storePath) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             for (var j = 0; j < jsonObject.Pages[i].Rows[p].CellContents.length; j++ , iterator++) {
                 if ((jsonObject.Pages[i].Rows[p].CellContents[j].IsDownloadable == true)&(jsonObject.Pages[i].Rows[p].CellContents[j].ContentType != "Empty")) {
-                    resources[iterator] = jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses[0].Link;
-                    fileName = resources[iterator].split('/');
-                    console.log(fileName);
-                    console.log(resources);
-                    console.log(fileName.length);
-                    fileName = fileName[fileName.length-1];
-                    console.log(fileName);
-                   
-                    
-                    jsonObject.Pages[i].Rows[p].CellContents[j].Value = replacementValueImages(jsonObject.Pages[i].Rows[p].CellContents[j].Value, fileName, storePath);
-                    // jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses[0].Link = storePath + fileName;
-                     console.log(jsonObject.Pages[i].Rows[p].CellContents[j].Value);
+                    for(var k=0;k<jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses.length;k++){
+                        
+                        resources[iterator] = jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses[k].Link;
+                        fileName = jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses[k].FileName;
+                       
+
+                        
+                        // jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses[k].Link = storePath + fileName;
+                        console.log(jsonObject.Pages[i].Rows[p].CellContents[j].Value);
+                    }
+                    jsonObject.Pages[i].Rows[p].CellContents[j].Value = replacementValueImages(jsonObject.Pages[i].Rows[p].CellContents[j].Value, jsonObject.Pages[i].Rows[p].CellContents[j].Resourceses, storePath);
                 }
             }
         }
@@ -81,17 +80,34 @@ function compareResouces(oldResources, newResources, storePath){
     
 }
 
-function replacementValueImages(jsonObjectValue, fileName, storePath) {
-    var value = jsonObjectValue.split('src=');
-    var src = value[1].split('\"')
-     console.log(src[1]);
-    console.log("ClassStore " + storePath);
-    src[1] = storePath + fileName;
-    console.log(src[1]);
-    value[1] = src.join('\"');
-    console.log(value[1]);
-    console.log(value.join('src='));
-    return  value.join('src=');
+function replacementValueImages(jsonObjectValue, arrayResources, storePath) {
+   
+  var m;
+  var urls = []; 
+  rex = /<img.+?src=[\"'](.+?)[\"'].*?>/g;
+  //rex = /<img[^>]+src='?([^'\s]+)'?\s*>/g;
+
+while ( m = rex.exec( jsonObjectValue ) ) {
+    urls.push( m[1] );
+}
+for(var i = 0; i<urls.length;i++){
+  jsonObjectValue = jsonObjectValue.replace(urls[i], storePath + arrayResources[i].FileName);
+}
+return jsonObjectValue;
+
+  
+  
+  
+    // var value = jsonObjectValue.split('src=');
+    // var src = value[1].split('\"')
+    //  console.log(src[1]);
+    // console.log("ClassStore " + storePath);
+    // src[1] = storePath + fileName;
+    // console.log(src[1]);
+    // value[1] = src.join('\"');
+    // console.log(value[1]);
+    // console.log(value.join('src='));
+    // return  value.join('src=');
     /*
     var m,
     urls = [], 
