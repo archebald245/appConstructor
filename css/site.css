@@ -93,3 +93,7 @@ form{
 .gallery-image{
 	max-width:100%;
 }
+.difficult-button-img{
+    box-shadow:0px 0px 7px 2px ##727272;
+    margin:5px auto;
+}
