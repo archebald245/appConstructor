@@ -1,3 +1,5 @@
+ initYoutube();
+
 function resourcesFromJson(jsonObject) {
     //var jsonObject = JSON.parse(data);
     var resourcesArray = new Array();
@@ -135,7 +137,7 @@ function deleteImage(imagePath) {
 
 }
 
-function renderingPage(index) {
+function goToPage(index) {
     indexPage= index;
     showActivePageInMenu(index);
     $("#container").empty();
@@ -143,7 +145,7 @@ function renderingPage(index) {
     
     reactRender();
     
-    $("a").each(function(i, e){
+    $("a:not(.galleryHref)").each(function(i, e){
         var hrefVal = $(e).attr("href");
         $(e).click(function(){
             window.open(hrefVal, '_system');
@@ -163,3 +165,11 @@ function deleteResources(){
     deleteImage("Phonegap/undefined");
     deleteImage("Phonegap/null");
 }
+ function initYoutube() {
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        // onYouTubeIframeAPIReady();
+        
+    }

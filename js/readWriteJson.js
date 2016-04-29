@@ -11,7 +11,7 @@ function onCheckJson(){
         var projectId = applicationData.ProjectId;
         var versionId = applicationData.Version;
           
-        createMenu();
+        createMenu(applicationData);
         reactRender();
     }else{
         
@@ -23,13 +23,14 @@ function onCheckJson(){
             cutImageOfYoutubeContainer();
              console.log(jsonString);
             $.jStorage.set('appData', jsonString);
-            createMenu();
+            createMenu(applicationData);
             reactRender();
         }
       
     }
   
     unBlockUi();
+    
     console.log($.jStorage.get('appData'));
     
         

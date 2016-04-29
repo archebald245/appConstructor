@@ -21,24 +21,49 @@ form{
     z-index:1000;
     width:100%;
     margin-top:-1px;
+
 }
-.top-menu-icon{
+.classMenuTop{
+    top:0;
+}
+.classMenuBottom{
+    bottom:0;
+}
+.menu-icon{
     width:96px;
     height:40px;
     background:url(../images/menuIcon.gif) no-repeat 0 50%;
     background-size:contain;
-    display:block;
     text-indent:-9999px;
     margin-left:10px;
     cursor:pointer;
+    display: block;
+
 }
- .classDropdownList{
+.top-menu-icon-right {
+    position: absolute;
+    right: 10px;
+}
+.top-menu-icon-left {
+    position: absolute;
+    left: 10px;
+
+}
+.classDropdownList{
     color: black;
     position:absolute;
     z-index: 10000;
     width:100%;
-    background:#E5E5E5;
-    top:80px;
+    background: #E5E5E5;
+
+}
+ .classDropdownList-topMenu{
+
+    top:70px;
+}
+ .classDropdownList-downMenu{
+
+    bottom:70px;
 }
 .classDropdownList > div{
     padding:7px 10px 7px 10px;
@@ -94,6 +119,10 @@ form{
 	max-width:100%;
 }
 .difficult-button-img{
-    box-shadow:0px 0px 7px 2px ##727272;
-    margin:5px auto;
+   box-shadow:0px 0px 7px 2px #727272;
+   margin:5px auto;
+}
+.menu-item-href{
+    color: #000;
+    text-align: center;
 }

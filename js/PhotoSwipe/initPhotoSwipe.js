@@ -1,4 +1,14 @@
+function removeLinkEvent(){
+    $("figure").find("a").each(function(i, e){
+        $(e).addEventListener("click",function(event){
+            event.preventDefault();
+            return false;
+        });
+    });
+}
 var initPhotoSwipeFromDOM = function(gallerySelector) {
+    setTimeout(removeLinkEvent, 1000);
+    
     // parse slide data (url, title, size ...) from DOM elements 
     // (children of gallerySelector)
     var parseThumbnailElements = function(el) {
@@ -21,6 +31,9 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
             linkEl = figureEl.children[0]; // <a> element
 
+            $(linkEl).click(function(e){
+                e.preventDefault();
+            });
             size = linkEl.getAttribute('data-size').split('x');
 
             // create slide object
