@@ -151,6 +151,17 @@ function goToPage(index) {
             window.open(hrefVal, '_system');
         });
     });
+    $(".my-youtube").attr("height", "auto");
+    
+    var pageStyles = "";
+    
+    applicationData.Pages.forEach(function(element) {
+        if(element.Id == index && element.Style != null && element.Style != ""){
+            pageStyles = element.Style;
+        }        
+    }, this);
+    
+    $("body").attr("style", pageStyles);
 }
 
 function deleteResources(){

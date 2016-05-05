@@ -14,11 +14,13 @@
     <script src="js/react/react.js"></script>
     <script src="js/react/react-dom.js"></script>
     <script src="js/jquery-touchswipe/jquery.touchSwipe.js"></script>
+    
+	
     <script src="js/readWriteJson.js"></script>
     <script src="applicationData.js"></script>
     <script src="js/jstorage.js"></script>
     <script src="js/jquery.blockUI.js"></script>
-
+	<script src="js/jquery-ui.js"></script>
     <script src="js/jsonInResourses.js"></script>
 
     <!-- PhotoSwipe-->
@@ -33,15 +35,16 @@
     <script src="js/events.js"></script>
 
     <style>
-    /*.blockUI{display:none !important;}*/
+   /* .blockUI{display:none !important;}*/
     </style>
 </head>
 
 <body>
     <div data-role="header" data-position="fixed" class="classMenu ">
-        <span class="menu-icon top-menu-icon-left" onclick="onClickButtonMenu()">Menu</span>
-        <div class="classDropdownList classDropdownList-topMenu"></div>
+        <span class="menu-icon" onclick="onClickButtonMenu()">Menu</span>
+        <div class="classDropdownList"></div>
     </div>
+	<div class="classSwipeDropList"></div>
     <!-- Root element of PhotoSwipe. Must have class pswp. -->
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>

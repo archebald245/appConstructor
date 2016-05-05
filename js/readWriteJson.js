@@ -13,6 +13,7 @@ function onCheckJson(){
           
         createMenu(applicationData);
         reactRender();
+        $(".my-youtube").attr("height", "auto");
     }else{
         
         replaceData();
@@ -25,11 +26,13 @@ function onCheckJson(){
             $.jStorage.set('appData', jsonString);
             createMenu(applicationData);
             reactRender();
+            $(".my-youtube").attr("height", "auto");
         }
       
     }
-  
-    unBlockUi();
+    // setTimeout(unBlockUi, 5000);
+    // unBlockUi();
+    $(".blockUI").remove();
     
     console.log($.jStorage.get('appData'));
     
@@ -61,7 +64,8 @@ function checkConnection(){
       $.ajax({
         type: "POST",
         url: "http://appconstructor.newlinetechnologies.net/Constructor/CheckNewVersion",
-        data: {projectId: projectId, versionId:versionId},
+        data: {projectId: projectId, versionName:versionId},
+        cache:false,
         success: function(jsonObjectOfServer){
             if(jsonObjectOfServer.IsUpdated ==true){
                 data = JSON.stringify(jsonObjectOfServer.Content);
@@ -87,12 +91,21 @@ function downloadResources() {
     //     var jsonString = JSON.stringify(applicationData);
     // console.log(jsonString);
     // $.jStorage.set('appData', jsonString);
-    createMenu();
-    reactRender();
-    }
-    
-    
    
+    }
+     createMenu();
+    reactRender();
+    $(".my-youtube").attr("height", "auto");
+    var pageStyles = "";
+    
+    applicationData.Pages.forEach(function(element) {
+        if(element.Id == index && element.Style != null && element.Style != ""){
+            pageStyles = element.Style;
+        }        
+    }, this);
+    
+    $("body").attr("style", pageStyles);
+
   
 }
 

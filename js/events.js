@@ -22,7 +22,7 @@ function initSwipe(){
 }
 
 function init(){
-    blockUi()
+    blockUi();
     document.addEventListener("deviceready", onDeviceReady, false);
     $(".classDropdownList").addClass("classHide");
     //initSwipe();
@@ -103,9 +103,9 @@ function appStart() {
 
 function createMenu(){
     if(applicationData.Menu!=null){
-    getPositionMenu(applicationData.Menu.Position);
+    var menu = getPositionMenu(applicationData.Menu.Position);
     var div;
-    $("div.classDropdownList").html("");
+    $(menu).html("");
     var label;
     for(var i =0;i<applicationData.Menu.MenuItems.length;i++){
         if(applicationData.Menu.MenuItems[i].IsExternal == true){
@@ -115,7 +115,7 @@ function createMenu(){
 
         }
         //  label.appendTo(div);
-       div.appendTo('div.classDropdownList');
+       div.appendTo(menu);
     }
     addListener();
     slideUp();
@@ -189,9 +189,9 @@ function cutImageOfYoutubeContainer(){
     // }
 }
 
+
 function getPositionMenu(positionMenu)
 {
-
     switch(positionMenu)
     {
 
@@ -199,41 +199,128 @@ function getPositionMenu(positionMenu)
         $('span.menu-icon').show().addClass('menu-icon-left');
         $('.classMenu').show().addClass('classMenuTop');
         $('.classDropdownList').addClass('classDropdownList-topMenu');
-        break;
+        $('#container').addClass('containerTop');
+        return '.classDropdownList';
+        
 
-        // case 'center-left':
-        // $('span.menu-icon').show().addClass('side-menu-left');
-        // $('.classMenu').show();
-        // break;
+        case 'center-left':
+        $('span.menu-icon').hide();
+        $('.classMenu').hide();
+        $('.classSwipeDropList') .addClass('side-menu-left');
+        //  $("#container").swipe( {
+        // //Generic swipe handler for all directions
+        //      swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+        //       //   alert("swipe");
+        //          if (direction == "right") {
+        //              $('.classSwipeDropList').show("slide", { direction: "right" }, 2000);
+        //          }else if(direction == "left"){
+        //              $('.classSwipeDropList').hide("slide", { direction: "left" }, 2000);
+        //          }
+                 
+        //      },
+        //      allowPageScroll: "vertical"
+        //  });
+        $("body").swipe( {
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+            if(direction == "right"){
+                $(".classSwipeDropList").animate({
+                   width: "70%"
+               },{queue: false}, 1500);
+            }else if(direction == "left"){
+                 $(".classSwipeDropList").animate({
+                   width: "0px"
+               },{queue: false}, 1500);
+            }
+        },
+        allowPageScroll:"vertical"
+        });
+    // });
+    //     $("#container").on('swiperight', function(){
+    //         $(".classSwipeDropList").animate({
+    //                width: "70%"
+    //            },{queue: false}, 1500);
+    //     });
+    //     $("#container").on('swipeleft', function(){
+    //         $(".classSwipeDropList").animate({
+    //                width: "0px"
+    //            },{queue: false}, 1500);
+    //     });
+        //  document.querySelector('body').addEventListener('click',function(){
+        //      $('.classSwipeDropList').hide("slide", { direction: "left" }, 2000);
+        //  },true);
+         console.log("leftSwipe");
+        return '.classSwipeDropList';
 
         case 'bottom-left':
         $('span.menu-icon').show().addClass('menu-icon-left');
         $('.classMenu').show().addClass('classMenuBottom');
         $('.classDropdownList').addClass('classDropdownList-downMenu');
-        break;
+        $('#container').addClass('containerBottom');
+        return '.classDropdownList';
+        
 
         case 'top-right':
         $('span.menu-icon').show().addClass('menu-icon-right');
         $('.classMenu').show().addClass('classMenuTop');
         $('.classDropdownList').addClass('classDropdownList-topMenu');
-        break;
+        $('#container').addClass('containerTop');
+        return '.classDropdownList';
+        
 
-        // case 'center-right':
-        // $('span.menu-icon').show().addClass('side-menu-right');
-        //  $('.classMenu').show();
-        // break;
+        case 'center-right':
+        $('span.menu-icon').hide()
+         $('.classMenu').hide();
+         $('.classSwipeDropList').addClass('side-menu-right');
+           $("body").swipe( {
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+            if(direction == "right"){
+                $(".classSwipeDropList").animate({
+                   width: "0px"
+                },{queue: false}, 1500);
+            }else if(direction == "left"){
+                 $(".classSwipeDropList").animate({
+                    width: "70%"
+                }, {queue: false},
+                 1500);
+            }
+        },
+        allowPageScroll:"vertical"
+        });
+        //    $("#container").on('swiperight', function(){
+        //         $(".classSwipeDropList").animate({
+        //            width: "0px"
+        //        },{queue: false}, 1500);
+        // });
+        // $("#container").on('swipeleft', function(){
+            
+        //         $(".classSwipeDropList").animate({
+        //            width: "70%"
+        //        }, {queue: false},
+        //         1500);
+        
+        // });
+       
+        return '.classSwipeDropList';
 
         case 'bottom-righ':
         $('span.menu-icon').show().addClass('menu-icon-right');
         $('.classMenu').show().addClass('classMenuBottom');
         $('.classDropdownList').addClass('classDropdownList-downMenu');
+        $('#container').addClass('containerBottom');
+        return '.classDropdownList';
+        
+        case null:
+        $('span.menu-icon').hide();
+        $('.classMenu').hide();
         break;
 
-        default:
-        $('span.menu-icon').show().addClass('menu-icon-left');
-        $('.classMenu').show().addClass('classMenuTop');
-        $('.classDropdownList').addClass('classDropdownList-topMenu');
-        break;
+        // default:
+        // $('span.menu-icon').show().addClass('menu-icon-left');
+        // $('.classMenu').show().addClass('classMenuTop');
+        // $('.classDropdownList').addClass('classDropdownList-topMenu');
+        // break;
 
 
 
