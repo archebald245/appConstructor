@@ -84,6 +84,9 @@ function reactRender() {
 				this.createItems(this.props.data)
 			);
 		},
+		componentDidMount: function componentDidMount() {
+			initPhotoSwipeFromDOM(".my-gallery");
+		},
 		createItems: function createItems(items) {
 			var output = [];
 			for (var i = 0; i < items.length; i++) {
@@ -149,6 +152,7 @@ function reactRender() {
 				styleCell = "";
 			}
 
+			//$(React.findDOMNode(this)).attr("style", styleCell);
 			$(ReactDOM.findDOMNode(this)).attr("style", styleCell);
 		},
 		render: function render() {

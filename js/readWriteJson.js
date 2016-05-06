@@ -30,6 +30,10 @@ function onCheckJson(){
         }
       
     }
+    var pageStyles = applicationData.Pages[0].Style;
+   
+    
+    $("body").attr("style", pageStyles);
     // setTimeout(unBlockUi, 5000);
     // unBlockUi();
     $(".blockUI").remove();
@@ -96,10 +100,7 @@ function downloadResources() {
      createMenu();
     reactRender();
     $(".my-youtube").attr("height", "auto");
-    var pageStyles = applicationData.Pages[0].Style;
    
-    
-    $("body").attr("style", pageStyles);
 
   
 }
