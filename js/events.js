@@ -6,6 +6,7 @@ var indexPage = 0;
 var applicationData;
 var countFileDownload = 0;
 var countFileDownloadFail = 0;
+var swipeMenuInGallary = false;
 
 function initSwipe(){
     $(document).swipe( {
@@ -222,16 +223,18 @@ function getPositionMenu(positionMenu)
         //  });
         $("body").swipe( {
         //Generic swipe handler for all directions
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-            if(direction == "right"){
-                $(".classSwipeDropList").animate({
-                   width: "70%"
-               },{queue: false}, 1500);
-            }else if(direction == "left"){
-                 $(".classSwipeDropList").animate({
-                   width: "0px"
-               },{queue: false}, 1500);
-            }
+            swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+                if (swipeMenuInGallary == false) {
+                    if (direction == "right") {
+                        $(".classSwipeDropList").animate({
+                            width: "70%"
+                        }, { queue: false }, 1500);
+                    } else if (direction == "left") {
+                        $(".classSwipeDropList").animate({
+                            width: "0px"
+                        }, { queue: false }, 1500);
+                    }
+                }
         },
         allowPageScroll:"vertical"
         });
@@ -280,18 +283,20 @@ function getPositionMenu(positionMenu)
          $('.classSwipeDropList').addClass('side-menu-right');
            $("body").swipe( {
         //Generic swipe handler for all directions
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-            if(direction == "right"){
-                $(".classSwipeDropList").animate({
-                   width: "0px"
-                },{queue: false}, 1500);
-            }else if(direction == "left"){
-                 $(".classSwipeDropList").animate({
-                    width: "70%"
-                }, {queue: false},
-                 1500);
-            }
-        },
+               swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+                   if (swipeMenuInGallary == false) {
+                       if (direction == "right") {
+                           $(".classSwipeDropList").animate({
+                               width: "0px"
+                           }, { queue: false }, 1500);
+                       } else if (direction == "left") {
+                           $(".classSwipeDropList").animate({
+                               width: "70%"
+                           }, { queue: false },
+                               1500);
+                       }
+                   }
+               },
         allowPageScroll:"vertical"
         });
         $("body").on("click",function(){

@@ -57,11 +57,13 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
     // find nearest parent element
     var closest = function closest(el, fn) {
+        
         return el && ( fn(el) ? el : closest(el.parentNode, fn) );
     };
 
     // triggers when user clicks on thumbnail
     var onThumbnailsClick = function(e) {
+        
         e = e || window.event;
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
 
@@ -134,6 +136,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     };
 
     var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+        swipeMenuInGallary = true;
         var pswpElement = document.querySelectorAll('.pswp')[0],
             gallery,
             options,
