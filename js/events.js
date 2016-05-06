@@ -235,6 +235,12 @@ function getPositionMenu(positionMenu)
         },
         allowPageScroll:"vertical"
         });
+        $("body").on("click",function(){
+            $(".classSwipeDropList").animate({
+                   width: "0px"
+               },{queue: false}, 1500);
+        } );
+        
     // });
     //     $("#container").on('swiperight', function(){
     //         $(".classSwipeDropList").animate({
@@ -288,6 +294,11 @@ function getPositionMenu(positionMenu)
         },
         allowPageScroll:"vertical"
         });
+        $("body").on("click",function(){
+            $(".classSwipeDropList").animate({
+                   width: "0px"
+               },{queue: false}, 1500);
+        } );
         //    $("#container").on('swiperight', function(){
         //         $(".classSwipeDropList").animate({
         //            width: "0px"
@@ -325,7 +336,7 @@ function getPositionMenu(positionMenu)
 
 
     }
-
+    
 
 }
 

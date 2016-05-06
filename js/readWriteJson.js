@@ -96,13 +96,8 @@ function downloadResources() {
      createMenu();
     reactRender();
     $(".my-youtube").attr("height", "auto");
-    var pageStyles = "";
-    
-    applicationData.Pages.forEach(function(element) {
-        if(element.Id == index && element.Style != null && element.Style != ""){
-            pageStyles = element.Style;
-        }        
-    }, this);
+    var pageStyles = applicationData.Pages[0].Style;
+   
     
     $("body").attr("style", pageStyles);
 
