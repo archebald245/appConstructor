@@ -162,6 +162,8 @@ function goToPage(index) {
     }, this);
     
     $("body").attr("style", pageStyles);
+    
+    
 }
 
 function deleteResources(){

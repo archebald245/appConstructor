@@ -80,20 +80,35 @@ function reactRender() {
 		render: function render() {
 			return React.createElement(
 				'div',
-				{ className: 'my-gallery' },
-				this.createItems(this.props.data)
+				null,
+				this.createIcon(this.props.data),
+				React.createElement(
+					'div',
+					{ className: 'my-gallery' },
+					this.createItems(this.props.data)
+				)
 			);
 		},
 		componentDidMount: function componentDidMount() {
 			initPhotoSwipeFromDOM(".my-gallery");
 		},
+		createIcon: function createIcon(items) {
+			var icon = _.where(items, { IsGalleryIcon: true });
+			items = _.without(items, icon);
+			if (icon.length > 0) {
+				return React.createElement('img', { src: icon[0].Link, className: 'gallery-icon' });
+			} else {
+				return React.createElement('img', { src: "file:///android_asset/www/images/gallery-shadow.png", className: 'gallery-icon gallery-shadow' });
+			}
+		},
 		createItems: function createItems(items) {
 			var output = [];
+
 			for (var i = 0; i < items.length; i++) {
 				if (i == 0) {
 					output.push(React.createElement(
 						'figure',
-						{ key: items[i].Id },
+						{ key: items[i].Id, className: 'hidden' },
 						React.createElement(
 							'a',
 							{ href: items[i].Link, className: 'galleryHref', itemProp: 'contentUrl', 'data-size': '964x1024' },

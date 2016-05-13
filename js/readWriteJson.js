@@ -36,6 +36,7 @@ function onCheckJson(){
     $("body").attr("style", pageStyles);
     // setTimeout(unBlockUi, 5000);
     // unBlockUi();
+    initGallaryClick();
     $(".blockUI").remove();
     
     console.log($.jStorage.get('appData'));
@@ -124,4 +125,11 @@ function replaceData(){
     data = data.replace(/\v/g,'');
     data = data.replace(/\f/g,'');
     console.log(data);
+}
+
+function initGallaryClick(){
+    $(".gallery-icon").unbind("click");
+    $(".gallery-icon").on("click", function(){
+        $($(this).siblings()).find("figure")[0].click();
+    });
 }
