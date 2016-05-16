@@ -53,7 +53,8 @@ function onCheckJson(){
 function checkConnection(){
      var networkState = navigator.connection.type;
   if(networkState!=Connection.NONE){
-      
+    var siteUrl = "http://appconstructor.newlinetechnologies.net"    
+    
     if($.jStorage.get('appData') != null){
         
         applicationData = JSON.parse($.jStorage.get('appData'));
@@ -65,10 +66,14 @@ function checkConnection(){
         var projectId = applicationData.ProjectId;
         var versionId = applicationData.Version;
     }
-      
-      $.ajax({
+    
+    if(applicationData.UrlForUpdateApp != "" && applicationData.UrlForUpdateApp != null && typeof applicationData.UrlForUpdateApp != 'undefined'){
+        siteUrl = applicationData.UrlForUpdateApp;
+    }
+    
+    $.ajax({
         type: "POST",
-        url: "http://appconstructor.newlinetechnologies.net/Constructor/CheckNewVersion",
+        url: siteUrl + "/Constructor/CheckNewVersion",
         data: {projectId: projectId, versionName:versionId},
         cache:false,
         success: function(jsonObjectOfServer){
@@ -80,7 +85,7 @@ function checkConnection(){
                  onCheckJson();
             }
         }
-});
+    });
   }else{
       onCheckJson();
   }
