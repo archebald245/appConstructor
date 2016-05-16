@@ -135,6 +135,7 @@ function replaceData(){
 function initGallaryClick(){
     $(".gallery-icon").unbind("click");
     $(".gallery-icon").on("click", function(){
-        $($(this).siblings()).find("figure")[0].click();
+        //$($(this).siblings()).find("figure")[0].click();
+        $(this).parent().siblings().find("figure")[0].click();
     });
 }

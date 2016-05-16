@@ -78,16 +78,39 @@ function reactRender() {
 		displayName: 'GalleryContainer',
 
 		render: function render() {
-			return React.createElement(
-				'div',
-				null,
-				this.createIcon(this.props.data),
-				React.createElement(
+			var icon = _.where(this.props.data, { IsGalleryIcon: true });
+			var items = _.without(this.props.data, icon);
+			if (icon.length > 0) {
+				return React.createElement(
 					'div',
-					{ className: 'my-gallery' },
-					this.createItems(this.props.data)
-				)
-			);
+					{ className: 'gallery-images-container' },
+					React.createElement(
+						'div',
+						{ className: 'icon-container' },
+						this.createIcon(this.props.data)
+					),
+					React.createElement(
+						'div',
+						{ className: 'my-gallery' },
+						this.createItems(this.props.data)
+					)
+				);
+			} else {
+				return React.createElement(
+					'div',
+					{ className: 'gallery-images-container' },
+					React.createElement(
+						'div',
+						{ className: 'shadow-container' },
+						this.createIcon(this.props.data)
+					),
+					React.createElement(
+						'div',
+						{ className: 'my-gallery' },
+						this.createItems(this.props.data)
+					)
+				);
+			}
 		},
 		componentDidMount: function componentDidMount() {
 			initPhotoSwipeFromDOM(".my-gallery");
@@ -98,17 +121,20 @@ function reactRender() {
 			if (icon.length > 0) {
 				return React.createElement('img', { src: icon[0].Link, className: 'gallery-icon' });
 			} else {
-				return React.createElement('img', { src: "file:///android_asset/www/images/gallery-shadow.png", className: 'gallery-icon gallery-shadow' });
+				//return React.createElement('img',{src:"file:///android_asset/www/images/gallery-shadow.png", className: 'gallery-icon gallery-shadow'});
+				return React.createElement('img', { src: "file:///android_asset/www/images/noimage.gif", className: 'gallery-icon gallery-shadow' });
 			}
 		},
 		createItems: function createItems(items) {
 			var output = [];
 
+			var icon = _.where(items, { IsGalleryIcon: true });
+			items = _.where(items, { IsGalleryIcon: false });
 			for (var i = 0; i < items.length; i++) {
-				if (i == 0) {
+				if (i == 0 && icon.length == 0) {
 					output.push(React.createElement(
 						'figure',
-						{ key: items[i].Id, className: 'hidden' },
+						{ key: items[i].Id },
 						React.createElement(
 							'a',
 							{ href: items[i].Link, className: 'galleryHref', itemProp: 'contentUrl', 'data-size': '964x1024' },
