@@ -25,22 +25,6 @@ function reactRender() {
 			return { data: [] };
 		},
 		componentDidMount: function componentDidMount() {
-			/*$.ajax({
-   	url: "/Constructor/GetPage",
-   	type: "POST",
-   	cache: false,
-   	data: {
-   		id: $("#ProjectId").val(),
-   		versionId: $("#versionId").val(),
-   		pageId: $("#pageId").val()
-   	},
-   	success: function(json) {
-   		this.setState({data: json.Rows});
-   	}.bind(this),
-   	error: function(xhr, status, err) {
-   		console.error(status, err.toString());
-   	}.bind(this)
-   });*/
 			for (var i = 0; i < applicationData.Pages.length; i++) {
 				if (indexPage == applicationData.Pages[i].Id) {
 					this.setState({ data: applicationData.Pages[i].Rows });
@@ -183,6 +167,96 @@ function reactRender() {
 		}
 	});
 
+	var Hbox = React.createClass({
+		displayName: 'Hbox',
+
+		componentDidMount: function componentDidMount() {
+			var data = Base64.decode(this.props.data);
+			var json = JSON.parse(data);
+			//$(ReactDOM.findDOMNode(this));
+			var swiper = new Swiper('.swiper-container', {
+				pagination: '.swiper-pagination',
+				slidesPerView: json.quantity,
+				paginationClickable: true,
+				spaceBetween: 10
+			});
+		},
+		render: function render() {
+			var data = Base64.decode(this.props.data);
+			var json = JSON.parse(data);
+
+			var elementModels = json.elements.map(function (element) {
+				if (element.ContentTypeId == 2) {
+					return React.createElement(
+						'div',
+						{ className: 'swiper-slide' },
+						React.createElement('div', { className: 'link-item', dangerouslySetInnerHTML: { __html: element.Value } })
+					);
+				}
+				if (element.ContentTypeId == 3) {
+					return React.createElement(
+						'div',
+						{ className: 'swiper-slide' },
+						React.createElement('div', { className: 'image-item', dangerouslySetInnerHTML: { __html: element.Value } })
+					);
+				}
+				if (element.ContentTypeId == 4) {
+					return React.createElement(
+						'div',
+						{ className: 'swiper-slide' },
+						React.createElement('div', { className: 'image-link-item', dangerouslySetInnerHTML: { __html: element.Value } })
+					);
+				}
+				if (element.ContentTypeId == 5) {
+					return React.createElement(
+						'div',
+						{ className: 'swiper-slide' },
+						React.createElement('div', { className: 'text-item', dangerouslySetInnerHTML: { __html: element.Value } })
+					);
+				}
+				if (element.ContentTypeId == 6) {
+					return React.createElement(
+						'div',
+						{ className: 'swiper-slide' },
+						React.createElement('div', { className: 'botton-item', dangerouslySetInnerHTML: { __html: element.Value } })
+					);
+				}
+				if (element.ContentTypeId == 7) {
+					return React.createElement(
+						'div',
+						{ className: 'swiper-slide' },
+						React.createElement(YoutubeContainer, { data: element.Value })
+					);
+				}
+				if (element.ContentTypeId == 8) {
+					return React.createElement(
+						'div',
+						{ className: 'swiper-slide' },
+						React.createElement(GalleryContainer, { data: element.Resourceses })
+					);
+				}
+				if (element.ContentTypeId == 9) {
+					return React.createElement(
+						'div',
+						{ className: 'swiper-slide' },
+						React.createElement('div', { className: 'difficult-botton-item', dangerouslySetInnerHTML: { __html: element.Value } })
+					);
+				}
+			});
+
+			return React.createElement(
+				'div',
+				{ className: 'hBox-container swiper-container' },
+				React.createElement(
+					'div',
+					{ className: 'swiper-wrapper' },
+					elementModels
+				),
+				React.createElement('div', { className: 'swiper-pagination' })
+			);
+		}
+	});
+
 	var CellContent = React.createClass({
 		displayName: 'CellContent',
 
@@ -234,8 +308,19 @@ function reactRender() {
 					React.createElement(YoutubeContainer, { data: data.Value })
 				);
 			}
+
+			//ContentTypeId - 10 start
+			if (data.ContentTypeId == 10) {
+				return React.createElement(
+					'div',
+					{ className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
+					React.createElement(Hbox, { data: data.Json })
+				);
+			}
 		}
 	});
+
+	//ContentTypeId - 10 end
 
 	ReactDOM.render(React.createElement(Rows, null), document.getElementById('container'));
 }
