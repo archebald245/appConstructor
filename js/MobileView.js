@@ -202,56 +202,56 @@ function reactRender() {
           return React.createElement(
             'div',
             { className: 'swiper-slide' },
-            React.createElement('div', { className: 'link-item', dangerouslySetInnerHTML: { __html: element.Value } })
+            React.createElement('div', { className: 'link-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id })
           );
         }
         if (element.ContentTypeId == 3) {
           return React.createElement(
             'div',
             { className: 'swiper-slide' },
-            React.createElement('div', { className: 'image-item', dangerouslySetInnerHTML: { __html: element.Value } })
+            React.createElement('div', { className: 'image-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id })
           );
         }
         if (element.ContentTypeId == 4) {
           return React.createElement(
             'div',
             { className: 'swiper-slide' },
-            React.createElement('div', { className: 'image-link-item', dangerouslySetInnerHTML: { __html: element.Value } })
+            React.createElement('div', { className: 'image-link-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id })
           );
         }
         if (element.ContentTypeId == 5) {
           return React.createElement(
             'div',
             { className: 'swiper-slide' },
-            React.createElement('div', { className: 'text-item', dangerouslySetInnerHTML: { __html: element.Value } })
+            React.createElement('div', { className: 'text-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id })
           );
         }
         if (element.ContentTypeId == 6) {
           return React.createElement(
             'div',
             { className: 'swiper-slide' },
-            React.createElement('div', { className: 'botton-item', dangerouslySetInnerHTML: { __html: element.Value } })
+            React.createElement('div', { className: 'botton-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id })
           );
         }
         if (element.ContentTypeId == 7) {
           return React.createElement(
             'div',
             { className: 'swiper-slide' },
-            React.createElement(YoutubeContainer, { data: element.Value })
+            React.createElement(YoutubeContainer, { data: element.Value, key: element.Id })
           );
         }
         if (element.ContentTypeId == 8) {
           return React.createElement(
             'div',
             { className: 'swiper-slide' },
-            React.createElement(GalleryContainer, { data: element.Resourceses })
+            React.createElement(GalleryContainer, { data: element.Resourceses, key: element.Id })
           );
         }
         if (element.ContentTypeId == 9) {
           return React.createElement(
             'div',
             { className: 'swiper-slide' },
-            React.createElement('div', { className: 'difficult-botton-item', dangerouslySetInnerHTML: { __html: element.Value } })
+            React.createElement('div', { className: 'difficult-botton-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id })
           );
         }
       });
@@ -284,28 +284,28 @@ function reactRender() {
       var elementModels = json.map(function (element) {
         element.Value = replaceData(element.Value);
         if (element.ContentTypeId == 2) {
-          return React.createElement('div', { className: 'link-item', dangerouslySetInnerHTML: { __html: element.Value } });
+          return React.createElement('div', { className: 'link-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id });
         }
         if (element.ContentTypeId == 3) {
-          return React.createElement('div', { className: 'image-item', dangerouslySetInnerHTML: { __html: element.Value } });
+          return React.createElement('div', { className: 'image-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id });
         }
         if (element.ContentTypeId == 4) {
-          return React.createElement('div', { className: 'image-link-item', dangerouslySetInnerHTML: { __html: element.Value } });
+          return React.createElement('div', { className: 'image-link-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id });
         }
         if (element.ContentTypeId == 5) {
-          return React.createElement('div', { className: 'text-item', dangerouslySetInnerHTML: { __html: element.Value } });
+          return React.createElement('div', { className: 'text-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id });
         }
         if (element.ContentTypeId == 6) {
-          return React.createElement('div', { className: 'botton-item', dangerouslySetInnerHTML: { __html: element.Value } });
+          return React.createElement('div', { className: 'botton-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id });
         }
         if (element.ContentTypeId == 7) {
-          return React.createElement(YoutubeContainer, { data: element.Value });
+          return React.createElement(YoutubeContainer, { data: element.Value, key: element.Id });
         }
         if (element.ContentTypeId == 8) {
-          return React.createElement(GalleryContainer, { data: element.Resourceses });
+          return React.createElement(GalleryContainer, { data: element.Resourceses, key: element.Id });
         }
         if (element.ContentTypeId == 9) {
-          return React.createElement('div', { className: 'difficult-botton-item', dangerouslySetInnerHTML: { __html: element.Value } });
+          return React.createElement('div', { className: 'difficult-botton-item', dangerouslySetInnerHTML: { __html: element.Value }, key: element.Id });
         }
       });
       return React.createElement('div', { className: 'vBox' }, elementModels);

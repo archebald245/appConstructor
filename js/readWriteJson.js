@@ -12,7 +12,7 @@ function onCheckJson(){
         var versionId = applicationData.Version;
           
         createMenu(applicationData);
-        reactRender();
+        
         $(".my-youtube").attr("height", "auto");
     }else{
         
@@ -25,7 +25,7 @@ function onCheckJson(){
              console.log(jsonString);
             $.jStorage.set('appData', jsonString);
             createMenu(applicationData);
-            reactRender();
+            
             $(".my-youtube").attr("height", "auto");
         }
       
@@ -82,6 +82,9 @@ function checkConnection(){
                  onCheckJson();
             }else{
                  onCheckJson();
+                 reactRender();
+                initGallaryClick();
+                 $(".blockUI").remove();
             }
         }
     });
@@ -103,7 +106,11 @@ function downloadResources() {
    
     }
      createMenu();
-    reactRender();
+     if(resources.length == 0){
+        reactRender();  
+        $(".blockUI").remove();
+     }
+   
     $(".my-youtube").attr("height", "auto");
    
 
@@ -117,6 +124,7 @@ function callback(){
     var jsonString = JSON.stringify(applicationData);
      $.jStorage.set('appData', jsonString);
      deleteResources();
+     reactRender();
        initGallaryClick();
     $(".blockUI").remove();
 }
