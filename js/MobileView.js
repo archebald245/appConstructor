@@ -116,8 +116,8 @@ function reactRender() {
       if (icon.length > 0) {
         return React.createElement('img', { src: icon[0].Link, className: 'gallery-icon' });
       } else {
-        //return React.createElement('img',{src:"file:///android_asset/www/images/gallery-shadow.png", className: 'gallery-icon gallery-shadow'});
-        return React.createElement('img', { src: "file:///android_asset/www/images/noimage.gif", className: 'gallery-icon gallery-shadow' });
+        //return React.createElement('img',{src:"file:///android_asset/www/baseimages/gallery-shadow.png", className: 'gallery-icon gallery-shadow'});
+        return React.createElement('img', { src: "file:///android_asset/www/baseimages/noimage.gif", className: 'gallery-icon gallery-shadow' });
       }
     },
     createItems: function createItems(items) {
@@ -197,6 +197,7 @@ function reactRender() {
       var json = JSON.parse(data);
 
       var elementModels = json.elements.map(function (element) {
+        element.Value = replaceData(element.Value);
         if (element.ContentTypeId == 2) {
           return React.createElement(
             'div',
@@ -281,6 +282,7 @@ function reactRender() {
       var json = JSON.parse(data);
 
       var elementModels = json.map(function (element) {
+        element.Value = replaceData(element.Value);
         if (element.ContentTypeId == 2) {
           return React.createElement('div', { className: 'link-item', dangerouslySetInnerHTML: { __html: element.Value } });
         }

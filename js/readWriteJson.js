@@ -16,7 +16,7 @@ function onCheckJson(){
         $(".my-youtube").attr("height", "auto");
     }else{
         
-        replaceData();
+        data = replaceData(data);
         applicationData = JSON.parse(data);
         downloadResources();
         if(resources.length==0){
@@ -36,8 +36,7 @@ function onCheckJson(){
     $("body").attr("style", pageStyles);
     // setTimeout(unBlockUi, 5000);
     // unBlockUi();
-    initGallaryClick();
-    $(".blockUI").remove();
+   
     
     console.log($.jStorage.get('appData'));
     
@@ -61,7 +60,7 @@ function checkConnection(){
         var projectId = applicationData.ProjectId;
         var versionId = applicationData.Version;
     }else{
-        replaceData();
+        data = replaceData(data);
         applicationData = JSON.parse(data);
         var projectId = applicationData.ProjectId;
         var versionId = applicationData.Version;
@@ -118,18 +117,22 @@ function callback(){
     var jsonString = JSON.stringify(applicationData);
      $.jStorage.set('appData', jsonString);
      deleteResources();
-      
+       initGallaryClick();
+    $(".blockUI").remove();
 }
 
-function replaceData(){
-    console.log(data);
-    data = data.replace(/\n/g,'');
-    data = data.replace(/\t/g,'');
-    data = data.replace(/\b/g,'');
-    data = data.replace(/\r/g,'');
-    data = data.replace(/\v/g,'');
-    data = data.replace(/\f/g,'');
-    console.log(data);
+function replaceData(element){
+    console.log(element);
+    element = element.replace(/&lt;/g,'<');
+    element = element.replace(/&gt;/g,'>');
+    element = element.replace(/\n/g,'');
+    element = element.replace(/\t/g,'');
+    element = element.replace(/\b/g,'');
+    element = element.replace(/\r/g,'');
+    element = element.replace(/\v/g,'');
+    element = element.replace(/\f/g,'');
+    console.log(element);
+    return element;
 }
 
 function initGallaryClick(){
