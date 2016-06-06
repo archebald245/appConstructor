@@ -234,7 +234,7 @@ function deleteImage(imagePath) {
         fileEntry.remove(function(file){
             console.log("File removed!");
         },function(){
-            console.log("error deleting the file " + error.code);
+            console.log("error deleting the file ");
             });
         },function(){
             console.log("file does not exist");
