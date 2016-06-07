@@ -106,10 +106,6 @@ function downloadResources() {
         fileNameImage = resources[i];
         console.log(fileNameImage);
         download();
-    //     var jsonString = JSON.stringify(applicationData);
-    // console.log(jsonString);
-    // $.jStorage.set('appData', jsonString);
-   
     }
      createMenu();
      if(resources.length == 0){
