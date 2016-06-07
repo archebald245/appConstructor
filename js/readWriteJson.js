@@ -34,6 +34,12 @@ function onCheckJson(){
    
     
     $("body").attr("style", pageStyles);
+      var networkState = navigator.connection.type;
+  if(networkState==Connection.NONE){
+       reactRender();
+       initGallaryClick();
+    $(".blockUI").remove();
+  }
     // setTimeout(unBlockUi, 5000);
     // unBlockUi();
    
