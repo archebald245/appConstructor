@@ -1,7 +1,6 @@
 var url;
 var store;
 var fileNameImage;
-var resources;
 var indexPage = 0;
 var applicationData;
 var countFileDownload = 0;
@@ -46,45 +45,7 @@ function onDeviceReady() {
     appStart();
 }
 
-function download() {
-    var remoteFile = encodeURI(fileNameImage);
-    var localFileName = encodeURI("Phonegap/" + remoteFile.substring(remoteFile.lastIndexOf('/')+1));
-    var localPath;
-    var resourcesArr = [];
-    for(var i = 0, iterator = 0;i<resources.length; i++, iterator++){
-        if(resources[i]!="undefined"){
-            resourcesArr[iterator] = resources[i];
-        }
-    }
-    resources = resourcesArr;
 
-        window.myFileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
-
-             localPath = fileEntry.toURL();
-            console.log( localPath );
-            var ft = new FileTransfer();
-            ft.download(remoteFile,
-                localPath, function(entry) {
-                   countFileDownload = countFileDownload+1;
-                   if((countFileDownload+countFileDownloadFail) === resources.length){
-                     callback();
-                   }
-
-
-
-                }, failDownload);
-        }, fail);
-}
-
- function failDownload(error) {
-     countFileDownloadFail = countFileDownloadFail+1;
-
-    console.log(error.code);
-}
-
-function fail(error) {
-    console.log(error.code);
-}
 
 function onGetDirectorySuccess(dir) {
       console.log("Created dir "+dir.name);

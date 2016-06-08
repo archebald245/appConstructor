@@ -19,6 +19,7 @@ function onCheckJson(){
         data = replaceData(data);
         applicationData = JSON.parse(data);
         downloadResources();
+        initMenuYoutunbe();
         if(resources.length==0){
             var jsonString = JSON.stringify(applicationData);
             cutImageOfYoutubeContainer();
@@ -40,19 +41,7 @@ function onCheckJson(){
        initGallaryClick();
     $(".blockUI").remove();
   }
-    // setTimeout(unBlockUi, 5000);
-    // unBlockUi();
-   
-    
-    console.log($.jStorage.get('appData'));
-    
-        
-// window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-//     fileSystem.root.getDirectory("Phonegap", {create: true, exclusive: false}, onGetDirectorySuccess, onGetDirectoryFail); 
-//     var localFileName = encodeURI("Phonegap/" + "applicationData.json");
-//     fileSystem.root.getFile(localFileName, null, gotFileEntryToRead, failCheckJson);
-//     console.log("check");
-// });
+ 
 }
 
 function checkConnection(){
@@ -99,14 +88,9 @@ function checkConnection(){
   }
 } 
 
-function downloadResources() {
-    resources = resourcesFromJson(applicationData);
-    
-    for(var i = 0;i<resources.length;i++){
-        fileNameImage = resources[i];
-        console.log(fileNameImage);
-        download();
-    }
+
+
+function initMenuYoutunbe(){
      createMenu();
      if(resources.length == 0){
         reactRender();  
@@ -120,9 +104,7 @@ function downloadResources() {
 }
 
 function callback(){
-    store = window.myFileSystem.root.nativeURL + "Phonegap/" ;
-    applicationData = SearchValueImages(applicationData, store);
-    console.log("app" + applicationData);
+    applicationData = JSON.parse($.jStorage.get('replaceImagePachJson'));
     var jsonString = JSON.stringify(applicationData);
      $.jStorage.set('appData', jsonString);
      deleteResources();
@@ -132,7 +114,6 @@ function callback(){
 }
 
 function replaceData(element){
-    console.log(element);
     element = element.replace(/&lt;/g,'<');
     element = element.replace(/&gt;/g,'>');
     element = element.replace(/\n/g,'');
@@ -141,7 +122,6 @@ function replaceData(element){
     element = element.replace(/\r/g,'');
     element = element.replace(/\v/g,'');
     element = element.replace(/\f/g,'');
-    console.log(element);
     return element;
 }
 
