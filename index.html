@@ -17,14 +17,13 @@
     <script src="js/react/react-dom.js"></script>
     <script src="js/jquery-touchswipe/jquery.touchSwipe.js"></script>
     <script src="js/underscore-min.js"></script>
-	
-    <script src="js/readWriteJson.js"></script>
+
     <script src="applicationData.js"></script>
     <script src="js/jstorage.js"></script>
     <script src="js/jquery.blockUI.js"></script>
-	<script src="js/jquery-ui.js"></script>
-    <script src="js/jsonInResourses.js"></script>
-	<script src="js/resourceWork.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/eventsWork.js"></script>
+    <script src="js/resourceWork.js"></script>
 
     <!-- PhotoSwipe-->
     <link rel="stylesheet" href="js/PhotoSwipe/photoswipe.css">
@@ -35,10 +34,15 @@
 
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline'">
 
-    <script src="js/events.js"></script>
+    <script src="js/encodeDecodeWork.js"></script>
+    <script src="js/menuWork.js"></script>
+    <script src="js/blockUIWork.js"></script>
+    <script src="js/initWork.js"></script>
+
+
 
     <style>
-   /* .blockUI{display:none !important;}*/
+        /* .blockUI{display:none !important;}*/
     </style>
 </head>
 
@@ -47,7 +51,7 @@
         <span class="menu-icon" onclick="onClickButtonMenu()">Menu</span>
         <div class="classDropdownList"></div>
     </div>
-	<div class="classSwipeDropList"></div>
+    <div class="classSwipeDropList"></div>
     <!-- Root element of PhotoSwipe. Must have class pswp. -->
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>
@@ -66,9 +70,9 @@
                     <button class="pswp__button pswp__button--zoom hidden" title="Zoom in/out"></button>
                     <div class="pswp__preloader">
                         <div class="pswp__preloader__icn">
-                          <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                          </div>
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,4 +99,5 @@
     </script>
     <script src="js/hBoxSlider/swiper.min.js"></script>
 </body>
+
 </html>
