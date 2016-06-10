@@ -1,0 +1,377 @@
+<<<<<<< HEAD
+body{
+    margin:0;
+    padding:0px 0 15px 0;
+}
+
+form{
+    margin:0px;
+}
+.row{
+    margin-right:0px !important;
+    margin-left:0px !important;
+}
+.classHide {
+    display: none;
+}
+.classMenu{
+    background:#E5E5E5;
+    position:fixed;
+    height:80px;
+    padding:25px 0 5px 0;
+    z-index:1000;
+    width:100%;
+    margin-top:-1px;
+    display: none;
+}
+.classMenuTop{
+    top:0;
+}
+.classMenuBottom{
+    bottom:0;
+}
+.menu-icon{
+    width:96px;
+    height:40px;
+    background:url(../baseimages/menuIcon.gif) no-repeat 0 50%;
+    background-size:contain;
+    text-indent:-9999px;
+    margin-left:10px;
+    cursor:pointer;
+    display: block;
+
+}
+.menu-icon-right {
+    position: absolute;
+    right: 10px;
+}
+.menu-icon-left {
+    position: absolute;
+    left: 10px;
+
+}
+.classDropdownList{
+    color: black;
+    position:absolute;
+    z-index: 10000;
+    width:100%;
+    background: #E5E5E5;
+
+}
+ .classDropdownList-topMenu{
+
+    top:70px;
+}
+ .classDropdownList-downMenu{
+
+    bottom:70px;
+}
+.classDropdownList > div{
+    padding:7px 10px 7px 10px;
+    text-align:center;
+    border-bottom:1px solid #CCCCCC;
+    box-shadow:0 1px 2px 0px #CCCCCC;
+}
+.classDropdownList > div.activePage{
+    background:#C5C5C5;
+}
+.containerTop{
+    padding-top:85px;
+}
+.containerBottom{
+    padding-bottom:85px;
+}
+.blockMsg{
+    width:80% !important;
+    left:50% !important;
+    margin-left:-40% !important;
+}
+.youtube-container {
+    position: relative;
+}
+.difficult-button {
+    position: relative;
+}
+.text-bottom, .text-top, .text-center{
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    opacity: 0.8;
+    min-height: fit-content !important;
+    display: block;
+    padding: 10px 0 10px 0;
+    color: #000;
+    text-align: center;
+}
+.text-bottom a, .text-top a, .text-center a {
+    display: block;
+    padding: 10px 0 10px 0;
+    color: #000;
+    text-align: center;
+}
+.text-top {
+    top: 10%;
+}
+.text-bottom {
+    bottom: 10%;
+}
+.text-center {
+    top: 50%;
+    margin-top: -10px;
+}
+.gallery-images-container{
+    position:relative;
+}
+.icon-container, .shadow-container{
+    position:absolute;
+    width:100%;
+}
+.shadow-container{
+    width: 100%;
+    height: 100%;
+    background: url(../baseimages/circles.gif) no-repeat 50% 50%;
+    background-size: 20%;
+    background-color: rgba(0,0,0,.5);
+}
+.shadow-container img{
+    width:100%;
+    height:100%;
+}
+
+.icon-container img{
+    width: 100%;
+}
+
+.gallery-image{
+	max-width:100%;
+}
+.difficult-button-img{
+   box-shadow:0px 0px 7px 2px #727272;
+   margin:5px auto;
+}
+.menu-item-href{
+    color: #000;
+    text-align: center;
+}
+.side-menu-left{
+    background-color: #E5E5E5;
+    width: 70%;
+    height: 100%;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+}
+.side-menu-right{
+    background-color: #E5E5E5;
+    width: 70%;
+    height: 100%;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    right: 0;
+}
+.classSwipeDropList{
+    width: 0px;
+}
+.classSwipeDropList{
+    overflow: hidden;
+}
+.classSwipeDropList > div{
+    padding:7px 10px 7px 10px;
+    text-align:center;
+    border-bottom:1px solid #CCCCCC;
+    box-shadow:0 1px 2px 0px #CCCCCC;
+}
+.classSwipeDropList > div.activePage{
+    background:#C5C5C5;
+}
+=======
+body{
+    margin:0;
+    padding:0px 0 15px 0;
+}
+
+form{
+    margin:0px;
+}
+.row{
+    margin-right:0px !important;
+    margin-left:0px !important;
+}
+.classHide {
+    display: none;
+}
+.classMenu{
+    background:#E5E5E5;
+    position:fixed;
+    height:80px;
+    padding:25px 0 5px 0;
+    z-index:1000;
+    width:100%;
+    margin-top:-1px;
+    display: none;
+}
+.classMenuTop{
+    top:0;
+}
+.classMenuBottom{
+    bottom:0;
+}
+.menu-icon{
+    width:96px;
+    height:40px;
+    background:url(../baseimages/menuIcon.gif) no-repeat 0 50%;
+    background-size:contain;
+    text-indent:-9999px;
+    margin-left:10px;
+    cursor:pointer;
+    display: block;
+
+}
+.menu-icon-right {
+    position: absolute;
+    right: 10px;
+}
+.menu-icon-left {
+    position: absolute;
+    left: 10px;
+
+}
+.classDropdownList{
+    color: black;
+    position:absolute;
+    z-index: 10000;
+    width:100%;
+    background: #E5E5E5;
+
+}
+ .classDropdownList-topMenu{
+
+    top:70px;
+}
+ .classDropdownList-downMenu{
+
+    bottom:70px;
+}
+.classDropdownList > div{
+    padding:7px 10px 7px 10px;
+    text-align:center;
+    border-bottom:1px solid #CCCCCC;
+    box-shadow:0 1px 2px 0px #CCCCCC;
+}
+.classDropdownList > div.activePage{
+    background:#C5C5C5;
+}
+.containerTop{
+    padding-top:85px;
+}
+.containerBottom{
+    padding-bottom:85px;
+}
+.blockMsg{
+    width:80% !important;
+    left:50% !important;
+    margin-left:-40% !important;
+}
+.youtube-container {
+    position: relative;
+}
+.difficult-button {
+    position: relative;
+}
+.text-bottom, .text-top, .text-center{
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    opacity: 0.8;
+    min-height: fit-content !important;
+    display: block;
+    padding: 10px 0 10px 0;
+    color: #000;
+    text-align: center;
+}
+.text-bottom a, .text-top a, .text-center a {
+    display: block;
+    padding: 10px 0 10px 0;
+    color: #000;
+    text-align: center;
+}
+.text-top {
+    top: 10%;
+}
+.text-bottom {
+    bottom: 10%;
+}
+.text-center {
+    top: 50%;
+    margin-top: -10px;
+}
+.gallery-images-container{
+    position:relative;
+}
+.icon-container, .shadow-container{
+    position:absolute;
+    width:100%;
+}
+.shadow-container{
+    width: 100%;
+    height: 100%;
+    background: url(../baseimages/circles.gif) no-repeat 50% 50%;
+    background-size: 20%;
+    background-color: rgba(0,0,0,.5);
+}
+.shadow-container img{
+    width:100%;
+    height:100%;
+}
+
+.icon-container img{
+    width: 100%;
+}
+
+.gallery-image{
+	max-width:100%;
+}
+.difficult-button-img{
+   box-shadow:0px 0px 7px 2px #727272;
+   margin:5px auto;
+}
+.menu-item-href{
+    color: #000;
+    text-align: center;
+}
+.side-menu-left{
+    background-color: #E5E5E5;
+    width: 70%;
+    height: 100%;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+}
+.side-menu-right{
+    background-color: #E5E5E5;
+    width: 70%;
+    height: 100%;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    right: 0;
+}
+.classSwipeDropList{
+    width: 0px;
+}
+.classSwipeDropList{
+    overflow: hidden;
+}
+.classSwipeDropList > div{
+    padding:7px 10px 7px 10px;
+    text-align:center;
+    border-bottom:1px solid #CCCCCC;
+    box-shadow:0 1px 2px 0px #CCCCCC;
+}
+.classSwipeDropList > div.activePage{
+    background:#C5C5C5;
+}
+>>>>>>> master
