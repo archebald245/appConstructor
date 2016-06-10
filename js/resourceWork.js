@@ -49,7 +49,8 @@ function resourcesOfBoxConteiner(boxConteiner, storePath) {
 
 function resourcesOfBackground(page, storePath){
     resourcesPushInArray(page);
-    page.Style = replacementPathImages(page.Style, page.Resourceses, storePath);
+    page.BackgroundImagePath = [page.BackgroundImagePath];
+    page.Style = replacementPathImages(page.Style, page.BackgroundImagePath, storePath);
     return page;
 }
 
