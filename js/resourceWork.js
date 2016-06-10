@@ -6,6 +6,7 @@ function searchResourcesAndReplacePatch(jsonObject) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
+         jsonObject.Pages = resourcesOfBackground(jsonObject.Pages, storePath);
     }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
@@ -44,6 +45,12 @@ function resourcesOfBoxConteiner(boxConteiner, storePath) {
     }
     boxConteiner.Json = decodedJson;
     return boxConteiner;
+}
+
+function resourcesOfBackground(page, storePath){
+    resourcesPushInArray(page);
+    page.Style = replacementPathImages(page.Style, page.Resourceses, storePath);
+    return page;
 }
 
 function resourcesPushInArray(element) {
