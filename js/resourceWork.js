@@ -6,7 +6,10 @@ function searchResourcesAndReplacePatch(jsonObject) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
-         jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
+        if(jsonObject.Pages[i].BackgroundImagePath != null){
+             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);    
+        }
+        
     }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
