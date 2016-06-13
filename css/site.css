@@ -1,9 +1,10 @@
 body{
     margin:0;
     padding:0px 0 15px 0;
-    background-size: cover;
 }
-
+html,body, #container{
+    height: 100%; 
+}
 form{
     margin:0px;
 }
@@ -189,6 +190,9 @@ form{
 
 #container {
     background-attachment:fixed;
+    background-size: cover;
+    height: auto;
+    min-height: 100%;
 }
 .button-block .btn-custom{
   display: block;
