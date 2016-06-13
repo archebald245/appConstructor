@@ -193,7 +193,6 @@ form{
     background-size: cover;
     height: auto;
     min-height: 100%;
-    padding:0px 0 15px 0;
 }
 .button-block .btn-custom{
   display: block;
