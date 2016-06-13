@@ -6,7 +6,7 @@ function searchResourcesAndReplacePatch(jsonObject) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
-         jsonObject.Pages = resourcesOfBackground(jsonObject.Pages, storePath);
+         jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
     }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
@@ -48,9 +48,9 @@ function resourcesOfBoxConteiner(boxConteiner, storePath) {
 }
 
 function resourcesOfBackground(page, storePath){
-    resourcesPushInArray(page);
+    resources.push(page.BackgroundImagePath);
     page.BackgroundImagePath = [page.BackgroundImagePath];
-    page.Style = replacementPathImages(page.Style, page.BackgroundImagePath, storePath);
+    page.Style = replacementBackgroundImagePath(page.Style, page.BackgroundImagePath, storePath);
     return page;
 }
 
@@ -99,6 +99,14 @@ function replacementPathImages(jsonObjectValue, arrayResources, storePath) {
     for (var i = 0; i < urls.length; i++) {
         jsonObjectValue = jsonObjectValue.replace(urls[i], storePath + arrayResources[i].FileName);
     }
+    return jsonObjectValue;
+}
+
+function replacementBackgroundImagePath(jsonObjectValue, arrayResources, storePath){
+    jsonObjectValue = replaceData(jsonObjectValue);
+    var url = arrayResources[0].split("/")
+    var fileName = url[url.length-1];
+    jsonObjectValue = jsonObjectValue.replace(arrayResources[0], storePath + fileName);
     return jsonObjectValue;
 }
 
