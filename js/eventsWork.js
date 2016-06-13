@@ -22,7 +22,7 @@ function goToPage(index) {
         }        
     }, this);
     
-    $("body").attr("style", pageStyles);
+    $("#container").attr("style", pageStyles);
     
     initGallaryClick();
 }
