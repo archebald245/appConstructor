@@ -55,6 +55,8 @@ function onCheckJson() {
         var versionId = applicationData.Version;
         createMenu(applicationData);
         $(".my-youtube").attr("height", "auto");
+         var pageStyles = applicationData.Pages[0].Style;
+        $("#container").attr("style", pageStyles);
     } else {
 
         data = replaceData(data);
