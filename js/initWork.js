@@ -55,6 +55,8 @@ function onCheckJson() {
         var versionId = applicationData.Version;
         createMenu(applicationData);
         $(".my-youtube").attr("height", "auto");
+         var pageStyles = applicationData.Pages[0].Style;
+        $("#container").attr("style", pageStyles);
     } else {
 
         data = replaceData(data);
@@ -72,7 +74,7 @@ function onCheckJson() {
     var networkState = navigator.connection.type;
     if (networkState == Connection.NONE) {
         var pageStyles = applicationData.Pages[0].Style;
-        $("body").attr("style", pageStyles);
+        $("#container").attr("style", pageStyles);
         reactRender();
         initGallaryClick();
         $(".blockUI").remove();
@@ -139,7 +141,7 @@ function callback() {
     reactRender();
     initGallaryClick();
     var pageStyles = applicationData.Pages[0].Style;
-    $("body").attr("style", pageStyles);
+    $("#container").attr("style", pageStyles);
     $(".blockUI").remove();
 }
 
