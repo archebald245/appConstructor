@@ -72,7 +72,7 @@ function onCheckJson() {
     var networkState = navigator.connection.type;
     if (networkState == Connection.NONE) {
         var pageStyles = applicationData.Pages[0].Style;
-        $("body").attr("style", pageStyles);
+        $("#container").attr("style", pageStyles);
         reactRender();
         initGallaryClick();
         $(".blockUI").remove();
@@ -139,7 +139,7 @@ function callback() {
     reactRender();
     initGallaryClick();
     var pageStyles = applicationData.Pages[0].Style;
-    $("body").attr("style", pageStyles);
+    $("#container").attr("style", pageStyles);
     $(".blockUI").remove();
 }
 
