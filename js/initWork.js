@@ -69,10 +69,10 @@ function onCheckJson() {
             $(".my-youtube").attr("height", "auto");
         }
     }
-    var pageStyles = applicationData.Pages[0].Style;
-    $("body").attr("style", pageStyles);
     var networkState = navigator.connection.type;
     if (networkState == Connection.NONE) {
+        var pageStyles = applicationData.Pages[0].Style;
+        $("body").attr("style", pageStyles);
         reactRender();
         initGallaryClick();
         $(".blockUI").remove();
@@ -138,6 +138,8 @@ function callback() {
     deleteResources();
     reactRender();
     initGallaryClick();
+    var pageStyles = applicationData.Pages[0].Style;
+    $("body").attr("style", pageStyles);
     $(".blockUI").remove();
 }
 
