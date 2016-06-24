@@ -148,11 +148,7 @@ function reactRender() {
           ));
         }
       }
-      return React.createElement(
-        'div',
-        null,
-        output
-      );
+      return output;
     }
   });
 
@@ -382,6 +378,9 @@ function reactRender() {
           { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
           React.createElement(Vbox, { data: data.Json })
         );
+      }
+      if (data.ContentTypeId == 12) {
+        return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
       }
     }
   });

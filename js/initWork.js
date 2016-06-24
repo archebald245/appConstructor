@@ -80,6 +80,7 @@ function onCheckJson() {
 
         reactRender();
         initGallaryClick();
+        submitFormListener();
         $(".blockUI").remove();
     }
 }
@@ -131,6 +132,7 @@ function initMenuYoutunbe() {
     createMenu();
     if (resources.length == 0) {
         reactRender();
+        submitFormListener();
         $(".blockUI").remove();
     }
     $(".my-youtube").attr("height", "auto");
@@ -143,6 +145,7 @@ function callback() {
     deleteResources();
     reactRender();
     initGallaryClick();
+    submitFormListener();
     var pageStyles = applicationData.Pages[0].Style;
     if (pageStyles != undefined) {
         $("#container").attr("style", pageStyles);
