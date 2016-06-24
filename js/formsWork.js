@@ -1,8 +1,8 @@
 function submitFormListener() {
 
-    $(".form-item").find(".formSubmit").on("click", function() {
+    $(".form-container").find(".formSubmit").on("click", function() {
         var check = true;
-        var form = $(this).closest(".form-item");
+        var form = $(this).closest(".form-container");
         $(form).find(".required").each(function(i, element) {
             if ($(element).val() == "") {
                 check = false;
@@ -12,17 +12,20 @@ function submitFormListener() {
             alert("Please fill in all required fields!");
             return;
         }
-        check = false;
-        $(form).find(".required-check").each(function(i, element) {
-          if(element.find("input").attr("checked")){
-              check = true;
-          }  
-        });
-        if (check == false) {
-            alert("Please fill in all required fields!");
-            return;
+        if ($(form).find(".required-check").length > 0) {
+            check = false;
+            $(form).find(".required-check").each(function(i, element) {
+                if (element.find("input").attr("checked")) {
+                    check = true;
+                }
+            });
+            if (check == false) {
+                alert("Please fill in all required fields!");
+                return;
+            }
         }
-        
+
+
 
         if ($(form).find(".phoneNumberElement").length > 0) {
             var phoneInput = $(form).find(".phoneNumberElement").find(".phoneNumber").val();
@@ -51,9 +54,10 @@ function submitFormListener() {
         var idForm = $(form).find(".formId").attr("id");
         var idProject = applicationData.ProjectId;
         var siteUrl = applicationData.UrlForUpdateApp;
+        var formData = new FormData(form)
         var modelData = {
             'projectId': idProject,
-            'formId': siteUrl
+            'formId': idForm
         }
         $.ajax({
             type: "POST",
@@ -62,12 +66,12 @@ function submitFormListener() {
             success: function(msg) {
                 console.log(msg.Massage);
                 $(".formId").each(function(i, element) {
-                    if(element.attr("id") == msg.Id){
+                    if ($(element).attr("id") == msg.Id) {
                         $(element).closest(".form-item").find(":input").val("");
                         $('.checkBoxFormBlock').find(":input").attr("checked", false)
                     }
                 });
-                
+
             },
             error: function(er) {
                 console.log(er);
