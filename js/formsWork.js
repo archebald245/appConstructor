@@ -9,9 +9,20 @@ function submitFormListener() {
             }
         }, this);
         if (check == false) {
-            alert("Please fill in all mandatory fields!");
+            alert("Please fill in all required fields!");
             return;
         }
+        check = false;
+        $(form).find(".required-check").each(function(i, element) {
+          if(element.find("input").attr("checked")){
+              check = true;
+          }  
+        });
+        if (check == false) {
+            alert("Please fill in all required fields!");
+            return;
+        }
+        
 
         if ($(form).find(".phoneNumberElement").length > 0) {
             var phoneInput = $(form).find(".phoneNumberElement").find(".phoneNumber").val();
@@ -49,9 +60,9 @@ function submitFormListener() {
             url: siteUrl + "/Form/SaveFormData",
             data: modelData,
             success: function(msg) {
-                console.log(msg);
+                console.log(msg.Massage);
                 $(".formId").each(function(i, element) {
-                    if(element.attr("id") == msg.id){
+                    if(element.attr("id") == msg.Id){
                         $(element).closest(".form-item").find(":input").val("");
                         $('.checkBoxFormBlock').find(":input").attr("checked", false)
                     }
