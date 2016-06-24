@@ -67,7 +67,6 @@ function onCheckJson() {
         initMenuYoutunbe();
         if (resources.length == 0) {
             var jsonString = JSON.stringify(applicationData);
-            cutImageOfYoutubeContainer();
             $.jStorage.set('appData', jsonString);
             createMenu(applicationData);
             $(".my-youtube").attr("height", "auto");
