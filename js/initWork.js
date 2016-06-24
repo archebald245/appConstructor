@@ -118,6 +118,7 @@ function checkConnection() {
                     onCheckJson();
                     reactRender();
                     initGallaryClick();
+                    submitFormListener();
                     $(".blockUI").remove();
                 }
             }
