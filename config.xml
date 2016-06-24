@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="qqqqqqqqqqqqqqq" version="0.0.1">
-  <name>Qqqqqqqqq</name>
-  <description>qqqqqqqqqqqq</description>
+<widget xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="com.form.test" version="0.0.1">
+  <name>TestForms</name>
+  <description>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</description>
   <plugin name="com.fantasyskiracer.inappbrowser" spec="1.0.4" source="pgb" />
   <plugin name="org.apache.cordova.file-transfer" spec="0.5.0" source="pgb" />
   <plugin name="org.apache.cordova.network-information" spec="0.2.7" source="pgb" />
@@ -21,6 +21,6 @@
   <feature name="FileTransfer">
     <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
   </feature>
-  <gap:platform name="winphone" />
+  <gap:platform name="android" />
   <preference name="orientation" value="default" />
 </widget>
