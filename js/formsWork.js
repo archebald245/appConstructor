@@ -1,10 +1,10 @@
 function submitFormListener() {
 
-    $(".form-item").find(".formSubmit").on("click", function() {
+    $(".form-container").find(".formSubmit").on("click", function() {
         var networkState = navigator.connection.type;
         if (networkState != Connection.NONE) {
             var check = true;
-            var form = $(this).closest(".form-item");
+            var form = $(this).closest(".form-container");
             $(form).find(".required").each(function(i, element) {
                 if ($(element).val() == "") {
                     check = false;
@@ -55,7 +55,7 @@ function submitFormListener() {
             }
             var idForm = $(form).find(".formId").attr("id");
             var idProject = applicationData.ProjectId;
-            $(".form-item").append("<input type='hidden' name='projectId' value='" + idProject + "'/><input type='hidden' name='formId' value='" + idForm + "'/>")
+            $(".form-container").append("<input type='hidden' name='projectId' value='" + idProject + "'/><input type='hidden' name='formId' value='" + idForm + "'/>")
 
             var siteUrl = applicationData.UrlForUpdateApp;
             var formData = new FormData(form)
@@ -68,7 +68,7 @@ function submitFormListener() {
             //         console.log(msg.Massage);
             //         $(".formId").each(function(i, element) {
             //             if ($(element).attr("id") == msg.Id) {
-            //                 $(element).closest(".form-item").find(":input").val("");
+            //                 $(element).closest(".form-container").find(":input").val("");
             //                 $('.checkBoxFormBlock').find(":input").attr("checked", false)
             //             }
             //         });
