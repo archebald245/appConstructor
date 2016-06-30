@@ -29,8 +29,8 @@ function submitFormListener() {
 
         if ($(form).find(".phoneNumberElement").length > 0) {
             var phoneInput = $(form).find(".phoneNumberElement").find(".phoneNumber").val();
-            var phoneValid = /^\+\d{4}\d{3}\d{4}$/;
-            if ((!phoneInput.match(phoneValid)) && (!phoneInput.val() != "")) {
+            var phoneValid = /^\+\d{4}\d{4}\d{4}$/;
+            if ((!phoneInput.match(phoneValid)) && (phoneInput != "")) {
                 alert("Please enter valid phone number!");
                 return;
             }
@@ -43,21 +43,13 @@ function submitFormListener() {
                 return;
             }
         }
-        if ($(form).find(".phoneNumberElement").length > 0) {
-            var phoneInput = $(form).find(".phoneNumberElement").find(".phoneNumber").val();
-            var phoneValid = /^\+\d{4}\d{3}\d{4}$/;
-            if ((!phoneInput.match(phoneValid)) && (!phoneInput.val() != "")) {
-                alert("Please enter valid phone number!");
-                return;
-            }
-        }
         var idForm = $(form).find(".formId").attr("id");
         var idProject = applicationData.ProjectId;
         $(".form-container").append("<input type='hidden' name='projectId' value='" + idProject +"'/><input type='hidden' name='formId' value='" +idForm +"'/>")
         
         var siteUrl = applicationData.UrlForUpdateApp;
         var formData = new FormData(form)
-        $.post(siteUrl+'/Form/SaveFormData', $(form).serialize());
+        $.post(''+siteUrl+'/Form/SaveFormData', $(form).serialize());
         // $.ajax({
         //     type: "POST",
         //     url: siteUrl + "/Form/SaveFormData",
