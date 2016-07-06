@@ -25,4 +25,5 @@ function goToPage(index) {
     $("#container").attr("style", pageStyles);
     submitFormListener();
     initGallaryClick();
+    bindChangeValForms();
 }

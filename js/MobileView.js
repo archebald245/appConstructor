@@ -321,84 +321,81 @@ function reactRender() {
       if (styleCell == undefined || styleCell == null) {
         styleCell = "";
       }
-       var data = this.props.data;
-	    var  value = data.Value;
-	    var formId;
-	    var fieldId;
-	    if (data.ContentTypeId == 12) {
+      var data = this.props.data;
+      var value = data.Value;
+      var formId;
+      var fieldId;
+      if (data.ContentTypeId == 12) {
 
-	          formId = this.props.data.FormId;
-	        var objectForm = applicationData.Forms;
-            var styleLabel = this.props.data.Value;
-            $(ReactDOM.findDOMNode(this)).html("<form class='form-container' id='form-container'></form>");
-	        $(objectForm).each(function(i, element) {
-	            if (element.Id == formId) {
-	                renderForm(element);
-	                $("#form-container").find("label").attr("style", styleLabel);
-	                $("#form-container").attr("id", "");
-                  if(data.CountFormColumn == 2){
-                    $(".formBlock").addClass("formHalf");
-                    $(".form-quantity-columns-select").val(2);
-                  }else if(data.CountFormColumn == 3){
-                    $(".formBlock").addClass("formThird");
-                    $(".form-quantity-columns-select").val(3);
-                  }
-                  if(data.LablePosition == "left"){
-                    $(".label-container").addClass("label-form-left");
-                    $(".form-item input, .form-item textarea").addClass("input-form");
-                  }else if(data.LablePosition == "right"){
-                    $(".label-container").addClass("label-form-right");
-                    $(".form-item input, .form-item textarea").addClass("input-form");
-                  }else if(data.LablePosition == "placeholder"){
-                    addPlaceholder();
-                  }
-                  if(data.ButtonPosition == "left"){
-                    $(".formSubmit").addClass("submit-form-left");
-                  }else if(data.ButtonPosition == "right"){
-                    $(".form-item").addClass("submit-form-right");
-                    $(".form-item div").addClass("submit-form-right-text-left");
-                  }else if(data.ButtonPosition == "allWidth"){
-                    $(".formSubmit").addClass("submit-form-allWidth");
-                  }else if (data.ButtonPosition == "center") {
-                    $(".form-item").addClass("submit-form-center");
-                    $(".form-item div").addClass("submit-form-right-text-left");
-                  }else{
-                    $(".formSubmit").addClass("submit-form-left");
-                  }
-	            }
-	        });
-	    }
-        
-         if (data.ContentTypeId == 13) {
-                 fieldId = this.props.data.FieldId;
-	          formId = this.props.data.FormId;
-	          var styleLabel = this.props.data.Value;
-	        var objectForm = applicationData.Forms;
-            
-            $(ReactDOM.findDOMNode(this)).attr("id", "custom-form-container");
-            
-	        $(objectForm).each(function(i, element) {
-	            if (element.Id == formId) {
-	                $(element.FormFields).each(function(i, field) {
-	                    if (field.Id == fieldId) {
-	                        var formToRender = {};
-	                        formToRender.FormFields = [];
-	                        formToRender.FormFields.push(field);
-	                        formToRender.Id = element.Id;
-                            formToRender.Name = element.Name;
-	                        renderCustomForm(formToRender);
-                            $("#custom-form-container").find("label").attr("style", styleLabel);
-	                        $("#custom-form-container").attr("id", "");
-	                    }
-	                });	            
+        formId = this.props.data.FormId;
+        var objectForm = applicationData.Forms;
+        var styleLabel = this.props.data.Value.split("|")[0];
+        var styleSubmit = this.props.data.Value.split("|")[1];
+        $(ReactDOM.findDOMNode(this)).html("<form class='form-container' id='form-container'></form>");
+        $(objectForm).each(function (i, element) {
+          if (element.Id == formId) {
+            renderForm(element);
+            $("#form-container").find(".formSubmit").attr("style", styleSubmit);
+            $("#form-container").find("label").attr("style", styleLabel);
+            $("#form-container").attr("id", "");
+            if (data.CountFormColumn == 2) {
+              $(".formBlock").addClass("formHalf");
+              $(".form-quantity-columns-select").val(2);
+            } else if (data.CountFormColumn == 3) {
+              $(".formBlock").addClass("formThird");
+              $(".form-quantity-columns-select").val(3);
+            }
+            if (data.LablePosition == "left") {
+              $(".label-container").addClass("label-form-left");
+              $(".form-item input, .form-item textarea").addClass("input-form");
+            } else if (data.LablePosition == "right") {
+              $(".label-container").addClass("label-form-right");
+              $(".form-item input, .form-item textarea").addClass("input-form");
+            } else if (data.LablePosition == "placeholder") {
+              addPlaceholder();
+            }
+            if (data.ButtonPosition == "left") {
+              $(".formSubmit").addClass("submit-form-left");
+            } else if (data.ButtonPosition == "right") {
+              $(".form-item").addClass("submit-form-right");
+              $(".form-item div").addClass("submit-form-right-text-left");
+            } else if (data.ButtonPosition == "allWidth") {
+              $(".formSubmit").addClass("submit-form-allWidth");
+            } else if (data.ButtonPosition == "center") {
+              $(".form-item").addClass("submit-form-center");
+              $(".form-item div").addClass("submit-form-right-text-left");
+            } else {
+              $(".formSubmit").addClass("submit-form-left");
+            }
+          }
+        });
+      }
 
+      if (data.ContentTypeId == 13) {
+        fieldId = this.props.data.FieldId;
+        formId = this.props.data.FormId;
+        var styleLabel = this.props.data.Value;
+        var objectForm = applicationData.Forms;
 
-	        }
-	        });
-	    }
-  
-        
-        
+        $(ReactDOM.findDOMNode(this)).attr("id", "custom-form-container");
+
+        $(objectForm).each(function (i, element) {
+          if (element.Id == formId) {
+            $(element.FormFields).each(function (i, field) {
+              if (field.Id == fieldId) {
+                var formToRender = {};
+                formToRender.FormFields = [];
+                formToRender.FormFields.push(field);
+                formToRender.Id = element.Id;
+                formToRender.Name = element.Name;
+                renderCustomForm(formToRender);
+                $("#custom-form-container").find("label").attr("style", styleLabel);
+                $("#custom-form-container").attr("id", "");
+              }
+            });
+          }
+        });
+      }
 
       //$(React.findDOMNode(this)).attr("style", styleCell);
       $(ReactDOM.findDOMNode(this)).attr("style", styleCell);
