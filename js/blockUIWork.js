@@ -11,5 +11,8 @@ function blockUi(){
 }
 
 function unBlockUi(){
+    createCustomHideForms();
+    bindChangeValForms();
     $.unblockUI();
+    
 }
