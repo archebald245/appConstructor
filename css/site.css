@@ -201,3 +201,49 @@ form{
 .form-control {
     max-width: 1000px !important;
 }
+.formSubmit{
+    width: 100%;
+}
+.form-item{
+    padding: 5px;
+}
+.form-item .form-control {
+    max-width: 1000px !important;
+}
+.label-form-left {
+     width: 30%;
+    display: inline-block;
+    float: left;
+}
+.label-form-right {
+     width: 30%;
+    display: inline-block;
+    float: right;
+}
+.input-form {
+    width: 69%;
+}
+.label-container {
+    min-height: 0 !important;
+}
+.submit-form-right {
+    text-align: right;
+}
+.submit-form-right-text-left {
+    text-align: left;
+}
+.submit-form-allWidth {
+    width: 99%;
+}
+.formSubmit {
+    margin: 4px;
+}
+.submit-form-center {
+      text-align: center;
+} 
+.form-item {
+    overflow: hidden;
+}
+.formBlock {
+    padding-bottom: 5px;
+}

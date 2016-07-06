@@ -80,7 +80,7 @@ function onCheckJson() {
         reactRender();
         initGallaryClick();
         submitFormListener();
-        $(".blockUI").remove();
+        unBlockUi()
     }
 }
 
@@ -119,7 +119,7 @@ function checkConnection() {
                     reactRender();
                     initGallaryClick();
                     submitFormListener();
-                    $(".blockUI").remove();
+                    unBlockUi()
                 }
             }
         });
@@ -133,7 +133,7 @@ function initMenuYoutunbe() {
     if (resources.length == 0) {
         reactRender();
         submitFormListener();
-        $(".blockUI").remove();
+        unBlockUi()
     }
     $(".my-youtube").attr("height", "auto");
 }
@@ -150,7 +150,7 @@ function callback() {
     if (pageStyles != undefined) {
         $("#container").attr("style", pageStyles);
     }
-    $(".blockUI").remove();
+    unBlockUi()
 }
 
 function replaceData(element) {
