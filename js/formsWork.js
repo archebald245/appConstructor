@@ -40,26 +40,28 @@ function bindChangeValForms() {
     var siteUrl = applicationData.UrlForUpdateApp;
     $($("#custom-hide-container").find("form")).each(function(i, elem) {
         var formId = $(elem).attr("id");
-
+        $(".formSubmit").unbind("click");
+        $(".formSubmit").each(function(i, button) {
+            $(button).on("click", function() {
+                var networkState = navigator.connection.type;
+                if (networkState != Connection.NONE) {
+                    var check = checkValidationAndRequired(elem);
+                    if (check != false) {
+                        $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
+                            alert("Thank you!");
+                        });
+                    }
+                } else {
+                    alert("Sorry, no internet connection!");
+                }
+            });
+        });
         (function(elem, siteUrl, formId) {
             $("." + formId).each(function(i, element) {
                 var field = $(element).siblings(".formBlock").find("input, textarea, select");
                 var fieldName = $(field).attr("name");
                 if ($(element).find("button").length > 0) {
-                    $(element).find("button").unbind("click");
-                    $(element).find("button").on("click", function() {
-                        var networkState = navigator.connection.type;
-                        if (networkState != Connection.NONE) {
-                            var check = checkValidationAndRequired(elem);
-                            if (check != false) {
-                                $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
-                                    alert("Thank you!");
-                                });
-                            }
-                        } else {
-                            alert("Sorry, no internet connection!");
-                        }
-                    })
+
                 } else {
                     $(field).unbind("change");
                     $(field).on("change", function() {
@@ -103,7 +105,7 @@ function checkValidationAndRequired(form) {
     }
     if ($(form).find(".phoneNumberElement").length > 0) {
         var phoneInput = $(form).find(".phoneNumberElement").find(".phoneNumber").val();
-            var phoneValid = /^\+\d{4}\d{4}\d{4}$/;
+        var phoneValid = /^\+\d{4}\d{3}\d{4}$/;
         if ((!phoneInput.match(phoneValid)) && (!phoneInput != "")) {
             alert("Please enter valid phone number!");
             check = false;
