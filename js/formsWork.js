@@ -17,7 +17,7 @@ function submitFormListener() {
             var formData = new FormData(form)
             $.post('' + siteUrl + '/Form/SaveFormData', $(form).serialize(), function() {
                 alert("Thank you!");
-                $(form).find("input, textarea").val("");
+                $(form).find(".formBlock").find("input, textarea").val("");
                 $(form).find("input[type='checkbox']").removeAttr("checked");
             });
         } else {
@@ -39,59 +39,69 @@ function createCustomHideForms() {
 function bindChangeValForms() {
     var siteUrl = applicationData.UrlForUpdateApp;
     $($("#custom-hide-container").find("form")).each(function(i, elem) {
-        var formId = $(elem).attr("id");
-        $(".form-submit-item").find(".formSubmit").unbind("click");
-          $(".form-submit-item").find(".formSubmit").each(function(i, button) {
-            $(button).on("click", function() {
-                var networkState = navigator.connection.type;
-                if (networkState != Connection.NONE) {
-                    var check = checkValidationAndRequired(elem);
-                    if (check != false) {
-                        $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
-                            alert("Thank you!");
-                        });
-                    }
-                } else {
-                    alert("Sorry, no internet connection!");
-                }
-            });
-        });
-        (function(elem, siteUrl, formId) {
-            $("." + formId).each(function(i, element) {
-                var field = $(element).siblings(".formBlock").find("input, textarea, select");
-                var fieldName = $(field).attr("name");
-                if ($(element).find("button").length > 0) {
-                      $(element).find("button").unbind("click");
-                      $(element).find("button").on("click", function() {
-                          var networkState = navigator.connection.type;
-                          if (networkState != Connection.NONE) {
-                              var check = checkValidationAndRequired(elem);
-                              if (check != false) {
-                                  $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
-                                      alert("Thank you!");
-                                  });
-                              }
-                          } else {
-                              alert("Sorry, no internet connection!");
-                          }
-                      })
-
-                } else {
-                    $(field).unbind("change");
-                    $(field).on("change", function() {
-
-                        if ($(elem).find("[name='" + fieldName + "']:radio").length > 0) {
-                            $(elem).find("[name='" + fieldName + "']").filter('[value=' + $(field).filter(':checked').val() + ']').prop('checked', true);
-                        } else if ($(elem).find("[name='" + fieldName + "']:checkbox").length > 0) {
-                            $(elem).find("[name='" + fieldName + "']").prop('checked', $(this).prop("checked"));
-                        } else {
-                            $(elem).find("[name='" + fieldName + "']").val(field.val());
+        var formId = $(elem).attr("id").split("_")[1];
+        $(".form-submit-item").find(".formSubmit").each(function(i, button) {
+            if (formId == $(button).parent().attr("name")) {
+                $(button).on("click", function() {
+                    var networkState = navigator.connection.type;
+                    if (networkState != Connection.NONE) {
+                        var check = checkValidationAndRequired(elem);
+                        if (check != false) {
+                            $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
+                                alert("Thank you!");
+                                $(elem).find(".formBlock").find("input, textarea").val("");
+                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input, textarea").val("");
+                                $(elem).find("input[type='checkbox']").removeAttr("checked");
+                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
+                            });
                         }
-                    })
-                }
-            })
-        })(elem, siteUrl, formId)
-    })
+                    } else {
+                        alert("Sorry, no internet connection!");
+                    }
+                });
+            }
+
+        });
+
+        $(".form_" + formId).each(function(i, element) {
+            var field = $(element).siblings(".formBlock").find("input, textarea, select");
+            var fieldName = $(field).attr("name");
+            if ($(element).find("button").length > 0) {
+                $(element).find("button").unbind("click");
+                $(element).find("button").on("click", function() {
+                    var networkState = navigator.connection.type;
+                    if (networkState != Connection.NONE) {
+                        var check = checkValidationAndRequired(elem);
+                        if (check != false) {
+                            $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
+                                alert("Thank you!");
+                                $(elem).find(".formBlock").find("input, textarea").val("");
+                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input, textarea").val("");
+                                $(elem).find("input[type='checkbox']").removeAttr("checked");
+                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
+                            });
+                        }
+                    } else {
+                        alert("Sorry, no internet connection!");
+                    }
+                })
+
+            } else {
+                $(field).unbind("change");
+                $(field).on("change", function() {
+
+                    if ($(elem).find("[name='" + fieldName + "']:radio").length > 0) {
+                        $(elem).find("[name='" + fieldName + "']").val($(this).val());
+                    } else if ($(elem).find("[name='" + fieldName + "']:checkbox").length > 0) {
+                        $(elem).find("[name='" + $(this).attr("name") + "']").prop('checked', $(this).prop("checked"));
+                    } else {
+                        $(elem).find("[name='" + fieldName + "']").val(field.val());
+                    }
+                });
+            }
+        });
+
+    });
 }
 
 function checkValidationAndRequired(form) {
