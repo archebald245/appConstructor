@@ -147,3 +147,14 @@ function checkValidationAndRequired(form) {
     }
     return check;
 }
+
+function addPlaceholder() {
+    $(".form-container, .custom-form-container").find("input[type='text'], input[type='number'], textarea").each(function () {
+        if (($(this).attr("type") != "radio") || ($(this).attr("type") != "checkbox")) {
+            var placeholder = $(this).siblings(".label-container").find("label").text();
+            $(this).attr("placeholder", placeholder).addClass("placeholderOfLable");
+            $(this).siblings(".label-container").addClass("hidden");
+        }
+
+    });
+}

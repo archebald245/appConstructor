@@ -281,7 +281,7 @@ function reactRender() {
       var data = this.props.data;
       var json = data;
 
-      var elementModels = json.map(function (element) {
+      var elementModels = json.elements.map(function (element) {
         element.Value = replaceData(element.Value);
         if (element.ContentTypeId == 2) {
           return React.createElement('div', { className: 'link-item', dangerouslySetInnerHTML: { __html: element.Value } });
