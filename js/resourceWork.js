@@ -6,10 +6,13 @@ function searchResourcesAndReplacePatch(jsonObject) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
-        if(jsonObject.Pages[i].BackgroundImagePath != null){
-             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);    
+        if (jsonObject.Pages[i].BackgroundImagePath != null) {
+            jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
         }
-        
+        if (jsonObject.RestaurantMenus != null) {
+            jsonObject.RestaurantMenus = resourcesOfRestaurantMenus(jsonObject.Pages[i], storePath);
+        }
+
     }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
@@ -50,11 +53,28 @@ function resourcesOfBoxConteiner(boxConteiner, storePath) {
     return boxConteiner;
 }
 
-function resourcesOfBackground(page, storePath){
+function resourcesOfBackground(page, storePath) {
     resources.push(page.BackgroundImagePath);
     page.BackgroundImagePath = [page.BackgroundImagePath];
     page.Style = replacementBackgroundImagePath(page.Style, page.BackgroundImagePath, storePath);
     return page;
+}
+
+function resourcesOfRestaurantMenus(restaurantMenu, storePath) {
+    restaurantMenu = replacePathToImageRestaurantMenu(restaurantMenu);
+    $(restaurantMenu).each(function() {
+        if (this.IsOnline == false) {
+            $(this.RestaurantMenuItems).each(function() {
+                $(this.RestaurantMenuImages).each(function() {
+                     resources.push(this.Path);
+                     this.Path = replacementPathImagesRestaurantMenu(this.Path, storePath);
+                     
+                });
+            });
+        }
+
+    });
+
 }
 
 function resourcesPushInArray(element) {
@@ -105,10 +125,16 @@ function replacementPathImages(jsonObjectValue, arrayResources, storePath) {
     return jsonObjectValue;
 }
 
-function replacementBackgroundImagePath(jsonObjectValue, arrayResources, storePath){
+function replacementPathImagesRestaurantMenu(oldPath, storePath){
+    var nameImage = oldPath.split("/");
+    nameImage = nameImage[nameImage.length-1];
+    return storePath + nameImage;
+}
+
+function replacementBackgroundImagePath(jsonObjectValue, arrayResources, storePath) {
     jsonObjectValue = replaceData(jsonObjectValue);
     var url = arrayResources[0].split("/")
-    var fileName = url[url.length-1];
+    var fileName = url[url.length - 1];
     jsonObjectValue = jsonObjectValue.replace(arrayResources[0], storePath + fileName);
     return jsonObjectValue;
 }
@@ -179,4 +205,15 @@ function failDownload(error) {
 
 function fail(error) {
     console.log(error.code);
+}
+
+function replacePathToImageRestaurantMenu(restaurantMenu) {
+    $(restaurantMenu).each(function() {
+        $(this.RestaurantMenuItems).each(function() {
+            $(this.RestaurantMenuImages).each(function() {
+                this.Path = UrlForUpdateApp + this.Path;
+            })
+        })
+    })
+    return restaurantMenu;
 }

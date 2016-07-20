@@ -13,6 +13,7 @@ function blockUi(){
 function unBlockUi(){
     createCustomHideForms();
     bindChangeValForms();
+    addListenerToClickBuy();
     $.unblockUI();
     
 }

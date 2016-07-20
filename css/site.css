@@ -247,3 +247,45 @@ form{
 .formBlock {
     padding-bottom: 5px;
 }
+.item-shop-img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.content-column-shopItem{
+  width: 47%;
+  display: block;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.img-column-shopItem{
+  width: 45%;
+  display: block;
+  float: left;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+.item-shop-title{
+  text-transform: uppercase;
+}
+.item-shop-categoty{
+  display: inline-block;
+  float: right;
+  margin-right: 20px;
+  font-weight: bold;
+}
+.center-img-shopItem{
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+.center-img-shopItem img{
+  width: 80%;
+  height: auto;
+}
+.shopItem-row {
+    overflow: hidden;
+    word-break: break-word;
+    padding-bottom: 20px;
+}
