@@ -7,10 +7,10 @@ function searchResourcesAndReplacePatch(jsonObject) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
-            jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
+            jsonObject.Pages[i] = resourcesOfBackground(jsonObject.RestaurantMenus, storePath);
         }
         if (jsonObject.RestaurantMenus != null) {
-            jsonObject.RestaurantMenus = resourcesOfRestaurantMenus(jsonObject.Pages[i], storePath);
+            jsonObject.RestaurantMenus = resourcesOfRestaurantMenus(jsonObject.RestaurantMenus, storePath);
         }
 
     }
@@ -74,7 +74,7 @@ function resourcesOfRestaurantMenus(restaurantMenu, storePath) {
         }
 
     });
-
+    return restaurantMenu;
 }
 
 function resourcesPushInArray(element) {
@@ -211,7 +211,7 @@ function replacePathToImageRestaurantMenu(restaurantMenu) {
     $(restaurantMenu).each(function() {
         $(this.RestaurantMenuItems).each(function() {
             $(this.RestaurantMenuImages).each(function() {
-                this.Path = UrlForUpdateApp + this.Path;
+                this.Path = applicationData.UrlForUpdateApp + this.Path;
             })
         })
     })

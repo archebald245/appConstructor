@@ -48,7 +48,10 @@ function renderRestaurantMenu(menuCollection, position) {
 								"p",
 								{ className: "item-shop-categoty" },
 								item.Category
-							)
+							),
+							React.createElement("input", { type: "hidden", name: "shopItemId", value: "shopItemId_" + item.Id }),
+							React.createElement("input", { type: "hidden", name: "shopItemCount"}),
+							React.createElement("b", {  className: "shopItemCountVisible"})
 						),
 						" "
 					);
@@ -147,7 +150,7 @@ function renderRestaurantMenu(menuCollection, position) {
 				React.createElement("input", { type: "hidden", name: "restaurantMenuId", value: "restaurantMenuId_" + this.state.data.Id }),
 				React.createElement("input", { type: "hidden", name: "restaurantMenuPosition", value: "restaurantMenuPosition_" + position }),
                 RestaurantMenuItemModels
-				
+
 			);
 		}
 	});
