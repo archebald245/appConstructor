@@ -1,20 +1,40 @@
 function addListenerToClickBuy() {
     $(".btn-restaurant-menu").on("click", function(){
-      // var itemInList = $(this).closest(".shopItem");
-      // var itemCountInList =  Number(itemInList.find("input[name='shopItemCount']").val()) + 1;
-      // itemInList.find("input[name='shopItemCount']").val(itemCountInList);
-    //     var item = $(this).closest(".shopItem").clone();
-    //     var itemId = $(item).find("input[name='shopItemId']").attr("value");
-    //     if($("#cart").find("input[value='"+itemId+"']").length > 0){
-    //       var itemCount = Number($(item).find("input[name='shopItemCount']").val());
-    //       $(item).find("input[name='shopItemCount']").val(itemCount + 1);
-    //       var itemNewCount = Number($(item).find("input[name='shopItemCount']").val());
-    //       $(item).find(".shopItemCountVisible").append(itemNewCount);
-    //     }else{
-    //         $("#cart").append(item);
-    //     }
-    //     $(item).find(".btn-restaurant-menu").remove();
-    // });
     var itemId = $(this).closest(".shopItem").find("input[name='shopItemId']").attr("value");
-    
+    var restaurantMenu = applicationData.RestaurantMenus[0].RestaurantMenuItems;
+
+    if($("#cart").find("input[value='"+itemId+"']").length > 0){
+      var itemThis = $("#cart").find("input[value='"+itemId+"']").siblings("input[name='shopItemCount']");
+      var itemCount = Number(itemThis.val());
+      itemThis.val(itemCount + 1);
+      $("#cart").find("input[value='"+itemId+"']").siblings(".cartItem-info").find(".shopItemCount-visible").html("");
+      var newItemCount = Number(itemThis.val());
+      $("#cart").find("input[value='"+itemId+"']").siblings(".cartItem-info").find(".shopItemCount-visible").append(newItemCount);
+
+      $(restaurantMenu).each(function () {
+        if(this.Id == itemId ){
+        $("#cart").find("input[value='"+itemId+"']").siblings(".cartItem-info").find(".shopItem-price").text(Number(this.Price) * newItemCount);
+        }
+      });
+    }else{
+      $(restaurantMenu).each(function () {
+        if(this.Id == itemId ){
+          $("#cart").append("<div id='shopItem'></div>");
+          renderCartItem(this);
+        }
+      });
+    }
+$("#shopItem").attr("id", "");
+    function TotalPrice(){
+        var  totalPrice = 0;
+      $("#cart").find(".shopItem-price").each(function(){
+        totalPrice+=Number($(this).text());
+      });
+      return totalPrice;
+    }
+    var TotalPrice = TotalPrice();
+    $(".totalPrice b").html("");
+    $(".totalPrice b").append(TotalPrice);
+
+  });
 }

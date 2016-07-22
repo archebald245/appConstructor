@@ -49,9 +49,11 @@ function renderRestaurantMenu(menuCollection, position) {
 								{ className: "item-shop-categoty" },
 								item.Category
 							),
-							React.createElement("input", { type: "hidden", name: "shopItemId", value: "shopItemId_" + item.Id }),
-							React.createElement("input", { type: "hidden", name: "shopItemCount"}),
-							React.createElement("b", {  className: "shopItemCountVisible"})
+							React.createElement(
+								"input",
+								{ type: "hidden", name: "shopItemId", value: item.Id },
+								item.Category
+							)
 						),
 						" "
 					);
