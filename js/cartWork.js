@@ -29,8 +29,10 @@ function clickPlaceAnOrder() {
                 OrderItems: collectionOrderItems,
                 Name: name,
                 Phone: phone,
-                Email:email,
-                Comment:comment
+                Email: email,
+                Comment: comment,
+                ProjectId: applicationData.ProjectId,
+                ContentId: applicationData.Id
             },
             cache: false,
             success: function() {
