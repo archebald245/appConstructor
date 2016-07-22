@@ -44,11 +44,7 @@ function renderCartItem(cartItem) {
           React.createElement(
             "li",
             { className: "delete-cartItem" },
-            React.createElement(
-              "a",
-              { href: "#" },
-              "Del"
-            )
+            "Del"
           )
         ),
         React.createElement("input", { type: "hidden", name: "shopItemId", value: data.Id }),

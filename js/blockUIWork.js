@@ -15,5 +15,5 @@ function unBlockUi(){
     bindChangeValForms();
     addListenerToClickBuy();
     $.unblockUI();
-    
+
 }
