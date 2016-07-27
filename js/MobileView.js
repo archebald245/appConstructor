@@ -37,8 +37,17 @@ function reactRender() {
             });
             return React.createElement(
                 'div',
-                { className: 'container-fluid' },
-                rowModels
+                null,
+                React.createElement(
+                    'button',
+                    { type: 'button', className: 'cart-btn' },
+                    React.createElement('img', { src: 'file:///android_asset/www/baseimages/cart.png' })
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'container-fluid' },
+                    rowModels
+                )
             );
         }
     });

@@ -10,6 +10,13 @@ function renderRestaurantMenu(menuCollection, position) {
 		},
 		render: function render() {
 			var RestaurantMenuItemModels = this.state.data.RestaurantMenuItems.map(function (item) {
+                 var image;
+                 if(item.RestaurantMenuImages.length == 0){
+                        image = "file:///android_asset/www/baseimages/cartItem.png";
+                    }else{
+                        image = item.RestaurantMenuImages[0].Path;
+                    }
+                
 				if (position == 1) {
 
 					return React.createElement(
@@ -18,7 +25,7 @@ function renderRestaurantMenu(menuCollection, position) {
 						React.createElement(
 							"div",
 							{ className: "img-column-shopItem" },
-							React.createElement("img", { src: item.RestaurantMenuImages[0].Path, className: "item-shop-img" })
+							React.createElement("img", { src: image, className: "item-shop-img" })
 						),
 						React.createElement(
 							"div",
@@ -58,7 +65,7 @@ function renderRestaurantMenu(menuCollection, position) {
 						" "
 					);
 				} else if (position == 2) {
-
+                   
 					return React.createElement(
 						"div",
 						null,
@@ -92,10 +99,11 @@ function renderRestaurantMenu(menuCollection, position) {
 								item.Category
 							)
 						),
+                        
 						React.createElement(
 							"div",
 							{ className: "img-column-shopItem" },
-							React.createElement("img", { src: item.RestaurantMenuImages[0].Path, className: "item-shop-img" })
+							React.createElement("img", { src: image, className: "item-shop-img" })
 						),
 						" "
 					);
@@ -107,7 +115,7 @@ function renderRestaurantMenu(menuCollection, position) {
 							"div",
 							{ className: "center-img-shopItem shopItem" },
 							" ",
-							React.createElement("img", { src: item.RestaurantMenuImages[0].Path })
+							React.createElement("img", { src: image })
 						),
 						React.createElement(
 							"h4",
@@ -149,8 +157,8 @@ function renderRestaurantMenu(menuCollection, position) {
 					this.state.data.Name,
 					" "
 				),
-				React.createElement("input", { type: "hidden", name: "restaurantMenuId", value: "restaurantMenuId_" + this.state.data.Id }),
-				React.createElement("input", { type: "hidden", name: "restaurantMenuPosition", value: "restaurantMenuPosition_" + position }),
+				React.createElement("input", { type: "hidden", name: "restaurantMenuId", value:  this.state.data.Id }),
+				React.createElement("input", { type: "hidden", name: "restaurantMenuPosition", value:  position }),
                 RestaurantMenuItemModels
 
 			);

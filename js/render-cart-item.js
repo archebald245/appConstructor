@@ -12,7 +12,7 @@ function renderCartItem(cartItem) {
       if (data.RestaurantMenuImages.length == 0) {
         cartImg = "file:///android_asset/www/baseimages/cartItem.png";
       } else {
-        cartImg = data.RestaurantMenuImages[0];
+        cartImg = data.RestaurantMenuImages[0].Path;
       }
 
       return React.createElement(

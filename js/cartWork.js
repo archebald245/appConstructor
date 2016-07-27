@@ -2,30 +2,38 @@ var collectionOrderItems;
 
 function clickOrder() {
     var orderItems = $("#cart").find(".cartItem");
-    var collectionOrderItems = [];
+     collectionOrderItems = [];
     $(orderItems).each(function() {
         var id = $(this).find("[name=shopItemId]").val();
         var count = $(this).find("[name=shopItemCount]").val();
-        $(applicationData.restaurantMenu).each(function() {
-            if (this.Id == id) {
-                var item = this
-                collectionOrderItems.push(this);
-            }
+        $(applicationData.RestaurantMenus).each(function() {
+            $(this.RestaurantMenuItems).each(function() {
+                if (this.Id == id) {
+                    var item = JSON.parse(JSON.stringify(this));
+                    item.Count = count;
+                    item.RestaurantMenuImages = null;
+                    collectionOrderItems.push(item);
+                }
+            });
+
+
+
         });
 
     });
 }
 
 function clickPlaceAnOrder() {
-    if(checkValidationAndRequired($("#OrderInfo"))){
-        var name = $("#OrderInfo").find(".nameOrder").val();
-        var phone = $("#OrderInfo").find(".phoneOrder").val();
-        var email = $("#OrderInfo").find(".emailOrder").val();
-        var comment = $("#OrderInfo").find(".commentOrder").val();
-         $.ajax({
+    clickOrder();
+    if (checkValidationAndRequired($("#orderInfo"))) {
+        var name = $("#orderInfo").find(".nameOrder").val();
+        var phone = $("#orderInfo").find(".phoneOrder").val();
+        var email = $("#orderInfo").find(".emailOrder").val();
+        var comment = $("#orderInfo").find(".commentOrder").val();
+        $.ajax({
             type: "POST",
-            url: siteUrl + "/Constructor/CheckNewVersion",
-            data: { 
+            url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CreateOrder",
+            data: {
                 OrderItems: collectionOrderItems,
                 Name: name,
                 Phone: phone,
@@ -38,11 +46,43 @@ function clickPlaceAnOrder() {
             success: function() {
                 alert("Thank you!");
                 $("#cart").html("");
-                $("#OrderInfo input").val("");
+                $("#orderInfo input, #orderInfo textarea").val("");
+                $("#container").removeClass("hidden");
+                 $("#orderInfo").addClass("hidden");
+                 
             },
-            error: function(){
+            error: function() {
                 alert("Sorry, error!");
             }
-        });    
-    } 
+        });
+    }
+}
+
+function bindListenerToClickBtn() {
+    $(".cart-btn").on("click", function() {
+        $("#container").addClass("hidden");
+        $(".cart").removeClass("hidden");
+    });
+
+    $(".back-to-container").on("click", function() {
+        $("#container").removeClass("hidden");
+        $(".cart").addClass("hidden");
+    });
+    $(".back-to-cart").on("click", function() {
+        $("#orderInfo").addClass("hidden");
+        $(".cart").removeClass("hidden");
+    });
+    $(".btn-order").on("click", function() {
+        if ($("#cart").children().length > 0) {
+            $("#orderInfo").removeClass("hidden");
+            $(".cart").addClass("hidden");
+        } else {
+            alert("You have nothing ordered!");
+        }
+
+    });
+    $(".placeAnOrder").on("click", function() {
+        clickPlaceAnOrder();
+    });
+
 }

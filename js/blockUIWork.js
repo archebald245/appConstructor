@@ -14,6 +14,7 @@ function unBlockUi(){
     createCustomHideForms();
     bindChangeValForms();
     addListenerToClickBuy();
+    bindListenerToClickBtn();
     $.unblockUI();
 
 }

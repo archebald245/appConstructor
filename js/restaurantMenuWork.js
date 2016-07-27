@@ -68,3 +68,39 @@ function addListenerToClickDelete(){
     $(".totalPrice b").append(TotalPrice);
   });
 }
+
+function checkUpdateRestaurantMenu() {
+    var collectionRestaurantMenu = [];
+    $(applicationData.RestaurantMenus).each(function() {
+        collectionRestaurantMenu.push({
+            Id: this.Id,
+            Version: this.Version
+        })
+    })
+    $.ajax({
+        type: "POST",
+        url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CheckUpdateRestaurantMenu",
+        data: {
+            model: collectionRestaurantMenu
+        }, cache: false,
+        success: function(object) {
+            if(object.IsUpdated == true){
+                applicationData.RestaurantMenus = object.Menus;
+                 var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
+                applicationData.RestaurantMenus = resourcesOfRestaurantMenus(applicationData.RestaurantMenus, storePath);
+            }
+            reactRender();
+            initGallaryClick();
+            submitFormListener();
+            unBlockUi()
+        },
+        error: function(err) {
+            reactRender();
+            initGallaryClick();
+            submitFormListener();
+            unBlockUi()
+            console.log("error");
+            console.log(err);
+        }
+    });
+}

@@ -22,7 +22,7 @@
 	<script src="js/render-custom-form.js"></script>
 	<script src="js/render-custom-hide-form.js"></script>
 	<script src="js/render-restaurant-menu.js"></script>
-  <script src="js/render-cart-item.js"></script>
+	<script src="js/render-cart-item.js"></script>
     <script src="applicationData.js"></script>
     <script src="js/jstorage.js"></script>
     <script src="js/jquery.blockUI.js"></script>
@@ -31,6 +31,7 @@
     <script src="js/resourceWork.js"></script>
 	<script src="js/formsWork.js"></script>
 	<script src="js/restaurantMenuWork.js"></script>
+	<script src="js/cartWork.js"></script>
 
     <!-- PhotoSwipe-->
     <link rel="stylesheet" href="js/PhotoSwipe/photoswipe.css">
@@ -68,8 +69,8 @@
                 <div class="pswp__item"></div>
                 <div class="pswp__item"></div>
             </div>
-            <div class="pswp__ui pswp__ui--hidden">
                 <div class="pswp__top-bar">
+            <div class="pswp__ui pswp__ui--hidden">
                     <div class="pswp__counter"></div>
                     <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
                     <button class="pswp__button pswp__button--share hidden" title="Share"></button>
@@ -99,18 +100,23 @@
 
 
     </div>
-
-<div class="cart">
-    <div class="cart-top-line">Your Order</div>
-  	  <div id="cart" class="hidden">
-
+	  <div class="cart hidden">
+		<div class="cart-top-line">Your Order</div>
+			<div id="cart">
 
 
-      </div>
-      <div class="totalPrice">Total $b <b>0</b></div>
-  <a  href="#" class="btn-order">Order</a>
-</div>
 
+			</div>
+		<div class="totalPrice">Total $b <b>0</b></div>
+		<a  href="#" class="btn-order">Order</a>
+		</div>
+	<div id="orderInfo" class="hidden">
+		<input type="text" class="nameOrder required"/>
+		<input type="text" class="phoneOrder required"/>
+		<input type="text" class="emailOrder required"/>
+		<textarea class="commentOrder required"></textarea>
+		<button class="placeAnOrder">buy</button>
+	</div>
     <div id="custom-hide-container" class="hidden">
 
 
