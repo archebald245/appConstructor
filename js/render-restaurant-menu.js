@@ -8,6 +8,9 @@ function renderRestaurantMenu(menuCollection, position) {
 		getInitialState: function getInitialState() {
 			return { data: menuCollection };
 		},
+		componentDidMount: function componentDidMount() {
+		cartShopPrice();
+		},
 		render: function render() {
 			var RestaurantMenuItemModels = this.state.data.RestaurantMenuItems.map(function (item) {
                  var image;
@@ -16,7 +19,7 @@ function renderRestaurantMenu(menuCollection, position) {
                     }else{
                         image = item.RestaurantMenuImages[0].Path;
                     }
-                
+
 				if (position == 1) {
 
 					return React.createElement(
@@ -36,36 +39,36 @@ function renderRestaurantMenu(menuCollection, position) {
 								item.ProdName
 							),
 							React.createElement(
-								"b",
-								null,
-								item.Price
-							),
-							React.createElement(
 								"p",
 								null,
 								item.Description
 							),
 							" ",
 							React.createElement(
-								"button",
-								{ type: "button", className: "btn btn-restaurant-menu btn-success" },
-								"Add to cart"
-							),
-							React.createElement(
-								"p",
-								{ className: "item-shop-categoty" },
-								item.Category
-							),
+					      "button",
+					      { type: "button", className: "btn-restaurant-menu" },
+					      "Add"
+					    ),
+					    React.createElement(
+					      "div",
+					      { className: "cartShop-price" },
+					      item.Price
+					    ),
+					    React.createElement(
+					      "p",
+					      { className: "item-shop-categoty" },
+					      item.Category
+					    ),
 							React.createElement(
 								"input",
 								{ type: "hidden", name: "shopItemId", value: item.Id },
-								item.Category
 							)
 						),
 						" "
 					);
+
 				} else if (position == 2) {
-                   
+
 					return React.createElement(
 						"div",
 						null,
@@ -99,7 +102,7 @@ function renderRestaurantMenu(menuCollection, position) {
 								item.Category
 							)
 						),
-                        
+
 						React.createElement(
 							"div",
 							{ className: "img-column-shopItem" },

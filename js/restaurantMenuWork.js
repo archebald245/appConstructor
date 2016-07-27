@@ -104,3 +104,11 @@ function checkUpdateRestaurantMenu() {
         }
     });
 }
+function cartShopPrice() {
+    $(".cartShop-price").each(function() {
+        var price = $(this).text();
+        if (price.indexOf('.') < 0) {
+            $(this).text(price + ".00");
+        }
+    });
+}

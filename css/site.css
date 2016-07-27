@@ -253,22 +253,22 @@ form{
   height: auto;
 }
 .content-column-shopItem{
-  width: 47%;
+  width: 60%;
   display: block;
   float: left;
   margin-left: 2%;
   margin-right: 2%;
 }
 .img-column-shopItem{
-  width: 45%;
+  width: 30%;
   display: block;
   float: left;
   margin-left: 1%;
   margin-right: 1%;
 }
-.item-shop-title{
+/*.item-shop-title{
   text-transform: uppercase;
-}
+}*/
 .item-shop-categoty{
   display: inline-block;
   float: right;
@@ -288,6 +288,83 @@ form{
     overflow: hidden;
     word-break: break-word;
     padding-bottom: 20px;
+    background-color: #fff;
+    border-top: 1px solid #939393;
+    border-bottom: 1px solid #939393;
+    color: #939393;
+}
+.btn-restaurant-menu{
+    border: none;
+    background-color: #939393;
+    width: 60px;
+    text-align: right;
+    color: #fff;
+    height: 30px;
+    position: relative;
+    float: right;
+}
+.btn-restaurant-menu::after {
+    height: 12px;
+    width: 2px;
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 19px;
+    background-color: #fff;
+
+}
+.btn-restaurant-menu::before {
+    height: 2px;
+    width: 12px;
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    background-color: #fff;
+}
+.cartShop-price {
+    height: 30px;
+    min-width: 60px;
+    float: right;
+    border: 2px solid #939393;
+    text-align: center;
+    margin-right: 5px;
+    background-image: url(file:///android_asset/www/baseimages/dollar.png);
+    background-position: 17%;
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    color: #939393;
+    line-height: 30px;
+}
+.item-shop-categoty {
+    height: 30px;
+    width: 60px;
+    float: right;
+    border: 2px solid #939393;
+    text-align: center;
+    margin-right: 5px;
+    background-color: #fff;
+    color: #939393;
+    line-height: 30px;
+}
+.priceUnderImg {
+    float: none;
+    width: 100%;
+    margin-top: 5px;
+}
+.content-column-shopItem.shopMiddle-content {
+    width: 25%;
+}
+.btn-shop-column {
+    width: 25%;
+    float: left;
+}
+.btn-shop-column .cartShop-price, .btn-shop-column .btn-restaurant-menu,  .btn-shop-column .item-shop-categoty {
+    display: block;
+    float: none;
+    width: 100%;
+    margin: 1px;
 }
 .cart{
   position: relative;
@@ -312,4 +389,18 @@ form{
 }
 #cart{
   margin-top: 20px;
+}
+.cart-btn{
+  border-radius: 50%;
+  background: none;
+  border: none;
+  position: fixed;
+  z-index: 1;
+  bottom: 20px;
+  right: 20px;
+}
+.cart-btn img{
+  border-radius: 50%;
+  width: 50px;
+  height: auto;
 }
