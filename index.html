@@ -101,7 +101,7 @@
 
     </div>
 	  <div class="cart hidden">
-		<div class="cart-top-line"><button class="back-to-container">back</button>Your Order</div>
+		<div class="cart-top-line"><button class="back-to-container"></button>Your Order</div>
 			<div id="cart">
 
 
@@ -111,12 +111,16 @@
 		<a  href="#" class="btn-order">Order</a>
 		</div>
 	<div id="orderInfo" class="hidden">
-	<div class="cart-top-line"><button class="back-to-cart">back</button>Your Order</div>
-		<input type="text" class="nameOrder required"/>
-		<input type="text" class="phoneOrder required"/>
-		<input type="text" class="emailOrder required"/>
-		<textarea class="commentOrder required"></textarea>
-		<button class="placeAnOrder">buy</button>
+	<div class="cart-top-line"><button class="back-to-cart"></button>Your Order Info</div>
+    <label for="nameOrder">Name</label>
+		<input type="text" id="nameOrder" class="nameOrder required"/>
+    <label for="phoneOrder">Phone Number</label>
+		<input type="text" id="phoneOrder" class="phoneOrder required"/>
+    <label for="emailOrder">Email</label>
+		<input type="text"  id="emailOrder" class="emailOrder required"/>
+    <label for="commentOrder">Your Order Comments</label>
+		<textarea id="commentOrder" class="commentOrder required"></textarea>
+		<button class="placeAnOrder btn-order">Buy</button>
 	</div>
     <div id="custom-hide-container" class="hidden">
 

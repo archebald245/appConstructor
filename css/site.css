@@ -285,13 +285,13 @@ form{
   height: auto;
 }
 .shopItem-row {
-    overflow: hidden;
-    word-break: break-word;
-    padding-bottom: 20px;
-    background-color: #fff;
-    border-top: 1px solid #939393;
-    border-bottom: 1px solid #939393;
-    color: #939393;
+overflow: hidden;
+word-break: break-word;
+padding-bottom: 20px;
+background-color: #fff;
+border-bottom: 1px solid #939393;
+color: #939393;
+padding: 5px 0;
 }
 .btn-restaurant-menu{
     border: none;
@@ -323,19 +323,20 @@ form{
     background-color: #fff;
 }
 .cartShop-price {
-    height: 30px;
-    min-width: 60px;
-    float: right;
-    border: 2px solid #939393;
-    text-align: center;
-    margin-right: 5px;
-    background-image: url(file:///android_asset/www/baseimages/dollar.png);
-    background-position: 17%;
-    background-size: 10px;
-    background-repeat: no-repeat;
-    background-color: #fff;
-    color: #939393;
-    line-height: 30px;
+height: 30px;
+min-width: 50%;
+float: right;
+border: 2px solid #939393;
+text-align: center;
+margin-right: 5px;
+background-image: url(file:///android_asset/www/baseimages/dollar.png);
+background-position: 10%;
+background-size: 10px;
+background-repeat: no-repeat;
+background-color: #fff;
+color: #939393;
+line-height: 30px;
+padding-right: 9px;
 }
 .item-shop-categoty {
     height: 30px;
@@ -368,27 +369,59 @@ form{
 }
 .cart{
   position: relative;
-}
-.cart .cart-top-line{
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  padding: 20px 0;
-  background-color: #ddd;
-  color: #fff;
+  height: 100%;
 }
-.cart .btn-order{
+.cart-top-line {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+padding: 10px 0;
+background-color: #ddd;
+color: #fff;
+font-size: 20px;
+text-align: center;
+z-index: 1;
+}
+ .cart-top-line button{
   position: absolute;
-  bottom: 0;
   left: 0;
-  width: 100%;
-  padding: 20px 0;
-  color: #fff;
-  background-color: #ddd;
+  top: 6px;
+  background-image: url(file:///android_asset/www/baseimages/back.png);
+  width: 33px;
+  height: 33px;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  margin-left: 10px;
+}
+.btn-order {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+padding: 12px 0;
+color: #fff;
+background-color: #ddd;
+text-align: center;
+font-size: 20px;
+border: none;
 }
 #cart{
-  margin-top: 20px;
+  margin-top: 70px;
+  overflow: hidden;
+}
+.totalPrice{
+margin-bottom: 60px;
+padding: 80px 0;
+text-align: center;
+color: #ddd;
+font-size: 40px;
+position: absolute;
+border-top: 1px solid #ddd;
+bottom: 0;
+width: 100%;
 }
 .cart-btn{
   border-radius: 50%;
@@ -403,4 +436,85 @@ form{
   border-radius: 50%;
   width: 50px;
   height: auto;
+}
+.cartItem-img{
+width: 20%;
+float: left;
+}
+.cartItem-name{
+  width: 20%;
+  float: left;
+  padding-top: 7px;
+}
+.cartItem-info{
+  width: 50%;
+  float: left;
+}
+.cartItem-info li{
+  list-style: none;
+  float: left;
+  height: 30px;
+  border: 1px solid #ddd;
+}
+.delete-cartItem{
+  position: relative;
+  background-color: #ddd;
+  width: 30px;
+  height: 30px;
+}
+.delete-cartItem::after {
+position: absolute;
+content: "";
+top: 12px;
+left: 0;
+height: 2px;
+width: 25px;
+background-color: #fff;
+transform: rotate(45deg);
+}
+.delete-cartItem::before {
+position: absolute;
+content: "";
+top: 0px;
+left: 12px;
+width: 2px;
+height: 25px;
+background-color: #fff;
+transform: rotate(45deg);
+}
+
+.shopItem-price{
+ width: 80px;
+ background-image: url(file:///android_asset/www/baseimages/dollar.png);
+ background-position: 10%;
+ background-size: 10px;
+ background-repeat: no-repeat;
+ text-align: center;
+ padding-top: 8px;
+}
+.shopItemCount-visible{
+width: 30px;
+padding-top: 7px;
+padding-left: 10px;
+}
+#orderInfo input, #orderInfo textarea{
+  width: 80%;
+  margin: auto;
+  display: block;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  height: 40px;
+  margin-bottom: 20px;
+}
+#orderInfo label{
+  display: block;
+  margin-left: 10%;
+  color: #000;
+  font-size: 16px;
+}
+#orderInfo textarea{
+  padding-bottom: 80px;
+}
+label[for='nameOrder']{
+  margin-top: 60px;
 }

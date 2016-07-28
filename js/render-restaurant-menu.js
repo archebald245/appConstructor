@@ -54,11 +54,6 @@ function renderRestaurantMenu(menuCollection, position) {
 					      { className: "cartShop-price" },
 					      item.Price
 					    ),
-					    React.createElement(
-					      "p",
-					      { className: "item-shop-categoty" },
-					      item.Category
-					    ),
 							React.createElement(
 								"input",
 								{ type: "hidden", name: "shopItemId", value: item.Id }
