@@ -40,6 +40,15 @@ $("#shopItem").attr("id", "");
 
 }
 
+
+// function addListenerToClickOpenSingleItem(){
+//   $(".item-shop-title").on("click", function(){
+//
+//
+//
+//   });
+// }
+
 function addListenerToClickDelete(){
   $(".delete-cartItem").unbind("click");
   $(".delete-cartItem").on("click", function(){
@@ -113,3 +122,14 @@ function cartShopPrice() {
         }
     });
 }
+$(".item-shop-title").unbind("click");
+  $(".item-shop-title").on("click", function(){
+    var id = $(this).siblings("[name='shopItemId']").val();
+    var restaurantMenu = applicationData.RestaurantMenus[0].RestaurantMenuItems;
+    $(restaurantMenu).each(function () {
+      if(this.Id == id){
+        renderSingleShopItem(this);
+      }
+    });
+
+  });

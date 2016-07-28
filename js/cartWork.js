@@ -49,7 +49,7 @@ function clickPlaceAnOrder() {
                 $("#orderInfo input, #orderInfo textarea").val("");
                 $("#container").removeClass("hidden");
                  $("#orderInfo").addClass("hidden");
-                 
+
             },
             error: function() {
                 alert("Sorry, error!");
@@ -70,6 +70,7 @@ function bindListenerToClickBtn() {
     });
     $(".back-to-cart").on("click", function() {
         $("#orderInfo").addClass("hidden");
+        
         $(".cart").removeClass("hidden");
     });
     $(".btn-order").on("click", function() {

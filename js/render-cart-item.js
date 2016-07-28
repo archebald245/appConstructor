@@ -6,6 +6,12 @@ function renderCartItem(cartItem) {
     getInitialState: function getInitialState() {
       return { data: cartItem };
     },
+    // componentDidMount: function componentDidMount() {
+    //  $(ReactDOM.findDOMNode(this)).on("click", function(){
+    //    alert("hello");
+    //    this.css("border","1px solid red");
+    //  })
+    // },
     render: function render() {
       var data = this.state.data;
       var cartImg;
