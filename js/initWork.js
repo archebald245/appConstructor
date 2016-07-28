@@ -63,6 +63,7 @@ function onCheckJson() {
 
         data = replaceData(data);
         applicationData = JSON.parse(data);
+        resources = searchResourcesAndReplacePatch(applicationData);
         downloadResources();
         initMenuYoutunbe();
         if (resources.length == 0) {

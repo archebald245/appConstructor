@@ -167,7 +167,7 @@ function deleteImage(imagePath) {
 }
 
 function downloadResources() {
-    resources = searchResourcesAndReplacePatch(applicationData);
+    
     for (var i = 0; i < resources.length; i++) {
         var fileNameImage = resources[i];
         download(fileNameImage);

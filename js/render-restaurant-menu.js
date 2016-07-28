@@ -61,7 +61,7 @@ function renderRestaurantMenu(menuCollection, position) {
 					    ),
 							React.createElement(
 								"input",
-								{ type: "hidden", name: "shopItemId", value: item.Id },
+								{ type: "hidden", name: "shopItemId", value: item.Id }
 							)
 						),
 						" "
