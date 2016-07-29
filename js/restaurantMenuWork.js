@@ -122,8 +122,10 @@ function cartShopPrice() {
         }
     });
 }
-$(".item-shop-title").unbind("click");
+function addListenerToClickOpenSingleItem(){
   $(".item-shop-title").on("click", function(){
+    $("#container").addClass("hidden");
+    $(".singleItem").removeClass("hidden");
     var id = $(this).siblings("[name='shopItemId']").val();
     var restaurantMenu = applicationData.RestaurantMenus[0].RestaurantMenuItems;
     $(restaurantMenu).each(function () {
@@ -133,3 +135,4 @@ $(".item-shop-title").unbind("click");
     });
 
   });
+}

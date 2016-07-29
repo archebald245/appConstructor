@@ -7,7 +7,10 @@ function renderSingleShopItem(singleItem) {
       return { data: singleItem };
     },
     componentDidMount: function componentDidMount() {
-      var swiper = new Swiper('.swiper-container');
+      var swiper = new Swiper('.swiper-container',{
+        loop: true,
+      });
+      cartShopPrice();
     },
     render: function render() {
       var data = this.state.data;
@@ -63,13 +66,16 @@ function renderSingleShopItem(singleItem) {
             )
           )
         ),
-        React.createElement("button", { className: "singleShop-btn" })
+        React.createElement(
+          "button",
+          { className: "singleShop-btn" },
+          "+ Add to Cart"
+        )
       );
     }
   });
   ReactDOM.render(React.createElement(singleShopItem, { data: singleItem }), document.getElementById("singleItem"));
 }
-
 
 
 // function renderSingleShopItem(singleItem){
@@ -78,7 +84,10 @@ function renderSingleShopItem(singleItem) {
 //       return { data: singleItem };
 //     },
 //     componentDidMount: function(){
-//       var swiper = new Swiper('.swiper-container');
+// var swiper = new Swiper('.swiper-container',{
+//   loop: true,
+// });
+//       cartShopPrice();
 //     },
 //     render: function() {
 //       var data = this.state.data;
@@ -101,7 +110,7 @@ function renderSingleShopItem(singleItem) {
 //         <p className="singleShop-price">{data.Price}</p>
 //         <div className="singleShop-description"><h5>Description:</h5><p>{data.Description}</p></div>
 // </div>
-// <button className="singleShop-btn"></button>
+// <button className="singleShop-btn">+ Add to Cart</button>
 // </div>
 //       );
 //     }

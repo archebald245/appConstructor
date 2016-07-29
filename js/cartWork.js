@@ -62,15 +62,18 @@ function bindListenerToClickBtn() {
     $(".cart-btn").on("click", function() {
         $("#container").addClass("hidden");
         $(".cart").removeClass("hidden");
+        $(".singleItem").addClass("hidden");
     });
 
     $(".back-to-container").on("click", function() {
         $("#container").removeClass("hidden");
         $(".cart").addClass("hidden");
+        $(".singleItem").addClass("hidden");
+
     });
     $(".back-to-cart").on("click", function() {
         $("#orderInfo").addClass("hidden");
-        
+        $(".singleItem").addClass("hidden");
         $(".cart").removeClass("hidden");
     });
     $(".btn-order").on("click", function() {
