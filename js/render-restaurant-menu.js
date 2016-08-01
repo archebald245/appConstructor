@@ -64,83 +64,85 @@ function renderRestaurantMenu(menuCollection, position) {
 
 				} else if (position == 2) {
 
-					return React.createElement(
-						"div",
-						null,
-						React.createElement(
-							"div",
-							{ className: "content-column-shopItem shopItem" },
-							React.createElement(
-								"h4",
-								{ className: "item-shop-title" },
-								item.ProdName
-							),
-							React.createElement(
-								"b",
-								null,
-								item.Price
-							),
-							React.createElement(
-								"p",
-								null,
-								item.Description
-							),
-							" ",
-							React.createElement(
-								"button",
-								{ type: "button", className: "btn btn-restaurant-menu btn-success" },
-								"Add to cart"
-							),
-							React.createElement(
-								"p",
-								{ className: "item-shop-categoty" },
-								item.Category
-							)
-						),
-
-						React.createElement(
-							"div",
-							{ className: "img-column-shopItem" },
-							React.createElement("img", { src: image, className: "item-shop-img" })
-						),
-						" "
-					);
+							return React.createElement(
+							  "div",
+							  { className: "shopItem-row" },
+							  React.createElement(
+							    "div",
+							    { className: "img-column-shopItem" },
+							    React.createElement("img", { src: item.RestaurantMenuImages[0].Path, className: "item-shop-img" }),
+							    React.createElement(
+							      "div",
+							      { className: "cartShop-price priceUnderImg" },
+							      item.Price
+							    )
+							  ),
+							  React.createElement(
+							    "div",
+							    { className: "content-column-shopItem" },
+							    React.createElement(
+							      "h4",
+							      { className: "item-shop-title" },
+							      item.ProdName
+							    ),
+							    React.createElement(
+							      "p",
+							      null,
+							      item.ShortDescription
+							    ),
+							    React.createElement(
+							      "button",
+							      { type: "button", className: "btn-restaurant-menu" },
+							      "Add"
+							    ),
+									React.createElement(
+										"input",
+										{ type: "hidden", name: "shopItemId", value: item.Id }
+									)
+							  )
+							);
 				} else if (position == 3) {
-					return React.createElement(
-						"div",
-						null,
-						React.createElement(
-							"div",
-							{ className: "center-img-shopItem shopItem" },
-							" ",
-							React.createElement("img", { src: image })
-						),
-						React.createElement(
-							"h4",
-							{ className: "item-shop-title" },
-							item.ProdName
-						),
-						React.createElement(
-							"b",
-							null,
-							item.Price
-						),
-						React.createElement(
-							"p",
-							{ className: "item-shop-categoty" },
-							item.Category
-						),
-						React.createElement(
-							"p",
-							null,
-							item.Description
-						),
-						" ",
-						React.createElement(
-							"button",
-							{ type: "button", className: "btn btn-success btn-block btn-restaurant-menu" },
-							"Add to cart"
-						)
+						return React.createElement(
+					  "div",
+					  { className: "shopItem-row" },
+					  React.createElement(
+					    "div",
+					    { className: "img-column-shopItem" },
+					    React.createElement("img", { src: item.RestaurantMenuImages[0].Path, className: "item-shop-img" })
+					  ),
+					  React.createElement(
+					    "div",
+					    { className: "content-column-shopItem shopMiddle-content" },
+					    React.createElement(
+					      "h4",
+					      { className: "item-shop-title" },
+					      item.ProdName
+					    ),
+					    React.createElement(
+					      "p",
+					      null,
+					      item.ShortDescription
+					    )
+					  ),
+					  React.createElement(
+					    "div",
+					    { className: "btn-shop-column" },
+					    React.createElement(
+					      "div",
+					      { className: "cartShop-price" },
+					      item.Price
+					    ),
+					    React.createElement(
+					      "button",
+					      { type: "button", className: "btn-restaurant-menu" },
+					      "Add"
+					    ),
+							React.createElement(
+								"input",
+								{ type: "hidden", name: "shopItemId", value: item.Id }
+							)
+
+					  )
 					);
 				}
 			});
