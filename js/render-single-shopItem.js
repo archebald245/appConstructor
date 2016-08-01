@@ -1,80 +1,93 @@
 "use strict";
 function renderSingleShopItem(singleItem) {
-  var singleShopItem = React.createClass({
-    displayName: "singleShopItem",
+    var singleShopItem = React.createClass({
+        displayName: "singleShopItem",
 
-    getInitialState: function getInitialState() {
-      return { data: singleItem };
-    },
-    componentDidMount: function componentDidMount() {
-      var swiper = new Swiper('.swiper-container',{
-        loop: true,
-      });
-      cartShopPrice();
-    },
-    render: function render() {
-      var data = this.state.data;
-      var sliderItem = data.RestaurantMenuImages.map(function (item) {
-        return React.createElement(
-          "div",
-          { className: "swiper-slide" },
-          React.createElement("img", { src: item.Path })
-        );
-      });
-      return React.createElement(
-        "div",
-        { className: "singleShop-item" },
-        React.createElement(
-          "div",
-          { className: "singleShop-wrapper" },
-          React.createElement(
-            "h4",
-            null,
-            data.ProdName
-          ),
-          React.createElement(
-            "div",
-            { className: "swiper-container" },
-            React.createElement(
-              "div",
-              { className: "swiper-wrapper" },
-              sliderItem
-            )
-          ),
-          React.createElement(
-            "p",
-            { className: "singleShop-category" },
-            data.Category
-          ),
-          React.createElement(
-            "p",
-            { className: "singleShop-price" },
-            data.Price
-          ),
-          React.createElement(
-            "div",
-            { className: "singleShop-description" },
-            React.createElement(
-              "h5",
-              null,
-              "Description:"
-            ),
-            React.createElement(
-              "p",
-              null,
-              data.Description
-            )
-          )
-        ),
-        React.createElement(
-          "button",
-          { className: "singleShop-btn" },
-          "+ Add to Cart"
-        )
-      );
-    }
-  });
-  ReactDOM.render(React.createElement(singleShopItem, { data: singleItem }), document.getElementById("singleItem"));
+        getInitialState: function getInitialState() {
+            return { data: singleItem };
+        },
+        componentDidMount: function componentDidMount() {
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+            });
+            cartShopPrice();
+            $(".singleShop-btn").on("click", function() {
+                var itemId = $("[name=singleItemId]").val();
+                workToClickBuy(itemId);
+            });
+        },
+        render: function render() {
+            var data = this.state.data;
+            var sliderItem = data.RestaurantMenuImages.map(function(item) {
+                return React.createElement(
+                    "div",
+                    { className: "swiper-slide" },
+                    React.createElement("img", { src: item.Path })
+                );
+            });
+            return React.createElement(
+                "div",
+                { className: "singleShop-item" },
+                React.createElement(
+                    "div",
+                    { className: "singleShop-wrapper" },
+                    React.createElement(
+                        "h4",
+                        null,
+                        data.ProdName
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "swiper-container" },
+                        React.createElement(
+                            "div",
+                            { className: "swiper-wrapper" },
+                            sliderItem
+                        )
+                    ),
+                    React.createElement(
+                        "p",
+                        { className: "singleShop-category" },
+                        data.Category
+                    ),
+                    React.createElement(
+                        "p",
+                        { className: "singleShop-price" },
+                        React.createElement(
+                            "img",
+                            { className: "img-dollar-singleItem", src: "file:///android_asset/www/baseimages/dollar.png" },
+                            null
+                        ),
+                        data.Price
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "singleShop-description" },
+                        React.createElement(
+                            "h5",
+                            null,
+                            "Description:"
+                        ),
+                        React.createElement(
+                            "p",
+                            null,
+                            data.Description
+                        ),
+                        React.createElement(
+                            'input',
+                            { type: 'hidden', name: "singleItemId", value: data.Id }
+                        )
+                    )
+                ),
+                React.createElement(
+                    "button",
+                    { className: "singleShop-btn" },
+                    "+ Add to Cart"
+                )
+            );
+        }
+    });
+    ReactDOM.render(React.createElement(singleShopItem, { data: singleItem }), document.getElementById("singleItem"));
 }
 
 
