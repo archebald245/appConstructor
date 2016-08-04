@@ -63,6 +63,7 @@ function onCheckJson() {
 
         data = replaceData(data);
         applicationData = JSON.parse(data);
+        resources = searchResourcesAndReplacePatch(applicationData);
         downloadResources();
         initMenuYoutunbe();
         if (resources.length == 0) {
@@ -110,16 +111,16 @@ function checkConnection() {
             data: { projectId: projectId, versionName: versionId },
             cache: false,
             success: function(jsonObjectOfServer) {
+                
                 if (jsonObjectOfServer.IsUpdated == true) {
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     $.jStorage.deleteKey('appData');
+                    checkUpdateRestaurantMenu();
                     onCheckJson();
                 } else {
                     onCheckJson();
-                    reactRender();
-                    initGallaryClick();
-                    submitFormListener();
-                    unBlockUi()
+                    checkUpdateRestaurantMenu();
+                    
                 }
             }
         });
