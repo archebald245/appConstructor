@@ -66,11 +66,11 @@ function renderRestaurantMenu(menuCollection, position) {
 
 							return React.createElement(
 							  "div",
-							  { className: "shopItem-row" },
+							  { className: "shopItem-row shopItem" },
 							  React.createElement(
 							    "div",
 							    { className: "img-column-shopItem" },
-							    React.createElement("img", { src: item.RestaurantMenuImages[0].Path, className: "item-shop-img" }),
+							    React.createElement("img", { src: iimage, className: "item-shop-img" }),
 							    React.createElement(
 							      "div",
 							      { className: "cartShop-price priceUnderImg" },
@@ -104,11 +104,11 @@ function renderRestaurantMenu(menuCollection, position) {
 				} else if (position == 3) {
 						return React.createElement(
 					  "div",
-					  { className: "shopItem-row" },
+					  { className: "shopItem-row shopItem"   },
 					  React.createElement(
 					    "div",
 					    { className: "img-column-shopItem" },
-					    React.createElement("img", { src: item.RestaurantMenuImages[0].Path, className: "item-shop-img" })
+					    React.createElement("img", { src: image, className: "item-shop-img" })
 					  ),
 					  React.createElement(
 					    "div",
