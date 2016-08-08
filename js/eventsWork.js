@@ -26,4 +26,8 @@ function goToPage(index) {
     submitFormListener();
     initGallaryClick();
     bindChangeValForms();
+      $(".cart-btn").on("click", function(){
+        $("#container").addClass("hidden");
+        $(".cart").removeClass("hidden");
+    });
 }
