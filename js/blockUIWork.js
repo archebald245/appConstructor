@@ -13,6 +13,9 @@ function blockUi(){
 function unBlockUi(){
     createCustomHideForms();
     bindChangeValForms();
+    addListenerToClickBuy();
+    addListenerToClickOpenSingleItem();
+    bindListenerToClickBtn();
     $.unblockUI();
-    
+
 }
