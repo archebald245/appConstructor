@@ -558,6 +558,7 @@ height: 50px;
 border: none;
 color: #fff;
 font-size: 20px;
+z-index:30;
 }
 .singleItem .cart-top-line{
   height: 50px;
@@ -571,4 +572,7 @@ margin-right: 5px;
 }
 .commentOrder{
     resize: vertical;
+}
+.swiper-slide img {
+    width: 100%;
 }
