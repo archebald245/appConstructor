@@ -35,7 +35,8 @@ function reactRender() {
             var rowModels = this.state.data.map(function (row) {
                 return React.createElement(CellContainer, { data: row, key: row.Id });
             });
-            return React.createElement(
+            if(applicationData.RestaurantMenus != null){
+                  return React.createElement(
                 'div',
                 null,
                 React.createElement(
@@ -49,6 +50,18 @@ function reactRender() {
                     rowModels
                 )
             );
+            }else{
+                  return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'div',
+                    { className: 'container-fluid' },
+                    rowModels
+                )
+            );
+            }
+          
         }
     });
 
