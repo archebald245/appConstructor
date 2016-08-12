@@ -26,6 +26,8 @@ function goToPage(index) {
     submitFormListener();
     initGallaryClick();
     bindChangeValForms();
+    addListenerToClickBuy();
+    addListenerToClickOpenSingleItem();
       $(".cart-btn").on("click", function(){
         $("#container").addClass("hidden");
         $(".cart").removeClass("hidden");
