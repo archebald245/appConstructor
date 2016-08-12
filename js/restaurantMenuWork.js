@@ -82,9 +82,13 @@ function checkUpdateRestaurantMenu() {
                 applicationData.RestaurantMenus = object.Menus;
                 var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
                 applicationData.RestaurantMenus = resourcesOfRestaurantMenus(applicationData.RestaurantMenus, storePath);
+                var appJsonString = JSON.stringify(applicationData);
+                 $.jStorage.set('replaceImagePachJson', appJsonString);
                 downloadResources();
+            }else{
+                reactRender();
             }
-            reactRender();
+            
             initGallaryClick();
             submitFormListener();
             unBlockUi()
