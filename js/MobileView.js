@@ -61,7 +61,7 @@ function reactRender() {
                 )
             );
             }
-          
+
         }
     });
 
@@ -395,16 +395,39 @@ function reactRender() {
             if (data.ContentTypeId == 15) {
                 $(ReactDOM.findDOMNode(this)).attr("id", "custom-restaurant-menu-container");
                 var restaurantMenu = applicationData.RestaurantMenus;
+                var ThisRestaurantMenuBlock = this;
+                var weekday = new Array(7);
+          			weekday[0]=  "Sunday";
+          			weekday[1] = "Monday";
+          			weekday[2] = "Tuesday";
+          			weekday[3] = "Wednesday";
+          			weekday[4] = "Thursday";
+          			weekday[5] = "Friday";
+          			weekday[6] = "Saturday";
+          			var dayNow = weekday[new Date().getDay()];
+
+
                 $(restaurantMenu).each(function () {
                     if (this.Id == data.RestaurantMenuId) {
+                      var thisRestaurantMenu = this;
                         if (this.IsOnline == false) {
-                            renderRestaurantMenu(this, data.LablePosition);
+                          $(this.DateTimeRestaurantMenu).each(function(dataItem){
+                            if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
+                              renderRestaurantMenu(this, data.LablePosition);
+                            }
+                          });
+
                         } else {
                             var networkState = navigator.connection.type;
-                            if (networkState != Connection.NONE) {
+                            if (networkState == Connection.NONE) {
                                 $("#custom-restaurant-menu-container").html("Sorry, is only available online!");
                             } else {
-                                renderRestaurantMenu(this, data.LablePosition);
+                              $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem){
+
+                                if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
+                                  renderRestaurantMenu(thisRestaurantMenu, data.LablePosition);
+                                }
+                              });
                             }
                         }
 
@@ -442,6 +465,62 @@ function reactRender() {
             //$(React.findDOMNode(this)).attr("style", styleCell);
             $(ReactDOM.findDOMNode(this)).attr("style", styleCell);
         },
+        checkRestarauntTime: 	function CheckRestarauntTime(FromHourModel, ToHourModel, NowHoursModel){
+          var FromDataArray = FromHourModel.split("T")[1].split(":");
+          var ToDataArray = ToHourModel.split("T")[1].split(":");
+          var NowDataArray = NowHoursModel.split("T")[1].split(":");
+            var FromHour = Number(FromDataArray[0]);
+            var FromMinuts = Number(FromDataArray[1]);
+            var FromSeconds = Number(FromDataArray[2]);
+
+            var ToHour =  Number(ToDataArray[0]);
+            var ToMinuts =  Number(ToDataArray[1]);
+            var ToSeconds =  Number(ToDataArray[2]);
+
+            var NowHour =  Number(NowDataArray[0]);
+            var NowMinuts =  Number(NowDataArray[1]);
+            var NowSeconds = Number(NowDataArray[2]);
+
+            var timeCheker = false;
+            if((FromHour <= NowHour) && (NowHour <= ToHour)) {
+
+                timeCheker = true;
+        }else{
+          timeCheker = false;
+        }
+          if(!timeCheker){
+            if( (FromMinuts <= NowMinuts) && (NowMinuts <= ToMinuts) ){
+              timeCheker = true;
+            }else{
+            timeCheker = false;
+            }
+          }
+          if(!timeCheker){
+            if( (FromSeconds <= NowSeconds) && (NowSeconds <= ToSeconds)){
+              timeCheker = true;
+            }else{
+            timeCheker = false;
+            }
+          }
+          if(timeCheker){
+            return true;
+          }else{
+            return false;
+          }
+        },
+        getClockTime: function GetClockTime(){
+           var now    = new Date();
+           var hour   = now.getHours();
+           var minute = now.getMinutes();
+           var second = now.getSeconds();
+           var ap = "12T";
+           if (hour   > 11) { ap = "24T"; }
+           if (hour   < 10) { hour   = "0" + hour;   }
+           if (minute < 10) { minute = "0" + minute; }
+           if (second < 10) { second = "0" + second; }
+           var timeString = ap+hour + ':' + minute + ':' + second;
+           return timeString;
+    },
         render: function render() {
             var data = this.props.data;
 
