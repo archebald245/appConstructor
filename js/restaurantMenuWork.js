@@ -78,6 +78,7 @@ function checkUpdateRestaurantMenu() {
             model: collectionRestaurantMenu
         }, cache: false,
         success: function(object) {
+          object = JSON.parse(object);
             if (object.IsUpdated == true) {
                 applicationData.RestaurantMenus = object.Menus;
                 var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
