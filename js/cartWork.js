@@ -61,12 +61,16 @@ function clickPlaceAnOrder() {
 function bindListenerToClickBtn() {
     $(".cart-btn").on("click", function() {
         $("#container").addClass("hidden");
+        $(".classMenu").addClass("hidden");
+        $(".classSwipeDropList").addClass("hidden");
         $(".cart").removeClass("hidden");
         $(".singleItem").addClass("hidden");
     });
 
     $(".back-to-container").on("click", function() {
         $("#container").removeClass("hidden");
+        $(".classMenu").removeClass("hidden");
+        $(".classSwipeDropList").removeClass("hidden");
         $(".cart").addClass("hidden");
         $(".singleItem").addClass("hidden");
 
