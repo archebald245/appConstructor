@@ -409,22 +409,30 @@ function reactRender() {
                       var thisRestaurantMenu = this;
                         if (this.IsOnline == false) {
 
-
-                            renderRestaurantMenu(this, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-
-
+                            if(this.UseDateTime == false){
+                              renderRestaurantMenu(this, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                            }else{
+                              $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem){
+                                if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
+                                renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                }
+                              });
+                            }
 
                         } else {
                             var networkState = navigator.connection.type;
                             if (networkState == Connection.NONE) {
                                 $("#custom-restaurant-menu-container").html("Sorry, is only available online!");
                             } else {
-                              $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem){
-
-                                if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
-                                renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                }
-                              });
+                              if(this.UseDateTime == false){
+                                renderRestaurantMenu(this, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                              }else{
+                                $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem){
+                                  if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
+                                  renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                  }
+                                });
+                              }
                             }
                         }
 
