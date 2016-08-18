@@ -108,7 +108,7 @@ function reactRender() {
                     ),
                     React.createElement(
                         'div',
-                        { className: 'my-gallery' },
+                        { id: 'lightgallery' },
                         this.createItems(this.props.data)
                     )
                 );
@@ -123,14 +123,17 @@ function reactRender() {
                     ),
                     React.createElement(
                         'div',
-                        { className: 'my-gallery' },
+                        { id: 'lightgallery' },
                         this.createItems(this.props.data)
                     )
                 );
             }
         },
         componentDidMount: function componentDidMount() {
-            initPhotoSwipeFromDOM(".my-gallery");
+         $("#lightgallery").lightGallery({
+           controls: false,
+           download: false
+         });
         },
         createIcon: function createIcon(items) {
             var icon = _.where(items, { IsGalleryIcon: true });
@@ -150,24 +153,18 @@ function reactRender() {
             for (var i = 0; i < items.length; i++) {
                 if (i == 0 && icon.length == 0) {
                     output.push(React.createElement(
-                        'figure',
-                        { key: items[i].Id },
-                        React.createElement(
                             'a',
                             { href: items[i].Link, className: 'galleryHref', itemProp: 'contentUrl', 'data-size': '964x1024' },
-                            React.createElement('img', { src: items[i].Link, alt: 'Image description', className: 'gallery-image' })
+                            React.createElement('img', { src: items[i].Link,  className: 'gallery-image' })
                         )
-                    ));
+                    );
                 } else {
                     output.push(React.createElement(
-                        'figure',
-                        { className: 'hidden', key: items[i].Id },
-                        React.createElement(
                             'a',
-                            { href: items[i].Link, className: 'galleryHref', itemProp: 'contentUrl', 'data-size': '964x1024' },
-                            React.createElement('img', { src: items[i].Link, alt: 'Image description', className: 'gallery-image' })
+                            { href: items[i].Link, className: 'galleryHref hidden', itemProp: 'contentUrl', 'data-size': '964x1024' },
+                            React.createElement('img', { src: items[i].Link, className: 'gallery-image' })
                         )
-                    ));
+                    );
                 }
             }
             return output;
@@ -411,11 +408,11 @@ function reactRender() {
                     if (this.Id == data.RestaurantMenuId) {
                       var thisRestaurantMenu = this;
                         if (this.IsOnline == false) {
-                          $(this.DateTimeRestaurantMenu).each(function(dataItem){
-                            if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
-                              renderRestaurantMenu(this, data.LablePosition);
-                            }
-                          });
+
+
+                            renderRestaurantMenu(this, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+
+
 
                         } else {
                             var networkState = navigator.connection.type;
@@ -425,7 +422,7 @@ function reactRender() {
                               $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem){
 
                                 if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
-                                  renderRestaurantMenu(thisRestaurantMenu, data.LablePosition);
+                                renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                 }
                               });
                             }
