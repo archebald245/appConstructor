@@ -111,7 +111,7 @@ function checkConnection() {
             data: { projectId: projectId, versionName: versionId },
             cache: false,
             success: function(jsonObjectOfServer) {
-                
+
                 if (jsonObjectOfServer.IsUpdated == true) {
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     $.jStorage.deleteKey('appData');
@@ -120,7 +120,7 @@ function checkConnection() {
                 } else {
                     onCheckJson();
                     checkUpdateRestaurantMenu();
-                    
+
                 }
             }
         });
@@ -169,6 +169,27 @@ function replaceData(element) {
 function initGallaryClick() {
     $(".gallery-icon").unbind("click");
     $(".gallery-icon").on("click", function() {
-        $(this).parent().siblings().find("figure")[0].click();
+        $(this).parent().siblings().find("a")[0].click();
     });
 }
+
+
+function doOnOrientationChange()
+  {
+    switch(window.orientation)
+    {
+      case -90:
+      case 90:
+      if(applicationData.RestaurantMenus.length > 0){
+        restarauntMenuModelItems();
+      }
+        break;
+      default:
+      if(applicationData.RestaurantMenus.length > 0){
+        restarauntMenuModelItems();
+      }
+        break;
+    }
+  }
+
+  window.addEventListener('orientationchange', doOnOrientationChange);

@@ -50,7 +50,7 @@ function addListenerToClickDelete() {
     $(".delete-cartItem").unbind("click");
     $(".delete-cartItem").on("click", function() {
         $(this).closest(".cartItem").parent().remove();
-       
+
         // var totalPrice = totalPrice();
         $(".totalPrice b").html("");
         $(".totalPrice b").append(totalPrice());
@@ -88,7 +88,7 @@ function checkUpdateRestaurantMenu() {
             }else{
                 reactRender();
             }
-            
+
             initGallaryClick();
             submitFormListener();
             unBlockUi()
@@ -124,4 +124,29 @@ function addListenerToClickOpenSingleItem() {
         });
 
     });
+}
+function restarauntMenuModelItems() {
+    if ($("#container").width() >= 1000 || $("#container").width() >= 810) {
+        $(".shopItem-row").attr("style", "");
+        $(".shopItem-row").css({
+            "float": "left",
+            "width": "30%",
+            "marginLeft": "2%",
+            "marginBottom": "15px",
+            "border": "1px solid #939393",
+            "padding": "3px"
+        });
+    } else if ($("#container").width() >= 809 || $("#container").width() >= 650) {
+        $(".shopItem-row").attr("style", "");
+        $(".shopItem-row").css({
+            "float": "left",
+            "width": "45%",
+            "marginLeft": "1%",
+            "marginBottom": "15px",
+            "border": "1px solid #939393",
+            "padding": "3px"
+        });
+    } else if ($("#container").width() <= 650) {
+        $(".shopItem-row").attr("style", "");
+    }
 }
