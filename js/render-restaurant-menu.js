@@ -1,6 +1,6 @@
 "use strict";
 
-function renderRestaurantMenu(menuCollection, position) {
+function renderRestaurantMenu(menuCollection, position, responsiveModel, stateName, statePrice, stateDescription, stateButton, stateImage) {
 
 	var RestaurantMenuBlock = React.createClass({
 		displayName: "RestaurantMenuBlock",
@@ -9,7 +9,37 @@ function renderRestaurantMenu(menuCollection, position) {
 			return { data: menuCollection };
 		},
 		componentDidMount: function componentDidMount() {
-		cartShopPrice();
+			if(stateName == false){
+			$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".item-shop-title").addClass("hidden");
+			}else{
+			$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".item-shop-title").removeClass("hidden");
+			}
+			if(statePrice == false){
+				$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".cartShop-price").addClass("hidden");
+			}
+			else{
+				$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".cartShop-price").removeClass("hidden");
+			}
+			if(stateDescription == false){
+				$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".content-column-shopItem p").addClass("hidden");
+			}
+			else{
+				$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".content-column-shopItem p").removeClass("hidden");
+			}
+			if(stateButton == false){
+				$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".btn-restaurant-menu").addClass("hidden");
+			}
+			else{
+				$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".btn-restaurant-menu").removeClass("hidden");
+			}
+			if(stateImage == false){
+			$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".img-column-shopItem").addClass("hidden");
+			}else{
+			$("[value=restaurantMenuId_"+ this.state.data.Id+"]").siblings(".shopItem-row").find(".img-column-shopItem").removeClass("hidden");
+			}
+			if(responsiveModel == true){
+			restarauntMenuModelItems();
+			}
 		},
 		render: function render() {
 			var RestaurantMenuItemModels = this.state.data.RestaurantMenuItems.map(function (item) {
