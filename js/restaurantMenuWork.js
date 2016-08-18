@@ -78,6 +78,7 @@ function checkUpdateRestaurantMenu() {
             model: collectionRestaurantMenu
         }, cache: false,
         success: function(object) {
+          object = JSON.parse(object);
             if (object.IsUpdated == true) {
                 applicationData.RestaurantMenus = object.Menus;
                 var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
@@ -114,6 +115,8 @@ function cartShopPrice() {
 function addListenerToClickOpenSingleItem() {
     $(".shopItem").on("click", function() {
         $("#container").addClass("hidden");
+        $(".classMenu").addClass("hidden");
+        $(".classSwipeDropList").addClass("hidden");
         $(".singleItem").removeClass("hidden");
         var id = $(this).find("[name='shopItemId']").val();
         var restaurantMenu = applicationData.RestaurantMenus[0].RestaurantMenuItems;
