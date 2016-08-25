@@ -8,7 +8,7 @@ function addListenerToClickBuy() {
 }
 
 function workToClickBuy(itemId) {
-    var restaurantMenu = applicationData.RestaurantMenus[0].RestaurantMenuItems;
+    var restaurantMenu = applicationData.RestaurantMenus;
 
     if ($("#cart").find("input[value='" + itemId + "']").length > 0) {
         var itemThis = $("#cart").find("input[value='" + itemId + "']").siblings("input[name='shopItemCount']");
@@ -18,17 +18,22 @@ function workToClickBuy(itemId) {
         var newItemCount = Number(itemThis.val());
         $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItemCount-visible").append(newItemCount);
 
-        $(restaurantMenu).each(function() {
-            if (this.Id == itemId) {
-                $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItem-price").text(Number(this.Price) * newItemCount);
+        $(restaurantMenu).each(function(index,itemMenu) {
+          $(itemMenu.RestaurantMenuItems).each(function(i, e){
+            if (e.Id == itemId) {
+                $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItem-price").text(Number(e.Price) * newItemCount);
             }
+          })
         });
     } else {
-        $(restaurantMenu).each(function() {
-            if (this.Id == itemId) {
-                $("#cart").append("<div id='shopItem'></div>");
-                renderCartItem(this);
-            }
+        $(restaurantMenu).each(function(index, itemMenu) {
+            $(itemMenu.RestaurantMenuItems).each(function(i, e){
+              if (e.Id == itemId) {
+                  $("#cart").append("<div id='shopItem'></div>");
+                  renderCartItem(e);
+              }
+            });
+
         });
     }
     $("#shopItem").attr("id", "");
