@@ -119,11 +119,13 @@ function addListenerToClickOpenSingleItem() {
         $(".classSwipeDropList").addClass("hidden");
         $(".singleItem").removeClass("hidden");
         var id = $(this).find("[name='shopItemId']").val();
-        var restaurantMenu = applicationData.RestaurantMenus[0].RestaurantMenuItems;
-        $(restaurantMenu).each(function() {
-            if (this.Id == id) {
-                renderSingleShopItem(this);
-            }
+        var restaurantMenu = applicationData.RestaurantMenus;
+        $(restaurantMenu).each(function(index, item) {
+            $(item.RestaurantMenuItems).each(function(){
+              if (this.Id == id) {
+                  renderSingleShopItem(this);
+              }
+            });
         });
 
     });
