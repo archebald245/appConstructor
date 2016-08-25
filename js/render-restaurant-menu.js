@@ -4,7 +4,6 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 
 	var RestaurantMenuBlock = React.createClass({
 		displayName: "RestaurantMenuBlock",
-
 		getInitialState: function getInitialState() {
 			return { data: menuCollection };
 		},
