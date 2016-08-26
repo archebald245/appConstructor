@@ -198,6 +198,8 @@ form{
 .button-block .btn-custom{
   display: block;
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .form-control {
     max-width: 1000px !important;

@@ -49,6 +49,7 @@ function clickPlaceAnOrder() {
                 $("#orderInfo input, #orderInfo textarea").val("");
                 $("#container").removeClass("hidden");
                  $("#orderInfo").addClass("hidden");
+                 $(".totalPrice b").text("0");
 
             },
             error: function() {
