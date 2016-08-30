@@ -55,7 +55,7 @@ function renderSingleShopItem(singleItem) {
                         { className: "singleShop-price" },
                         React.createElement(
                             "img",
-                            { className: "img-dollar-singleItem", src: "file:///android_asset/www/baseimages/dollar.png" },
+                            { className: "img-dollar-singleItem", src: "../baseimages/dollar.png" },
                             null
                         ),
                         data.Price

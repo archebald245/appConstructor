@@ -42,7 +42,7 @@ function reactRender() {
                 React.createElement(
                     'button',
                     { type: 'button', className: 'cart-btn' },
-                    React.createElement('img', { src: 'file:///android_asset/www/baseimages/cart.png' })
+                    React.createElement('img', { src: '../baseimages/cart.png' })
                 ),
                 React.createElement(
                     'div',
@@ -141,8 +141,7 @@ function reactRender() {
             if (icon.length > 0) {
                 return React.createElement('img', { src: icon[0].Link, className: 'gallery-icon' });
             } else {
-                //return React.createElement('img',{src:"file:///android_asset/www/baseimages/gallery-shadow.png", className: 'gallery-icon gallery-shadow'});
-                return React.createElement('img', { src: "file:///android_asset/www/baseimages/noimage.gif", className: 'gallery-icon gallery-shadow' });
+                return React.createElement('img', { src: "../baseimages/noimage.gif", className: 'gallery-icon gallery-shadow' });
             }
         },
         createItems: function createItems(items) {

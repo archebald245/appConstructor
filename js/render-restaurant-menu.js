@@ -44,7 +44,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 			var RestaurantMenuItemModels = this.state.data.RestaurantMenuItems.map(function (item) {
                  var image;
                  if(item.RestaurantMenuImages.length == 0){
-                        image = "file:///android_asset/www/baseimages/cartItem.png";
+                        image = "../baseimages/cartItem.png";
                     }else{
                         image = item.RestaurantMenuImages[0].Path;
                     }

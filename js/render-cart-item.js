@@ -16,7 +16,7 @@ function renderCartItem(cartItem) {
       var data = this.state.data;
       var cartImg;
       if (data.RestaurantMenuImages.length == 0) {
-        cartImg = "file:///android_asset/www/baseimages/cartItem.png";
+        cartImg = "../baseimages/cartItem.png";
       } else {
         cartImg = data.RestaurantMenuImages[0].Path;
       }
