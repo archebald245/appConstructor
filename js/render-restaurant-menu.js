@@ -44,9 +44,9 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 			var RestaurantMenuItemModels = this.state.data.RestaurantMenuItems.map(function (item) {
                  var image;
                  if(item.RestaurantMenuImages.length == 0){
-                        image = "../baseimages/cartItem.png";
+                        image = <span className='restaurantMenuNoImages item-shop-img'></span>;
                     }else{
-                        image = item.RestaurantMenuImages[0].Path;
+                        image = <img src={item.RestaurantMenuImages[0].Path} />;
                     }
 
 				if (position == 1) {
@@ -57,7 +57,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 						React.createElement(
 							"div",
 							{ className: "img-column-shopItem" },
-							React.createElement("img", { src: image, className: "item-shop-img" })
+						image
 						),
 						React.createElement(
 							"div",

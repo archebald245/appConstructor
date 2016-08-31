@@ -135,9 +135,10 @@ form{
     background-size: 20%;
     background-color: rgba(0,0,0,.5);
 }
-.shadow-container img{
+.shadow-container .no-images{
     width:100%;
     height:100%;
+    background-image: url(../baseimages/noimage.gif);
 }
 
 .icon-container img{
@@ -146,6 +147,11 @@ form{
 
 .gallery-image{
 	max-width:100%;
+}
+.restaurantMenuNoImages{
+  width: 100%;
+  height: 100%;
+  background-image: url(../baseimages/cartItem.png);
 }
 .difficult-button-img{
    box-shadow:0px 0px 7px 2px #727272;
@@ -431,6 +437,12 @@ width: 100%;
   z-index: 1;
   bottom: 20px;
   right: 20px;
+  background-image: url(../baseimages/cart.png);
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .cart-btn img{
   border-radius: 50%;
@@ -570,6 +582,8 @@ background-color: #939393;
 .img-dollar-singleItem {
 width: 14px;
 margin-right: 5px;
+display: inline-block;
+background-image: url(../baseimages/dollar.png);
 }
 .commentOrder{
     resize: vertical;

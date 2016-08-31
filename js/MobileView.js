@@ -41,8 +41,7 @@ function reactRender() {
                 null,
                 React.createElement(
                     'button',
-                    { type: 'button', className: 'cart-btn' },
-                    React.createElement('img', { src: '../baseimages/cart.png' })
+                    { type: 'button', className: 'cart-btn' }
                 ),
                 React.createElement(
                     'div',
@@ -75,7 +74,6 @@ function reactRender() {
                 styleRow = "";
             }
 
-            console.log(styleRow);
 
             $(React.findDOMNode(this)).attr("style", styleRow);
         },
@@ -141,7 +139,7 @@ function reactRender() {
             if (icon.length > 0) {
                 return React.createElement('img', { src: icon[0].Link, className: 'gallery-icon' });
             } else {
-                return React.createElement('img', { src: "../baseimages/noimage.gif", className: 'gallery-icon gallery-shadow' });
+              return React.createElement('div', { className: 'gallery-icon gallery-shadow no-images' });
             }
         },
         createItems: function createItems(items) {
