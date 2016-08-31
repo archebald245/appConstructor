@@ -75,9 +75,6 @@ function onCheckJson() {
     }
     var networkState = navigator.connection.type;
     if (networkState == Connection.NONE) {
-        var pageStyles = applicationData.Pages[0].Style;
-        $("#container").attr("style", pageStyles);
-
         reactRender();
         initGallaryClick();
         submitFormListener();
@@ -147,10 +144,6 @@ function callback() {
     reactRender();
     initGallaryClick();
     submitFormListener();
-    var pageStyles = applicationData.Pages[0].Style;
-    if (pageStyles != undefined) {
-        $("#container").attr("style", pageStyles);
-    }
     unBlockUi()
 }
 

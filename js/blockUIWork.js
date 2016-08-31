@@ -16,6 +16,10 @@ function unBlockUi(){
     addListenerToClickBuy();
     addListenerToClickOpenSingleItem();
     bindListenerToClickBtn();
+    var pageStyles = applicationData.Pages[0].Style;
+    if (pageStyles != undefined) {
+        $("#container").attr("style", pageStyles);
+    }
     $.unblockUI();
 
 }
