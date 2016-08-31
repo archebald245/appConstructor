@@ -16,7 +16,7 @@ function renderCartItem(cartItem) {
       var data = this.state.data;
       var cartImg;
       if (data.RestaurantMenuImages.length == 0) {
-        cartImg = <div className='restaurantMenuNoImages'></div>
+        cartImg = <div className='restaurantMenuNoImages'> </div>
       } else {
         cartImg =<img src={data.RestaurantMenuImages[0].Path}  />
       }

@@ -44,7 +44,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 			var RestaurantMenuItemModels = this.state.data.RestaurantMenuItems.map(function (item) {
                  var image;
                  if(item.RestaurantMenuImages.length == 0){
-                        image = <span className='restaurantMenuNoImages item-shop-img'></span>;
+                        image = <span className='restaurantMenuNoImages item-shop-img'> </span>;
                     }else{
                         image = <img src={item.RestaurantMenuImages[0].Path} />;
                     }
