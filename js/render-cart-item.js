@@ -16,10 +16,10 @@ function renderCartItem(cartItem) {
       var data = this.state.data;
       var cartImg;
       if (data.RestaurantMenuImages.length == 0) {
-        cartImg = <div className='restaurantMenuNoImages'> </div>
-      } else {
-        cartImg =<img src={data.RestaurantMenuImages[0].Path}  />
-      }
+    cartImg = React.createElement('div', { className: 'restaurantMenuNoImages' });
+  } else {
+    cartImg = React.createElement('img', { src: data.RestaurantMenuImages[0].Path });
+  }
 
       return React.createElement(
         "div",
