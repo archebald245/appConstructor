@@ -9,11 +9,12 @@ function searchResourcesAndReplacePatch(jsonObject) {
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
         }
-        if (jsonObject.RestaurantMenus != null) {
-            jsonObject.RestaurantMenus = resourcesOfRestaurantMenus(jsonObject.RestaurantMenus, storePath);
-        }
+        
 
     }
+    if (jsonObject.RestaurantMenus != null) {
+            jsonObject.RestaurantMenus = resourcesOfRestaurantMenus(jsonObject.RestaurantMenus, storePath);
+        }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
     } else {
