@@ -7,13 +7,14 @@ function searchResourcesAndReplacePatch(jsonObject) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
-            jsonObject.Pages[i] = resourcesOfBackground(jsonObject.RestaurantMenus, storePath);
+            jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
         }
-        if (jsonObject.RestaurantMenus != null) {
-            jsonObject.RestaurantMenus = resourcesOfRestaurantMenus(jsonObject.RestaurantMenus, storePath);
-        }
+        
 
     }
+    if (jsonObject.RestaurantMenus != null) {
+            jsonObject.RestaurantMenus = resourcesOfRestaurantMenus(jsonObject.RestaurantMenus, storePath);
+        }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
     } else {
