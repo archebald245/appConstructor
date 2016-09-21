@@ -20,6 +20,8 @@ function unBlockUi(){
     if (pageStyles != undefined) {
         $("#container").attr("style", pageStyles);
     }
+    changeRestaurant();
+    changeMenu();
     $.unblockUI();
 
 }

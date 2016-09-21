@@ -188,6 +188,12 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 				),
 				React.createElement("input", { type: "hidden", name: "restaurantMenuId", value:  this.state.data.Id }),
 				React.createElement("input", { type: "hidden", name: "restaurantMenuPosition", value:  position }),
+                React.createElement("input", { type: "hidden", name: "responsiveModel", value:  responsiveModel }),
+                React.createElement("input", { type: "hidden", name: "stateName", value:  stateName }),
+                React.createElement("input", { type: "hidden", name: "statePrice", value:  statePrice }),
+                React.createElement("input", { type: "hidden", name: "stateDescription", value:  stateDescription }),
+                React.createElement("input", { type: "hidden", name: "stateButton", value:  stateButton }),
+                React.createElement("input", { type: "hidden", name: "stateImage", value:  stateImage }),
                 RestaurantMenuItemModels
 
 			);

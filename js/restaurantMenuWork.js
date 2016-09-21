@@ -8,7 +8,14 @@ function addListenerToClickBuy() {
 }
 
 function workToClickBuy(itemId) {
-    var restaurantMenu = applicationData.RestaurantMenus;
+    var restaurantMenu = [];
+    $(applicationData.Restaurants).each(function() {
+        $(this.RestaurantMenus).each(function() {
+            restaurantMenu.push(this);
+        });
+    });
+
+
 
     if ($("#cart").find("input[value='" + itemId + "']").length > 0) {
         var itemThis = $("#cart").find("input[value='" + itemId + "']").siblings("input[name='shopItemCount']");
@@ -18,37 +25,59 @@ function workToClickBuy(itemId) {
         var newItemCount = Number(itemThis.val());
         $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItemCount-visible").append(newItemCount);
 
-        $(restaurantMenu).each(function(index,itemMenu) {
-          $(itemMenu.RestaurantMenuItems).each(function(i, e){
-            if (e.Id == itemId) {
-                $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItem-price").text(Number(e.Price) * newItemCount);
-            }
-          })
+        $(restaurantMenu).each(function(index, itemMenu) {
+            $(itemMenu.RestaurantMenuItems).each(function(i, e) {
+                if (e.Id == itemId) {
+                    $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItem-price").text(Number(e.Price) * newItemCount);
+                }
+            });
         });
     } else {
-        $(restaurantMenu).each(function(index, itemMenu) {
-            $(itemMenu.RestaurantMenuItems).each(function(i, e){
-              if (e.Id == itemId) {
-                  $("#cart").append("<div id='shopItem'></div>");
-                  renderCartItem(e);
-              }
-            });
 
-        });
-    }
-    $("#shopItem").attr("id", "");
-    function totalPrice() {
-        var totalPrice = 0;
-        $("#cart").find(".shopItem-price").each(function() {
-            totalPrice += Number($(this).text());
-        });
-        return totalPrice;
-    }
-    // var totalPrice = totalPrice();
-    $(".totalPrice b").html("");
-    $(".totalPrice b").append(totalPrice());
-    addListenerToClickDelete();
-    window.plugins.toast.showShortBottom("Item add to cart!");
+
+        var restaurantId;
+        $(restaurantMenu).each(function(index, itemMenu) {
+            restaurantId = itemMenu.RestaurantId;
+            $(itemMenu.RestaurantMenuItems).each(function(i, e) {
+                if (e.Id == itemId) {
+                    if ($("#cart").children().length > 0) {
+                        if ($("[name=cartRestaurantId]").attr("value") != restaurantId) {
+                            if (confirm("Сказать привет?")) {
+                                $("#cart").children().remove();
+                                $("[name=cartRestaurantId]").attr("value", restaurantId);
+                                $("#cart").append("<div id='shopItem'></div>");
+                                renderCartItem(e);
+                                window.plugins.toast.showShortBottom("Item add to cart!");
+                            } else {
+
+                            }
+                        }
+                    } else {
+                        $("[name=cartRestaurantId]").attr("value", restaurantId);
+                        $("#cart").append("<div id='shopItem'></div>");
+                        renderCartItem(e);
+                        window.plugins.toast.showShortBottom("Item add to cart!");
+                    }
+                }
+            
+            });
+    });
+
+
+}
+$("#shopItem").attr("id", "");
+function totalPrice() {
+    var totalPrice = 0;
+    $("#cart").find(".shopItem-price").each(function() {
+        totalPrice += Number($(this).text());
+    });
+    return totalPrice;
+}
+// var totalPrice = totalPrice();
+$(".totalPrice b").html("");
+$(".totalPrice b").append(totalPrice());
+addListenerToClickDelete();
+
 }
 
 function addListenerToClickDelete() {
@@ -61,20 +90,23 @@ function addListenerToClickDelete() {
         $(".totalPrice b").append(totalPrice());
     });
 }
- function totalPrice() {
-            var totalPrice = 0;
-            $("#cart").find(".shopItem-price").each(function() {
-                totalPrice += Number($(this).text());
-            });
-            return totalPrice;
-        }
+function totalPrice() {
+    var totalPrice = 0;
+    $("#cart").find(".shopItem-price").each(function() {
+        totalPrice += Number($(this).text());
+    });
+    return totalPrice;
+}
 function checkUpdateRestaurantMenu() {
     var collectionRestaurantMenu = [];
-    $(applicationData.RestaurantMenus).each(function() {
-        collectionRestaurantMenu.push({
-            Id: this.Id,
-            Version: this.Version
-        })
+    $(applicationData.Restaurants).each(function(i, elem) {
+        $(elem.RestaurantMenus).each(function() {
+            collectionRestaurantMenu.push({
+                Id: this.Id,
+                Version: this.Version
+            });
+        });
+
     })
     $.ajax({
         type: "POST",
@@ -83,15 +115,15 @@ function checkUpdateRestaurantMenu() {
             model: collectionRestaurantMenu
         }, cache: false,
         success: function(object) {
-          object = JSON.parse(object);
+            object = JSON.parse(object);
             if (object.IsUpdated == true) {
-                applicationData.RestaurantMenus = object.Menus;
+                applicationData.Restaurants = object.Restaurants;
                 var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
-                applicationData.RestaurantMenus = resourcesOfRestaurantMenus(applicationData.RestaurantMenus, storePath);
+                applicationData.Restaurants = resourcesOfRestaurantMenus(applicationData.Restaurants, storePath);
                 var appJsonString = JSON.stringify(applicationData);
-                 $.jStorage.set('replaceImagePachJson', appJsonString);
+                $.jStorage.set('replaceImagePachJson', appJsonString);
                 downloadResources();
-            }else{
+            } else {
                 reactRender();
             }
 
@@ -124,12 +156,17 @@ function addListenerToClickOpenSingleItem() {
         $(".classSwipeDropList").addClass("hidden");
         $(".singleItem").removeClass("hidden");
         var id = $(this).find("[name='shopItemId']").val();
-        var restaurantMenu = applicationData.RestaurantMenus;
-        $(restaurantMenu).each(function(index, item) {
-            $(item.RestaurantMenuItems).each(function(){
-              if (this.Id == id) {
-                  renderSingleShopItem(this);
-              }
+        var menus = [];
+        $(applicationData.Restaurants).each(function(){
+           $(this.RestaurantMenus).each(function(){
+               menus.push(this);
+           }); 
+        });
+        $(menus).each(function(index, item) {
+            $(item.RestaurantMenuItems).each(function() {
+                if (this.Id == id) {
+                    renderSingleShopItem(this);
+                }
             });
         });
 
@@ -159,4 +196,59 @@ function restarauntMenuModelItems() {
     } else if ($("#container").width() <= 650) {
         $(".shopItem-row").attr("style", "");
     }
+}
+
+function changeRestaurant() {
+    $(".select-restaurant").on("change", function() {
+        var idRest = $(this).val();
+        var arrIdMenu = $(this).siblings("[name=arrIdMenu]").attr("value").split(',');
+        var restaurantCollection = applicationData.Restaurants;
+        // setUseRestaurantMenus(arrIdMenu, true,restaurantCollection);
+        var restaurantsArr = filterMenu(restaurantCollection, arrIdMenu);
+        var selectMenu = $(this).siblings(".select-menu");
+        $(selectMenu).children().remove();
+
+        var restaurant;
+        $(restaurantsArr).each(function() {
+            if (idRest == this.Id) {
+                restaurant = this;
+            }
+        });
+        $(restaurant.RestaurantMenus).each(function() {
+            $(selectMenu).append("<option value='" + this.Id + "'>" + this.Name + "</option>");
+        });
+        $(this).siblings(".custom-restaurant-menu-container").attr("id", "custom-restaurant-menu-container");
+
+        renderRestaurantMenu(restaurant.RestaurantMenus[0], $(this).siblings().find("[name=restaurantMenuPosition]").attr("value"), $(this).siblings().find("[name=responsiveModel]").attr("value"),
+            $(this).siblings().find("[name=stateName]").attr("value"), $(this).siblings().find("[name=statePrice]").attr("value"), $(this).siblings().find("[name=stateDescription]").attr("value"),
+            $(this).siblings().find("[name=stateButton]").attr("value"), $(this).siblings().find("[name=stateImage]").attr("value"));
+
+        $(this).siblings(".custom-restaurant-menu-container").attr("id", "");
+        addListenerToClickBuy();
+        addListenerToClickOpenSingleItem();
+    });
+}
+
+function changeMenu() {
+    $(".select-menu").on("change", function() {
+        var idMenu = $(this).val();
+        var menu;
+        $(applicationData.Restaurants).each(function() {
+            $(this.RestaurantMenus).each(function() {
+                if (this.Id == idMenu) {
+                    menu = this;
+                }
+            });
+        });
+        $(this).siblings(".custom-restaurant-menu-container").attr("id", "custom-restaurant-menu-container");
+
+        renderRestaurantMenu(menu, $(this).siblings().find("[name=restaurantMenuPosition]").attr("value"), $(this).siblings().find("[name=responsiveModel]").attr("value"),
+            $(this).siblings().find("[name=stateName]").attr("value"), $(this).siblings().find("[name=statePrice]").attr("value"),
+            $(this).siblings().find("[name=stateDescription]").attr("value"),
+            $(this).siblings().find("[name=stateButton]").attr("value"), $(this).siblings().find("[name=stateImage]").attr("value"));
+
+        $(this).siblings(".custom-restaurant-menu-container").attr("id", "");
+        addListenerToClickBuy();
+        addListenerToClickOpenSingleItem();
+    });
 }

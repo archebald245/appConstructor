@@ -1,5 +1,49 @@
 'use strict';
 
+//restaurant menu element
+                //
+                function filterMenu(restaurantsArr, arrIdMenu) {
+                    var restaurantCopy = JSON.parse(JSON.stringify(restaurantsArr));
+                    function returnUse(menu) {
+                        for (var i = 0; i < arrIdMenu.length; i++) {
+                            if (arrIdMenu[i] == menu.Id) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+
+                    function emptyRestaurants(restaurant) {
+                        return restaurant.RestaurantMenus.length > 0;
+                    }
+                    for (var i = 0; i < restaurantCopy.length; i++) {
+                        restaurantCopy[i].RestaurantMenus = restaurantCopy[i].RestaurantMenus.filter(returnUse);
+                    }
+                    restaurantCopy = restaurantCopy.filter(emptyRestaurants);
+                    return restaurantCopy;
+
+                }
+                function setUseRestaurantMenus(ids, use, restaurants) {
+
+                    $(ids).each(function(i, id) {
+                        setUseRestaurantMenu(id, use, restaurants);
+                    });
+                }
+
+                function setUseRestaurantMenu(id, use, restaurants) {
+                    $(restaurants).each(function() {
+                        $(this.RestaurantMenus).each(function() {
+                            if (this.Id == id) {
+                                this.UseOnPage = use;
+                            }
+                        });
+                    });
+                }
+
+
+                //
+                //restaurant menu element
+
 function reactRender() {
     function onYouTubeIframeAPIReady(element, id) {
         var player = new YT.Player(element, {
@@ -16,7 +60,7 @@ function reactRender() {
         // event.target.playVideo();
     }
 
-    function onPlayerStateChange(event) {}
+    function onPlayerStateChange(event) { }
 
     var Rows = React.createClass({
         displayName: 'Rows',
@@ -30,35 +74,36 @@ function reactRender() {
                     this.setState({ data: applicationData.Pages[i].Rows });
                 }
             }
+
         },
         render: function render() {
-            var rowModels = this.state.data.map(function (row) {
+            var rowModels = this.state.data.map(function(row) {
                 return React.createElement(CellContainer, { data: row, key: row.Id });
             });
-            if(applicationData.RestaurantMenus != null){
-                  return React.createElement(
-                'div',
-                null,
-                React.createElement(
-                    'button',
-                    { type: 'button', className: 'cart-btn' }
-                ),
-                React.createElement(
+            if (applicationData.Restaurants != null) {
+                return React.createElement(
                     'div',
-                    { className: 'container-fluid' },
-                    rowModels
-                )
-            );
-            }else{
-                  return React.createElement(
-                'div',
-                null,
-                React.createElement(
+                    null,
+                    React.createElement(
+                        'button',
+                        { type: 'button', className: 'cart-btn' }
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'container-fluid' },
+                        rowModels
+                    )
+                );
+            } else {
+                return React.createElement(
                     'div',
-                    { className: 'container-fluid' },
-                    rowModels
-                )
-            );
+                    null,
+                    React.createElement(
+                        'div',
+                        { className: 'container-fluid' },
+                        rowModels
+                    )
+                );
             }
 
         }
@@ -78,7 +123,7 @@ function reactRender() {
             $(React.findDOMNode(this)).attr("style", styleRow);
         },
         render: function render() {
-            var cellModels = this.props.data.CellContents.map(function (cell) {
+            var cellModels = this.props.data.CellContents.map(function(cell) {
                 return React.createElement(CellContent, { data: cell, key: cell.Id });
             });
             return React.createElement(
@@ -128,10 +173,10 @@ function reactRender() {
             }
         },
         componentDidMount: function componentDidMount() {
-         $("#lightgallery").lightGallery({
-           controls: false,
-           download: false
-         });
+            $("#lightgallery").lightGallery({
+                controls: false,
+                download: false
+            });
         },
         createIcon: function createIcon(items) {
             var icon = _.where(items, { IsGalleryIcon: true });
@@ -139,7 +184,7 @@ function reactRender() {
             if (icon.length > 0) {
                 return React.createElement('img', { src: icon[0].Link, className: 'gallery-icon' });
             } else {
-              return React.createElement('div', { className: 'gallery-icon gallery-shadow no-images' });
+                return React.createElement('div', { className: 'gallery-icon gallery-shadow no-images' });
             }
         },
         createItems: function createItems(items) {
@@ -150,17 +195,17 @@ function reactRender() {
             for (var i = 0; i < items.length; i++) {
                 if (i == 0 && icon.length == 0) {
                     output.push(React.createElement(
-                            'a',
-                            { href: items[i].Link, className: 'galleryHref', itemProp: 'contentUrl', 'data-size': '964x1024' },
-                            React.createElement('img', { src: items[i].Link,  className: 'gallery-image' })
-                        )
+                        'a',
+                        { href: items[i].Link, className: 'galleryHref', itemProp: 'contentUrl', 'data-size': '964x1024' },
+                        React.createElement('img', { src: items[i].Link, className: 'gallery-image' })
+                    )
                     );
                 } else {
                     output.push(React.createElement(
-                            'a',
-                            { href: items[i].Link, className: 'galleryHref hidden', itemProp: 'contentUrl', 'data-size': '964x1024' },
-                            React.createElement('img', { src: items[i].Link, className: 'gallery-image' })
-                        )
+                        'a',
+                        { href: items[i].Link, className: 'galleryHref hidden', itemProp: 'contentUrl', 'data-size': '964x1024' },
+                        React.createElement('img', { src: items[i].Link, className: 'gallery-image' })
+                    )
                     );
                 }
             }
@@ -212,7 +257,7 @@ function reactRender() {
             var data = this.props.data;
             var json = data;
 
-            var elementModels = json.elements.map(function (element) {
+            var elementModels = json.elements.map(function(element) {
                 element.Value = replaceData(element.Value);
                 if (element.ContentTypeId == 2) {
                     return React.createElement(
@@ -297,7 +342,7 @@ function reactRender() {
             var data = this.props.data;
             var json = data;
 
-            var elementModels = json.elements.map(function (element) {
+            var elementModels = json.elements.map(function(element) {
                 element.Value = replaceData(element.Value);
                 if (element.ContentTypeId == 2) {
                     return React.createElement('div', { className: 'link-item', dangerouslySetInnerHTML: { __html: element.Value } });
@@ -348,7 +393,7 @@ function reactRender() {
                 var styleLabel = this.props.data.Value.split("|")[0];
                 var styleSubmit = this.props.data.Value.split("|")[1];
                 $(ReactDOM.findDOMNode(this)).html("<form class='form-container' id='form-container'></form>");
-                $(objectForm).each(function (i, element) {
+                $(objectForm).each(function(i, element) {
                     if (element.Id == formId) {
                         renderForm(element);
                         $("#form-container").find(".formSubmit").attr("style", styleSubmit);
@@ -387,33 +432,69 @@ function reactRender() {
                 });
             }
             if (data.ContentTypeId == 15) {
-                $(ReactDOM.findDOMNode(this)).attr("id", "custom-restaurant-menu-container");
-                var restaurantMenu = applicationData.RestaurantMenus;
+                
+
+
+
+
+                // $(ReactDOM.findDOMNode(this)).append("<div><select class='select-restaurant'></select><select class='select-menu'></select><div id='custom-restaurant-menu-container'></div></div>");
+                var arrIdMenu = data.Value.split(',');
+                
+                var restaurantCollection = applicationData.Restaurants;
+                // setUseRestaurantMenus(arrIdMenu, true,restaurantCollection);
+                var restaurantsArr = filterMenu(restaurantCollection, arrIdMenu);
+                var restaurants = [];
+                var selectRest = $("<select class='select-restaurant'></select>");
+                var selectMenu = $("<select class='select-menu'></select>");
+             
+                $(restaurantsArr).each(function(){
+                    $(selectRest).append("<option value='"+ this.Id +"'>"+this.Name+"</option>")
+                       
+                });
+                $(restaurantsArr[0].RestaurantMenus).each(function(){
+                        $(selectMenu).append("<option value='"+ this.Id +"'>"+this.Name+"</option>");    
+                });  
+                
+                restaurants = _.uniq(restaurants);
+                
+                // $(restaurants).each(function(){
+                //     $(selectRest).append("<option value='"+ this.Id +"'>"+this.Name+"</option>")
+                // });
+                var div = $("<div><hidden name='arrIdMenu' value=" + data.Value +"/></div>");
+                var divContainer = "<div id='custom-restaurant-menu-container' class='custom-restaurant-menu-container'></div>"
+                
+                
+                div = $(div).append($(selectRest)).append($(selectMenu)).append($(divContainer));
+                $(ReactDOM.findDOMNode(this)).append($(div));
+                
+                renderRestaurantMenu(restaurantsArr[0].RestaurantMenus[0], data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                
+                $("#custom-restaurant-menu-container").attr("id", "");
                 var ThisRestaurantMenuBlock = this;
                 var weekday = new Array(7);
-          			weekday[0]=  "Sunday";
-          			weekday[1] = "Monday";
-          			weekday[2] = "Tuesday";
-          			weekday[3] = "Wednesday";
-          			weekday[4] = "Thursday";
-          			weekday[5] = "Friday";
-          			weekday[6] = "Saturday";
-          			var dayNow = weekday[new Date().getDay()];
-
-
-                $(restaurantMenu).each(function () {
+                weekday[0] = "Sunday";
+                weekday[1] = "Monday";
+                weekday[2] = "Tuesday";
+                weekday[3] = "Wednesday";
+                weekday[4] = "Thursday";
+                weekday[5] = "Friday";
+                weekday[6] = "Saturday";
+                var dayNow = weekday[new Date().getDay()];
+                    
+                //no working
+                $(restaurantsArr).each(function() {
                     if (this.Id == data.RestaurantMenuId) {
-                      var thisRestaurantMenu = this;
+                        var thisRestaurantMenu = this;
                         if (this.IsOnline == false) {
 
-                            if(this.UseDateTime == false){
-                              renderRestaurantMenu(this, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                            }else{
-                              $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem){
-                                if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
-                                renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                }
-                              });
+                            if (this.UseDateTime == false) {
+                                renderRestaurantMenu(this, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                            } else {
+                                $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem) {
+                                    if (dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())) {
+                                        renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                    }
+                                });
                             }
 
                         } else {
@@ -421,18 +502,18 @@ function reactRender() {
                             if (networkState == Connection.NONE) {
                                 $("#custom-restaurant-menu-container").html("Sorry, is only available online!");
                             } else {
-                              if(this.UseDateTime == false){
-                                renderRestaurantMenu(this, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                              }else{
-                                $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem){
-                                  if(dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())){
-                                  renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                  }
-                                });
-                              }
+                                if (this.UseDateTime == false) {
+                                    renderRestaurantMenu(this, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                } else {
+                                    $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(index, dataItem) {
+                                        if (dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())) {
+                                            renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                        }
+                                    });
+                                }
                             }
                         }
-
+                        //no working
                         $("#custom-restaurant-menu-container").attr("id", "");
                     }
                 });
@@ -446,9 +527,9 @@ function reactRender() {
 
                 $(ReactDOM.findDOMNode(this)).attr("id", "custom-form-container");
 
-                $(objectForm).each(function (i, element) {
+                $(objectForm).each(function(i, element) {
                     if (element.Id == formId) {
-                        $(element.FormFields).each(function (i, field) {
+                        $(element.FormFields).each(function(i, field) {
                             if (field.Id == fieldId) {
                                 var formToRender = {};
                                 formToRender.FormFields = [];
@@ -467,62 +548,62 @@ function reactRender() {
             //$(React.findDOMNode(this)).attr("style", styleCell);
             $(ReactDOM.findDOMNode(this)).attr("style", styleCell);
         },
-        checkRestarauntTime: 	function CheckRestarauntTime(FromHourModel, ToHourModel, NowHoursModel){
-          var FromDataArray = FromHourModel.split("T")[1].split(":");
-          var ToDataArray = ToHourModel.split("T")[1].split(":");
-          var NowDataArray = NowHoursModel.split("T")[1].split(":");
+        checkRestarauntTime: function CheckRestarauntTime(FromHourModel, ToHourModel, NowHoursModel) {
+            var FromDataArray = FromHourModel.split("T")[1].split(":");
+            var ToDataArray = ToHourModel.split("T")[1].split(":");
+            var NowDataArray = NowHoursModel.split("T")[1].split(":");
             var FromHour = Number(FromDataArray[0]);
             var FromMinuts = Number(FromDataArray[1]);
             var FromSeconds = Number(FromDataArray[2]);
 
-            var ToHour =  Number(ToDataArray[0]);
-            var ToMinuts =  Number(ToDataArray[1]);
-            var ToSeconds =  Number(ToDataArray[2]);
+            var ToHour = Number(ToDataArray[0]);
+            var ToMinuts = Number(ToDataArray[1]);
+            var ToSeconds = Number(ToDataArray[2]);
 
-            var NowHour =  Number(NowDataArray[0]);
-            var NowMinuts =  Number(NowDataArray[1]);
+            var NowHour = Number(NowDataArray[0]);
+            var NowMinuts = Number(NowDataArray[1]);
             var NowSeconds = Number(NowDataArray[2]);
 
             var timeCheker = false;
-            if((FromHour <= NowHour) && (NowHour <= ToHour)) {
+            if ((FromHour <= NowHour) && (NowHour <= ToHour)) {
 
                 timeCheker = true;
-        }else{
-          timeCheker = false;
-        }
-          if(!timeCheker){
-            if( (FromMinuts <= NowMinuts) && (NowMinuts <= ToMinuts) ){
-              timeCheker = true;
-            }else{
-            timeCheker = false;
+            } else {
+                timeCheker = false;
             }
-          }
-          if(!timeCheker){
-            if( (FromSeconds <= NowSeconds) && (NowSeconds <= ToSeconds)){
-              timeCheker = true;
-            }else{
-            timeCheker = false;
+            if (!timeCheker) {
+                if ((FromMinuts <= NowMinuts) && (NowMinuts <= ToMinuts)) {
+                    timeCheker = true;
+                } else {
+                    timeCheker = false;
+                }
             }
-          }
-          if(timeCheker){
-            return true;
-          }else{
-            return false;
-          }
+            if (!timeCheker) {
+                if ((FromSeconds <= NowSeconds) && (NowSeconds <= ToSeconds)) {
+                    timeCheker = true;
+                } else {
+                    timeCheker = false;
+                }
+            }
+            if (timeCheker) {
+                return true;
+            } else {
+                return false;
+            }
         },
-        getClockTime: function GetClockTime(){
-           var now    = new Date();
-           var hour   = now.getHours();
-           var minute = now.getMinutes();
-           var second = now.getSeconds();
-           var ap = "12T";
-           if (hour   > 11) { ap = "24T"; }
-           if (hour   < 10) { hour   = "0" + hour;   }
-           if (minute < 10) { minute = "0" + minute; }
-           if (second < 10) { second = "0" + second; }
-           var timeString = ap+hour + ':' + minute + ':' + second;
-           return timeString;
-    },
+        getClockTime: function GetClockTime() {
+            var now = new Date();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+            var ap = "12T";
+            if (hour > 11) { ap = "24T"; }
+            if (hour < 10) { hour = "0" + hour; }
+            if (minute < 10) { minute = "0" + minute; }
+            if (second < 10) { second = "0" + second; }
+            var timeString = ap + hour + ':' + minute + ':' + second;
+            return timeString;
+        },
         render: function render() {
             var data = this.props.data;
 
