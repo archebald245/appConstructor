@@ -29,6 +29,7 @@ function workToClickBuy(itemId) {
             $(itemMenu.RestaurantMenuItems).each(function(i, e) {
                 if (e.Id == itemId) {
                     $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItem-price").text(Number(e.Price) * newItemCount);
+                      window.plugins.toast.showShortBottom("Item add to cart!");
                 }
             });
         });
@@ -51,6 +52,11 @@ function workToClickBuy(itemId) {
                             } else {
 
                             }
+                        }else{
+                          $("[name=cartRestaurantId]").attr("value", restaurantId);
+                          $("#cart").append("<div id='shopItem'></div>");
+                          renderCartItem(e);
+                          window.plugins.toast.showShortBottom("Item add to cart!");
                         }
                     } else {
                         $("[name=cartRestaurantId]").attr("value", restaurantId);
@@ -59,7 +65,7 @@ function workToClickBuy(itemId) {
                         window.plugins.toast.showShortBottom("Item add to cart!");
                     }
                 }
-            
+
             });
     });
 
@@ -160,7 +166,7 @@ function addListenerToClickOpenSingleItem() {
         $(applicationData.Restaurants).each(function(){
            $(this.RestaurantMenus).each(function(){
                menus.push(this);
-           }); 
+           });
         });
         $(menus).each(function(index, item) {
             $(item.RestaurantMenuItems).each(function() {

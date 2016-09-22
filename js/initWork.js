@@ -110,7 +110,9 @@ function checkConnection() {
             success: function(jsonObjectOfServer) {
 
                 if (jsonObjectOfServer.IsUpdated == true) {
+
                     data = JSON.stringify(jsonObjectOfServer.Content);
+                    applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     checkUpdateRestaurantMenu();
                     onCheckJson();
@@ -173,12 +175,12 @@ function doOnOrientationChange()
     {
       case -90:
       case 90:
-      if(applicationData.RestaurantMenus.length > 0){
+      if(applicationData.Restaurants.length > 0){
         restarauntMenuModelItems();
       }
         break;
       default:
-      if(applicationData.RestaurantMenus.length > 0){
+      if(applicationData.Restaurants.length > 0){
         restarauntMenuModelItems();
       }
         break;
