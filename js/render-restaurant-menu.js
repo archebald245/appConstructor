@@ -43,11 +43,11 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 		render: function render() {
 			var RestaurantMenuItemModels = this.state.data.RestaurantMenuItems.map(function (item) {
                  var image;
-                 if(item.RestaurantMenuImages.length == 0){
-                        image = "file:///android_asset/www/baseimages/cartItem.png";
-                    }else{
-                        image = item.RestaurantMenuImages[0].Path;
-                    }
+								 if (item.RestaurantMenuImages.length == 0) {
+							    image = React.createElement('span', { className: 'restaurantMenuNoImages item-shop-img' });
+							} else {
+							    image = React.createElement('img', { src: item.RestaurantMenuImages[0].Path });
+							}
 
 				if (position == 1) {
 
@@ -57,7 +57,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 						React.createElement(
 							"div",
 							{ className: "img-column-shopItem" },
-							React.createElement("img", { src: image, className: "item-shop-img" })
+						image
 						),
 						React.createElement(
 							"div",
@@ -188,6 +188,12 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
 				),
 				React.createElement("input", { type: "hidden", name: "restaurantMenuId", value:  this.state.data.Id }),
 				React.createElement("input", { type: "hidden", name: "restaurantMenuPosition", value:  position }),
+                React.createElement("input", { type: "hidden", name: "responsiveModel", value:  responsiveModel }),
+                React.createElement("input", { type: "hidden", name: "stateName", value:  stateName }),
+                React.createElement("input", { type: "hidden", name: "statePrice", value:  statePrice }),
+                React.createElement("input", { type: "hidden", name: "stateDescription", value:  stateDescription }),
+                React.createElement("input", { type: "hidden", name: "stateButton", value:  stateButton }),
+                React.createElement("input", { type: "hidden", name: "stateImage", value:  stateImage }),
                 RestaurantMenuItemModels
 
 			);
