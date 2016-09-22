@@ -75,9 +75,6 @@ function onCheckJson() {
     }
     var networkState = navigator.connection.type;
     if (networkState == Connection.NONE) {
-        var pageStyles = applicationData.Pages[0].Style;
-        $("#container").attr("style", pageStyles);
-
         reactRender();
         initGallaryClick();
         submitFormListener();
@@ -113,7 +110,9 @@ function checkConnection() {
             success: function(jsonObjectOfServer) {
 
                 if (jsonObjectOfServer.IsUpdated == true) {
+
                     data = JSON.stringify(jsonObjectOfServer.Content);
+                    applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     checkUpdateRestaurantMenu();
                     onCheckJson();
@@ -147,10 +146,6 @@ function callback() {
     reactRender();
     initGallaryClick();
     submitFormListener();
-    var pageStyles = applicationData.Pages[0].Style;
-    if (pageStyles != undefined) {
-        $("#container").attr("style", pageStyles);
-    }
     unBlockUi()
 }
 
@@ -180,12 +175,12 @@ function doOnOrientationChange()
     {
       case -90:
       case 90:
-      if(applicationData.RestaurantMenus.length > 0){
+      if(applicationData.Restaurants.length > 0){
         restarauntMenuModelItems();
       }
         break;
       default:
-      if(applicationData.RestaurantMenus.length > 0){
+      if(applicationData.Restaurants.length > 0){
         restarauntMenuModelItems();
       }
         break;
