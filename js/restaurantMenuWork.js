@@ -43,7 +43,7 @@ function workToClickBuy(itemId) {
                 if (e.Id == itemId) {
                     if ($("#cart").children().length > 0) {
                         if ($("[name=cartRestaurantId]").attr("value") != restaurantId) {
-                            if (confirm("Сказать привет?")) {
+                            if (confirm("Your shopping cart already has order from previous restaurant. If you add and confirm current order the order from previous restaurant will be removed. Continue?")) {
                                 $("#cart").children().remove();
                                 $("[name=cartRestaurantId]").attr("value", restaurantId);
                                 $("#cart").append("<div id='shopItem'></div>");
