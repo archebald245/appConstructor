@@ -9,12 +9,12 @@ function searchResourcesAndReplacePatch(jsonObject) {
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
         }
-        
+
 
     }
-    if (jsonObject.RestaurantMenus != null) {
-            jsonObject.RestaurantMenus = resourcesOfRestaurantMenus(jsonObject.RestaurantMenus, storePath);
-        }
+    if (jsonObject.Restaurants != null) {
+        jsonObject.Restaurants = resourcesOfRestaurantMenus(jsonObject.Restaurants, storePath);
+    }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
     } else {
@@ -61,21 +61,24 @@ function resourcesOfBackground(page, storePath) {
     return page;
 }
 
-function resourcesOfRestaurantMenus(restaurantMenu, storePath) {
-    restaurantMenu = replacePathToImageRestaurantMenu(restaurantMenu);
-    $(restaurantMenu).each(function() {
-        if (this.IsOnline == false) {
-            $(this.RestaurantMenuItems).each(function() {
-                $(this.RestaurantMenuImages).each(function() {
-                     resources.push(this.Path);
-                     this.Path = replacementPathImagesRestaurantMenu(this.Path, storePath);
-                     
-                });
-            });
-        }
+function resourcesOfRestaurantMenus(restaurants, storePath) {
+    restaurants = replacePathToImageRestaurantMenu(restaurants);
+    $(restaurants).each(function() {
+        $(this.RestaurantMenus).each(function() {
+            if (this.IsOnline == false) {
+                $(this.RestaurantMenuItems).each(function() {
+                    $(this.RestaurantMenuImages).each(function() {
+                        resources.push(this.Path);
+                        this.Path = replacementPathImagesRestaurantMenu(this.Path, storePath);
 
+                    });
+                });
+            }
+
+        });
     });
-    return restaurantMenu;
+
+    return restaurants;
 }
 
 function resourcesPushInArray(element) {
@@ -126,9 +129,9 @@ function replacementPathImages(jsonObjectValue, arrayResources, storePath) {
     return jsonObjectValue;
 }
 
-function replacementPathImagesRestaurantMenu(oldPath, storePath){
+function replacementPathImagesRestaurantMenu(oldPath, storePath) {
     var nameImage = oldPath.split("/");
-    nameImage = nameImage[nameImage.length-1];
+    nameImage = nameImage[nameImage.length - 1];
     return storePath + nameImage;
 }
 
@@ -168,7 +171,7 @@ function deleteImage(imagePath) {
 }
 
 function downloadResources() {
-    
+
     for (var i = 0; i < resources.length; i++) {
         var fileNameImage = resources[i];
         download(fileNameImage);
@@ -208,13 +211,15 @@ function fail(error) {
     console.log(error.code);
 }
 
-function replacePathToImageRestaurantMenu(restaurantMenu) {
-    $(restaurantMenu).each(function() {
-        $(this.RestaurantMenuItems).each(function() {
-            $(this.RestaurantMenuImages).each(function() {
-                this.Path = applicationData.UrlForUpdateApp + this.Path;
-            })
-        })
-    })
-    return restaurantMenu;
+function replacePathToImageRestaurantMenu(restaurants) {
+    $(restaurants).each(function() {
+        $(this.RestaurantMenus).each(function() {
+            $(this.RestaurantMenuItems).each(function() {
+                $(this.RestaurantMenuImages).each(function() {
+                    this.Path = applicationData.UrlForUpdateApp + this.Path;
+                });
+            });
+        });
+    });
+    return restaurants;
 }
