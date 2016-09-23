@@ -6,7 +6,8 @@ function clickOrder() {
     $(orderItems).each(function() {
         var id = $(this).find("[name=shopItemId]").val();
         var count = $(this).find("[name=shopItemCount]").val();
-        $(applicationData.RestaurantMenus).each(function() {
+        $(applicationData.Restaurants).each(function() {
+          $(this.RestaurantMenus).each(function(){
             $(this.RestaurantMenuItems).each(function() {
                 if (this.Id == id) {
                     var item = JSON.parse(JSON.stringify(this));
@@ -15,9 +16,7 @@ function clickOrder() {
                     collectionOrderItems.push(item);
                 }
             });
-
-
-
+          });
         });
 
     });
