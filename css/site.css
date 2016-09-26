@@ -603,3 +603,6 @@ margin-bottom: 10px;
 display: inline-block;
 margin: 0 2.5% 20px;
 }
+.lg-toolbar .lg-close:after {
+    content: "X" !important;
+}
