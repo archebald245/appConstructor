@@ -68,6 +68,7 @@ function bindListenerToClickBtn() {
         $(".classSwipeDropList").addClass("hidden");
         $(".cart").removeClass("hidden");
         $(".singleItem").addClass("hidden");
+        window.scrollTo(0,0);
     });
 
     $(".back-to-container").on("click", function() {
