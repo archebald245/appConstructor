@@ -48,6 +48,10 @@ function clickPlaceAnOrder() {
                 $("#orderInfo input, #orderInfo textarea").val("");
                 $("#container").removeClass("hidden");
                  $("#orderInfo").addClass("hidden");
+                 
+               if($('.classMenuTop').length>0||$('.classMenuBottom').length>0){
+                   $(".classMenu").removeClass("hidden");
+               }
 
             },
             error: function() {
