@@ -24,6 +24,7 @@ function onDeviceReady() {
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
     appStart();
+	StatusBar.hide();
 }
 
 function onGetDirectorySuccess(dir) {
