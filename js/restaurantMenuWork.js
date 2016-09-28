@@ -103,7 +103,7 @@ function totalPrice() {
     });
     return totalPrice;
 }
-function checkUpdateRestaurantMenu() {
+function checkUpdateRestaurantMenu(isNewVersion) {
     var collectionRestaurantMenu = [];
     
     $(applicationData.Restaurants).each(function(i, elem) {
@@ -131,7 +131,7 @@ function checkUpdateRestaurantMenu() {
                 $.jStorage.set('replaceImagePachJson', appJsonString);
                 downloadResources();
                 
-            } else {
+            } else if(!isNewVersion) {
                 reactRender();
                 initGallaryClick();
                 submitFormListener();
