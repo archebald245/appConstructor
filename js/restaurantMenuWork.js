@@ -105,6 +105,7 @@ function totalPrice() {
 }
 function checkUpdateRestaurantMenu() {
     var collectionRestaurantMenu = [];
+    
     $(applicationData.Restaurants).each(function(i, elem) {
         $(elem.RestaurantMenus).each(function() {
             collectionRestaurantMenu.push({
@@ -129,13 +130,15 @@ function checkUpdateRestaurantMenu() {
                 var appJsonString = JSON.stringify(applicationData);
                 $.jStorage.set('replaceImagePachJson', appJsonString);
                 downloadResources();
+                
             } else {
                 reactRender();
+                initGallaryClick();
+                submitFormListener();
+                unBlockUi()
             }
 
-            initGallaryClick();
-            submitFormListener();
-            unBlockUi()
+            
         },
         error: function(err) {
             reactRender();
@@ -146,6 +149,8 @@ function checkUpdateRestaurantMenu() {
             console.log(err);
         }
     });
+    
+
 }
 function cartShopPrice() {
     $(".cartShop-price").each(function() {
