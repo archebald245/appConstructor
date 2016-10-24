@@ -152,6 +152,7 @@ form{
   background-image: url(../baseimages/cartItem.png);
   background-size: cover;
   background-position: center;
+  background-repeat:no-repeat;
 }
 .difficult-button-img{
    box-shadow:0px 0px 7px 2px #727272;
@@ -602,4 +603,7 @@ padding: 10px 0;
 margin-bottom: 10px;
 display: inline-block;
 margin: 0 2.5% 20px;
+}
+.lg-toolbar .lg-close:after {
+    content: "X" !important;
 }

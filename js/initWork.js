@@ -24,6 +24,7 @@ function onDeviceReady() {
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
     appStart();
+	StatusBar.hide();
 }
 
 function onGetDirectorySuccess(dir) {
@@ -114,11 +115,11 @@ function checkConnection() {
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
-                    checkUpdateRestaurantMenu();
+                    checkUpdateRestaurantMenu(true);
                     onCheckJson();
                 } else {
                     onCheckJson();
-                    checkUpdateRestaurantMenu();
+                    checkUpdateRestaurantMenu(false);
 
                 }
             }

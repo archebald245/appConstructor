@@ -6,7 +6,8 @@ function clickOrder() {
     $(orderItems).each(function() {
         var id = $(this).find("[name=shopItemId]").val();
         var count = $(this).find("[name=shopItemCount]").val();
-        $(applicationData.RestaurantMenus).each(function() {
+        $(applicationData.Restaurants).each(function() {
+          $(this.RestaurantMenus).each(function(){
             $(this.RestaurantMenuItems).each(function() {
                 if (this.Id == id) {
                     var item = JSON.parse(JSON.stringify(this));
@@ -15,9 +16,7 @@ function clickOrder() {
                     collectionOrderItems.push(item);
                 }
             });
-
-
-
+          });
         });
 
     });
@@ -49,6 +48,10 @@ function clickPlaceAnOrder() {
                 $("#orderInfo input, #orderInfo textarea").val("");
                 $("#container").removeClass("hidden");
                  $("#orderInfo").addClass("hidden");
+                 
+               if($('.classMenuTop').length>0||$('.classMenuBottom').length>0){
+                   $(".classMenu").removeClass("hidden");
+               }
 
             },
             error: function() {
@@ -65,6 +68,7 @@ function bindListenerToClickBtn() {
         $(".classSwipeDropList").addClass("hidden");
         $(".cart").removeClass("hidden");
         $(".singleItem").addClass("hidden");
+        window.scrollTo(0,0);
     });
 
     $(".back-to-container").on("click", function() {
