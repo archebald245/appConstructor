@@ -18,13 +18,18 @@ function renderSingleShopItem(singleItem) {
         },
         render: function render() {
             var data = this.state.data;
-            var sliderItem = data.RestaurantMenuImages.map(function(item) {
-                return React.createElement(
-                    "div",
-                    { className: "swiper-slide" },
-                    React.createElement("img", { src: item.Path })
-                );
-            });
+            var sliderItem;
+            if(data.RestaurantMenuImages.length > 0){
+              sliderItem = data.RestaurantMenuImages.map(function(item) {
+                  return React.createElement(
+                      "div",
+                      { className: "swiper-slide" },
+                      React.createElement("img", { src: item.Path })
+                  );
+              });
+            }else{
+              sliderItem =  React.createElement('img', { src:'baseimages/cartItem.png',className: 'restaurantMenuNoImages item-shop-img' });
+            }
             return React.createElement(
                 "div",
                 { className: "singleShop-item" },
@@ -54,8 +59,8 @@ function renderSingleShopItem(singleItem) {
                         "p",
                         { className: "singleShop-price" },
                         React.createElement(
-                            "img",
-                            { className: "img-dollar-singleItem", src: "file:///android_asset/www/baseimages/dollar.png" },
+                            "span",
+                            { className: "img-dollar-singleItem" },
                             null
                         ),
                         data.Price
