@@ -33,4 +33,6 @@ function goToPage(index) {
         $(".classMenu").addClass("hidden");
         $(".cart").removeClass("hidden");
     });
+    changeRestaurant();
+    changeMenu();
 }
