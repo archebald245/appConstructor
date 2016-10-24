@@ -135,9 +135,10 @@ form{
     background-size: 20%;
     background-color: rgba(0,0,0,.5);
 }
-.shadow-container img{
+.shadow-container .no-images{
     width:100%;
     height:100%;
+    background-image: url(../baseimages/noimage.gif);
 }
 
 .icon-container img{
@@ -146,6 +147,12 @@ form{
 
 .gallery-image{
 	max-width:100%;
+}
+.restaurantMenuNoImages{
+  background-image: url(../baseimages/cartItem.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat:no-repeat;
 }
 .difficult-button-img{
    box-shadow:0px 0px 7px 2px #727272;
@@ -249,9 +256,9 @@ form{
     padding-bottom: 5px;
 }
 .item-shop-img{
-  display: block;
-  width: 100%;
-  height: auto;
+display: block;
+width: 100%;
+height: 90px;
 }
 .content-column-shopItem{
   width: 60%;
@@ -330,7 +337,7 @@ float: right;
 border: 2px solid #939393;
 text-align: center;
 margin-right: 5px;
-background-image: url(file:///android_asset/www/baseimages/dollar.png);
+background-image: url(../baseimages/dollar.png);
 background-position: 10%;
 background-size: 10px;
 background-repeat: no-repeat;
@@ -389,7 +396,7 @@ z-index: 10;
   position: absolute;
   left: 0;
   top: 6px;
-  background-image: url(file:///android_asset/www/baseimages/back.png);
+  background-image: url(../baseimages/back.png);
   width: 33px;
   height: 33px;
   background-size: cover;
@@ -431,6 +438,12 @@ width: 100%;
   z-index: 1;
   bottom: 20px;
   right: 20px;
+  background-image: url(../baseimages/cart.png);
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .cart-btn img{
   border-radius: 50%;
@@ -468,7 +481,7 @@ float: left;
   position: relative;
   width: 30px;
   height: 30px;
-  background-image: url(file:///android_asset/www/baseimages/delete.png);
+  background-image: url(../baseimages/delete.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -476,7 +489,7 @@ float: left;
 
 .shopItem-price{
  width: 80px;
- background-image: url(file:///android_asset/www/baseimages/dollar.png);
+ background-image: url(../baseimages/dollar.png);
  background-position: 10%;
  background-size: 10px;
  background-repeat: no-repeat;
@@ -559,6 +572,7 @@ border: none;
 color: #fff;
 font-size: 20px;
 z-index:30;
+background-color: #939393;
 }
 .singleItem .cart-top-line{
   height: 50px;
@@ -569,10 +583,27 @@ z-index:30;
 .img-dollar-singleItem {
 width: 14px;
 margin-right: 5px;
+display: inline-block;
+background-image: url(../baseimages/dollar.png);
 }
 .commentOrder{
     resize: vertical;
 }
 .swiper-slide img {
     width: 100%;
+}
+.img-column-shopItem img{
+  width: 100%;
+  height: auto;
+}
+.select-restaurant, .select-menu{
+border: none;
+width: 45%;
+padding: 10px 0;
+margin-bottom: 10px;
+display: inline-block;
+margin: 0 2.5% 20px;
+}
+.lg-toolbar .lg-close:after {
+    content: "X" !important;
 }
