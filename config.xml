@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<widget xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="hhhhhhhhhhhh">
-  <name>jhjhjhjhh</name>
-  <description>jjjjjj</description>
+<widget xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="asdasdasdasdasd">
+  <name>sdsdsdsdsdsd</name>
+  <description>asdadsasdasd</description>
   <plugin name="com.fantasyskiracer.inappbrowser" spec="1.0.4" source="pgb" />
   <plugin name="org.apache.cordova.file-transfer" spec="0.5.0" source="pgb" />
   <plugin name="org.apache.cordova.network-information" spec="0.2.7" source="pgb" />
@@ -32,10 +32,10 @@
   <feature name="FileTransfer">
     <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
   </feature>
-  <gap:platform name="ios" />
+  <gap:platform name="android" />
   <preference name="orientation" value="default" />
   <preference name="phonegap-version" value="cli-5.4.1" />
-  <icon platform="ios" qualifier="" src="icons/icon180.png" width="180" height="180" />
-  <icon platform="ios" qualifier="" src="icons/icon152.png" width="152" height="152" />
-  <icon platform="ios" qualifier="" src="icons/icon76.png" width="76" height="76" />
+  <icon platform="android" qualifier="ldpi" src="icons/icon180.png" width="180" height="180" />
+  <icon platform="android" qualifier="mdpi" src="icons/icon152.png" width="180" height="152" />
+  <icon platform="android" qualifier="hdpi" src="icons/icon76.png" width="180" height="76" />
 </widget>
