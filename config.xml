@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="qqqqq">
+  <name>GCU London</name>
+  <description>TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVlciBhZGlwaXNjaW5nIGVsaXQsIHNlZCBkaWFtIG5vbnVtbXkgbmliaCBldWlzbW9kIHRpbmNpZHVudCB1dCBsYW9yZWV0IGRvbG9yZSBtYWduYSBhbGlxdWFtIGVyYXQgdm9sdXRwYXQuICBMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCwgY29uc2VjdGV0dWVyIGFkaXBpc2NpbmcgZWxpdCwgc2VkIGRpYW0gbm9udW1teSBuaWJoIGV1aXNtb2QgdGluY2lkdW50IHV0IGxhb3JlZXQgZG9sb3JlIG1hZ25hIGFsaXF1YW0gZXJhdCB2b2x1dHBhdC4g</description>
+  <plugin name="com.fantasyskiracer.inappbrowser" spec="1.0.4" source="pgb" />
+  <plugin name="org.apache.cordova.file-transfer" spec="0.5.0" source="pgb" />
+  <plugin name="org.apache.cordova.network-information" spec="0.2.7" source="pgb" />
+  <plugin name="cordova-plugin-whitelist" spec="" source="npm" />
+  <plugin name="cordova-plugin-x-toast" spec="" source="npm" />
+  <plugin name="org.apache.cordova.statusbar" spec="0.1.4" source="pgb" />
+  <allow-navigation href="http://*/*" />
+  <allow-intent href="*" />
+  <access origin="*" />
+  <feature name="http://api.phonegap.com/1.0/file">
+    <param name="" value="" />
+  </feature>
+  <feature name="http://api.phonegap.com/1.0/network">
+    <param name="" value="" />
+  </feature>
+  <feature name="File">
+    <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+  </feature>
+  <feature name="Toast">
+    <param name="android-package" value="nl.xservices.plugins.Toast" />
+  </feature>
+  <feature name="Toast">
+    <param name="ios-package" value="Toast" />
+  </feature>
+  <feature name="Toast">
+    <param name="wp-package" value="Toast" />
+  </feature>
+  <feature name="FileTransfer">
+    <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+  </feature>
+  <gap:platform name="android" />
+  <gap:platform name="ios" />
+  <preference name="orientation" value="default" />
+  <preference name="phonegap-version" value="cli-5.4.1" />
+  <icon platform="android" qualifier="ldpi" src="icons/icon180.png" width="180" height="180" />
+  <icon platform="android" qualifier="mdpi" src="icons/icon152.png" width="180" height="152" />
+  <icon platform="android" qualifier="hdpi" src="icons/icon76.png" width="180" height="76" />
+  <icon platform="ios" qualifier="" src="icons/icon180.png" width="180" height="180" />
+  <icon platform="ios" qualifier="" src="icons/icon152.png" width="152" height="152" />
+  <icon platform="ios" qualifier="" src="icons/icon76.png" width="76" height="76" />
+</widget>
