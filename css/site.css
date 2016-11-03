@@ -215,9 +215,9 @@ form{
 .form-control {
     max-width: 1000px !important;
 }
-.formSubmit{
+/*.formSubmit{
     width: 100%;
-}
+}*/
 .form-item{
     padding: 5px;
 }
@@ -403,8 +403,8 @@ z-index: 10;
   left: 0;
   top: 6px;
   background-image: url(../baseimages/back.png);
-  width: 33px;
-  height: 33px;
+  width: 40px;
+  height: 40px;
   background-size: cover;
   background-color: transparent;
   border: none;
@@ -612,4 +612,11 @@ margin: 0 2.5% 20px;
 }
 .lg-toolbar .lg-close:after {
     content: "X" !important;
+}
+.restarant-menu-name{
+  display: block;
+margin-bottom: 5px;
+font-weight: bold;
+clear: both;
+overflow: hidden;
 }
