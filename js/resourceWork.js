@@ -15,9 +15,13 @@ function searchResourcesAndReplacePatch(jsonObject) {
     if (jsonObject.Restaurants != null) {
         jsonObject.Restaurants = resourcesOfRestaurantMenus(jsonObject.Restaurants, storePath);
     }
+    if(jsonObject.Institutions != null){
+        jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
+    }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
-    } else {
+    } 
+    else {
         resourcesToDownload = resources;
     }
     $.jStorage.set('replaceImagePachJson', JSON.stringify(jsonObject));
@@ -80,7 +84,21 @@ function resourcesOfRestaurantMenus(restaurants, storePath) {
 
     return restaurants;
 }
+function resourcesOfBooking(institutions, storePath) {
+    institutions = replacePathToImageInstitution(institutions);
+   $(institutions).each(function(){
+        $(this.BookResources).each(function(){
+            resources.push(this.ImagePath);
+            this.ImagePath = replacementPathImagesRestaurantMenu(this.ImagePath, storePath);
+            $(this.BookServiceProvides).each(function(){
+                resources.push(this.ImagePath);
+                this.ImagePath = replacementPathImagesRestaurantMenu(this.ImagePath, storePath);
+            });
+        });
+    });
 
+    return institutions;
+}
 function resourcesPushInArray(element) {
     for (var i = 0; i < element.Resourceses.length; i++) {
         resources.push(element.Resourceses[i].Link);
@@ -222,4 +240,15 @@ function replacePathToImageRestaurantMenu(restaurants) {
         });
     });
     return restaurants;
+}
+function replacePathToImageInstitution(institutions) {
+    $(institutions).each(function(){
+        $(this.BookResources).each(function(){
+            this.ImagePath = applicationData.UrlForUpdateApp + this.ImagePath;
+            $(this.BookServiceProvides).each(function(){
+                this.ImagePath = applicationData.UrlForUpdateApp + this.ImagePath;
+            });
+        });
+    });
+    return institutions;
 }
