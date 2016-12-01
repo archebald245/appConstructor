@@ -82,7 +82,7 @@ function reactRender() {
             var rowModels = this.state.data.map(function (row) {
                 return React.createElement(CellContainer, { data: row, key: row.Id });
             });
-        if (applicationData.Restaurants.length > 0) {
+            if (applicationData.Restaurants != null) {
                 return React.createElement(
                     'div',
                     null,
