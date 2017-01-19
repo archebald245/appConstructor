@@ -625,6 +625,10 @@ overflow: hidden;
     display:block;
     margin:0 auto;
 }
+.image-link-block img{
+    display:block;
+    margin:0 auto;
+}
 @media (min-width: 960px) {
     .classMenu{
         height: 90px;
