@@ -79,7 +79,7 @@ function renderHideCustomForm(form, id) {
 								field.Label
 							)
 						),
-						React.createElement(DropDownModels, { data: field })
+						React.createElement(DropDownModels, { data: field,name:field.Name })
 					);
 				}
 				if (field.FieldTypeId == 4) {
@@ -288,7 +288,7 @@ function renderHideCustomForm(form, id) {
 			});
 			return React.createElement(
 				"select",
-				{ name: isDropdownName, className: "DropDownElement form-control" },
+				{ name: this.props.name, className: "DropDownElement form-control" },
 				DropDownOptionModels
 			);
 		}
