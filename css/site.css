@@ -654,3 +654,83 @@ overflow: hidden;
         left: 15px;
     }
 }
+
+/*Switcher, Simple CheckBox Block*/
+.checkBoxFormBlock, .switcherFormBlock {
+    padding-left: 5px;
+}
+.CheckBoxFormElement.checkbox-inline > .input-form {
+    width:13px;
+}
+.switcher-inline {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    vertical-align: middle;
+    cursor: pointer;
+}.switcher-label-inline {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: normal;
+    vertical-align: middle;
+    cursor: pointer;
+    left: 30px;
+    top: -19px;
+}
+input[type="checkbox"].SwitcherFormElement { 
+	opacity: 0;
+    left: -9999px;
+}
+input[type="checkbox"].SwitcherFormElement + div {
+	vertical-align: middle;
+	width: 40px;	height: 20px;
+	border: 1px solid rgba(0,0,0,.4);
+	border-radius: 999px;
+	background-color: rgba(0, 0, 0, 0.1);
+	-webkit-transition-duration: .4s;
+	-webkit-transition-property: background-color, box-shadow;
+	box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+}
+input[type="checkbox"].SwitcherFormElement:checked + div {
+	width: 40px;
+	background-position: 0 0;
+	background-color: #75ffe5;
+	border: 1px solid #008b8b;
+	box-shadow: inset 0 0 0 10px rgba(29, 177, 144, 1);
+}
+input[type="checkbox"].SwitcherFormElement + div > div {
+	float: left;
+	width: 18px; height: 18px;
+	border-radius: inherit;
+	background: #ffffff;
+	-webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+	-webkit-transition-duration: 0.4s;
+	-webkit-transition-property: transform, background-color, box-shadow;
+	-moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+	-moz-transition-duration: 0.4s;
+	-moz-transition-property: transform, background-color;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
+	pointer-events: none;
+	 margin-left: 1px;
+}
+input[type="checkbox"].SwitcherFormElement:checked + div > div {
+	-webkit-transform: translate3d(20px, 0, 0);
+	-moz-transform: translate3d(20px, 0, 0);
+	background-color: #ffffff;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px  rgba(29, 177, 144, 1);
+}
+/*Flex Block*/
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
