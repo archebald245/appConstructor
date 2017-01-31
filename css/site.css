@@ -659,6 +659,9 @@ overflow: hidden;
 .checkBoxFormBlock, .switcherFormBlock {
     padding-left: 5px;
 }
+.CheckBoxFormElement.checkbox-inline > .input-form {
+    width:13px;
+}
 .switcher-inline {
     position: relative;
     display: inline-block;
