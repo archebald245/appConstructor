@@ -379,12 +379,14 @@ function reactRender() {
                 var objectForm = applicationData.Forms;
                 var styleLabel = this.props.data.Value.split("|")[0];
                 var styleSubmit = this.props.data.Value.split("|")[1];
+                var textSubmitButton = this.props.data.Value.split("|")[2];
                 $(ReactDOM.findDOMNode(this)).html("<form class='form-container' id='form-container'></form>");
                 $(objectForm).each(function (i, element) {
                     if (element.Id == formId) {
                         renderForm(element);
                         $("#form-container").find(".formSubmit").attr("style", styleSubmit);
                         $("#form-container").find("label").attr("style", styleLabel);
+                        $("#form-container").find(".formSubmit").text(textSubmitButton);
                         $("#form-container").attr("id", "");
                         if (data.CountFormColumn == 2) {
                             $(".formBlock").addClass("formHalf");
