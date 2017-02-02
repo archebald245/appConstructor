@@ -267,7 +267,7 @@ function renderForm(form, id) {
                         React.createElement(
                             "label",
                             { className: "switcher-inline" },
-                            React.createElement("input", { id: field.Id, className: "SwitcherFormElement switcher-inline", name: field.Name, type: "checkbox", value: field.Name }),
+                            React.createElement("input", { id: field.Id, className: "SwitcherFormElement switcher-inline", name: field.Name, type: "checkbox", value: true }),
                             React.createElement(
                                           "div",
                                           null,
@@ -291,7 +291,7 @@ function renderForm(form, id) {
                             React.createElement(
                                 "label",
                                 { className: "CheckBoxFormElement checkbox-inline" },
-                                React.createElement("input", { name: field.Label, type: "checkbox", value: field.Label }),
+                                React.createElement("input", { name: field.Label, type: "checkbox", value: true }),
                                 " ",
                                 field.Label
                             )
@@ -304,7 +304,7 @@ function renderForm(form, id) {
                             React.createElement(
                                 "label",
                                 { className: "CheckBoxFormElement checkbox-inline" },
-                                React.createElement("input", { name: field.Label, type: "checkbox", value: field.Label }),
+                                React.createElement("input", { name: field.Label, type: "checkbox", value: true }),
                                 " ",
                                 field.Label
                             )
