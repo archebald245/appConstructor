@@ -35,7 +35,6 @@ function createCustomHideForms() {
         $("#custom-form-hide-container").attr("id", idHideForm);
     });
 }
-
 function bindChangeValForms() {
     var siteUrl = applicationData.UrlForUpdateApp;
     $($("#custom-hide-container").find("form")).each(function(i, elem) {
@@ -60,7 +59,6 @@ function bindChangeValForms() {
                     }
                 });
             }
-
         });
 
         $(".form_" + formId).each(function(i, element) {
@@ -85,7 +83,6 @@ function bindChangeValForms() {
                         alert("Sorry, no internet connection!");
                     }
                 })
-
             } else {
                 $(field).unbind("change");
                 $(field).on("change", function() {
@@ -100,7 +97,6 @@ function bindChangeValForms() {
                 });
             }
         });
-
     });
 }
 
@@ -138,7 +134,8 @@ function checkValidationAndRequired(form) {
     }
     if ($(form).find(".emailElement").length > 0) {
         var emailInput = $(form).find(".emailElement").find(".email").val().toLowerCase();
-        var emailValid = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/;
+        //var emailValid = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/;
+        var emailValid = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,8})$/;
         if ((!emailInput.match(emailValid)) && (emailInput != "")) {
             alert("Please enter valid email!");
             check = false;
