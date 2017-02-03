@@ -209,9 +209,9 @@ form{
 .form-control {
     max-width: 1000px !important;
 }
-/*.formSubmit{
+.formSubmit{
     width: 100%;
-}*/
+}
 .form-item{
     padding: 5px;
 }
@@ -397,14 +397,14 @@ z-index: 10;
   left: 0;
   top: 6px;
   background-image: url(../baseimages/back.png);
-  width: 40px;
-  height: 40px;
+  width: 33px;
+  height: 33px;
   background-size: cover;
   background-color: transparent;
   border: none;
   margin-left: 10px;
 }
-.btn-order {
+.btn-order, .btn-send-order-booking {
 position: fixed;
 bottom: 0;
 left: 0;
@@ -501,7 +501,7 @@ width: 30px;
 padding-top: 7px;
 padding-left: 10px;
 }
-#orderInfo input, #orderInfo textarea{
+#orderInfo input, #orderInfo textarea, .order-booking input, .order-booking textarea, .order-booking select, .container-selectFreeBookTime select{
   width: 80%;
   margin: auto;
   display: block;
@@ -510,13 +510,13 @@ padding-left: 10px;
   height: 40px;
   margin-bottom: 20px;
 }
-#orderInfo label{
+#orderInfo label, .order-booking label{
   display: block;
   margin-left: 10%;
   color: #000;
   font-size: 16px;
 }
-#orderInfo textarea{
+#orderInfo textarea, .order-booking textarea{
   padding-bottom: 80px;
 }
 label[for='nameOrder']{
@@ -607,10 +607,109 @@ margin: 0 2.5% 20px;
 .lg-toolbar .lg-close:after {
     content: "X" !important;
 }
-.restarant-menu-name{
+.row-elementInstitution time {
+    display: block;
+    margin-bottom: 10px;
+}
+.row-elementInstitution {
+    color: #000;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+}
+.noimage-elementInstitution {
+    width: 200px;
+    height: auto;
+}
+.bookingServices{
+  margin-top: 60px;
+}
+#bookingServices{
+    margin-top: 60px;
+    padding-bottom: 40px;
+}
+.btn-bookThisService{
+width: 100px;
+padding: 4px 0;
+background: transparent;
+border: 1px solid #939393;
+color: #939393;
+}
+#dateTimePicker-date, #dateTimePicker-time{
+  border: 1px solid #939393;
+  padding: 10px 0;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  display: block;
+  margin-top: 20px;
+}
+.dateTimePicker-container{
+  margin-top: 60px;
+}
+.dateTimePicker-container label{
+  margin-left: 5%;
+margin-top: 30px;
 display: block;
-margin-bottom: 5px;
-font-weight: bold;
-clear: both;
-overflow: hidden;
+}
+.btn-confirmDateForBook, .btn-order-booking, .btn-order-booking-ForFreeTime{
+  width: 100%;
+position: fixed;
+bottom: 0;
+height: 47px;
+background-color: #939393;
+color: #fff;
+border: none;
+font-size: 18px;
+}
+.kc_fab_wrapper {
+z-index: 9999;
+}
+.fab {
+background: red;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+text-align: center;
+color: #FFF;
+box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5), 3px 3px 3px rgba(0, 0, 0, 0.25);
+position: fixed;
+bottom: 30px;
+right: 30px;
+font-size: 2.6667em;
+display: inline-block;
+cursor: default;
+z-index: 999;
+}
+.fab span {
+
+}
+.fab.child {
+  right: 40px;
+width: 30px;
+height: 30px;
+display: none;
+opacity: 0;
+font-size: 1em;
+line-height: 35px;
+}
+.backdrop {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: #000;
+opacity: 0.4;
+display: none;
+z-index: 999;
+}
+.status-list{
+  padding-top: 60px;
+}
+.container-selectFreeBookTime p{
+  padding-top: 100px;
+  padding-left: 10%;
+}
+.row-elementInstitution img{
+  width: 100%;
 }
