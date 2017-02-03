@@ -827,7 +827,7 @@ input[type="checkbox"].SwitcherFormElement:checked + div > div {
   display: -webkit-flex;
   display: -ms-flexbox;
   display:         flex;
-  flex-wrap: wrap;
+  /*flex-wrap: wrap;*/
 }
 .row > [class*='col-'] {
   display: flex;
