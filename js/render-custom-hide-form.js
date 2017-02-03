@@ -265,7 +265,7 @@ function renderHideCustomForm(form, id) {
                         React.createElement(
                             "label",
                             { className: "switcher-inline" },
-                            React.createElement("input", { id: field.Id + "_" + field.Name, className: "SwitcherFormElement switcher-inline", name: field.Name, type: "checkbox",  defaultChecked: true, value: true }),
+                            React.createElement("input", { id: field.Id + "_" + field.Name, className: "SwitcherFormElement switcher-inline", name: field.Name, type: "checkbox", value: true }),
                             React.createElement(
                                 "div",
                                 null,
@@ -289,7 +289,7 @@ function renderHideCustomForm(form, id) {
                             React.createElement(
                                 "label",
                                 { className: "CheckBoxFormElement checkbox-inline" },
-                                React.createElement("input", { name: field.Label, type: "checkbox", defaultChecked: true, value: true }),
+                                React.createElement("input", { name: field.Label, type: "checkbox", value: true }),
                                 " ",
                                 field.Label
                             )
@@ -302,7 +302,7 @@ function renderHideCustomForm(form, id) {
                             React.createElement(
                                 "label",
                                 { className: "CheckBoxFormElement checkbox-inline" },
-                                React.createElement("input", { name: field.Label, type: "checkbox",  defaultChecked: true, value: true }),
+                                React.createElement("input", { name: field.Label, type: "checkbox", value: true }),
                                 " ",
                                 field.Label
                             )

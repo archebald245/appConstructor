@@ -48,8 +48,8 @@ function bindChangeValForms() {
                         if (check != false) {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                 alert("Thank you!");
-                                $(elem).find(".formBlock").find("input, textarea").val("");
-                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input, textarea").val("");
+                                $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
                                 $(elem).find("input[type='checkbox']").removeAttr("checked");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
                             });
@@ -73,8 +73,9 @@ function bindChangeValForms() {
                         if (check != false) {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                 alert("Thank you!");
-                                $(elem).find(".formBlock").find("input, textarea").val("");
-                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input, textarea").val("");
+                                $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+
                                 $(elem).find("input[type='checkbox']").removeAttr("checked");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
                             });
@@ -114,7 +115,7 @@ function checkValidationAndRequired(form) {
     if ($(form).find(".required-check").length > 0) {
         check = false;
         $(form).find(".required-check").each(function(i, element) {
-            if (element.find("input").attr("checked")) {
+            if ($(element).find("input").is(':checked')) {
                 check = true;
             }
         });
@@ -134,7 +135,6 @@ function checkValidationAndRequired(form) {
     }
     if ($(form).find(".emailElement").length > 0) {
         var emailInput = $(form).find(".emailElement").find(".email").val().toLowerCase();
-        //var emailValid = /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/;
         var emailValid = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,8})$/;
         if ((!emailInput.match(emailValid)) && (emailInput != "")) {
             alert("Please enter valid email!");
