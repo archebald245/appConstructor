@@ -23,6 +23,17 @@ function onDeviceReady() {
         checkConnection();
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
+    $("#dateTimePicker-date").dateDropper({
+      dropBorder: "1px solid #939393",
+      dropPrimaryColor: "#939393",
+      dropWidth: "250"
+    });
+    $("#dateTimePicker-time").timeDropper({
+      primaryColor: "#939393",
+      borderColor: "#939393",
+      format: "HH:mm",
+      setCurrentTime: "false"
+    });
     appStart();
 	StatusBar.hide();
 }
@@ -87,7 +98,6 @@ function checkConnection() {
     var networkState = navigator.connection.type;
     if (networkState != Connection.NONE) {
         var siteUrl = "http://appconstructor.newlinetechnologies.net"
-
         if ($.jStorage.get('appData') != null) {
             applicationData = JSON.parse($.jStorage.get('appData'));
             var projectId = applicationData.ProjectId;
@@ -102,7 +112,7 @@ function checkConnection() {
         if (applicationData.UrlForUpdateApp != "" && applicationData.UrlForUpdateApp != null && typeof applicationData.UrlForUpdateApp != 'undefined') {
             siteUrl = applicationData.UrlForUpdateApp;
         }
-
+        checkApplicationId();
         $.ajax({
             type: "POST",
             url: siteUrl + "/Constructor/CheckNewVersion",
@@ -128,7 +138,18 @@ function checkConnection() {
         onCheckJson();
     }
 }
-
+function checkApplicationId(){
+  if($.jStorage.get('ApplicationId') == null){
+    $.ajax({
+        type: "POST",
+        url: applicationData.UrlForUpdateApp + "/UploadFiles/GetApplicationIdForMobileApp",
+        cache: false,
+        success: function(applicationId) {
+          $.jStorage.set('ApplicationId', applicationId)
+        }
+    });
+  }
+}
 function initMenuYoutunbe() {
     createMenu();
     if (resources.length == 0) {
@@ -168,6 +189,7 @@ function initGallaryClick() {
         $(this).parent().siblings().find("a")[0].click();
     });
 }
+
 
 
 function doOnOrientationChange()
