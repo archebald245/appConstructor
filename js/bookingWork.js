@@ -319,27 +319,24 @@ function addOrderBookingInJStorage(listServiceForBooking, listOfOrders){
 function checkUpdateBooking(isNewVersion) {
     var collectionBookingResource = [];
     
-    $(applicationData.Institutions).each(function(i, elem) {
-        $(elem.BookResources).each(function() {
-            collectionRestaurantMenu.push({
+    $(applicationData.Institutions).each(function() {
+            collectionBookingResource.push({
                 Id: this.Id,
                 Version: this.Version
             });
-        });
-
-    })
+    });
     $.ajax({
         type: "POST",
-        url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CheckUpdateRestaurantMenu",
+        url: applicationData.UrlForUpdateApp + "/Booking/CheckUpdateBooking",
         data: {
-            model: collectionRestaurantMenu
+            model: collectionBookingResource
         }, cache: false,
         success: function(object) {
             object = JSON.parse(object);
             if (object.IsUpdated == true) {
-                applicationData.Restaurants = object.Restaurants;
+                applicationData.Institutions = object.Institutions;
                 var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
-                applicationData.Restaurants = resourcesOfRestaurantMenus(applicationData.Restaurants, storePath);
+                applicationData.Institutions = resourcesOfBooking(applicationData.Institutions, storePath);
                 var appJsonString = JSON.stringify(applicationData);
                 $.jStorage.set('replaceImagePachJson', appJsonString);
                 downloadResources();
@@ -349,9 +346,7 @@ function checkUpdateBooking(isNewVersion) {
                 initGallaryClick();
                 submitFormListener();
                 unBlockUi()
-            }
-
-            
+            } 
         },
         error: function(err) {
             reactRender();

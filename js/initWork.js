@@ -121,11 +121,11 @@ function checkConnection() {
             success: function(jsonObjectOfServer) {
 
                 if (jsonObjectOfServer.IsUpdated == true) {
-
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     checkUpdateRestaurantMenu(true);
+                    checkUpdateBooking(true);
                     onCheckJson();
                 } else {
                     onCheckJson();
