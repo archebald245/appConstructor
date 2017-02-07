@@ -113,10 +113,20 @@ function checkConnection() {
             siteUrl = applicationData.UrlForUpdateApp;
         }
         checkApplicationId();
+
+        var collectionBookingId = [];
+
+        applicationData.Institutions.forEach(function() {
+                collectionBookingResource.push({
+                    Id: this.Id,
+                    Version: this.Version
+                });
+        });
+
         $.ajax({
             type: "POST",
             url: siteUrl + "/Constructor/CheckNewVersion",
-            data: { projectId: projectId, versionName: versionId },
+            data: { projectId: projectId, versionName: versionId, collectionBookingId: collectionBookingId },
             cache: false,
             success: function(jsonObjectOfServer) {
 
@@ -125,9 +135,12 @@ function checkConnection() {
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     checkUpdateRestaurantMenu(true);
-                    checkUpdateBooking(true);
+                    // checkUpdateBooking(true);
                     onCheckJson();
                 } else {
+                    if(jsonObjectOfServer.InstitutionsUpdate){
+                        applicationData.Institutions = jsonObjectOfServer.Institutions;
+                    }
                     onCheckJson();
                     checkUpdateRestaurantMenu(false);
 
