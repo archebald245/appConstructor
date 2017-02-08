@@ -116,10 +116,10 @@ function checkConnection() {
 
         var collectionBookingId = [];
 
-        applicationData.Institutions.forEach(function() {
-                collectionBookingResource.push({
-                    Id: this.Id,
-                    Version: this.Version
+        applicationData.Institutions.forEach(function(e) {
+                collectionBookingId.push({
+                    Id: e.Id,
+                    Version: e.Version
                 });
         });
 
@@ -129,7 +129,7 @@ function checkConnection() {
             data: { projectId: projectId, versionName: versionId, collectionBookingId: collectionBookingId },
             cache: false,
             success: function(jsonObjectOfServer) {
-
+                jsonObjectOfServer = JSON.parse(jsonObjectOfServer);
                 if (jsonObjectOfServer.IsUpdated == true) {
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
@@ -137,10 +137,13 @@ function checkConnection() {
                     checkUpdateRestaurantMenu(true);
                     // checkUpdateBooking(true);
                     onCheckJson();
-                } else {
-                    if(jsonObjectOfServer.InstitutionsUpdate){
-                        applicationData.Institutions = jsonObjectOfServer.Institutions;
-                    }
+                } else if(jsonObjectOfServer.InstitutionsUpdate){
+                applicationData.Institutions = jsonObjectOfServer.Institutions;
+                data = JSON.stringify(applicationData);
+                applicationData = JSON.parse(data);
+                $.jStorage.deleteKey('appData');
+                onCheckJson();
+                }else {
                     onCheckJson();
                     checkUpdateRestaurantMenu(false);
 
