@@ -315,3 +315,48 @@ function addOrderBookingInJStorage(listServiceForBooking, listOfOrders){
     $.jStorage.set('bookOrderWithStatusPending', oldAndNewJsonOrder);
   }
 }
+
+function checkUpdateBooking(isNewVersion) {
+    var collectionBookingResource = [];
+    
+    $(applicationData.Institutions).each(function() {
+            collectionBookingResource.push({
+                Id: this.Id,
+                Version: this.Version
+            });
+    });
+    $.ajax({
+        type: "POST",
+        url: applicationData.UrlForUpdateApp + "/Booking/CheckUpdateBooking",
+        data: {
+            model: collectionBookingResource
+        }, cache: false,
+        success: function(object) {
+            object = JSON.parse(object);
+            if (object.IsUpdated == true) {
+                applicationData.Institutions = object.Institutions;
+                var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
+                applicationData.Institutions = resourcesOfBooking(applicationData.Institutions, storePath);
+                var appJsonString = JSON.stringify(applicationData);
+                $.jStorage.set('replaceImagePachJson', appJsonString);
+                downloadResources();
+                
+            } else if(!isNewVersion) {
+                reactRender();
+                initGallaryClick();
+                submitFormListener();
+                unBlockUi()
+            } 
+        },
+        error: function(err) {
+            reactRender();
+            initGallaryClick();
+            submitFormListener();
+            unBlockUi()
+            console.log("error");
+            console.log(err);
+        }
+    });
+    
+
+}
