@@ -3,7 +3,7 @@ function goToPage(index) {
     showActivePageInMenu(index);
     $("#container").empty();
     slideUp();
-
+    $("html, body").animate({ scrollTop: -$(document).height() }, "fast");
     reactRender();
 
     $("a:not(.galleryHref)").each(function(i, e){
