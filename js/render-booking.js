@@ -110,7 +110,7 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
       if (data.ImagePath != null) {
         image = React.createElement('img', { src: data.ImagePath });
       } else {
-        image = React.createElement('img', { className: 'noimage-elementInstitution', src: 'baseimages/cartItem.png' });
+        image = null;
       }
       return React.createElement(
         'div',
@@ -234,9 +234,9 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
 //     var isconfirm = this.props.isconfirm;
 //     var image;
 //     if(data.ImagePath != null){
-//       image = <img src={data.ImagePath} />
+//       image = <img src={data.ImagePath} />;
 //     }else{
-//       image = <img className='noimage-elementInstitution' src='baseimages/cartItem.png' />
+//       image = null;
 //     }
 //       return (
 //           <div className='row-elementInstitution'>
