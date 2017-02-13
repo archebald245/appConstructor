@@ -64,8 +64,8 @@ function reactRender() {
     }
 
     function onPlayerStateChange(event) {}
-    var isBook = false;
-    var isRest = false;
+    var isBooking = false;
+    var isRestaurant = false;
     var Rows = React.createClass({
         displayName: 'Rows',
 
@@ -75,14 +75,13 @@ function reactRender() {
         componentWillMount: function componentWillMount() {
             for (var i = 0; i < applicationData.Pages.length; i++) {
                 if (indexPage == applicationData.Pages[i].Id) {
-                    this.setState({ data: applicationData.Pages[i].Rows });
                     applicationData.Pages[i].Rows.forEach(function(item) {
                         item.CellContents.forEach(function(element) {
                             if (element.ContentTypeId == 15) {
-                                isRest = true;
+                                isRestaurant = true;
                             }
                             if (element.ContentTypeId == 16) {
-                                isBook = true;
+                                isBooking = true;
                             }
                         });
                     });
@@ -90,6 +89,12 @@ function reactRender() {
             }
         },
         componentDidMount: function componentDidMount() {
+            for (var i = 0; i < applicationData.Pages.length; i++) {
+                if (indexPage == applicationData.Pages[i].Id) {
+                    this.setState({ data: applicationData.Pages[i].Rows });
+                }
+            }
+
             $(".fab, .backdrop").click(function() {
                 if ($(".backdrop").is(":visible")) {
                     $(".backdrop").fadeOut(125);
@@ -153,10 +158,10 @@ function reactRender() {
                     applicationData.Pages[i].Rows.forEach(function(item) {
                         item.CellContents.forEach(function(element) {
                             if (element.ContentTypeId == 15) {
-                                isRest = true;
+                                isRestaurant = true;
                             }
                             if (element.ContentTypeId == 16) {
-                                isBook = true;
+                                isBooking = true;
                             }
                         });
                     });
@@ -167,104 +172,196 @@ function reactRender() {
             var rowModels = this.state.data.map(function(row) {
                 return React.createElement(CellContainer, { data: row, key: row.Id });
             });
-
-            if (isBook == true && isRest == true) {
-                return React.createElement(
-                    'div',
-                    null,
-                    React.createElement('div', { className: 'backdrop' }),
-                    React.createElement(
-                        'div', { className: 'fab child', 'data-subitem': '1' },
+            if (applicationData.Menu.Position == "bottom-left" || applicationData.Menu.Position == "bottom-right") {
+                if (isBooking == true && isRestaurant == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'backdrop' }),
                         React.createElement(
-                            'span',
-                            null,
-                            'C'
-                        )
-                    ),
-                    React.createElement(
-                        'div', { className: 'fab child', 'data-subitem': '2' },
+                            'div', { className: 'fab child cart-btn', 'data-subitem': '2' },
+                            React.createElement(
+                                'span',
+                                null,
+                                'R'
+                            )
+                        ),
                         React.createElement(
-                            'span',
-                            null,
-                            'B'
-                        )
-                    ),
-                    React.createElement(
-                        'div', { className: 'fab child first', 'data-subitem': '3' },
+                            'div', { className: 'fab child first', 'data-subitem': '1' },
+                            React.createElement(
+                                'span',
+                                null,
+                                'O'
+                            )
+                        ),
                         React.createElement(
-                            'span',
-                            null,
-                            'O'
-                        )
-                    ),
-                    React.createElement(
-                        'div', { className: 'fab', id: 'masterfab' },
+                            'div', { className: 'fab bottom-menu', id: 'masterfab' },
+                            React.createElement(
+                                'span',
+                                null,
+                                '+'
+                            )
+                        ),
                         React.createElement(
-                            'span',
-                            null,
-                            '+'
+                            'div', { className: 'container-fluid' },
+                            rowModels
                         )
-                    ),
-                    React.createElement(
-                        'div', { className: 'container-fluid' },
-                        rowModels
-                    )
-                );
-            } else if (isBook == true) {
-                return React.createElement(
-                    'div',
-                    null,
-                    React.createElement('div', { className: 'backdrop' }),
-                    React.createElement(
-                        'div', { className: 'fab child', 'data-subitem': '2' },
+                    );
+                } else if (isBooking == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'backdrop' }),
                         React.createElement(
-                            'span',
-                            null,
-                            'B'
-                        )
-                    ),
-                    React.createElement(
-                        'div', { className: 'fab child first', 'data-subitem': '3' },
+                            'div', { className: 'fab child first', 'data-subitem': '1' },
+                            React.createElement(
+                                'span',
+                                null,
+                                'O'
+                            )
+                        ),
                         React.createElement(
-                            'span',
-                            null,
-                            'O'
-                        )
-                    ),
-                    React.createElement(
-                        'div', { className: 'fab', id: 'masterfab' },
+                            'div', { className: 'fab bottom-menu', id: 'masterfab' },
+                            React.createElement(
+                                'span',
+                                null,
+                                '+'
+                            )
+                        ),
                         React.createElement(
-                            'span',
-                            null,
-                            '+'
+                            'div', { className: 'container-fluid' },
+                            rowModels
                         )
-                    ),
-                    React.createElement(
-                        'div', { className: 'container-fluid' },
-                        rowModels
-                    )
-                );
-            } else if (isRest == true) {
-
-                return React.createElement(
-                    'div',
-                    null,
-                    React.createElement('div', { className: 'cart-btn' }),
-                    React.createElement(
-                        'div', { className: 'container-fluid' },
-                        rowModels
-                    )
-                );
+                    );
+                } else if (isRestaurant == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'cart-btn bottom-menu' }),
+                        React.createElement(
+                            'div', { className: 'container-fluid' },
+                            rowModels
+                        )
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement(
+                            'div', { className: 'container-fluid' },
+                            rowModels
+                        )
+                    );
+                }
             } else {
-                return React.createElement(
-                    'div',
-                    null,
-                    React.createElement(
-                        'div', { className: 'container-fluid' },
-                        rowModels
-                    )
-                );
+                if (isBooking == true && isRestaurant == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'backdrop' }),
+                        // React.createElement(
+                        //     'div', { className: 'fab child', 'data-subitem': '1' },
+                        //     React.createElement(
+                        //         'span',
+                        //         null,
+                        //         'C'
+                        //     )
+                        // ),
+                        React.createElement(
+                            'div', { className: 'fab child cart-btn', 'data-subitem': '2' },
+                            React.createElement(
+                                'span',
+                                null,
+                                'R'
+                            )
+                        ),
+                        React.createElement(
+                            'div', { className: 'fab child first', 'data-subitem': '1' },
+                            React.createElement(
+                                'span',
+                                null,
+                                'O'
+                            )
+                        ),
+                        React.createElement(
+                            'div', { className: 'fab', id: 'masterfab' },
+                            React.createElement(
+                                'span',
+                                null,
+                                '+'
+                            )
+                        ),
+                        React.createElement(
+                            'div', { className: 'container-fluid' },
+                            rowModels
+                        )
+                    );
+                } else if (isBooking == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'backdrop' }),
+                        // React.createElement(
+                        //     'div', { className: 'fab child cart-btn', 'data-subitem': '2' },
+                        //     React.createElement(
+                        //         'span',
+                        //         null,
+                        //         'R'
+                        //     )
+                        // ),
+                        React.createElement(
+                            'div', { className: 'fab child first', 'data-subitem': '1' },
+                            React.createElement(
+                                'span',
+                                null,
+                                'O'
+                            )
+                        ),
+                        React.createElement(
+                            'div', { className: 'fab', id: 'masterfab' },
+                            React.createElement(
+                                'span',
+                                null,
+                                '+'
+                            )
+                        ),
+                        React.createElement(
+                            'div', { className: 'container-fluid' },
+                            rowModels
+                        )
+                    );
+                } else if (isRestaurant == true) {
+
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'cart-btn' }),
+                        React.createElement(
+                            'div', { className: 'container-fluid' },
+                            rowModels
+                        )
+                    );
+                } else {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement(
+                            'div', { className: 'container-fluid' },
+                            rowModels
+                        )
+                    );
+                }
             }
+
+
+
+
+
+
+
+
+
+
         }
     });
 
@@ -583,7 +680,7 @@ function reactRender() {
 
                 div = $(div).append($(selectRest)).append($(selectMenu)).append($(divContainer));
                 $(ReactDOM.findDOMNode(this)).append($(div));
-                var ThisRestaurantMenuBlock = this;
+                var ThisRestaurantaurantMenuBlock = this;
                 var weekday = new Array(7);
                 weekday[0] = "Sunday";
                 weekday[1] = "Monday";
@@ -594,36 +691,36 @@ function reactRender() {
                 weekday[6] = "Saturday";
                 var dayNow = weekday[new Date().getDay()];
                 //no working
-                $(restaurantsArr).each(function(i, thisRestaraunt) {
-                    $(thisRestaraunt.RestaurantMenus).each(function(index, thisRestarauntMenu) {
-                        var thisRestaurantMenu = thisRestarauntMenu;
-                        if (thisRestarauntMenu.IsOnline == false) {
-                            if (thisRestarauntMenu.UseDateTime == false) {
-                                renderRestaurantMenu(thisRestarauntMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                $(restaurantsArr).each(function(i, thisRestaurantaraunt) {
+                    $(thisRestaurantaraunt.RestaurantMenus).each(function(index, thisRestaurantarauntMenu) {
+                        var thisRestaurantaurantMenu = thisRestaurantarauntMenu;
+                        if (thisRestaurantarauntMenu.IsOnline == false) {
+                            if (thisRestaurantarauntMenu.UseDateTime == false) {
+                                renderRestaurantMenu(thisRestaurantarauntMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                 $(selectMenu).html("");
-                                $(thisRestaraunt.RestaurantMenus).each(function(count, option) {
+                                $(thisRestaurantaraunt.RestaurantMenus).each(function(count, option) {
                                     $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                 });
-                                $(".select-restaurant").val(thisRestaraunt.Id);
-                                $(".select-menu").val(thisRestarauntMenu.Id);
+                                $(".select-restaurant").val(thisRestaurantaraunt.Id);
+                                $(".select-menu").val(thisRestaurantarauntMenu.Id);
                             } else {
-                                $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(indexData, dataItem) {
-                                    if (dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())) {
-                                        renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                $(thisRestaurantaurantMenu.DateTimeRestaurantMenu).each(function(indexData, dataItem) {
+                                    if (dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantaurantMenuBlock.getClockTime())) {
+                                        renderRestaurantMenu(thisRestaurantaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                         $(selectMenu).html("");
-                                        $(thisRestaraunt.RestaurantMenus).each(function(count, option) {
+                                        $(thisRestaurantaraunt.RestaurantMenus).each(function(count, option) {
                                             $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                         });
-                                        $(".select-restaurant").val(thisRestaraunt.Id);
-                                        $(".select-menu").val(thisRestarauntMenu.Id);
-                                    } else if (dataItem.IsChecked && dataItem.Day == "Date" && ThisRestaurantMenuBlock.checkRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
-                                        renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                        $(".select-restaurant").val(thisRestaurantaraunt.Id);
+                                        $(".select-menu").val(thisRestaurantarauntMenu.Id);
+                                    } else if (dataItem.IsChecked && dataItem.Day == "Date" && ThisRestaurantaurantMenuBlock.checkRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
+                                        renderRestaurantMenu(thisRestaurantaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                         $(selectMenu).html("");
-                                        $(thisRestaraunt.RestaurantMenus).each(function(count, option) {
+                                        $(thisRestaurantaraunt.RestaurantMenus).each(function(count, option) {
                                             $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                         });
-                                        $(".select-restaurant").val(thisRestaraunt.Id);
-                                        $(".select-menu").val(thisRestarauntMenu.Id);
+                                        $(".select-restaurant").val(thisRestaurantaraunt.Id);
+                                        $(".select-menu").val(thisRestaurantarauntMenu.Id);
                                     }
                                 });
                             }
@@ -632,32 +729,32 @@ function reactRender() {
                             if (networkState == Connection.NONE) {
                                 $("#custom-restaurant-menu-container").html("Sorry, is only available online!");
                             } else {
-                                if (thisRestarauntMenu.UseDateTime == false) {
-                                    renderRestaurantMenu(thisRestarauntMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                if (thisRestaurantarauntMenu.UseDateTime == false) {
+                                    renderRestaurantMenu(thisRestaurantarauntMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                     $(selectMenu).html("");
-                                    $(thisRestaraunt.RestaurantMenus).each(function(count, option) {
+                                    $(thisRestaurantaraunt.RestaurantMenus).each(function(count, option) {
                                         $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                     });
-                                    $(".select-restaurant").val(thisRestaraunt.Id);
-                                    $(".select-menu").val(thisRestarauntMenu.Id);
+                                    $(".select-restaurant").val(thisRestaurantaraunt.Id);
+                                    $(".select-menu").val(thisRestaurantarauntMenu.Id);
                                 } else {
-                                    $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(indexData, dataItem) {
-                                        if (dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantMenuBlock.getClockTime())) {
-                                            renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                    $(thisRestaurantaurantMenu.DateTimeRestaurantMenu).each(function(indexData, dataItem) {
+                                        if (dataItem.IsChecked && dataItem.Day == dayNow && ThisRestaurantaurantMenuBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisRestaurantaurantMenuBlock.getClockTime())) {
+                                            renderRestaurantMenu(thisRestaurantaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                             $(selectMenu).html("");
-                                            $(thisRestaraunt.RestaurantMenus).each(function(count, option) {
+                                            $(thisRestaurantaraunt.RestaurantMenus).each(function(count, option) {
                                                 $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                             });
-                                            $(".select-restaurant").val(thisRestaraunt.Id);
-                                            $(".select-menu").val(thisRestarauntMenu.Id);
-                                        } else if (dataItem.IsChecked && dataItem.Day == "Date" && ThisRestaurantMenuBlock.checkRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
-                                            renderRestaurantMenu(thisRestaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                            $(".select-restaurant").val(thisRestaurantaraunt.Id);
+                                            $(".select-menu").val(thisRestaurantarauntMenu.Id);
+                                        } else if (dataItem.IsChecked && dataItem.Day == "Date" && ThisRestaurantaurantMenuBlock.checkRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
+                                            renderRestaurantMenu(thisRestaurantaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                             $(selectMenu).html("");
-                                            $(thisRestaraunt.RestaurantMenus).each(function(count, option) {
+                                            $(thisRestaurantaraunt.RestaurantMenus).each(function(count, option) {
                                                 $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                             });
-                                            $(".select-restaurant").val(thisRestaraunt.Id);
-                                            $(".select-menu").val(thisRestarauntMenu.Id);
+                                            $(".select-restaurant").val(thisRestaurantaraunt.Id);
+                                            $(".select-menu").val(thisRestaurantarauntMenu.Id);
                                         }
                                     });
                                 }

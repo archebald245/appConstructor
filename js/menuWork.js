@@ -4,7 +4,7 @@ function createMenu() {
             indexPage = applicationData.Pages[i].Id;
         }
     }
-    if(indexPage == 0){
+    if (indexPage == 0) {
         indexPage = applicationData.Pages[0].Id;
     }
     if (applicationData.Menu != null) {
@@ -128,8 +128,8 @@ function getPositionMenu(positionMenu) {
                             }, { queue: false }, 1500);
                         } else if (direction == "left") {
                             $(".classSwipeDropList").animate({
-                                width: "70%"
-                            }, { queue: false },
+                                    width: "70%"
+                                }, { queue: false },
                                 1500);
                         }
                     }
@@ -143,7 +143,7 @@ function getPositionMenu(positionMenu) {
             });
             return '.classSwipeDropList';
 
-        case 'bottom-righ':
+        case 'bottom-right':
             $('span.menu-icon').show().addClass('menu-icon-right');
             $('.classMenu').show().addClass('classMenuBottom');
             $('.classDropdownList').addClass('classDropdownList-downMenu');
