@@ -92,10 +92,14 @@ function resourcesOfBooking(institutions, storePath) {
    $(institutions).each(function(){
         $(this.BookResources).each(function(){
             resources.push(this.ImagePath);
-            this.ImagePath = replacementPathImagesRestaurantMenu(this.ImagePath, storePath);
+            if(this.ImagePath != null){
+                this.ImagePath = replacementPathImagesRestaurantMenu(this.ImagePath, storePath);
+            }
             $(this.BookServiceProvides).each(function(){
                 resources.push(this.ImagePath);
+            if(this.ImagePath != null){
                 this.ImagePath = replacementPathImagesRestaurantMenu(this.ImagePath, storePath);
+            }
             });
         });
     });
@@ -262,9 +266,17 @@ function replacePathToImageRestaurantMenu(restaurants) {
 function replacePathToImageInstitution(institutions) {
     $(institutions).each(function(){
         $(this.BookResources).each(function(){
-            this.ImagePath = applicationData.UrlForUpdateApp + this.ImagePath;
-            $(this.BookServiceProvides).each(function(){
+            if(this.ImagePath == null){
+                this.ImagePath = null
+            }else{
                 this.ImagePath = applicationData.UrlForUpdateApp + this.ImagePath;
+            }
+            $(this.BookServiceProvides).each(function(){
+                if(this.ImagePath == null){
+                    this.ImagePath = null
+                }else{
+                    this.ImagePath = applicationData.UrlForUpdateApp + this.ImagePath;
+                } 
             });
         });
     });
