@@ -90,14 +90,14 @@ function resourcesOfRestaurantMenus(restaurants, storePath) {
 function resourcesOfBooking(institutions, storePath) {
     institutions = replacePathToImageInstitution(institutions);
    $(institutions).each(function(){
-        $(this.BookResources).each(function(){
-            resources.push(this.ImagePath);
+        $(this.BookResources).each(function(){ 
             if(this.ImagePath != null){
+                resources.push(this.ImagePath);
                 this.ImagePath = replacementPathImagesRestaurantMenu(this.ImagePath, storePath);
             }
             $(this.BookServiceProvides).each(function(){
-                resources.push(this.ImagePath);
             if(this.ImagePath != null){
+                resources.push(this.ImagePath);
                 this.ImagePath = replacementPathImagesRestaurantMenu(this.ImagePath, storePath);
             }
             });
