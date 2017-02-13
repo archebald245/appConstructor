@@ -45,10 +45,8 @@ form {
 }
 
 .menu-icon {
-    width: 96px;
+    width: 30px;
     height: 40px;
-    background: url(../baseimages/menuIcon.gif) no-repeat 0 50%;
-    background-size: contain;
     text-indent: -9999px;
     margin-left: 10px;
     cursor: pointer;
@@ -999,4 +997,14 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 .row>[class*='col-'] {
     display: flex;
     flex-direction: column;
+}
+
+
+/*~~~~~~~~~~~~STYLING MENU~~~~~~~~~~~~~~*/
+
+.classMenu .menu-icon>div {
+    width: 30px;
+    height: 5px;
+    background-color: #555353;
+    margin: 5px 0;
 }

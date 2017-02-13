@@ -10,7 +10,16 @@ function createMenu() {
     if (applicationData.Menu != null) {
         var menu = getPositionMenu(applicationData.Menu.Position);
         var menuItems = applicationData.Menu.MenuItems;
+        var style = applicationData.Menu.Styles + "; display:block";
+        var sandwichStyle = applicationData.Menu.SandwichColor;
+        var sandwichColor = sandwichStyle.split(":")[1];
         var div;
+        $(".menu-icon div").attr("style", sandwichStyle);
+        $(".classMenu").attr("style", style);
+
+        $(".classDropdownList").attr("style", style);
+        $(".classDropdownList").css("color", sandwichColor);
+
         $(menu).html("");
         var label;
         for (var i = 0; i < menuItems.length; i++) {
@@ -18,17 +27,17 @@ function createMenu() {
                 div = $('<a href=' + menuItems[i].Link + ' class="menu-item-href"><div class="classPageLink"><label>' + menuItems[i].Title + '</label></div></a>');
             } else {
                 div = $('<div class="classPageLink" id =' + menuItems[i].Link + ' onClick="clickPageOnDropdownMenu(' + menuItems[i].Link + ')"><label>' + menuItems[i].Title + '</label></div>');
-
             }
             div.appendTo(menu);
         }
+        $(".classDropdownList>div").css({
+            'border-bottom': '1px solid ' + sandwichColor,
+            'box-shadow': '0 1px 2px 0px ' + sandwichColor
+        });
         addListener();
         slideUp();
         showActivePageInMenu(indexPage);
     }
-
-
-
 }
 
 function clickPageOnDropdownMenu(link) {
@@ -56,8 +65,32 @@ function openMenu() {
 }
 
 function showActivePageInMenu(page) {
+    var activeColor = applicationData.Menu.Styles;
+    var borderColor = applicationData.Menu.SandwichColor;
+    $(".classPageLink.activePage").attr('style', activeColor);
+    $(".classPageLink.activePage").css({
+        'border-bottom': '1px solid ' + borderColor,
+        'box-shadow': '0 1px 2px 0px ' + borderColor
+    });
     $(".classPageLink").removeClass("activePage");
+
+    var colors = activeColor.replace(/[^\d,]/g, '').split(',');
+    activeColor = "background-color:rgb(";
+    colors.forEach(function(item, index) {
+        item = Math.round(item * 0.9);
+        if (index < 2) {
+            activeColor += item + ", ";
+        } else {
+            activeColor += item + ") ";
+        }
+    });
+
     $("#" + page + "").addClass("activePage");
+    $(".classPageLink.activePage").attr("style", activeColor);
+    $(".classPageLink.activePage").css({
+        'border-bottom': '1px solid ' + borderColor,
+        'box-shadow': '0 1px 2px 0px ' + borderColor
+    });
 }
 
 function onClickButtonMenu() {
@@ -67,14 +100,14 @@ function onClickButtonMenu() {
 function getPositionMenu(positionMenu) {
     switch (positionMenu) {
         case 'top-left':
-            $('span.menu-icon').show().addClass('menu-icon-left');
+            $('div.menu-icon').show().addClass('menu-icon-left');
             $('.classMenu').show().addClass('classMenuTop');
             $('.classDropdownList').addClass('classDropdownList-topMenu');
             $('#container').addClass('containerTop');
             return '.classDropdownList';
 
         case 'left-swipe':
-            $('span.menu-icon').hide();
+            $('div.menu-icon').hide();
             $('.classMenu').hide();
             $('.classSwipeDropList').addClass('side-menu-left');
 
@@ -102,21 +135,21 @@ function getPositionMenu(positionMenu) {
             return '.classSwipeDropList';
 
         case 'bottom-left':
-            $('span.menu-icon').show().addClass('menu-icon-left');
+            $('div.menu-icon').show().addClass('menu-icon-left');
             $('.classMenu').show().addClass('classMenuBottom');
             $('.classDropdownList').addClass('classDropdownList-downMenu');
             $('#container').addClass('containerBottom');
             return '.classDropdownList';
 
         case 'top-right':
-            $('span.menu-icon').show().addClass('menu-icon-right');
+            $('div.menu-icon').show().addClass('menu-icon-right');
             $('.classMenu').show().addClass('classMenuTop');
             $('.classDropdownList').addClass('classDropdownList-topMenu');
             $('#container').addClass('containerTop');
             return '.classDropdownList';
 
         case 'right-swipe':
-            $('span.menu-icon').hide()
+            $('div.menu-icon').hide()
             $('.classMenu').hide();
             $('.classSwipeDropList').addClass('side-menu-right');
             $("body").swipe({
@@ -144,14 +177,14 @@ function getPositionMenu(positionMenu) {
             return '.classSwipeDropList';
 
         case 'bottom-right':
-            $('span.menu-icon').show().addClass('menu-icon-right');
+            $('div.menu-icon').show().addClass('menu-icon-right');
             $('.classMenu').show().addClass('classMenuBottom');
             $('.classDropdownList').addClass('classDropdownList-downMenu');
             $('#container').addClass('containerBottom');
             return '.classDropdownList';
 
         case null:
-            $('span.menu-icon').hide();
+            $('div.menu-icon').hide();
             $('.classMenu').hide();
             break;
     }
