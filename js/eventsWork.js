@@ -3,7 +3,7 @@ function goToPage(index) {
     showActivePageInMenu(index);
     $("#container").empty();
     slideUp();
-
+    $("html, body").animate({ scrollTop: -$(document).height() }, "fast");
     reactRender();
 
     $("a:not(.galleryHref)").each(function(i, e){
@@ -28,11 +28,13 @@ function goToPage(index) {
     bindChangeValForms();
     addListenerToClickBuy();
     addListenerToClickOpenSingleItem();
+    addListenerToClickTimeLine();
       $(".cart-btn").on("click", function(){
         $("#container").addClass("hidden");
         $(".classMenu").addClass("hidden");
         $(".cart").removeClass("hidden");
     });
+
     changeRestaurant();
     changeMenu();
 }
