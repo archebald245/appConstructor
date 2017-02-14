@@ -18,7 +18,7 @@ function addListenerToClickTimeLine(){
     $("#container, .classMenu").removeClass("hidden");
   });
   $(".back-to-container-from-book").unbind().click(function(){
-  $("#container").removeClass("hidden");
+  $("#container, .classMenu").removeClass("hidden");
   $(".container-selectFreeBookTime, .container-statusBooking").addClass("hidden");
 });
 }
