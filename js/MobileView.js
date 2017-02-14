@@ -179,7 +179,7 @@ function reactRender() {
                         null,
                         React.createElement('div', { className: 'backdrop' }),
                         React.createElement(
-                            'div', { className: 'fab child cart-btn', 'data-subitem': '2' },
+                            'div', { className: 'fab child cart-btn cart-backgroundImage', 'data-subitem': '2' },
                             React.createElement(
                                 'span',
                                 null,
