@@ -14,11 +14,6 @@ function createMenu() {
         var sandwichStyle = applicationData.Menu.SandwichColor;
         var sandwichColor = sandwichStyle.split(":")[1];
         var div;
-        $(".menu-icon div").attr("style", sandwichStyle);
-        $(".classMenu").attr("style", style);
-
-        $(".classDropdownList").attr("style", style);
-        $(".classDropdownList").css("color", sandwichColor);
 
         $(menu).html("");
         var label;
@@ -30,10 +25,28 @@ function createMenu() {
             }
             div.appendTo(menu);
         }
-        $(".classDropdownList>div").css({
-            'border-bottom': '1px solid ' + sandwichColor,
-            'box-shadow': '0 1px 2px 0px ' + sandwichColor
-        });
+        if (applicationData.Menu.Position == "left-swipe" || applicationData.Menu.Position == "right-swipe") {
+            $(".menu-icon div").attr("style", sandwichStyle);
+            $(".classSwipeDropList").attr("style", style);
+            $(".classSwipeDropList").css("color", sandwichColor);
+
+            $(".classSwipeDropList>div").css({
+                'border-bottom': '1px solid ' + sandwichColor
+            });
+        } else {
+            $(".menu-icon div").attr("style", sandwichStyle);
+            $(".classMenu").attr("style", style);
+
+            $(".classDropdownList").attr("style", style);
+            $(".classDropdownList").css("color", sandwichColor);
+
+            $(".classDropdownList>div").css({
+                'border-bottom': '1px solid ' + sandwichColor
+            });
+            $(".classDropdownList").css({
+                'border-top': '2px solid ' + sandwichColor
+            });
+        }
         addListener();
         slideUp();
         showActivePageInMenu(indexPage);
@@ -66,18 +79,17 @@ function openMenu() {
 
 function showActivePageInMenu(page) {
     var activeColor = applicationData.Menu.Styles;
-    var borderColor = applicationData.Menu.SandwichColor;
+    var borderColor = applicationData.Menu.SandwichColor.split(":")[1];
     $(".classPageLink.activePage").attr('style', activeColor);
     $(".classPageLink.activePage").css({
-        'border-bottom': '1px solid ' + borderColor,
-        'box-shadow': '0 1px 2px 0px ' + borderColor
+        'border-bottom': '1px solid ' + borderColor
     });
     $(".classPageLink").removeClass("activePage");
 
     var colors = activeColor.replace(/[^\d,]/g, '').split(',');
     activeColor = "background-color:rgb(";
     colors.forEach(function(item, index) {
-        item = Math.round(item * 0.9);
+        item = Math.round(item * 0.8);
         if (index < 2) {
             activeColor += item + ", ";
         } else {
@@ -88,8 +100,7 @@ function showActivePageInMenu(page) {
     $("#" + page + "").addClass("activePage");
     $(".classPageLink.activePage").attr("style", activeColor);
     $(".classPageLink.activePage").css({
-        'border-bottom': '1px solid ' + borderColor,
-        'box-shadow': '0 1px 2px 0px ' + borderColor
+        'border-bottom': '1px solid ' + borderColor
     });
 }
 
