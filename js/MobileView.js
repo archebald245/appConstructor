@@ -182,16 +182,14 @@ function reactRender() {
                             'div', { className: 'fab child cart-btn cart-backgroundImage', 'data-subitem': '2' },
                             React.createElement(
                                 'span',
-                                null,
-                                'R'
+                                null
                             )
                         ),
                         React.createElement(
                             'div', { className: 'fab child first', 'data-subitem': '1' },
                             React.createElement(
                                 'span',
-                                null,
-                                'O'
+                                null
                             )
                         ),
                         React.createElement(
