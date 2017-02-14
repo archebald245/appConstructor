@@ -1016,15 +1016,24 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     border-color: transparent transparent transparent #007bff;
 }*/
 
-.first{
+.first {
     background-image: url(../baseimages/booking.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
 }
-.cart-backgroundImage{
+
+.cart-backgroundImage {
     background-image: url(../baseimages/cart2.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    width: 100%;
 }
