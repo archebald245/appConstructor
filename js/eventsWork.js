@@ -33,8 +33,13 @@ function goToPage(index) {
         $("#container").addClass("hidden");
         $(".classMenu").addClass("hidden");
         $(".cart").removeClass("hidden");
+        scrollTop();
     });
 
     changeRestaurant();
     changeMenu();
+}
+
+function scrollTop() {
+    $("html, body").animate({ scrollTop: -$(document).height() }, "fast");
 }
