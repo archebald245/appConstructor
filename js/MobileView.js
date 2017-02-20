@@ -386,7 +386,7 @@ function reactRender() {
                         this.createIcon(this.props.data)
                     ),
                     React.createElement(
-                        'div', { id: 'lightgallery' },
+                        'div', { className: 'lightgallery-id' },
                         this.createItems(this.props.data)
                     )
                 );
@@ -398,14 +398,14 @@ function reactRender() {
                         this.createIcon(this.props.data)
                     ),
                     React.createElement(
-                        'div', { id: 'lightgallery' },
+                        'div', { className: 'lightgallery-id' },
                         this.createItems(this.props.data)
                     )
                 );
             }
         },
         componentDidMount: function componentDidMount() {
-            $("#lightgallery").lightGallery({
+            $(".lightgallery-id").lightGallery({
                 controls: false,
                 download: false
             });
@@ -782,8 +782,8 @@ function reactRender() {
                 });
                 $("#custom-container-booking").attr("id", "");
             }
-            if(data.ContentTypeId == 17){
-                $(ReactDOM.findDOMNode(this)).find("span").click(function(e){
+            if (data.ContentTypeId == 17) {
+                $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var sApp = startApp.set({ /* params */
                         "uri": $(this).attr("data-locationpdf"),
                         "type": "application/pdf"
