@@ -163,6 +163,10 @@ function replacementPathImages(jsonObjectValue, arrayResources, storePath) {
             urls.push(m[1]);
         }
     }
+     rexPdf = /<span.+?data-locationpdf=[\"'](.+?)[\"'].*?>/g;
+    while (m = rexPdf.exec(jsonObjectValue)) {
+        urls.push(m[1]);
+    }
     for (var i = 0; i < urls.length; i++) {
         jsonObjectValue = jsonObjectValue.replace(urls[i], storePath + arrayResources[i].FileName);
     }
