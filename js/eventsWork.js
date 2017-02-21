@@ -38,6 +38,7 @@ function goToPage(index) {
 
     changeRestaurant();
     changeMenu();
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
 function scrollTop() {
