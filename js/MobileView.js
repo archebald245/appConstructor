@@ -126,6 +126,7 @@ function reactRender() {
                 } else {
                     $(".container-statusBooking").removeClass("hidden");
                     $("#container, .classMenu").addClass("hidden");
+                    scrollTop();
                     var orderedArray = JSON.parse($.jStorage.get('bookOrderWithStatusPending'));
                     var arrayOfOrdersId = [];
                     orderedArray.forEach(function(e) {
@@ -179,19 +180,17 @@ function reactRender() {
                         null,
                         React.createElement('div', { className: 'backdrop' }),
                         React.createElement(
-                            'div', { className: 'fab child cart-btn', 'data-subitem': '2' },
+                            'div', { className: 'fab child cart-btn cart-backgroundImage', 'data-subitem': '2' },
                             React.createElement(
                                 'span',
-                                null,
-                                'R'
+                                null
                             )
                         ),
                         React.createElement(
                             'div', { className: 'fab child first', 'data-subitem': '1' },
                             React.createElement(
                                 'span',
-                                null,
-                                'O'
+                                null
                             )
                         ),
                         React.createElement(
@@ -216,8 +215,7 @@ function reactRender() {
                             'div', { className: 'fab child first', 'data-subitem': '1' },
                             React.createElement(
                                 'span',
-                                null,
-                                'O'
+                                null
                             )
                         ),
                         React.createElement(
@@ -271,16 +269,14 @@ function reactRender() {
                             'div', { className: 'fab child cart-btn', 'data-subitem': '2' },
                             React.createElement(
                                 'span',
-                                null,
-                                'R'
+                                null
                             )
                         ),
                         React.createElement(
                             'div', { className: 'fab child first', 'data-subitem': '1' },
                             React.createElement(
                                 'span',
-                                null,
-                                'O'
+                                null
                             )
                         ),
                         React.createElement(
@@ -313,8 +309,7 @@ function reactRender() {
                             'div', { className: 'fab child first', 'data-subitem': '1' },
                             React.createElement(
                                 'span',
-                                null,
-                                'O'
+                                null
                             )
                         ),
                         React.createElement(
@@ -391,7 +386,7 @@ function reactRender() {
                         this.createIcon(this.props.data)
                     ),
                     React.createElement(
-                        'div', { id: 'lightgallery' },
+                        'div', { className: 'lightgallery-id' },
                         this.createItems(this.props.data)
                     )
                 );
@@ -403,14 +398,14 @@ function reactRender() {
                         this.createIcon(this.props.data)
                     ),
                     React.createElement(
-                        'div', { id: 'lightgallery' },
+                        'div', { className: 'lightgallery-id' },
                         this.createItems(this.props.data)
                     )
                 );
             }
         },
         componentDidMount: function componentDidMount() {
-            $("#lightgallery").lightGallery({
+            $(".lightgallery-id").lightGallery({
                 controls: false,
                 download: false
             });
@@ -787,6 +782,19 @@ function reactRender() {
                 });
                 $("#custom-container-booking").attr("id", "");
             }
+            if (data.ContentTypeId == 17) {
+                $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
+                    var sApp = startApp.set({ /* params */
+                        "uri": $(this).attr("data-locationpdf"),
+                        "type": "application/pdf"
+                    });
+                    sApp.start(function() { /* success */
+                        console.log("PDF open succses!");
+                    }, function(error) { /* fail */
+                        console.log("PDF open error!");
+                    });
+                });
+            }
             //$(React.findDOMNode(this)).attr("style", styleCell);
             $(ReactDOM.findDOMNode(this)).attr("style", styleCell);
         },
@@ -995,6 +1003,9 @@ function reactRender() {
             }
             if (data.ContentTypeId == 16) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell });
+            }
+            if (data.ContentTypeId == 17) {
+                return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
             }
         }
     });

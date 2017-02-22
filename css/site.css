@@ -1015,3 +1015,60 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     border-width: 12.5px 0 12.5px 15px;
     border-color: transparent transparent transparent #007bff;
 }*/
+
+.first {
+    background-image: url(../baseimages/booking.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cart-backgroundImage {
+    background-image: url(../baseimages/cart2.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    width: 100%;
+}
+
+.pdf-block {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    background: url(../baseimages/pdf-small.png) no-repeat 0 50%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+/* Tooltip */
+
+.custom-tooltip+.tooltip>.tooltip-inner {
+    background-color: #252525;
+    color: #FFFFFF;
+    border: 1px solid black;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.tooltip {
+    overflow: hidden;
+    max-width: 50%;
+}
+
+.custom-tooltip+.tooltip.top>.tooltip-arrow {
+    border-top: 5px solid black;
+}
+
+.custom-tooltip+.tooltip.bottom>.tooltip-arrow {
+    border-bottom: 5px solid black;
+}

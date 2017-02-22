@@ -1,14 +1,15 @@
 function goToPage(index) {
-    indexPage= index;
+    indexPage = index;
+    setLastOpenPage(indexPage);
     showActivePageInMenu(index);
     $("#container").empty();
     slideUp();
     $("html, body").animate({ scrollTop: -$(document).height() }, "fast");
     reactRender();
 
-    $("a:not(.galleryHref)").each(function(i, e){
+    $("a:not(.galleryHref)").each(function(i, e) {
         var hrefVal = $(e).attr("href");
-        $(e).click(function(){
+        $(e).click(function() {
             window.open(hrefVal, '_system');
         });
     });
@@ -17,7 +18,7 @@ function goToPage(index) {
     var pageStyles = "";
 
     applicationData.Pages.forEach(function(element) {
-        if(element.Id == index && element.Style != null && element.Style != ""){
+        if (element.Id == index && element.Style != null && element.Style != "") {
             pageStyles = element.Style;
         }
     }, this);
@@ -29,12 +30,26 @@ function goToPage(index) {
     addListenerToClickBuy();
     addListenerToClickOpenSingleItem();
     addListenerToClickTimeLine();
-      $(".cart-btn").on("click", function(){
+    $(".cart-btn").on("click", function() {
         $("#container").addClass("hidden");
         $(".classMenu").addClass("hidden");
         $(".cart").removeClass("hidden");
+        scrollTop();
     });
 
     changeRestaurant();
     changeMenu();
+    $('[data-toggle="tooltip"]').tooltip();
+}
+
+function scrollTop() {
+    $("html, body").animate({ scrollTop: -$(document).height() }, "fast");
+}
+
+function setLastOpenPage(pageId) {
+    $.jStorage.set('lastPageId', pageId);
+}
+
+function getLastOpenPage() {
+    return $.jStorage.get('lastPageId');
 }
