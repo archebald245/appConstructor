@@ -14,6 +14,7 @@ function init() {
     blockUi();
     document.addEventListener("deviceready", onDeviceReady, false);
     $(".classDropdownList").addClass("classHide");
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
 function onDeviceReady() {
@@ -30,13 +31,14 @@ function onDeviceReady() {
       format: "m/d/Y l"
     });
     $("#dateTimePicker-time").timeDropper({
-      primaryColor: "#939393",
-      borderColor: "#939393",
-      format: "HH:mm",
-      setCurrentTime: "false"
+        primaryColor: "#939393",
+        borderColor: "#939393",
+        format: "HH:mm",
+        setCurrentTime: "false"
     });
     appStart();
-	StatusBar.hide();
+    StatusBar.hide();
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
 function onGetDirectorySuccess(dir) {
@@ -49,8 +51,7 @@ function onGetDirectoryFail(error) {
 
 function appStart() {
     console.log("add" + store)
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-    });
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {});
 }
 
 function initYoutube() {
@@ -73,7 +74,6 @@ function onCheckJson() {
         $("#container").attr("style", pageStyles);
 
     } else {
-
         data = replaceData(data);
         applicationData = JSON.parse(data);
         resources = searchResourcesAndReplacePatch(applicationData);
@@ -91,6 +91,7 @@ function onCheckJson() {
         reactRender();
         initGallaryClick();
         submitFormListener();
+        $('[data-toggle="tooltip"]').tooltip();
         unBlockUi()
     }
 }
@@ -118,10 +119,10 @@ function checkConnection() {
         var collectionBookingId = [];
 
         applicationData.Institutions.forEach(function(e) {
-                collectionBookingId.push({
-                    Id: e.Id,
-                    Version: e.Version
-                });
+            collectionBookingId.push({
+                Id: e.Id,
+                Version: e.Version
+            });
         });
 
         $.ajax({
@@ -138,13 +139,13 @@ function checkConnection() {
                     checkUpdateRestaurantMenu(true);
                     // checkUpdateBooking(true);
                     onCheckJson();
-                } else if(jsonObjectOfServer.InstitutionsUpdate){
-                applicationData.Institutions = jsonObjectOfServer.Institutions;
-                data = JSON.stringify(applicationData);
-                applicationData = JSON.parse(data);
-                $.jStorage.deleteKey('appData');
-                onCheckJson();
-                }else {
+                } else if (jsonObjectOfServer.InstitutionsUpdate) {
+                    applicationData.Institutions = jsonObjectOfServer.Institutions;
+                    data = JSON.stringify(applicationData);
+                    applicationData = JSON.parse(data);
+                    $.jStorage.deleteKey('appData');
+                    onCheckJson();
+                } else {
                     onCheckJson();
                     checkUpdateRestaurantMenu(false);
 
@@ -155,18 +156,20 @@ function checkConnection() {
         onCheckJson();
     }
 }
-function checkApplicationId(){
-  if($.jStorage.get('ApplicationId') == null){
-    $.ajax({
-        type: "POST",
-        url: applicationData.UrlForUpdateApp + "/UploadFiles/GetApplicationIdForMobileApp",
-        cache: false,
-        success: function(applicationId) {
-          $.jStorage.set('ApplicationId', applicationId)
-        }
-    });
-  }
+
+function checkApplicationId() {
+    if ($.jStorage.get('ApplicationId') == null) {
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/UploadFiles/GetApplicationIdForMobileApp",
+            cache: false,
+            success: function(applicationId) {
+                $.jStorage.set('ApplicationId', applicationId)
+            }
+        });
+    }
 }
+
 function initMenuYoutunbe() {
     createMenu();
     if (resources.length == 0) {
@@ -185,7 +188,8 @@ function callback() {
     reactRender();
     initGallaryClick();
     submitFormListener();
-    unBlockUi()
+    $('[data-toggle="tooltip"]').tooltip();
+    unBlockUi();
 }
 
 function replaceData(element) {
@@ -207,24 +211,20 @@ function initGallaryClick() {
     });
 }
 
-
-
-function doOnOrientationChange()
-  {
-    switch(window.orientation)
-    {
-      case -90:
-      case 90:
-      if(applicationData.Restaurants.length > 0){
-        restarauntMenuModelItems();
-      }
-        break;
-      default:
-      if(applicationData.Restaurants.length > 0){
-        restarauntMenuModelItems();
-      }
-        break;
+function doOnOrientationChange() {
+    switch (window.orientation) {
+        case -90:
+        case 90:
+            if (applicationData.Restaurants.length > 0) {
+                restarauntMenuModelItems();
+            }
+            break;
+        default:
+            if (applicationData.Restaurants.length > 0) {
+                restarauntMenuModelItems();
+            }
+            break;
     }
-  }
+}
 
-  window.addEventListener('orientationchange', doOnOrientationChange);
+window.addEventListener('orientationchange', doOnOrientationChange);

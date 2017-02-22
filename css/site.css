@@ -1037,6 +1037,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     z-index: 1;
     width: 100%;
 }
+
 .pdf-block {
     width: 100%;
     height: 40px;
@@ -1046,4 +1047,28 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+
+/* Tooltip */
+
+.custom-tooltip+.tooltip>.tooltip-inner {
+    background-color: #252525;
+    color: #FFFFFF;
+    border: 1px solid black;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.tooltip {
+    overflow: hidden;
+    max-width: 50%;
+}
+
+.custom-tooltip+.tooltip.top>.tooltip-arrow {
+    border-top: 5px solid black;
+}
+
+.custom-tooltip+.tooltip.bottom>.tooltip-arrow {
+    border-bottom: 5px solid black;
 }
