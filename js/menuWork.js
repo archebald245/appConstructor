@@ -60,6 +60,19 @@ function createMenu() {
                 $(".classSwipeDropList>div").css({
                     'border-bottom': '1px solid ' + sandwichColor
                 });
+
+                if ($(".menu-triangle").hasClass("menu-left")) {
+                    $(".menu-left").css({
+                        'border-color': 'transparent transparent transparent ' + style.split(";")[0].split(":")[1]
+                    });
+                    $(".classSwiperMenu.left-menu").attr("style", style);
+                }
+                if ($(".menu-triangle").hasClass("menu-right")) {
+                    $(".menu-right").css({
+                        'border-color': 'transparent ' + style.split(";")[0].split(":")[1] + ' transparent transparent'
+                    });
+                    $(".classSwiperMenu.right-menu").attr("style", style);
+                }
             } else {
                 $(".menu-icon div").attr("style", sandwichStyle);
                 $(".classMenu").attr("style", style);
@@ -72,6 +85,9 @@ function createMenu() {
                 });
                 $(".classDropdownList").css({
                     'border-top': '2px solid ' + sandwichColor
+                });
+                $(".menu-icon").css({
+                    'border': '2px solid ' + sandwichColor
                 });
             }
         }
@@ -114,11 +130,12 @@ function showActivePageInMenu(page) {
     if (activeColor == null) {
         activeColor = "background-color:rgb(94, 94, 94)"
     }
-    borderColor = borderColor.split(":")[1]
+    borderColor = borderColor.split(":")[1];
     $(".classPageLink.activePage").attr('style', activeColor);
     $(".classPageLink.activePage").css({
         'border-bottom': '1px solid ' + borderColor
     });
+
     $(".classPageLink").removeClass("activePage");
 
     var colors = activeColor.replace(/[^\d,]/g, '').split(',');
@@ -156,7 +173,8 @@ function getPositionMenu(positionMenu) {
             $('div.menu-icon').hide();
             $('.classMenu').hide();
             $('.classSwipeDropList').addClass('side-menu-left');
-
+            $('.menu-triangle').addClass('menu-left');
+            $('.classSwiperMenu').addClass('left-menu');
             $("body").swipe({
                 swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
                     if (swipeMenuInGallary == false) {
@@ -198,6 +216,8 @@ function getPositionMenu(positionMenu) {
             $('div.menu-icon').hide()
             $('.classMenu').hide();
             $('.classSwipeDropList').addClass('side-menu-right');
+            $('.menu-triangle').addClass('menu-right');
+            $('.classSwiperMenu').addClass('right-menu');
             $("body").swipe({
                 swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
                     if (swipeMenuInGallary == false) {
