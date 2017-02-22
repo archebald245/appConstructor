@@ -25,9 +25,10 @@ function onDeviceReady() {
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
     $("#dateTimePicker-date").dateDropper({
-        dropBorder: "1px solid #939393",
-        dropPrimaryColor: "#939393",
-        dropWidth: "250"
+      dropBorder: "1px solid #939393",
+      dropPrimaryColor: "#939393",
+      dropWidth: "250",
+      format: "m/d/Y l"
     });
     $("#dateTimePicker-time").timeDropper({
         primaryColor: "#939393",
