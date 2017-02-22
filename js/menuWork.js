@@ -1,12 +1,33 @@
 function createMenu() {
-    for (var i = 0; i < applicationData.Pages.length; i++) {
-        if (!!applicationData.Pages[i].IsStartPage) {
-            indexPage = applicationData.Pages[i].Id;
+    if (getLastOpenPage() == null) {
+        for (var i = 0; i < applicationData.Pages.length; i++) {
+            if (!!applicationData.Pages[i].IsStartPage) {
+                indexPage = applicationData.Pages[i].Id;
+                setLastOpenPage(indexPage);
+            }
+        }
+    } else {
+        var isContent = false;
+        indexPage = getLastOpenPage();
+        for (var i = 0; i < applicationData.Pages.length; i++) {
+            if (applicationData.Pages[i].Id == indexPage) {
+                isContent = true;
+            }
+        }
+        if (!isContent) {
+            for (var i = 0; i < applicationData.Pages.length; i++) {
+                if (!!applicationData.Pages[i].IsStartPage) {
+                    indexPage = applicationData.Pages[i].Id;
+                    setLastOpenPage(indexPage);
+                }
+            }
         }
     }
-    if (indexPage == 0) {
-        indexPage = applicationData.Pages[0].Id;
-    }
+
+    // if (indexPage == 0) {
+    //     indexPage = applicationData.Pages[0].Id;
+    // }
+
     if (applicationData.Menu != null) {
         var menu = getPositionMenu(applicationData.Menu.Position);
         var menuItems = applicationData.Menu.MenuItems;
@@ -21,8 +42,8 @@ function createMenu() {
             }
             div.appendTo(menu);
         }
-        var style = applicationData.Menu.Styles + "; display:block"; //94, 94, 94
-        var sandwichStyle = applicationData.Menu.SandwichColor; //85, 83, 83
+        var style = applicationData.Menu.Styles + "; display:block";
+        var sandwichStyle = applicationData.Menu.SandwichColor;
         if (sandwichStyle == null) {
             sandwichStyle = "background-color:rgb(85, 83, 83)";
         }
