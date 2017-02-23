@@ -1,5 +1,6 @@
-function blockUi(){
-     $.blockUI({ css: {
+function blockUi() {
+    $.blockUI({
+        css: {
             border: 'none',
             padding: '15px',
             backgroundColor: '#000',
@@ -7,10 +8,11 @@ function blockUi(){
             '-moz-border-radius': '10px',
             opacity: .5,
             color: '#fff'
-        } });
+        }
+    });
 }
 
-function unBlockUi(){
+function unBlockUi() {
     createCustomHideForms();
     bindChangeValForms();
     addListenerToClickBuy();
@@ -24,5 +26,4 @@ function unBlockUi(){
     changeRestaurant();
     changeMenu();
     $.unblockUI();
-
 }
