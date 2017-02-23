@@ -1,5 +1,6 @@
 function goToPage(index) {
     indexPage = index;
+    setLastOpenPage(indexPage);
     showActivePageInMenu(index);
     $("#container").empty();
     slideUp();
@@ -33,8 +34,22 @@ function goToPage(index) {
         $("#container").addClass("hidden");
         $(".classMenu").addClass("hidden");
         $(".cart").removeClass("hidden");
+        scrollTop();
     });
 
     changeRestaurant();
     changeMenu();
+    $('[data-toggle="tooltip"]').tooltip();
+}
+
+function scrollTop() {
+    $("html, body").animate({ scrollTop: -$(document).height() }, "fast");
+}
+
+function setLastOpenPage(pageId) {
+    $.jStorage.set('lastPageId', pageId);
+}
+
+function getLastOpenPage() {
+    return $.jStorage.get('lastPageId');
 }
