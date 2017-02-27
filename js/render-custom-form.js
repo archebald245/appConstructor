@@ -289,7 +289,7 @@ function renderCustomForm(form) {
                                     field.Label
                                 )
                             ),
-                            React.createElement("input", { type: "password", name: field.Name, className: "required form-control", id: field.Id })
+                            React.createElement("input", { type: "password", name: field.Name, className: "passElement required form-control", id: field.Id })
                         );
                     } else {
                         return React.createElement(
@@ -303,7 +303,7 @@ function renderCustomForm(form) {
                                     field.Label
                                 )
                             ),
-                            React.createElement("input", { className: "form-control", name: field.Name, type: "password", id: field.Id })
+                            React.createElement("input", { className: "passElement form-control", name: field.Name, type: "password", id: field.Id })
                         );
                     }
                 }

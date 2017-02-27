@@ -35,6 +35,7 @@ function createCustomHideForms() {
         $("#custom-form-hide-container").attr("id", idHideForm);
     });
 }
+
 function bindChangeValForms() {
     var siteUrl = applicationData.UrlForUpdateApp;
     $($("#custom-hide-container").find("form")).each(function(i, elem) {
@@ -142,11 +143,34 @@ function checkValidationAndRequired(form) {
             return check;
         }
     }
+    if ($(form).find(".passwordElement").length > 0) {
+        if ($(form).find(".passwordElement").first().find(".passElement").val().length < 4) {
+            alert("Password must contain 4 or more characters!");
+            check = false;
+            return check;
+        }
+        if ($(form).find(".passwordElement").length > 1) {
+            var passArray = [];
+            $(form).find(".passwordElement").each(function(index, item) {
+                passArray.push($(item).find(".passElement").val());
+            });
+
+            for (var i = 1; i < passArray.length; i++) {
+                if (passArray[i] !== passArray[0]) {
+                    alert("Passwords do not match. Try again.");
+                    check = false;
+                    return check;
+                }
+            }
+        }
+    }
+
+
     return check;
 }
 
 function addPlaceholder() {
-    $(".form-container, .custom-form-container").find("input[type='text'], input[type='number'], textarea").each(function () {
+    $(".form-container, .custom-form-container").find("input[type='text'], input[type='number'], textarea").each(function() {
         if (($(this).attr("type") != "radio") || ($(this).attr("type") != "checkbox")) {
             var placeholder = $(this).siblings(".label-container").find("label").text();
             $(this).attr("placeholder", placeholder).addClass("placeholderOfLable");
