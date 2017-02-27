@@ -311,8 +311,8 @@ function renderForm(form, id) {
             return React.createElement(
                 "div", { className: "form-item form-vertical" },
                 React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
-                React.createElement("input", { className: "loginForm form-control", name: "isLoginForm", type: "hidden", Value: this.state.data.LoginForm }),
-                React.createElement("input", { className: "registrationForm form-control", name: "isRegistrationForm", type: "hidden", Value: this.state.data.RegistrationForm }),
+                React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
+                React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
                 fieldModels,
                 React.createElement(
                     "button", { type: "button", className: "formSubmit btn btn-defoult" },

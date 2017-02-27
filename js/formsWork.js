@@ -9,17 +9,37 @@ function submitFormListener() {
             if (check == false) {
                 return;
             }
+            var isLoginForm = $(form).find("input[name='LoginForm']").val();
+            var isRegisterForm = $(form).find("input[name='RegistrationForm']").val();
             var idForm = $(form).find(".formId").attr("id");
             var idProject = applicationData.ProjectId;
             $(".form-container").append("<input type='hidden' name='projectId' value='" + idProject + "'/><input type='hidden' name='formId' value='" + idForm + "'/>")
 
             var siteUrl = applicationData.UrlForUpdateApp;
             var formData = new FormData(form)
-            $.post('' + siteUrl + '/Form/SaveFormData', $(form).serialize(), function() {
-                alert("Thank you!");
-                $(form).find(".formBlock").find("input, textarea").val("");
-                $(form).find("input[type='checkbox']").removeAttr("checked");
-            });
+            if (isLoginForm) {
+                $.post('' + siteUrl + '/MobileUserAuth/Login/', $(form).serialize(), function(data) {
+                    var response = jQuery.parseJSON(data);
+                    alert(response.Message);
+                    $(form).find(".formBlock").find("input, textarea").val("");
+                    $(form).find("input[type='checkbox']").removeAttr("checked");
+                });
+
+            } else if (isRegisterForm) {
+                $.post('' + siteUrl + '/MobileUserAuth/Register/', $(form).serialize(), function(data) {
+                    var response = jQuery.parseJSON(data);
+                    alert(response.Message);
+                    $(form).find(".formBlock").find("input, textarea").val("");
+                    $(form).find("input[type='checkbox']").removeAttr("checked");
+                });
+            } else {
+                $.post('' + siteUrl + '/Form/SaveFormData', $(form).serialize(), function() {
+                    alert("Thank you!");
+                    $(form).find(".formBlock").find("input, textarea").val("");
+                    $(form).find("input[type='checkbox']").removeAttr("checked");
+                });
+            }
+
         } else {
             alert("Sorry, no internet connection!");
         }
