@@ -310,18 +310,20 @@ function renderForm(form, id) {
                 }
             });
 
-            if (isLogin == "true" && this.state.data.LoginForm == true) {
-                return React.createElement(
-                    "div", { className: "form-item form-vertical" },
-                    React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
-                    React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
-                    React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
-                    fieldModels,
-                    React.createElement(
-                        "button", { type: "button", className: "formLogin btn btn-defoult" },
-                        "Logout"
-                    )
-                );
+            if (isLogin == true) {
+                if (this.state.data.LoginForm == true) {
+                    return React.createElement(
+                        "div", { className: "form-item form-vertical" },
+                        React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
+                        React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
+                        React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
+                        fieldModels,
+                        React.createElement(
+                            "button", { type: "button", className: "formLogout btn btn-defoult" },
+                            "Logout"
+                        )
+                    );
+                }
             } else {
                 return React.createElement(
                     "div", { className: "form-item form-vertical" },
@@ -335,8 +337,6 @@ function renderForm(form, id) {
                     )
                 );
             }
-            alert(isLogin);
-            alert(this.state.data.LoginForm);
         }
     });
     var DropDownModels = React.createClass({

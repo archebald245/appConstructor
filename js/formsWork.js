@@ -19,19 +19,28 @@ function submitFormListener() {
             var formData = new FormData(form)
             if (isLoginForm == "true") {
                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(form).serialize(), function(data) {
-                    if (data.Success) {
+                    if (data.Success == true) {
                         $.jStorage.set('isLogin', true);
+                        alert(data.Message);
+                        goToPage(indexPage);
+                    } else {
+                        $(form).find(".formBlock").find(".passElement").val("");
+                        $(form).find("input[type='checkbox']").removeAttr("checked");
+                        alert(data.Message);
                     }
-                    alert(data.Message);
-                    $(form).find(".formBlock").find("input, textarea").val("");
-                    $(form).find("input[type='checkbox']").removeAttr("checked");
                 });
 
             } else if (isRegisterForm == "true") {
                 $.post('' + siteUrl + '/MobileUserAuth/Register/', $(form).serialize(), function(data) {
-                    alert(data.Message);
-                    $(form).find(".formBlock").find("input, textarea").val("");
-                    $(form).find("input[type='checkbox']").removeAttr("checked");
+                    if (data.Success == true) {
+                        alert(data.Message + "\nPlease login.");
+                        $(form).find(".formBlock").find("input, textarea").val("");
+                        $(form).find("input[type='checkbox']").removeAttr("checked");
+                    } else {
+                        $(form).find(".formBlock").find(".passElement").val("");
+                        $(form).find("input[type='checkbox']").removeAttr("checked");
+                        alert(data.Message);
+                    }
                 });
             } else {
                 $.post('' + siteUrl + '/Form/SaveFormData', $(form).serialize(), function() {
@@ -45,7 +54,8 @@ function submitFormListener() {
             alert("Sorry, no internet connection!");
         }
     });
-    $(".form-container").find(".formLogin").on("click", function() {
+    $(".form-container").find(".formLogout").on("click", function() {
+        var form = $(this).closest(".form-container");
         var isLoginForm = $(form).find("input[name='LoginForm']").val();
         if (isLoginForm) {
             $.jStorage.set('isLogin', false);
