@@ -5,6 +5,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function renderForm(form, id) {
     var idRadioBtn;
     var isDropdownName;
+    var isLogin = $.jStorage.get('isLogin');
     var FormBlock = React.createClass({
         displayName: "FormBlock",
 
@@ -308,9 +309,21 @@ function renderForm(form, id) {
                     }
                 }
             });
-            var isLogin = $.jStorage.get('isLogin');
-            return
-            this.state.data.LoginForm && isLogin ? React.createElement(
+
+            if (isLogin == "true" && this.state.data.LoginForm == true) {
+                return React.createElement(
+                    "div", { className: "form-item form-vertical" },
+                    React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
+                    React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
+                    React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
+                    fieldModels,
+                    React.createElement(
+                        "button", { type: "button", className: "formLogin btn btn-defoult" },
+                        "Logout"
+                    )
+                );
+            } else {
+                return React.createElement(
                     "div", { className: "form-item form-vertical" },
                     React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
                     React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
@@ -320,18 +333,10 @@ function renderForm(form, id) {
                         "button", { type: "button", className: "formSubmit btn btn-defoult" },
                         "Submit"
                     )
-                ) :
-                React.createElement(
-                    "div", { className: "form-item form-vertical" },
-                    React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
-                    React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
-                    React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
-                    fieldModels,
-                    React.createElement(
-                        "button", { type: "button", className: "formLogout btn btn-defoult" },
-                        "Logout"
-                    ),
-                )
+                );
+            }
+            alert(isLogin);
+            alert(this.state.data.LoginForm);
         }
     });
     var DropDownModels = React.createClass({

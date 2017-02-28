@@ -17,21 +17,19 @@ function submitFormListener() {
 
             var siteUrl = applicationData.UrlForUpdateApp;
             var formData = new FormData(form)
-            if (isLoginForm) {
+            if (isLoginForm == "true") {
                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(form).serialize(), function(data) {
-                    var response = jQuery.parseJSON(data);
-                    if (response.Success) {
+                    if (data.Success) {
                         $.jStorage.set('isLogin', true);
                     }
-                    alert(response.Message);
+                    alert(data.Message);
                     $(form).find(".formBlock").find("input, textarea").val("");
                     $(form).find("input[type='checkbox']").removeAttr("checked");
                 });
 
-            } else if (isRegisterForm) {
+            } else if (isRegisterForm == "true") {
                 $.post('' + siteUrl + '/MobileUserAuth/Register/', $(form).serialize(), function(data) {
-                    var response = jQuery.parseJSON(data);
-                    alert(response.Message);
+                    alert(data.Message);
                     $(form).find(".formBlock").find("input, textarea").val("");
                     $(form).find("input[type='checkbox']").removeAttr("checked");
                 });
