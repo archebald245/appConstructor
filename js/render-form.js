@@ -310,7 +310,7 @@ function renderForm(form, id) {
                 }
             });
 
-            if (isLogin == "true" && this.state.data.LoginForm == true) {
+            if (isLogin == true && this.state.data.LoginForm == true) {
                 return React.createElement(
                     "div", { className: "form-item form-vertical" },
                     React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
@@ -318,7 +318,7 @@ function renderForm(form, id) {
                     React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
                     fieldModels,
                     React.createElement(
-                        "button", { type: "button", className: "formLogin btn btn-defoult" },
+                        "button", { type: "button", className: "formLogout btn btn-defoult" },
                         "Logout"
                     )
                 );
