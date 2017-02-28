@@ -20,6 +20,9 @@ function submitFormListener() {
             if (isLoginForm) {
                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(form).serialize(), function(data) {
                     var response = jQuery.parseJSON(data);
+                    if (response.Success) {
+                        $.jStorage.set('isLogin', true);
+                    }
                     alert(response.Message);
                     $(form).find(".formBlock").find("input, textarea").val("");
                     $(form).find("input[type='checkbox']").removeAttr("checked");
