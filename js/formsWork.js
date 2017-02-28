@@ -47,6 +47,16 @@ function submitFormListener() {
             alert("Sorry, no internet connection!");
         }
     });
+    $(".form-container").find(".formLogin").on("click", function() {
+        var isLoginForm = $(form).find("input[name='LoginForm']").val();
+        if (isLoginForm) {
+            $.jStorage.set('isLogin', false);
+            goToPage(indexPage);
+        } else {
+            alert("Something was wrong");
+        }
+    });
+
 }
 
 function createCustomHideForms() {
