@@ -312,6 +312,8 @@ function renderHideCustomForm(form, id) {
 
                 React.createElement("input", { type: "hidden", name: "projectId", value: this.state.projectId }),
                 React.createElement("input", { type: "hidden", name: "formId", value: this.state.data.Id }),
+                React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
+                React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
                 fieldModels,
                 React.createElement(
                     "button", { type: "button", className: "formSubmit btn btn-defoult" },

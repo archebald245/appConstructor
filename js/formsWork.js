@@ -54,17 +54,10 @@ function submitFormListener() {
             alert("Sorry, no internet connection!");
         }
     });
-    $(".form-container").find(".formLogout").on("click", function() {
-        var form = $(this).closest(".form-container");
-        var isLoginForm = $(form).find("input[name='LoginForm']").val();
-        if (isLoginForm) {
-            $.jStorage.set('isLogin', false);
-            goToPage(indexPage);
-        } else {
-            alert("Something was wrong");
-        }
+    $(".formLogout").on("click", function() {
+        $.jStorage.set('isLogin', false);
+        goToPage(indexPage);
     });
-
 }
 
 function createCustomHideForms() {
@@ -87,14 +80,43 @@ function bindChangeValForms() {
                     var networkState = navigator.connection.type;
                     if (networkState != Connection.NONE) {
                         var check = checkValidationAndRequired(elem);
+                        var isLoginForm = $(elem).find("input[name='LoginForm']").val();
+                        var isRegisterForm = $(elem).find("input[name='RegistrationForm']").val();
                         if (check != false) {
-                            $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
-                                alert("Thank you!");
-                                $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
-                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
-                                $(elem).find("input[type='checkbox']").removeAttr("checked");
-                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
-                            });
+                            if (isLoginForm == "true") {
+                                $.post('' + siteUrl + '/MobileUserAuth/Login/', $(elem).serialize(), function(data) {
+                                    if (data.Success == true) {
+                                        $.jStorage.set('isLogin', true);
+                                        alert(data.Message);
+                                        goToPage(indexPage);
+                                    } else {
+                                        $(elem).find(".formBlock").find(".passElement").val("");
+                                        $(elem).find("input[type='checkbox']").removeAttr("checked");
+                                        alert(data.Message);
+                                    }
+                                });
+                            } else if (isRegisterForm == "true") {
+                                $.post('' + siteUrl + '/MobileUserAuth/Register/', $(elem).serialize(), function(data) {
+                                    if (data.Success == true) {
+                                        alert(data.Message + "\nPlease login.");
+                                        $(elem).find(".formBlock").find("input, textarea").val("");
+                                        $(elem).find("input[type='checkbox']").removeAttr("checked");
+                                        goToPage(indexPage);
+                                    } else {
+                                        $(elem).find(".formBlock").find(".passElement").val("");
+                                        $(elem).find("input[type='checkbox']").removeAttr("checked");
+                                        alert(data.Message);
+                                    }
+                                });
+                            } else {
+                                $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
+                                    alert("Thank you!");
+                                    $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                    $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                    $(elem).find("input[type='checkbox']").removeAttr("checked");
+                                    $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
+                                });
+                            }
                         }
                     } else {
                         alert("Sorry, no internet connection!");
