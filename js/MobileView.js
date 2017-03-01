@@ -613,7 +613,7 @@ function reactRender() {
                         $("#form-container").find(".formSubmit").text(textSubmitButton);
                         $("#form-container").attr("id", "");
                         if ($.jStorage.get('isLogin') && element.RegistrationForm) {
-                            $("#form-container").find('input, button, textarea').prop("disabled", true);
+                            $(".form-container").find('input, button, textarea').prop("disabled", true);
                         }
                         if (data.CountFormColumn == 2) {
                             $(".formBlock").addClass("formHalf");
