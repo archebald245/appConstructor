@@ -31,7 +31,7 @@ function goToPage(index) {
     if (applicationData.IsTrackingLastPage == true) {
         setLastOpenPage(indexPage);
     }
-    showActivePageInMenu(index);
+    showActivePageInMenu(indexPage);
     $("#container").empty();
     slideUp();
     $("html, body").animate({ scrollTop: -$(document).height() }, "fast");
@@ -48,7 +48,7 @@ function goToPage(index) {
     var pageStyles = "";
 
     applicationData.Pages.forEach(function(element) {
-        if (element.Id == index && element.Style != null && element.Style != "") {
+        if (element.Id == indexPage && element.Style != null && element.Style != "") {
             pageStyles = element.Style;
         }
     }, this);
