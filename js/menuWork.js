@@ -1,20 +1,14 @@
 function createMenu() {
     if (applicationData.IsTrackingLastPage == true) {
-        if (getLastOpenPage() == null) {
-            for (var i = 0; i < applicationData.Pages.length; i++) {
-                if (!!applicationData.Pages[i].IsStartPage) {
-                    indexPage = applicationData.Pages[i].Id;
-                    setLastOpenPage(indexPage);
-                }
-            }
-        } else {
+        if (getLastOpenPage() != null) {
             var isContains = false;
             indexPage = getLastOpenPage();
             for (var i = 0; i < applicationData.Pages.length; i++) {
                 if (applicationData.Pages[i].Id == indexPage) {
-                    isConteints = true;
+                    isContains = true;
                 }
             }
+        } else {
             if (!isContains) {
                 for (var i = 0; i < applicationData.Pages.length; i++) {
                     if (!!applicationData.Pages[i].IsStartPage) {
@@ -92,7 +86,8 @@ function createMenu() {
                     'border-bottom': '1px solid ' + sandwichColor
                 });
                 $(".classDropdownList").css({
-                    'border-top': '2px solid ' + sandwichColor
+                    'border-top': '2px solid ' + sandwichColor,
+					'max-height': $(document).height() / 1.5
                 });
                 $(".menu-icon").css({
                     'border': '2px solid ' + sandwichColor
