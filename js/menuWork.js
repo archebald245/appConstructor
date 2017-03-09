@@ -1,32 +1,34 @@
 function createMenu() {
-    if (getLastOpenPage() == null) {
-        for (var i = 0; i < applicationData.Pages.length; i++) {
-            if (!!applicationData.Pages[i].IsStartPage) {
-                indexPage = applicationData.Pages[i].Id;
-                setLastOpenPage(indexPage);
-            }
-        }
-    } else {
-        var isContent = false;
-        indexPage = getLastOpenPage();
-        for (var i = 0; i < applicationData.Pages.length; i++) {
-            if (applicationData.Pages[i].Id == indexPage) {
-                isContent = true;
-            }
-        }
-        if (!isContent) {
+    if (applicationData.IsTrackingLastPage == true) {
+        if (getLastOpenPage() != null) {
+            var isContains = false;
+            indexPage = getLastOpenPage();
             for (var i = 0; i < applicationData.Pages.length; i++) {
-                if (!!applicationData.Pages[i].IsStartPage) {
-                    indexPage = applicationData.Pages[i].Id;
-                    setLastOpenPage(indexPage);
+                if (applicationData.Pages[i].Id == indexPage) {
+                    isContains = true;
+                }
+            }
+        } else {
+            if (!isContains) {
+                for (var i = 0; i < applicationData.Pages.length; i++) {
+                    if (!!applicationData.Pages[i].IsStartPage) {
+                        indexPage = applicationData.Pages[i].Id;
+                        setLastOpenPage(indexPage);
+                    }
                 }
             }
         }
+    } else {
+        for (var i = 0; i < applicationData.Pages.length; i++) {
+            if (!!applicationData.Pages[i].IsStartPage) {
+                indexPage = applicationData.Pages[i].Id;
+            }
+        }
+        if (indexPage == 0) {
+            indexPage = applicationData.Pages[0].Id;
+        }
     }
 
-    // if (indexPage == 0) {
-    //     indexPage = applicationData.Pages[0].Id;
-    // }
 
     if (applicationData.Menu != null) {
         var menu = getPositionMenu(applicationData.Menu.Position);
@@ -84,7 +86,8 @@ function createMenu() {
                     'border-bottom': '1px solid ' + sandwichColor
                 });
                 $(".classDropdownList").css({
-                    'border-top': '2px solid ' + sandwichColor
+                    'border-top': '2px solid ' + sandwichColor,
+					'max-height': $(document).height() / 1.5
                 });
                 $(".menu-icon").css({
                     'border': '2px solid ' + sandwichColor
