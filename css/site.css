@@ -70,6 +70,7 @@ form {
     z-index: 10000;
     width: 100%;
     background: #E5E5E5;
+	overflow: scroll;
 }
 
 .classDropdownList-topMenu {
@@ -222,12 +223,11 @@ form {
     right: 0;
 }
 
-.classSwipeDropList {
-    width: 0px;
-}
 
 .classSwipeDropList {
-    overflow: hidden;
+    overflow: scroll;
+    width: 0;
+
 }
 
 .classSwipeDropList>div {
