@@ -1103,6 +1103,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     border: 1px solid black;
     padding: 15px;
     font-size: 16px;
+    text-indent: 0px;
 }
 
 .tooltip {
