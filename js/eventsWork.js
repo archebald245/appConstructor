@@ -1,13 +1,13 @@
 function goToPage(index) {
     indexPage = index;
-    var thisPage = applicationData.Pages.filter(function(item){return item.Id == indexPage})[0];
-    if(thisPage.IsPrivate){
-        if(!$.jStorage.get('isLogin')){
+    var thisPage = applicationData.Pages.filter(function(item) { return item.Id == indexPage })[0];
+    if (thisPage.IsPrivate) {
+        if (!$.jStorage.get('isLogin')) {
             var pageWithForm = [];
-            applicationData.Pages.forEach(function(page){
-                page.Rows.forEach(function(row){
-                    row.CellContents.forEach(function(cell){
-                        if(cell.ContentTypeId == 12){
+            applicationData.Pages.forEach(function(page) {
+                page.Rows.forEach(function(row) {
+                    row.CellContents.forEach(function(cell) {
+                        if (cell.ContentTypeId == 12) {
                             pageWithForm.push({
                                 pageId: page.Id,
                                 formId: cell.FormId
@@ -16,16 +16,16 @@ function goToPage(index) {
                     })
                 });
             });
-            pageWithForm.forEach(function(item){
-                applicationData.Forms.forEach(function(form){
-                    if(form.Id == item.formId && form.LoginForm){
+            pageWithForm.forEach(function(item) {
+                applicationData.Forms.forEach(function(form) {
+                    if (form.Id == item.formId && form.LoginForm) {
                         indexPage = item.pageId
                     }
                 });
             });
-              window.plugins.toast.showShortBottom("Login, please!");
+            window.plugins.toast.showShortBottom("Login, please!");
         }
-      
+
     }
     if (applicationData.IsTrackingLastPage == true) {
         setLastOpenPage(indexPage);
@@ -45,15 +45,15 @@ function goToPage(index) {
     $(".my-youtube").attr("height", "auto");
 
     var pageStyles = "";
-    var pageWithGeneralBg = applicationData.Pages.filter(function(page){return page.BackgroundForApplication});
-    if(pageWithGeneralBg.length > 0){
+    var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
+    if (pageWithGeneralBg.length > 0) {
         pageStyles = pageWithGeneralBg[0].Style;
-    }else{
-    applicationData.Pages.forEach(function(element) {
-        if (element.Id == indexPage && element.Style != null && element.Style != "") {
-            pageStyles = element.Style;
-        }
-    }, this);
+    } else {
+        applicationData.Pages.forEach(function(element) {
+            if (element.Id == indexPage && element.Style != null && element.Style != "") {
+                pageStyles = element.Style;
+            }
+        }, this);
     }
 
 
@@ -74,6 +74,10 @@ function goToPage(index) {
     changeRestaurant();
     changeMenu();
     $('[data-toggle="tooltip"]').tooltip();
+    $("body a").click(function(e) {
+        e.preventDefault();
+        window.open($(this).attr("href"), '_system')
+    });
 }
 
 function scrollTop() {

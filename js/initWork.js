@@ -25,10 +25,10 @@ function onDeviceReady() {
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
     $("#dateTimePicker-date").dateDropper({
-      dropBorder: "1px solid #939393",
-      dropPrimaryColor: "#939393",
-      dropWidth: "250",
-      format: "m/d/Y l"
+        dropBorder: "1px solid #939393",
+        dropPrimaryColor: "#939393",
+        dropWidth: "250",
+        format: "m/d/Y l"
     });
     $("#dateTimePicker-time").timeDropper({
         primaryColor: "#939393",
@@ -39,9 +39,13 @@ function onDeviceReady() {
     appStart();
     StatusBar.hide();
     $('[data-toggle="tooltip"]').tooltip();
-    if ('ontouchstart' in document.documentElement) { 
-         $('body').css('cursor', 'pointer');
+    if ('ontouchstart' in document.documentElement) {
+        $('body').css('cursor', 'pointer');
     }
+    $("body a").click(function(e) {
+        e.preventDefault();
+        window.open($(this).attr("href"), '_system')
+    });
 }
 
 function onGetDirectorySuccess(dir) {
