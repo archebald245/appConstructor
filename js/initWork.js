@@ -25,10 +25,10 @@ function onDeviceReady() {
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
     $("#dateTimePicker-date").dateDropper({
-      dropBorder: "1px solid #939393",
-      dropPrimaryColor: "#939393",
-      dropWidth: "250",
-      format: "m/d/Y l"
+        dropBorder: "1px solid #939393",
+        dropPrimaryColor: "#939393",
+        dropWidth: "250",
+        format: "m/d/Y l"
     });
     $("#dateTimePicker-time").timeDropper({
         primaryColor: "#939393",
@@ -39,6 +39,9 @@ function onDeviceReady() {
     appStart();
     StatusBar.hide();
     $('[data-toggle="tooltip"]').tooltip();
+    if ('ontouchstart' in document.documentElement) {
+        $('body').css('cursor', 'pointer');
+    }
 }
 
 function onGetDirectorySuccess(dir) {
@@ -69,8 +72,15 @@ function onCheckJson() {
         var versionId = applicationData.Version;
         createMenu(applicationData);
         $(".my-youtube").attr("height", "auto");
-        var pageStyles = applicationData.Pages[0].Style;
 
+        var pageStyles;
+        var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
+        if (pageWithGeneralBg.length > 0) {
+            pageStyles = pageWithGeneralBg[0].Style;
+        }
+        if (applicationData.Pages[0].Style != null) {
+            pageStyles = applicationData.Pages[0].Style;
+        }
         $("#container").attr("style", pageStyles);
 
     } else {
