@@ -74,10 +74,6 @@ function goToPage(index) {
     changeRestaurant();
     changeMenu();
     $('[data-toggle="tooltip"]').tooltip();
-    $("body a").click(function(e) {
-        e.preventDefault();
-        window.open($(this).attr("href"), '_system')
-    });
 }
 
 function scrollTop() {

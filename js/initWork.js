@@ -42,10 +42,6 @@ function onDeviceReady() {
     if ('ontouchstart' in document.documentElement) {
         $('body').css('cursor', 'pointer');
     }
-    $("body a").click(function(e) {
-        e.preventDefault();
-        window.open($(this).attr("href"), '_system')
-    });
 }
 
 function onGetDirectorySuccess(dir) {
