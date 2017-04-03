@@ -143,31 +143,44 @@ function checkConnection() {
                 Version: e.Version
             });
         });
-
+        var NameOfPricingPlan = applicationData.NameOfPricingPlan;
         $.ajax({
             type: "POST",
             url: siteUrl + "/Constructor/CheckNewVersion",
-            data: { projectId: projectId, versionName: versionId, collectionBookingId: collectionBookingId },
+            data: { projectId: projectId, versionName: versionId, collectionBookingId: collectionBookingId, nameOfPricingPlan: NameOfPricingPlan},
             cache: false,
             success: function(jsonObjectOfServer) {
                 jsonObjectOfServer = JSON.parse(jsonObjectOfServer);
-                if (jsonObjectOfServer.IsUpdated == true) {
+                if (jsonObjectOfServer.IsUpdated) {
+                    jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     checkUpdateRestaurantMenu(true);
-                    // checkUpdateBooking(true);
                     onCheckJson();
                 } else if (jsonObjectOfServer.InstitutionsUpdate) {
                     applicationData.Institutions = jsonObjectOfServer.Institutions;
+                    applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
+                    applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(applicationData);
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     onCheckJson();
-                } else {
+                }else if(!jsonObjectOfServer.IsUpdated && jsonObjectOfServer.Content != "" && jsonObjectOfServer.Content != undefined) {
+                    jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
+                    data = JSON.stringify(jsonObjectOfServer.Content);
+                    applicationData = JSON.parse(data);
+                    $.jStorage.deleteKey('appData');
+                    checkUpdateRestaurantMenu(true);
+                    onCheckJson();
+                }else {
+                    applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
+                    applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
+                    data = JSON.stringify(applicationData);
+                    applicationData = JSON.parse(data);
+                    $.jStorage.deleteKey('appData');
                     onCheckJson();
                     checkUpdateRestaurantMenu(false);
-
                 }
             }
         });
