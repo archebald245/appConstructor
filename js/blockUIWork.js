@@ -20,7 +20,7 @@ function unBlockUi() {
     addListenerToClickOpenSingleItem();
     bindListenerToClickBtn();
     addListenerToClickTimeLine();
-    var pageStyles;
+    var pageStyle = "";
     var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
     if (pageWithGeneralBg.length > 0) {
         pageStyles = pageWithGeneralBg[0].Style;
@@ -33,11 +33,23 @@ function unBlockUi() {
         }
     } else {
         var StartPage = applicationData.Pages.filter(function(p) { return p.IsStartPage })[0];
-        if (StartPage.BackgroundImagePath != null) {
-            pageStyles = StartPage.Style;
+        if (indexPage == StartPage.Id) {
+            if (StartPage.BackgroundImagePath != null) {
+                pageStyles = StartPage.Style;
+            }
+        } else {
+            applicationData.Pages.forEach(function(element) {
+                if (element.Id == indexPage && element.BackgroundImagePath != null) {
+                    pageStyles = element.Style;
+                }
+            }, this);
         }
+
     }
+    var t = $("#container").attr("style");
     $("#container").attr("style", pageStyles);
+
+    console.log(t, " unblockUI = ", pageStyles);
     changeRestaurant();
     changeMenu();
     $.unblockUI();
