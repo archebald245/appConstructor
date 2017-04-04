@@ -46,10 +46,8 @@ function unBlockUi() {
         }
 
     }
-    var t = $("#container").attr("style");
     $("#container").attr("style", pageStyles);
 
-    console.log(t, " unblockUI = ", pageStyles);
     changeRestaurant();
     changeMenu();
     $.unblockUI();
