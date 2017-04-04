@@ -55,8 +55,6 @@ function goToPage(index) {
         }
     }, this);
 
-
-
     $("#container").attr("style", pageStyles);
     submitFormListener();
     initGallaryClick();
