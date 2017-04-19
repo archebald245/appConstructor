@@ -173,7 +173,6 @@ function checkConnection() {
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     onCheckJson();
-                    checkUpdateRestaurantMenu(false);
                 }
             }
         });
