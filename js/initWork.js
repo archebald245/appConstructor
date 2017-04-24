@@ -20,6 +20,9 @@ function init() {
 function onDeviceReady() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
         window.myFileSystem = fileSystem;
+        if (!window.Promise) {
+                window.Promise = Promise;
+            }
         fileSystem.root.getDirectory("Phonegap", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
         checkConnection();
         store = fileSystem.root.nativeURL + "Phonegap/";
@@ -159,7 +162,7 @@ function checkConnection() {
                     onCheckJson();
                 } else {
                     onCheckJson();
-                    checkUpdateRestaurantMenu(false);
+                    // checkUpdateRestaurantMenu(false);
 
                 }
             }
