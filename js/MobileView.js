@@ -811,10 +811,16 @@ function reactRender() {
                     url, 'application/pdf', options, onShow);
                 });
             }
-            $("body a").click(function(e) {
+            if (data.ContentTypeId == 2 || data.ContentTypeId == 4) {
+                $(ReactDOM.findDOMNode(this)).click(function(e) {
                 e.preventDefault();
                 window.open($(this).attr("href"), '_system')
             });
+            }
+            // $("body a").click(function(e) {
+            //     e.preventDefault();
+            //     window.open($(this).attr("href"), '_system')
+            // });
             //$(React.findDOMNode(this)).attr("style", styleCell);
             $(ReactDOM.findDOMNode(this)).attr("style", styleCell);
         },
