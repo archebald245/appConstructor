@@ -21,8 +21,8 @@ function onDeviceReady() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
         window.myFileSystem = fileSystem;
         if (!window.Promise) {
-                window.Promise = Promise;
-            }
+            window.Promise = Promise;
+        }
         fileSystem.root.getDirectory("Phonegap", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
         checkConnection();
         store = fileSystem.root.nativeURL + "Phonegap/";
@@ -68,6 +68,7 @@ function initYoutube() {
 }
 
 function onCheckJson() {
+    var networkState = navigator.connection.type;
     if ($.jStorage.get('appData') != null) {
 
         applicationData = JSON.parse($.jStorage.get('appData'));
@@ -88,6 +89,13 @@ function onCheckJson() {
         }, this);
         $("#container").attr("style", pageStyles);
 
+        if (networkState != Connection.NONE) {
+            reactRender();
+            initGallaryClick();
+            submitFormListener();
+            $('[data-toggle="tooltip"]').tooltip();
+            unBlockUi()
+        }
     } else {
         data = replaceData(data);
         applicationData = JSON.parse(data);
@@ -101,7 +109,6 @@ function onCheckJson() {
             $(".my-youtube").attr("height", "auto");
         }
     }
-    var networkState = navigator.connection.type;
     if (networkState == Connection.NONE) {
         reactRender();
         initGallaryClick();
@@ -143,7 +150,7 @@ function checkConnection() {
         $.ajax({
             type: "POST",
             url: siteUrl + "/Constructor/CheckNewVersion",
-            data: { projectId: projectId, versionName: versionId, collectionBookingId: collectionBookingId, nameOfPricingPlan: NameOfPricingPlan},
+            data: { projectId: projectId, versionName: versionId, collectionBookingId: collectionBookingId, nameOfPricingPlan: NameOfPricingPlan },
             cache: false,
             success: function(jsonObjectOfServer) {
                 jsonObjectOfServer = JSON.parse(jsonObjectOfServer);
@@ -162,21 +169,19 @@ function checkConnection() {
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     onCheckJson();
-                }else if(!jsonObjectOfServer.IsUpdated && jsonObjectOfServer.Content != "" && jsonObjectOfServer.Content != undefined) {
+                } else if (!jsonObjectOfServer.IsUpdated && jsonObjectOfServer.Content != "" && jsonObjectOfServer.Content != undefined) {
                     jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     checkUpdateRestaurantMenu(true);
                     onCheckJson();
-                }else {
+                } else {
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(applicationData);
                     applicationData = JSON.parse(data);
-                    $.jStorage.deleteKey('appData');
                     onCheckJson();
-                    // checkUpdateRestaurantMenu(false);
                 }
             }
         });
