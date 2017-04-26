@@ -20,11 +20,12 @@ function unBlockUi() {
     addListenerToClickOpenSingleItem();
     bindListenerToClickBtn();
     addListenerToClickTimeLine();
-    var pageStyle = "";
+    var pageStyles = "";
     var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
     if (pageWithGeneralBg.length > 0) {
         pageStyles = pageWithGeneralBg[0].Style;
     }
+
     if (applicationData.IsTrackingLastPage) {
         var idLastPage = getLastOpenPage();
         var lastPage = applicationData.Pages.filter(function(p) { return p.Id == idLastPage })[0]
@@ -43,6 +44,7 @@ function unBlockUi() {
                     pageStyles = element.Style;
                 }
             }, this);
+
         }
 
     }
