@@ -173,6 +173,7 @@ function reactRender() {
             var rowModels = this.state.data.map(function(row) {
                 return React.createElement(CellContainer, { data: row, key: row.Id });
             });
+            var pageIsLocked = applicationData.Pages.filter(function(p){return p.Id == indexPage})[0].IsLocked;
             if (applicationData.Menu.Position == "bottom-left" || applicationData.Menu.Position == "bottom-right") {
                 if (isBooking == true && isRestaurant == true) {
                     return React.createElement(
@@ -203,7 +204,7 @@ function reactRender() {
                         ),
                         React.createElement(
                             'div', { className: 'container-fluid' },
-                            rowModels
+                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
                         )
                     );
                 } else if (isBooking == true) {
@@ -228,7 +229,7 @@ function reactRender() {
                         ),
                         React.createElement(
                             'div', { className: 'container-fluid' },
-                            rowModels
+                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
                         )
                     );
                 } else if (isRestaurant == true) {
@@ -238,7 +239,7 @@ function reactRender() {
                         React.createElement('div', { className: 'cart-btn bottom-menu' }),
                         React.createElement(
                             'div', { className: 'container-fluid' },
-                            rowModels
+                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
                         )
                     );
                 } else {
@@ -247,7 +248,7 @@ function reactRender() {
                         null,
                         React.createElement(
                             'div', { className: 'container-fluid' },
-                            rowModels
+                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
                         )
                     );
                 }
@@ -289,7 +290,7 @@ function reactRender() {
                         ),
                         React.createElement(
                             'div', { className: 'container-fluid' },
-                            rowModels
+                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
                         )
                     );
                 } else if (isBooking == true) {
@@ -322,7 +323,7 @@ function reactRender() {
                         ),
                         React.createElement(
                             'div', { className: 'container-fluid' },
-                            rowModels
+                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
                         )
                     );
                 } else if (isRestaurant == true) {
@@ -333,7 +334,7 @@ function reactRender() {
                         React.createElement('div', { className: 'cart-btn' }),
                         React.createElement(
                             'div', { className: 'container-fluid' },
-                            rowModels
+                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
                         )
                     );
                 } else {
@@ -342,7 +343,7 @@ function reactRender() {
                         null,
                         React.createElement(
                             'div', { className: 'container-fluid' },
-                            rowModels
+                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
                         )
                     );
                 }
@@ -589,6 +590,7 @@ function reactRender() {
         displayName: 'CellContent',
 
         componentDidMount: function componentDidMount() {
+            var deniedTools = applicationData.DeniedTools.replace(/"/g, "'").replace(/]/).split("[")[1].replace(/'/g, '').split(",");
             var styleCell = this.props.data.Style;
 
             if (styleCell == undefined || styleCell == null) {
@@ -598,7 +600,7 @@ function reactRender() {
             var value = data.Value;
             var formId;
             var fieldId;
-            if (data.ContentTypeId == 12) {
+            if (data.ContentTypeId == 12 && this.checkDeniedTools(deniedTools, "form-item")) {
                 formId = this.props.data.FormId;
                 var objectForm = applicationData.Forms;
                 var styleLabel = this.props.data.Value.split("|")[0];
@@ -647,7 +649,7 @@ function reactRender() {
                     }
                 });
             }
-            if (data.ContentTypeId == 15) {
+            if (data.ContentTypeId == 15 && this.checkDeniedTools(deniedTools, "restaurant-menu-item")) {
                 // $(ReactDOM.findDOMNode(this)).append("<div><select class='select-restaurant'></select><select class='select-menu'></select><div id='custom-restaurant-menu-container'></div></div>");
                 var arrIdMenu = data.Value.split(',');
                 var restaurantCollection = applicationData.Restaurants;
@@ -753,7 +755,7 @@ function reactRender() {
                 $("#custom-restaurant-menu-container").attr("id", "");
             }
 
-            if (data.ContentTypeId == 13) {
+            if (data.ContentTypeId == 13 && this.checkDeniedTools(deniedTools, "custom-form-item")) {
                 fieldId = this.props.data.FieldId;
                 formId = this.props.data.FormId;
                 var styleLabel = this.props.data.Value;
@@ -784,7 +786,7 @@ function reactRender() {
                     }
                 });
             }
-            if (data.ContentTypeId == 16) {
+            if (data.ContentTypeId == 16 && this.checkDeniedTools(deniedTools, "booking-item")) {
                 $(ReactDOM.findDOMNode(this)).append("<div class='custom-container-booking' id='custom-container-booking'></div>");
                 $(applicationData.Institutions).each(function() {
                     if (this.Id == data.BookingCurrentInstitution) {
@@ -793,7 +795,7 @@ function reactRender() {
                 });
                 $("#custom-container-booking").attr("id", "");
             }
-            if (data.ContentTypeId == 17) {
+            if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
                     var options = {
@@ -809,10 +811,16 @@ function reactRender() {
                     url, 'application/pdf', options, onShow);
                 });
             }
-            $("body a").click(function(e) {
+            if (data.ContentTypeId == 2 || data.ContentTypeId == 4) {
+                $(ReactDOM.findDOMNode(this)).click(function(e) {
                 e.preventDefault();
                 window.open($(this).attr("href"), '_system')
             });
+            }
+            // $("body a").click(function(e) {
+            //     e.preventDefault();
+            //     window.open($(this).attr("href"), '_system')
+            // });
             //$(React.findDOMNode(this)).attr("style", styleCell);
             $(ReactDOM.findDOMNode(this)).attr("style", styleCell);
         },
@@ -957,73 +965,109 @@ function reactRender() {
         //   var timeString = month + "-" + day + "-" + ap + hour + ':' + minute + ':' + second;
         //   return timeString;
         // },
+        checkDeniedTools: function(allTool, thisTool){
+            var tool = allTool.filter(function(e){return e == thisTool}).length < 1;
+            return tool
+        },
         render: function render() {
             var data = this.props.data;
-
-            if (data.ContentTypeId == 3) {
+            var deniedTools = applicationData.DeniedTools.replace(/"/g, "'").replace(/]/).split("[")[1].replace(/'/g, '').split(",");
+            if (data.ContentTypeId == 3 && this.checkDeniedTools(deniedTools, "image-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 3){
+            return null
             }
-            if (data.ContentTypeId == 4) {
+            if (data.ContentTypeId == 4 && this.checkDeniedTools(deniedTools, "image-link-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 4){
+            return null
             }
-            if (data.ContentTypeId == 5) {
+            if (data.ContentTypeId == 5 && this.checkDeniedTools(deniedTools, "text-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 5){
+            return null
             }
-            if (data.ContentTypeId == 6) {
+            if (data.ContentTypeId == 6 && this.checkDeniedTools(deniedTools, "botton-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 6){
+            return null
             }
-            if (data.ContentTypeId == 2) {
+            if (data.ContentTypeId == 2 && this.checkDeniedTools(deniedTools, "link-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
-            }
+            }else if(data.ContentTypeId == 2){
+            return null
+             }
             if (data.ContentTypeId == 1) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
             }
-            if (data.ContentTypeId == 8) {
+            if (data.ContentTypeId == 8 && this.checkDeniedTools(deniedTools, "gallery-item")) {
                 return React.createElement(
                     'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
                     React.createElement(GalleryContainer, { data: data.Resourceses })
                 );
+            }else if(data.ContentTypeId == 8){
+            return null
             }
-            if (data.ContentTypeId == 9) {
+            if (data.ContentTypeId == 9 && this.checkDeniedTools(deniedTools, "difficult-botton-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 9){
+            return null
             }
-            if (data.ContentTypeId == 7) {
+            if (data.ContentTypeId == 7 && this.checkDeniedTools(deniedTools, "youtube-item")) {
                 return React.createElement(
                     'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
                     React.createElement(YoutubeContainer, { data: data.Value })
                 );
+            }else if(data.ContentTypeId == 7){
+            return null
             }
 
             //ContentTypeId - 10 start
-            if (data.ContentTypeId == 10) {
+            if (data.ContentTypeId == 10 && this.checkDeniedTools(deniedTools, "hbox-container-item")) {
                 return React.createElement(
                     'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
                     React.createElement(Hbox, { data: data.Json })
                 );
+            }else if(data.ContentTypeId == 10){
+            return null
             }
-            if (data.ContentTypeId == 11) {
+            if (data.ContentTypeId == 11 && this.checkDeniedTools(deniedTools, "vbox-container-item")) {
                 return React.createElement(
                     'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
                     React.createElement(Vbox, { data: data.Json })
                 );
+            }else if(data.ContentTypeId == 11){
+            return null
             }
-            if (data.ContentTypeId == 12) {
+            if (data.ContentTypeId == 12 && this.checkDeniedTools(deniedTools, "form-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 12){
+            return null
             }
-            if (data.ContentTypeId == 13) {
+            if (data.ContentTypeId == 13 && this.checkDeniedTools(deniedTools, "custom-form-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 13){
+            return null
             }
-            if (data.ContentTypeId == 14) {
+            if (data.ContentTypeId == 14 && this.checkDeniedTools(deniedTools, "custom-form-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 14){
+            return null
             }
-            if (data.ContentTypeId == 15) {
+            if (data.ContentTypeId == 15 && this.checkDeniedTools(deniedTools, "restaurant-menu-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell });
+            }else if(data.ContentTypeId == 15){
+            return null
             }
-            if (data.ContentTypeId == 16) {
+            if (data.ContentTypeId == 16 && this.checkDeniedTools(deniedTools, "booking-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell });
+            }else if(data.ContentTypeId == 16){
+            return null
             }
-            if (data.ContentTypeId == 17) {
+            if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
+            }else if(data.ContentTypeId == 17){
+            return null
             }
         }
     });
