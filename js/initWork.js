@@ -20,6 +20,9 @@ function init() {
 function onDeviceReady() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
         window.myFileSystem = fileSystem;
+        if (!window.Promise) {
+            window.Promise = Promise;
+        }
         fileSystem.root.getDirectory("Phonegap", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
         checkConnection();
         store = fileSystem.root.nativeURL + "Phonegap/";
@@ -65,6 +68,7 @@ function initYoutube() {
 }
 
 function onCheckJson() {
+    var networkState = navigator.connection.type;
     if ($.jStorage.get('appData') != null) {
 
         applicationData = JSON.parse($.jStorage.get('appData'));
@@ -73,16 +77,25 @@ function onCheckJson() {
         createMenu(applicationData);
         $(".my-youtube").attr("height", "auto");
 
-        var pageStyles;
+        var pageStyles = "";
         var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
         if (pageWithGeneralBg.length > 0) {
             pageStyles = pageWithGeneralBg[0].Style;
         }
-        if (applicationData.Pages[0].Style != null) {
-            pageStyles = applicationData.Pages[0].Style;
-        }
+        applicationData.Pages.forEach(function(element) {
+            if (element.Id == indexPage && element.BackgroundImagePath != null) {
+                pageStyles = element.Style;
+            }
+        }, this);
         $("#container").attr("style", pageStyles);
 
+        if (networkState != Connection.NONE) {
+            reactRender();
+            initGallaryClick();
+            submitFormListener();
+            $('[data-toggle="tooltip"]').tooltip();
+            unBlockUi()
+        }
     } else {
         data = replaceData(data);
         applicationData = JSON.parse(data);
@@ -96,7 +109,6 @@ function onCheckJson() {
             $(".my-youtube").attr("height", "auto");
         }
     }
-    var networkState = navigator.connection.type;
     if (networkState == Connection.NONE) {
         reactRender();
         initGallaryClick();
@@ -134,31 +146,42 @@ function checkConnection() {
                 Version: e.Version
             });
         });
-
+        var NameOfPricingPlan = applicationData.NameOfPricingPlan;
         $.ajax({
             type: "POST",
             url: siteUrl + "/Constructor/CheckNewVersion",
-            data: { projectId: projectId, versionName: versionId, collectionBookingId: collectionBookingId },
+            data: { projectId: projectId, versionName: versionId, collectionBookingId: collectionBookingId, nameOfPricingPlan: NameOfPricingPlan },
             cache: false,
             success: function(jsonObjectOfServer) {
                 jsonObjectOfServer = JSON.parse(jsonObjectOfServer);
-                if (jsonObjectOfServer.IsUpdated == true) {
+                if (jsonObjectOfServer.IsUpdated) {
+                    jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     checkUpdateRestaurantMenu(true);
-                    // checkUpdateBooking(true);
                     onCheckJson();
                 } else if (jsonObjectOfServer.InstitutionsUpdate) {
                     applicationData.Institutions = jsonObjectOfServer.Institutions;
+                    applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
+                    applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(applicationData);
                     applicationData = JSON.parse(data);
                     $.jStorage.deleteKey('appData');
                     onCheckJson();
-                } else {
+                } else if (!jsonObjectOfServer.IsUpdated && jsonObjectOfServer.Content != "" && jsonObjectOfServer.Content != undefined) {
+                    jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
+                    data = JSON.stringify(jsonObjectOfServer.Content);
+                    applicationData = JSON.parse(data);
+                    $.jStorage.deleteKey('appData');
+                    checkUpdateRestaurantMenu(true);
                     onCheckJson();
-                    checkUpdateRestaurantMenu(false);
-
+                } else {
+                    applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
+                    applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
+                    data = JSON.stringify(applicationData);
+                    applicationData = JSON.parse(data);
+                    onCheckJson();
                 }
             }
         });
