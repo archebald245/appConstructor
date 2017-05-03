@@ -1,6 +1,11 @@
 function goToPage(index) {
     indexPage = index;
     var thisPage = applicationData.Pages.filter(function(item) { return item.Id == indexPage })[0];
+    var thisPageIsLocked = thisPage.IsLocked;
+    if(thisPageIsLocked){
+        window.plugins.toast.showShortBottom("This page is locked!");
+        return false
+    }
     if (thisPage.IsPrivate) {
         if (!$.jStorage.get('isLogin')) {
             var pageWithForm = [];
@@ -50,12 +55,10 @@ function goToPage(index) {
         pageStyles = pageWithGeneralBg[0].Style;
     }
     applicationData.Pages.forEach(function(element) {
-        if (element.Id == indexPage && element.Style != null && element.Style != "") {
+        if (element.Id == indexPage && element.BackgroundImagePath != null) {
             pageStyles = element.Style;
         }
     }, this);
-
-
 
     $("#container").attr("style", pageStyles);
     submitFormListener();
