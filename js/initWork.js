@@ -89,14 +89,15 @@ function onCheckJson() {
         }, this);
         $("#container").attr("style", pageStyles);
 
-        if (networkState != Connection.NONE) {
-            reactRender();
-            initGallaryClick();
-            submitFormListener();
-            $('[data-toggle="tooltip"]').tooltip();
-            unBlockUi()
-        }
+        // if (networkState != Connection.NONE) {
+        //     reactRender();
+        //     initGallaryClick();
+        //     submitFormListener();
+        //     $('[data-toggle="tooltip"]').tooltip();
+        //     unBlockUi()
+        // }
     } else {
+        console.log("Download");
         data = replaceData(data);
         applicationData = JSON.parse(data);
         resources = searchResourcesAndReplacePatch(applicationData);
@@ -109,24 +110,41 @@ function onCheckJson() {
             $(".my-youtube").attr("height", "auto");
         }
     }
-    if (networkState == Connection.NONE) {
-        reactRender();
-        initGallaryClick();
-        submitFormListener();
-        $('[data-toggle="tooltip"]').tooltip();
-        unBlockUi()
+    // if (networkState == Connection.NONE) {
+    //     reactRender();
+    //     initGallaryClick();
+    //     submitFormListener();
+    //     $('[data-toggle="tooltip"]').tooltip();
+    //     unBlockUi()
+    // }
+}
+
+function updateResources() {
+    resources = searchResourcesAndReplacePatch(applicationData);
+    downloadResources();
+    initMenuYoutunbe();
+    if (resources.length == 0) {
+        var jsonString = JSON.stringify(applicationData);
+        $.jStorage.set('appData', jsonString);
+        createMenu(applicationData);
+        $(".my-youtube").attr("height", "auto");
     }
+    console.log("updateResources");
 }
 
 function checkConnection() {
+
     var networkState = navigator.connection.type;
     if (networkState != Connection.NONE) {
+        //ЕСЛИ ЕСТЬ ИНЕТ
         var siteUrl = "http://appconstructor.newlinetechnologies.net"
         if ($.jStorage.get('appData') != null) {
+            //ПОВТОРНЫЙ ЗАПУСК С ИНЕТОМ
             applicationData = JSON.parse($.jStorage.get('appData'));
             var projectId = applicationData.ProjectId;
             var versionId = applicationData.Version;
         } else {
+            //ПЕРВЫЙ ЗАПУСК С ИНЕТОМ
             data = replaceData(data);
             applicationData = JSON.parse(data);
             var projectId = applicationData.ProjectId;
@@ -156,37 +174,83 @@ function checkConnection() {
                 jsonObjectOfServer = JSON.parse(jsonObjectOfServer);
                 if (jsonObjectOfServer.IsUpdated) {
                     jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
+
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
-                    $.jStorage.deleteKey('appData');
+                    var jsonString = JSON.stringify(applicationData);
+                    $.jStorage.set('appData', jsonString);
                     checkUpdateRestaurantMenu(true);
+                    updateResources();
                     onCheckJson();
                 } else if (jsonObjectOfServer.InstitutionsUpdate) {
                     applicationData.Institutions = jsonObjectOfServer.Institutions;
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
+
                     data = JSON.stringify(applicationData);
                     applicationData = JSON.parse(data);
-                    $.jStorage.deleteKey('appData');
+                    var jsonString = JSON.stringify(applicationData);
+                    $.jStorage.set('appData', jsonString);
+                    updateResources();
                     onCheckJson();
                 } else if (!jsonObjectOfServer.IsUpdated && jsonObjectOfServer.Content != "" && jsonObjectOfServer.Content != undefined) {
                     jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
+
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
-                    $.jStorage.deleteKey('appData');
+                    var jsonString = JSON.stringify(applicationData);
+                    $.jStorage.set('appData', jsonString);
                     checkUpdateRestaurantMenu(true);
+                    updateResources();
                     onCheckJson();
                 } else {
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
-                    data = JSON.stringify(applicationData);
-                    applicationData = JSON.parse(data);
-                    onCheckJson();
+                    // data = JSON.stringify(applicationData);
+                    // applicationData = JSON.parse(data);
+
+                    updateResources()
+
+                    createMenu(applicationData);
+                    reactRender();
+                    initGallaryClick();
+                    submitFormListener();
+                    $('[data-toggle="tooltip"]').tooltip();
+                    unBlockUi();
                 }
             }
         });
     } else {
-        onCheckJson();
+        //ЕСЛИ НЕТ ИНЕТА
+        if ($.jStorage.get('appData') != null) {
+            //ПОВТОРНЫЙ ЗАПУСК БЕЗ ИНЕТА
+            applicationData = JSON.parse($.jStorage.get('appData'));
+            var projectId = applicationData.ProjectId;
+            var versionId = applicationData.Version;
+            // if ($.jStorage.get('replaceImagePachJson') != null) {
+            //     applicationData = JSON.parse($.jStorage.get('replaceImagePachJson'));
+            // }
+            // var temp = searchResourcesAndReplacePatch(applicationData);
+
+        } else {
+            //ПЕРВЫЙ ЗАПУСК БЕЗ ИНЕТА
+            data = replaceData(data);
+            applicationData = JSON.parse(data);
+            var t = ReplaceResourcesPatchByLocal(applicationData);
+            var projectId = applicationData.ProjectId;
+            var versionId = applicationData.Version;
+        }
+
+        var StartPage = applicationData.Pages.filter(function(p) { return p.IsStartPage })[0];
+        indexPage = StartPage.Id;
+
+        createMenu(applicationData);
+        reactRender();
+        initGallaryClick();
+        submitFormListener();
+        $('[data-toggle="tooltip"]').tooltip();
+        unBlockUi();
+        //onCheckJson();
     }
 }
 
