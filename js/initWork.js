@@ -70,47 +70,42 @@ function initYoutube() {
 function onCheckJson() {
     console.log("onCheckJson");
     var networkState = navigator.connection.type;
-    if ($.jStorage.get('appData') != null) {
 
-        applicationData = JSON.parse($.jStorage.get('appData'));
-        var projectId = applicationData.ProjectId;
-        var versionId = applicationData.Version;
-        createMenu(applicationData);
-        $(".my-youtube").attr("height", "auto");
+    var projectId = applicationData.ProjectId;
+    var versionId = applicationData.Version;
+    createMenu(applicationData);
+    $(".my-youtube").attr("height", "auto");
 
-        var pageStyles = "";
-        var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
-        if (pageWithGeneralBg.length > 0) {
-            pageStyles = pageWithGeneralBg[0].Style;
-        }
-        applicationData.Pages.forEach(function(element) {
-            if (element.Id == indexPage && element.BackgroundImagePath != null) {
-                pageStyles = element.Style;
-            }
-        }, this);
-        $("#container").attr("style", pageStyles);
-
-        // if (networkState != Connection.NONE) {
-        //     reactRender();
-        //     initGallaryClick();
-        //     submitFormListener();
-        //     $('[data-toggle="tooltip"]').tooltip();
-        //     unBlockUi()
-        // }
+    var pageStyles = "";
+    var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
+    if (pageWithGeneralBg.length > 0) {
+        pageStyles = pageWithGeneralBg[0].Style;
     }
+    applicationData.Pages.forEach(function(element) {
+        if (element.Id == indexPage && element.BackgroundImagePath != null) {
+            pageStyles = element.Style;
+        }
+    }, this);
+    $("#container").attr("style", pageStyles);
+
+    // if (networkState != Connection.NONE) {
+    //     reactRender();
+    //     initGallaryClick();
+    //     submitFormListener();
+    //     $('[data-toggle="tooltip"]').tooltip();
+    //     unBlockUi()
+    // }
 }
 
 function updateResources() {
     resources = searchResourcesAndReplacePatch(applicationData);
     downloadResources();
     initMenuYoutunbe();
-    if (resources.length == 0) {
-        var jsonString = JSON.stringify(applicationData);
-        $.jStorage.set('appData', jsonString);
-        createMenu(applicationData);
-        $(".my-youtube").attr("height", "auto");
-    }
-    console.log("updateResources");
+
+    var jsonString = JSON.stringify(applicationData);
+    $.jStorage.set('appData', jsonString);
+    createMenu(applicationData);
+    $(".my-youtube").attr("height", "auto");
 }
 
 function checkConnection() {
@@ -252,7 +247,6 @@ function initMenuYoutunbe() {
 }
 
 function callback() {
-    applicationData = JSON.parse($.jStorage.get('replaceImagePachJson'));
     var jsonString = JSON.stringify(applicationData);
     $.jStorage.set('appData', jsonString);
     deleteResources();
