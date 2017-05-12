@@ -68,6 +68,7 @@ function initYoutube() {
 }
 
 function onCheckJson() {
+    console.log("onCheckJson");
     var networkState = navigator.connection.type;
     if ($.jStorage.get('appData') != null) {
 
@@ -96,27 +97,7 @@ function onCheckJson() {
         //     $('[data-toggle="tooltip"]').tooltip();
         //     unBlockUi()
         // }
-    } else {
-        console.log("Download");
-        data = replaceData(data);
-        applicationData = JSON.parse(data);
-        resources = searchResourcesAndReplacePatch(applicationData);
-        downloadResources();
-        initMenuYoutunbe();
-        if (resources.length == 0) {
-            var jsonString = JSON.stringify(applicationData);
-            $.jStorage.set('appData', jsonString);
-            createMenu(applicationData);
-            $(".my-youtube").attr("height", "auto");
-        }
     }
-    // if (networkState == Connection.NONE) {
-    //     reactRender();
-    //     initGallaryClick();
-    //     submitFormListener();
-    //     $('[data-toggle="tooltip"]').tooltip();
-    //     unBlockUi()
-    // }
 }
 
 function updateResources() {
@@ -149,6 +130,8 @@ function checkConnection() {
             applicationData = JSON.parse(data);
             var projectId = applicationData.ProjectId;
             var versionId = applicationData.Version;
+
+            var t = ReplaceResourcesPatchByLocal(applicationData);
         }
 
         if (applicationData.UrlForUpdateApp != "" && applicationData.UrlForUpdateApp != null && typeof applicationData.UrlForUpdateApp != 'undefined') {
@@ -206,10 +189,6 @@ function checkConnection() {
                 } else {
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
-                    // data = JSON.stringify(applicationData);
-                    // applicationData = JSON.parse(data);
-
-                    updateResources()
 
                     createMenu(applicationData);
                     reactRender();
@@ -227,10 +206,6 @@ function checkConnection() {
             applicationData = JSON.parse($.jStorage.get('appData'));
             var projectId = applicationData.ProjectId;
             var versionId = applicationData.Version;
-            // if ($.jStorage.get('replaceImagePachJson') != null) {
-            //     applicationData = JSON.parse($.jStorage.get('replaceImagePachJson'));
-            // }
-            // var temp = searchResourcesAndReplacePatch(applicationData);
 
         } else {
             //ПЕРВЫЙ ЗАПУСК БЕЗ ИНЕТА
@@ -250,7 +225,6 @@ function checkConnection() {
         submitFormListener();
         $('[data-toggle="tooltip"]').tooltip();
         unBlockUi();
-        //onCheckJson();
     }
 }
 

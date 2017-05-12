@@ -5,7 +5,7 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
     var path = window.location.pathname;
     var storePath = path.substring(0, path.lastIndexOf('/') + 1);
 
-    storePath = storePath + "/images/";
+    storePath = "file://" + storePath + "images/";
     for (var i = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
@@ -41,8 +41,6 @@ function searchResourcesAndReplacePatch(jsonObject) {
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
         }
-
-
     }
     if (jsonObject.Restaurants != null) {
         jsonObject.Restaurants = resourcesOfRestaurantMenus(jsonObject.Restaurants, storePath);
