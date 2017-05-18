@@ -68,54 +68,31 @@ function initYoutube() {
 }
 
 function onCheckJson() {
-    var networkState = navigator.connection.type;
-    if ($.jStorage.get('appData') != null) {
-
-        applicationData = JSON.parse($.jStorage.get('appData'));
-        var projectId = applicationData.ProjectId;
-        var versionId = applicationData.Version;
-        createMenu(applicationData);
-        $(".my-youtube").attr("height", "auto");
-
-        var pageStyles = "";
-        var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
-        if (pageWithGeneralBg.length > 0) {
-            pageStyles = pageWithGeneralBg[0].Style;
-        }
-        applicationData.Pages.forEach(function(element) {
-            if (element.Id == indexPage && element.BackgroundImagePath != null) {
-                pageStyles = element.Style;
-            }
-        }, this);
-        $("#container").attr("style", pageStyles);
-
-        if (networkState != Connection.NONE) {
-            reactRender();
-            initGallaryClick();
-            submitFormListener();
-            $('[data-toggle="tooltip"]').tooltip();
-            unBlockUi()
-        }
-    } else {
-        data = replaceData(data);
-        applicationData = JSON.parse(data);
-        resources = searchResourcesAndReplacePatch(applicationData);
-        downloadResources();
-        initMenuYoutunbe();
-        if (resources.length == 0) {
-            var jsonString = JSON.stringify(applicationData);
-            $.jStorage.set('appData', jsonString);
-            createMenu(applicationData);
-            $(".my-youtube").attr("height", "auto");
-        }
+    var projectId = applicationData.ProjectId;
+    var versionId = applicationData.Version;
+    createMenu(applicationData);
+    $(".my-youtube").attr("height", "auto");
+    var pageStyles = "";
+    var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
+    if (pageWithGeneralBg.length > 0) {
+        pageStyles = pageWithGeneralBg[0].Style;
     }
-    if (networkState == Connection.NONE) {
-        reactRender();
-        initGallaryClick();
-        submitFormListener();
-        $('[data-toggle="tooltip"]').tooltip();
-        unBlockUi()
-    }
+    applicationData.Pages.forEach(function(element) {
+        if (element.Id == indexPage && element.BackgroundImagePath != null) {
+            pageStyles = element.Style;
+        }
+    }, this);
+    $("#container").attr("style", pageStyles);
+}
+
+function updateResources() {
+    resources = searchResourcesAndReplacePatch(applicationData);
+    downloadResources();
+    initMenuYoutunbe();
+    var jsonString = JSON.stringify(applicationData);
+    $.jStorage.set('appData', jsonString);
+    createMenu(applicationData);
+    $(".my-youtube").attr("height", "auto");
 }
 
 function checkConnection() {
@@ -131,6 +108,7 @@ function checkConnection() {
             applicationData = JSON.parse(data);
             var projectId = applicationData.ProjectId;
             var versionId = applicationData.Version;
+            var tempRes = ReplaceResourcesPatchByLocal(applicationData);
         }
 
         if (applicationData.UrlForUpdateApp != "" && applicationData.UrlForUpdateApp != null && typeof applicationData.UrlForUpdateApp != 'undefined') {
@@ -158,8 +136,10 @@ function checkConnection() {
                     jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
-                    $.jStorage.deleteKey('appData');
+                    var jsonString = JSON.stringify(applicationData);
+                    $.jStorage.set('appData', jsonString);
                     checkUpdateRestaurantMenu(true);
+                    updateResources();
                     onCheckJson();
                 } else if (jsonObjectOfServer.InstitutionsUpdate) {
                     applicationData.Institutions = jsonObjectOfServer.Institutions;
@@ -167,26 +147,52 @@ function checkConnection() {
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(applicationData);
                     applicationData = JSON.parse(data);
-                    $.jStorage.deleteKey('appData');
+                    var jsonString = JSON.stringify(applicationData);
+                    $.jStorage.set('appData', jsonString);
+                    updateResources();
                     onCheckJson();
                 } else if (!jsonObjectOfServer.IsUpdated && jsonObjectOfServer.Content != "" && jsonObjectOfServer.Content != undefined) {
                     jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(jsonObjectOfServer.Content);
                     applicationData = JSON.parse(data);
-                    $.jStorage.deleteKey('appData');
+                    var jsonString = JSON.stringify(applicationData);
+                    $.jStorage.set('appData', jsonString);
                     checkUpdateRestaurantMenu(true);
+                    updateResources();
                     onCheckJson();
                 } else {
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
-                    data = JSON.stringify(applicationData);
-                    applicationData = JSON.parse(data);
-                    onCheckJson();
+                    createMenu(applicationData);
+                    reactRender();
+                    initGallaryClick();
+                    submitFormListener();
+                    $('[data-toggle="tooltip"]').tooltip();
+                    unBlockUi();
                 }
             }
         });
     } else {
-        onCheckJson();
+        if ($.jStorage.get('appData') != null) {
+            applicationData = JSON.parse($.jStorage.get('appData'));
+            var projectId = applicationData.ProjectId;
+            var versionId = applicationData.Version;
+        } else {
+            data = replaceData(data);
+            applicationData = JSON.parse(data);
+            var t = ReplaceResourcesPatchByLocal(applicationData);
+            var projectId = applicationData.ProjectId;
+            var versionId = applicationData.Version;
+        }
+
+        var StartPage = applicationData.Pages.filter(function(p) { return p.IsStartPage })[0];
+        indexPage = StartPage.Id;
+        createMenu(applicationData);
+        reactRender();
+        initGallaryClick();
+        submitFormListener();
+        $('[data-toggle="tooltip"]').tooltip();
+        unBlockUi();
     }
 }
 
@@ -214,7 +220,6 @@ function initMenuYoutunbe() {
 }
 
 function callback() {
-    applicationData = JSON.parse($.jStorage.get('replaceImagePachJson'));
     var jsonString = JSON.stringify(applicationData);
     $.jStorage.set('appData', jsonString);
     deleteResources();
