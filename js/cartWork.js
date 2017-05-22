@@ -45,6 +45,7 @@ function clickPlaceAnOrder() {
             success: function() {
                 alert("Thank you!");
                 $("#cart").html("");
+                $("#cart .cartItem").html("");
                 $("#orderInfo input, #orderInfo textarea").val("");
                 $("#container").removeClass("hidden");
                 $("#orderInfo").addClass("hidden");
