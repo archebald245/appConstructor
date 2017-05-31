@@ -24,6 +24,7 @@ function onDeviceReady() {
             window.Promise = Promise;
         }
         fileSystem.root.getDirectory("Phonegap", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
+        initRuCulture();
         checkConnection();
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
@@ -164,6 +165,7 @@ function checkConnection() {
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
                     createMenu(applicationData);
+                    initRuCulture();
                     reactRender();
                     initGallaryClick();
                     submitFormListener();
@@ -188,6 +190,7 @@ function checkConnection() {
         var StartPage = applicationData.Pages.filter(function(p) { return p.IsStartPage })[0];
         indexPage = StartPage.Id;
         createMenu(applicationData);
+        initRuCulture();
         reactRender();
         initGallaryClick();
         submitFormListener();
@@ -212,6 +215,7 @@ function checkApplicationId() {
 function initMenuYoutunbe() {
     createMenu();
     if (resources.length == 0) {
+        initRuCulture();
         reactRender();
         submitFormListener();
         unBlockUi()
@@ -223,6 +227,7 @@ function callback() {
     var jsonString = JSON.stringify(applicationData);
     $.jStorage.set('appData', jsonString);
     deleteResources();
+    initRuCulture();
     reactRender();
     initGallaryClick();
     submitFormListener();
