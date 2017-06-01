@@ -24,7 +24,6 @@ function onDeviceReady() {
             window.Promise = Promise;
         }
         fileSystem.root.getDirectory("Phonegap", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
-        initCulture();
         checkConnection();
         store = fileSystem.root.nativeURL + "Phonegap/";
     });

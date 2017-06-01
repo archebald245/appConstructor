@@ -1,5 +1,50 @@
 function initCulture() {
-    initRuCulture();
+    var cultureName = "ru";
+
+    if ($.jStorage.get('cultureName') != null) {
+        cultureName = $.jStorage.get('cultureName');
+    } else if ($.jStorage.get('cultureName') == null) {
+        if (applicationData.CultureName != null) {
+            cultureName = applicationData.CultureName;
+        }
+        $.jStorage.set('cultureName', cultureName);
+    }
+
+    if (cultureName == "ru" || cultureName == "Ru" || cultureName == "ru-RU") {
+        initRuCulture();
+    } else if (cultureName == "ua" || cultureName == "uk" || cultureName == "ua-UK") {
+        initUaCulture()
+    } else {
+        initRuCulture();
+    }
+    //изменить на ресурсы
+    $(".container-statusBooking .cart-top-line span").html("Your book status list");
+    $(".bookingServices-container .cart-top-line span").html("Services1111");
+    $(".bookingServices-container button.btn-order-booking span").html("Order Booking");
+    $(".container-selectFreeBookTime button.back-to-container-from-book span").html("Select free time");
+    $(".container-selectFreeBookTime p span").html("We can offer you these times:");
+    $(".container-selectFreeBookTime button#bookAfterConfirmFreeTime span").html("Book");
+    $(".dateTimePicker-container .cart-top-line span").html("Select Date");
+    $("label[for='dateTimePicker-time']").html("Select time");
+    $("label[for='dateTimePicker-date']").html("Select date");
+    $("label[for='nameOrder']").html("Name");
+    $("label[for='confirmMethod']").html("Phone Number");
+    $("label[for='commentOrder']").html("Your Order Comments");
+
+
+    $(".dateTimePicker-container button.btn-confirmDateForBook span").html("Confirm Method");
+    $(".order-booking .cart-top-line span").html("Your Order Info");
+    $(".order-booking button.btn-send-order-booking span ").html("Book");
+    $(".cart .cart-top-line span").html("Your Order");
+    $(".cart .totalPrice span ").html("Total $ ");
+    $(".cart Button.btn-order span ").html("Order");
+    $("#orderInfo .cart-top-line span ").html("Your Order Info");
+
+    $("#orderInfo label[for='nameOrder']").html("Name");
+    $("#orderInfo label[for='phoneOrder']").html("Phone Number");
+    $("#orderInfo label[for='emailOrder']").html("Email");
+    $("#orderInfo label[for='commentOrder']").html("Your Order Comments");
+    $("#orderInfo button.placeAnOrder span").html("Buy");
 }
 
 function initRuCulture() {
@@ -34,7 +79,7 @@ function initRuCulture() {
     cultureRes.lockedPage = "This page is locked!";
     cultureRes.loginPlease = "Login Please";
     //formWork
-    cultureRes.noInternet = "Sorry, no internet connection!лол";
+    cultureRes.noInternet = "Извините, проверте Интернет соединение!";
     cultureRes.requiredFields = "Please fill in all required fields!";
     cultureRes.validPhone = "Please enter valid phone number!";
     cultureRes.validEmail = "Please enter valid email!";
@@ -87,6 +132,9 @@ function initRuCulture() {
     cultureRes.restConf = "Your shopping cart already has order from previous restaurant. If you add and confirm current order the order from previous restaurant will be removed. Continue?";
     cultureRes.sorryOnline = "Sorry, is only available online!";
     cultureRes.noTime = "No time for this rest!";
+
+    //index.html
+
 }
 
 function initUaCulture() {
@@ -121,7 +169,7 @@ function initUaCulture() {
     cultureRes.lockedPage = "This page is locked!";
     cultureRes.loginPlease = "Login Please";
     //formWork
-    cultureRes.noInternet = "Sorry, no internet connection!лол";
+    cultureRes.noInternet = "Вибачте, перевірте Інтернет з`єднання";
     cultureRes.requiredFields = "Please fill in all required fields!";
     cultureRes.validPhone = "Please enter valid phone number!";
     cultureRes.validEmail = "Please enter valid email!";
