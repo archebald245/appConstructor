@@ -230,7 +230,7 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId) {
                         var toDay = moment(fromDay, ["MM/DD/YYYY"]).add(bookResources.CountDaysForBook, "days").format("MM/DD/YYYY");
 
                         if (!((moment(dateVal, ["MM/DD/YYYY"]).isAfter(fromDay) || moment(dateVal, ["MM/DD/YYYY"]).isSame(fromDay)) && (moment(dateVal, ["MM/DD/YYYY"]).isBefore(toDay)) || moment(dateVal, ["MM/DD/YYYY"]).isSame(toDay))) {
-                            alert(cultureRes.cantBookOne + fromDay + cultureRes.cantBookOne + toDay + "!");
+                            alert(cultureRes.cantBookOne + fromDay + cultureRes.cantBookTwo + toDay + "!");
                             return false;
                         } else {
                             if (bookedStart >= startTime && bookedEnd <= closeTime) {

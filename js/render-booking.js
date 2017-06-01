@@ -27,16 +27,14 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
                 null,
                 React.createElement(
                     'h1',
-                    null,
-                    cultureRes.displayInstTwo,
+                    null, cultureRes.displayInstTwo,
                     data.Name
                 ),
                 CollectionOfElementsInstitution,
                 React.createElement('input', { type: 'hidden', className: 'value-sortByService', value: sortByService }),
                 React.createElement('input', { type: 'hidden', className: 'value-currentInstitution', value: data.Id }),
                 React.createElement(
-                    'button', { type: 'button', className: sortByService ? "btn-order-booking" : "hidden btn-order-booking" },
-                    cultureRes.orderBook
+                    'button', { type: 'button', className: sortByService ? "btn-order-booking" : "hidden btn-order-booking" }, cultureRes.orderBook
                 )
             );
         }
@@ -58,8 +56,7 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
                 'div', { className: 'row-elementInstitution row-elementTimeLine' },
                 image,
                 React.createElement(
-                    'p', { className: 'name-elementInstitution' },
-                    cultureRes.displayName,
+                    'p', { className: 'name-elementInstitution' }, cultureRes.displayName,
                     data.Name
                 ),
                 data.UseDayTime ? data.DayForBookResource.map(function(day) {
@@ -68,16 +65,14 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
                         null,
                         React.createElement(
                             'time',
-                            null,
-                            cultureRes.openTime,
+                            null, cultureRes.openTime,
                             day.Day,
                             ' - ',
                             day.OpenTime.split("T")[1]
                         ),
                         React.createElement(
                             'time',
-                            null,
-                            cultureRes.closeTime,
+                            null, cultureRes.closeTime,
                             day.Day,
                             ' - ',
                             day.CloseTime.split("T")[1]
@@ -88,33 +83,28 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
                     null,
                     React.createElement(
                         'time',
-                        null,
-                        cultureRes.openTime,
+                        null, cultureRes.openTime,
                         data.OpenTime.split("T")[1]
                     ),
                     React.createElement(
                         'time',
-                        null,
-                        cultureRes.closeTime,
+                        null, cultureRes.closeTime,
                         data.CloseTime.split("T")[1]
                     )
                 ),
                 React.createElement(
                     'p',
-                    null,
-                    cultureRes.startBookDay,
+                    null, cultureRes.startBookDay,
                     data.StartBookDay
                 ),
                 React.createElement(
                     'p',
-                    null,
-                    cultureRes.stepMin,
+                    null, cultureRes.stepMin,
                     data.StepMinutes
                 ),
                 React.createElement(
                     'p',
-                    null,
-                    cultureRes.countDay,
+                    null, cultureRes.countDay,
                     data.CountDaysForBook
                 ),
                 React.createElement('input', { type: 'hidden', className: 'timeLineId', value: data.Id })
@@ -123,7 +113,7 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
     });
 
     var Service = React.createClass({
-        displayName: 'Service',
+        displayName: cultureRes.service,
 
         render: function render() {
             var data = this.props.data;
@@ -139,24 +129,24 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
                 image,
                 React.createElement(
                     'p', { className: 'name-elementInstitution' },
-                    'Name - ',
+                    cultureRes.displayName,
                     data.Name
                 ),
                 React.createElement(
                     'p',
                     null,
-                    'Description - ',
+                    cultureRes.description,
                     data.Description
                 ),
                 React.createElement(
                     'time',
                     null,
-                    'Duration Time - ',
+                    cultureRes.durationTime,
                     data.Duration
                 ),
                 React.createElement(
                     'button', { className: 'btn-bookThisService' },
-                    'Book'
+                    cultureRes.book
                 ),
                 React.createElement('input', { type: 'hidden', className: 'serviceId', value: data.Id }),
                 React.createElement('input', { type: 'hidden', className: 'serviceDuration', value: data.Duration }),
