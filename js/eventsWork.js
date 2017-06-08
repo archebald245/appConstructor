@@ -2,8 +2,8 @@ function goToPage(index) {
     indexPage = index;
     var thisPage = applicationData.Pages.filter(function(item) { return item.Id == indexPage })[0];
     var thisPageIsLocked = thisPage.IsLocked;
-    if(thisPageIsLocked){
-        window.plugins.toast.showShortBottom("This page is locked!");
+    if (thisPageIsLocked) {
+        window.plugins.toast.showShortBottom(cultureRes.lockedPage);
         return false
     }
     if (thisPage.IsPrivate) {
@@ -28,7 +28,7 @@ function goToPage(index) {
                     }
                 });
             });
-            window.plugins.toast.showShortBottom("Login, please!");
+            window.plugins.toast.showShortBottom(cultureRes.loginPlease);
         }
 
     }
