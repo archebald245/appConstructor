@@ -1,7 +1,11 @@
 var resources = [];
 
-function searchResourcesAndReplacePatch(jsonObject) {
-    var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
+function ReplaceResourcesPatchByLocal(jsonObject) {
+    //var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
+    var path = window.location.pathname;
+    var storePath = path.substring(0, path.lastIndexOf('/') + 1);
+
+    storePath = "file://" + storePath + "images/";
     for (var i = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
@@ -11,6 +15,32 @@ function searchResourcesAndReplacePatch(jsonObject) {
         }
 
 
+    }
+    if (jsonObject.Restaurants != null) {
+        jsonObject.Restaurants = resourcesOfRestaurantMenus(jsonObject.Restaurants, storePath);
+    }
+    if (jsonObject.Institutions != null) {
+        jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
+    }
+    if ($.jStorage.get('resources') != null) {
+        resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
+    } else {
+        resourcesToDownload = resources;
+    }
+    $.jStorage.set('appData', JSON.stringify(jsonObject));
+    $.jStorage.set('resources', resources);
+    return resourcesToDownload;
+}
+
+function searchResourcesAndReplacePatch(jsonObject) {
+    var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
+    for (var i = 0; i < jsonObject.Pages.length; i++) {
+        for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
+            jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
+        }
+        if (jsonObject.Pages[i].BackgroundImagePath != null) {
+            jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
+        }
     }
     if (jsonObject.Restaurants != null) {
         jsonObject.Restaurants = resourcesOfRestaurantMenus(jsonObject.Restaurants, storePath);
@@ -219,13 +249,14 @@ function downloadResources() {
     var promiseArray = [];
     for (var i = 0; i < resources.length; i++) {
         var fileNameImage = resources[i];
-       promiseArray.push(download(fileNameImage));
+        promiseArray.push(download(fileNameImage));
     }
-    Promise.all(promiseArray).then(callback).catch(function(err){
-          callback();
+    Promise.all(promiseArray).then(callback).catch(function(err) {
+        console.log("downloadResources ERROR");
+        callback();
     })
 
-    
+
 }
 
 function download(fileName) {
@@ -238,21 +269,21 @@ function download(fileName) {
             resourcesArr.push(resources[i]);
         }
     }
-   return new Promise(function(resolve, reject){
+    return new Promise(function(resolve, reject) {
         window.myFileSystem.root.getFile(localFileName, { create: true, exclusive: false }, function(fileEntry) {
-        localPath = fileEntry.toURL();
-        console.log(localPath);
-        var ft = new FileTransfer();
-        // readFile(entry);
-                // countFileDownload = countFileDownload + 1;
-                // if ((countFileDownload + countFileDownloadFail) === resourcesArr.length) {
-                //     callback();
-                // }
-        ft.download(remoteFile,
-            localPath,
-            resolve,reject);
-    }, fail);
-   }); 
+            localPath = fileEntry.toURL();
+            console.log(localPath);
+            var ft = new FileTransfer();
+            // readFile(entry);
+            // countFileDownload = countFileDownload + 1;
+            // if ((countFileDownload + countFileDownloadFail) === resourcesArr.length) {
+            //     callback();
+            // }
+            ft.download(remoteFile,
+                localPath,
+                resolve, reject);
+        }, fail);
+    });
 }
 
 // function failDownload(error) {
