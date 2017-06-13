@@ -44,16 +44,19 @@ function submitFormListener() {
                 });
             } else {
                 $.post('' + siteUrl + '/Form/SaveFormData', $(form).serialize(), function() {
-                    alert("Thank you!");
+                    alert(cultureRes.thankYou);
                     $(form).find(".formBlock").find("input, textarea").val("");
                     $(form).find("input[type='checkbox']").removeAttr("checked");
                 });
             }
 
         } else {
-            alert("Sorry, no internet connection!");
+            alert(cultureRes.noInternet);
         }
     });
+    if ($.jStorage.get("isLogin")) {
+        $(".formLogout").prop("disabled", false);
+    }
     $(".formLogout").on("click", function() {
         $.jStorage.set('isLogin', false);
         goToPage(indexPage);
@@ -110,7 +113,7 @@ function bindChangeValForms() {
                                 });
                             } else {
                                 $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
-                                    alert("Thank you!");
+                                    alert(cultureRes.thankYou);
                                     $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
                                     $(elem).find("input[type='checkbox']").removeAttr("checked");
@@ -119,7 +122,7 @@ function bindChangeValForms() {
                             }
                         }
                     } else {
-                        alert("Sorry, no internet connection!");
+                        alert(cultureRes.noInternet);
                     }
                 });
             }
@@ -145,7 +148,7 @@ function bindChangeValForms() {
                             });
                         }
                     } else {
-                        alert("Sorry, no internet connection!");
+                        alert(cultureRes.noInternet);
                     }
                 })
             } else {
@@ -173,7 +176,7 @@ function checkValidationAndRequired(form) {
         }
     }, this);
     if (check == false) {
-        alert("Please fill in all required fields!");
+        alert(cultureRes.requiredFields);
         return check;
     }
     if ($(form).find(".required-check").length > 0) {
@@ -184,7 +187,7 @@ function checkValidationAndRequired(form) {
             }
         });
         if (check == false) {
-            alert("Please fill in all required fields!");
+            alert(cultureRes.requiredFields);
             return check;
         }
     }
@@ -192,7 +195,7 @@ function checkValidationAndRequired(form) {
         var phoneInput = $(form).find(".phoneNumberElement").find(".phoneNumber").val();
         var phoneValid = /^\+\d{4}\d{3}\d{4}$/;
         if ((!phoneInput.match(phoneValid)) && (!phoneInput != "")) {
-            alert("Please enter valid phone number!");
+            alert(cultureRes.validPhone);
             check = false;
             return check;
         }
@@ -201,14 +204,14 @@ function checkValidationAndRequired(form) {
         var emailInput = $(form).find(".emailElement").find(".email").val().toLowerCase();
         var emailValid = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,8})$/;
         if ((!emailInput.match(emailValid)) && (emailInput != "")) {
-            alert("Please enter valid email!");
+            alert(cultureRes.validEmail);
             check = false;
             return check;
         }
     }
     if ($(form).find(".passwordElement").length > 0) {
         if ($(form).find(".passwordElement").first().find(".passElement").val().length < 4) {
-            alert("Password must contain 4 or more characters!");
+            alert(cultureRes.passLength);
             check = false;
             return check;
         }
@@ -220,7 +223,7 @@ function checkValidationAndRequired(form) {
 
             for (var i = 1; i < passArray.length; i++) {
                 if (passArray[i] !== passArray[0]) {
-                    alert("Passwords do not match. Try again.");
+                    alert(cultureRes.pathNotMatgh);
                     check = false;
                     return check;
                 }
