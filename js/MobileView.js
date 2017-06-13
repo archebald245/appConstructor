@@ -47,6 +47,8 @@ function setUseRestaurantMenu(id, use, restaurants) {
 //restaurant menu element
 
 function reactRender() {
+    initCulture();
+
     function onYouTubeIframeAPIReady(element, id) {
         var player = new YT.Player(element, {
             heidth: 'auto',
@@ -121,7 +123,7 @@ function reactRender() {
             });
             $(".first").click(function() {
                 if ($.jStorage.get('bookOrderWithStatusPending') == null) {
-                    alert("You haven't any orders!");
+                    alert(cultureRes.haveNotOrders);
                     return false;
                 } else {
                     $(".container-statusBooking").removeClass("hidden");
@@ -146,7 +148,7 @@ function reactRender() {
 
                             $(".status-list").html("");
                             for (var i = 0; i < orderedArray.length; i++) {
-                                $(".status-list").append("<p>" + (collectionOrders[i].IsConfirmated ? 'Confirmated' : 'Pending') + "</p> <p>" + orderedArray[i].nemesService + "</p>");
+                                $(".status-list").append("<p>" + (collectionOrders[i].IsConfirmated ? cultureRes.confirmated : cultureRes.pending) + "</p> <p>" + orderedArray[i].nemesService + "</p>");
                             }
                         }
                     });
@@ -173,7 +175,7 @@ function reactRender() {
             var rowModels = this.state.data.map(function(row) {
                 return React.createElement(CellContainer, { data: row, key: row.Id });
             });
-            var pageIsLocked = applicationData.Pages.filter(function(p){return p.Id == indexPage})[0].IsLocked;
+            var pageIsLocked = applicationData.Pages.filter(function(p) { return p.Id == indexPage })[0].IsLocked;
             if (applicationData.Menu.Position == "bottom-left" || applicationData.Menu.Position == "bottom-right") {
                 if (isBooking == true && isRestaurant == true) {
                     return React.createElement(
@@ -203,8 +205,7 @@ function reactRender() {
                             )
                         ),
                         React.createElement(
-                            'div', { className: 'container-fluid' },
-                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
                     );
                 } else if (isBooking == true) {
@@ -228,8 +229,7 @@ function reactRender() {
                             )
                         ),
                         React.createElement(
-                            'div', { className: 'container-fluid' },
-                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
                     );
                 } else if (isRestaurant == true) {
@@ -238,8 +238,7 @@ function reactRender() {
                         null,
                         React.createElement('div', { className: 'cart-btn bottom-menu' }),
                         React.createElement(
-                            'div', { className: 'container-fluid' },
-                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
                     );
                 } else {
@@ -247,8 +246,7 @@ function reactRender() {
                         'div',
                         null,
                         React.createElement(
-                            'div', { className: 'container-fluid' },
-                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
                     );
                 }
@@ -289,8 +287,7 @@ function reactRender() {
                             )
                         ),
                         React.createElement(
-                            'div', { className: 'container-fluid' },
-                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
                     );
                 } else if (isBooking == true) {
@@ -322,8 +319,7 @@ function reactRender() {
                             )
                         ),
                         React.createElement(
-                            'div', { className: 'container-fluid' },
-                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
                     );
                 } else if (isRestaurant == true) {
@@ -333,8 +329,7 @@ function reactRender() {
                         null,
                         React.createElement('div', { className: 'cart-btn' }),
                         React.createElement(
-                            'div', { className: 'container-fluid' },
-                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
                     );
                 } else {
@@ -342,8 +337,7 @@ function reactRender() {
                         'div',
                         null,
                         React.createElement(
-                            'div', { className: 'container-fluid' },
-                            !pageIsLocked ? rowModels : React.createElement('span',null,'This page is Locked!')
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
                     );
                 }
@@ -672,13 +666,13 @@ function reactRender() {
                 $(ReactDOM.findDOMNode(this)).append($(div));
                 var ThisRestaurantaurantMenuBlock = this;
                 var weekday = new Array(7);
-                weekday[0] = "Sunday";
-                weekday[1] = "Monday";
-                weekday[2] = "Tuesday";
-                weekday[3] = "Wednesday";
-                weekday[4] = "Thursday";
-                weekday[5] = "Friday";
-                weekday[6] = "Saturday";
+                weekday[0] = cultureRes.sunday;
+                weekday[1] = cultureRes.monday;
+                weekday[2] = cultureRes.tuesday;
+                weekday[3] = cultureRes.wednesday;
+                weekday[4] = cultureRes.thursday;
+                weekday[5] = cultureRes.friday;
+                weekday[6] = cultureRes.saturday;
                 var dayNow = weekday[new Date().getDay()];
                 //no working
                 $(restaurantsArr).each(function(i, thisRestaurantaraunt) {
@@ -703,7 +697,7 @@ function reactRender() {
                                         });
                                         $(".select-restaurant").val(thisRestaurantaraunt.Id);
                                         $(".select-menu").val(thisRestaurantarauntMenu.Id);
-                                    } else if (dataItem.IsChecked && dataItem.Day == "Date" && ThisRestaurantaurantMenuBlock.checkRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
+                                    } else if (dataItem.IsChecked && dataItem.Day == cultureRes.date && ThisRestaurantaurantMenuBlock.checkRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
                                         renderRestaurantMenu(thisRestaurantaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                         $(selectMenu).html("");
                                         $(thisRestaurantaraunt.RestaurantMenus).each(function(count, option) {
@@ -717,7 +711,7 @@ function reactRender() {
                         } else {
                             var networkState = navigator.connection.type;
                             if (networkState == Connection.NONE) {
-                                $("#custom-restaurant-menu-container").html("Sorry, is only available online!");
+                                $("#custom-restaurant-menu-container").html(cultureRes.sorryOnline);
                             } else {
                                 if (thisRestaurantarauntMenu.UseDateTime == false) {
                                     renderRestaurantMenu(thisRestaurantarauntMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
@@ -737,7 +731,7 @@ function reactRender() {
                                             });
                                             $(".select-restaurant").val(thisRestaurantaraunt.Id);
                                             $(".select-menu").val(thisRestaurantarauntMenu.Id);
-                                        } else if (dataItem.IsChecked && dataItem.Day == "Date" && ThisRestaurantaurantMenuBlock.checkRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
+                                        } else if (dataItem.IsChecked && dataItem.Day == cultureRes.date && ThisRestaurantaurantMenuBlock.checkRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
                                             renderRestaurantMenu(thisRestaurantaurantMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
                                             $(selectMenu).html("");
                                             $(thisRestaurantaraunt.RestaurantMenus).each(function(count, option) {
@@ -776,7 +770,7 @@ function reactRender() {
                                     $(".SubmitBtnIdForm.form-submit-item[name=" + element.Id + "]").find("button").prop("disabled", true);
                                 }
                                 if ($.jStorage.get('isLogin') && element.LoginForm) {
-                                    $(".SubmitBtnIdForm.form-submit-item[name=" + element.Id + "]").find("button").removeClass("formSubmit").addClass("formLogout").text("Logout")
+                                    $(".SubmitBtnIdForm.form-submit-item[name=" + element.Id + "]").find("button").removeClass("formSubmit").addClass("formLogout").text("Logout");
                                     submitFormListener();
                                 }
                                 $("#custom-form-container").find("label").attr("style", styleLabel);
@@ -799,23 +793,24 @@ function reactRender() {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
                     var options = {
-                        openWith : {
-		                    enabled : true
-	                    }
+                        openWith: {
+                            enabled: true
+                        }
                     }
-                    function onShow(){
-                    window.console.log('document shown');
-                    //e.g. track document usage
+
+                    function onShow() {
+                        window.console.log('document shown');
+                        //e.g. track document usage
                     }
                     cordova.plugins.SitewaertsDocumentViewer.viewDocument(
-                    url, 'application/pdf', options, onShow);
+                        url, 'application/pdf', options, onShow);
                 });
             }
             if (data.ContentTypeId == 2 || data.ContentTypeId == 4) {
                 $(ReactDOM.findDOMNode(this)).click(function(e) {
-                e.preventDefault();
-                window.open($(this).attr("href"), '_system')
-            });
+                    e.preventDefault();
+                    window.open($(this).attr("href"), '_system')
+                });
             }
             // $("body a").click(function(e) {
             //     e.preventDefault();
@@ -965,8 +960,8 @@ function reactRender() {
         //   var timeString = month + "-" + day + "-" + ap + hour + ':' + minute + ':' + second;
         //   return timeString;
         // },
-        checkDeniedTools: function(allTool, thisTool){
-            var tool = allTool.filter(function(e){return e == thisTool}).length < 1;
+        checkDeniedTools: function(allTool, thisTool) {
+            var tool = allTool.filter(function(e) { return e == thisTool }).length < 1;
             return tool
         },
         render: function render() {
@@ -974,29 +969,29 @@ function reactRender() {
             var deniedTools = applicationData.DeniedTools.replace(/"/g, "'").replace(/]/).split("[")[1].replace(/'/g, '').split(",");
             if (data.ContentTypeId == 3 && this.checkDeniedTools(deniedTools, "image-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 3){
-            return null
+            } else if (data.ContentTypeId == 3) {
+                return null
             }
             if (data.ContentTypeId == 4 && this.checkDeniedTools(deniedTools, "image-link-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 4){
-            return null
+            } else if (data.ContentTypeId == 4) {
+                return null
             }
             if (data.ContentTypeId == 5 && this.checkDeniedTools(deniedTools, "text-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 5){
-            return null
+            } else if (data.ContentTypeId == 5) {
+                return null
             }
             if (data.ContentTypeId == 6 && this.checkDeniedTools(deniedTools, "botton-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 6){
-            return null
+            } else if (data.ContentTypeId == 6) {
+                return null
             }
             if (data.ContentTypeId == 2 && this.checkDeniedTools(deniedTools, "link-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 2){
-            return null
-             }
+            } else if (data.ContentTypeId == 2) {
+                return null
+            }
             if (data.ContentTypeId == 1) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
             }
@@ -1005,21 +1000,21 @@ function reactRender() {
                     'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
                     React.createElement(GalleryContainer, { data: data.Resourceses })
                 );
-            }else if(data.ContentTypeId == 8){
-            return null
+            } else if (data.ContentTypeId == 8) {
+                return null
             }
             if (data.ContentTypeId == 9 && this.checkDeniedTools(deniedTools, "difficult-botton-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 9){
-            return null
+            } else if (data.ContentTypeId == 9) {
+                return null
             }
             if (data.ContentTypeId == 7 && this.checkDeniedTools(deniedTools, "youtube-item")) {
                 return React.createElement(
                     'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
                     React.createElement(YoutubeContainer, { data: data.Value })
                 );
-            }else if(data.ContentTypeId == 7){
-            return null
+            } else if (data.ContentTypeId == 7) {
+                return null
             }
 
             //ContentTypeId - 10 start
@@ -1028,46 +1023,46 @@ function reactRender() {
                     'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
                     React.createElement(Hbox, { data: data.Json })
                 );
-            }else if(data.ContentTypeId == 10){
-            return null
+            } else if (data.ContentTypeId == 10) {
+                return null
             }
             if (data.ContentTypeId == 11 && this.checkDeniedTools(deniedTools, "vbox-container-item")) {
                 return React.createElement(
                     'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
                     React.createElement(Vbox, { data: data.Json })
                 );
-            }else if(data.ContentTypeId == 11){
-            return null
+            } else if (data.ContentTypeId == 11) {
+                return null
             }
             if (data.ContentTypeId == 12 && this.checkDeniedTools(deniedTools, "form-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 12){
-            return null
+            } else if (data.ContentTypeId == 12) {
+                return null
             }
             if (data.ContentTypeId == 13 && this.checkDeniedTools(deniedTools, "custom-form-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 13){
-            return null
+            } else if (data.ContentTypeId == 13) {
+                return null
             }
             if (data.ContentTypeId == 14 && this.checkDeniedTools(deniedTools, "custom-form-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 14){
-            return null
+            } else if (data.ContentTypeId == 14) {
+                return null
             }
             if (data.ContentTypeId == 15 && this.checkDeniedTools(deniedTools, "restaurant-menu-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell });
-            }else if(data.ContentTypeId == 15){
-            return null
+            } else if (data.ContentTypeId == 15) {
+                return null
             }
             if (data.ContentTypeId == 16 && this.checkDeniedTools(deniedTools, "booking-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell });
-            }else if(data.ContentTypeId == 16){
-            return null
+            } else if (data.ContentTypeId == 16) {
+                return null
             }
             if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
-            }else if(data.ContentTypeId == 17){
-            return null
+            } else if (data.ContentTypeId == 17) {
+                return null
             }
         }
     });
