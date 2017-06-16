@@ -888,9 +888,10 @@ label[for='nameOrder'] {
     margin: 0 auto;
 }
 
-@media (min-width: 960px) {
+
+/*@media (min-width: 960px) {
     .classMenu {
-        height: 90px;
+        height: 65px;
     }
     .containerTop {
         padding-top: 88px;
@@ -912,7 +913,24 @@ label[for='nameOrder'] {
         position: absolute;
         left: 15px;
     }
-}
+    .menu-icon {
+        width: 45px;
+        height: 54px;
+        text-indent: -9999px;
+        margin-left: 10px;
+        cursor: pointer;
+        display: block;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding-left: 3px;
+    }
+    .classMenu .menu-icon>div {
+        width: 37px;
+        height: 6px;
+        background-color: #555353;
+        margin: 8px 0;
+    }
+}*/
 
 
 /*Switcher, Simple CheckBox Block*/
@@ -1069,6 +1087,52 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     left: 0%;
     z-index: 100;
 }
+
+@media (min-width: 960px) {
+    .classMenu {
+        height: 65px;
+    }
+    .containerTop {
+        padding-top: 88px;
+    }
+    .containerBottom {
+        padding-bottom: 88px;
+    }
+    .classDropdownList-topMenu {
+        top: 88px;
+    }
+    .classDropdownList-downMenu {
+        bottom: 88px;
+    }
+    .menu-icon-right {
+        position: absolute;
+        right: 15px;
+    }
+    .menu-icon-left {
+        position: absolute;
+        left: 15px;
+    }
+    .menu-icon {
+        width: 45px;
+        height: 54px;
+        text-indent: -9999px;
+        margin-left: 10px;
+        cursor: pointer;
+        display: block;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding-left: 3px;
+    }
+    .classMenu .menu-icon>div {
+        width: 35px;
+        height: 6px;
+        background-color: #555353;
+        margin: 8px 0;
+    }
+}
+
+
+/*~~~~~~~~~~~~STYLING MENU END~~~~~~~~~~~~~~*/
 
 .first {
     background-image: url(../baseimages/booking.png);
