@@ -1020,7 +1020,7 @@ function reactRender() {
             //ContentTypeId - 10 start
             if (data.ContentTypeId == 10 && this.checkDeniedTools(deniedTools, "hbox-container-item")) {
                 return React.createElement(
-                    'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
+                    'div', { className: "videoWrapper cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
                     React.createElement(Hbox, { data: data.Json })
                 );
             } else if (data.ContentTypeId == 10) {
