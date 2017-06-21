@@ -1010,7 +1010,7 @@ function reactRender() {
             }
             if (data.ContentTypeId == 7 && this.checkDeniedTools(deniedTools, "youtube-item")) {
                 return React.createElement(
-                    'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
+                    'div', { className: "videoWrapper cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
                     React.createElement(YoutubeContainer, { data: data.Value })
                 );
             } else if (data.ContentTypeId == 7) {
@@ -1020,7 +1020,7 @@ function reactRender() {
             //ContentTypeId - 10 start
             if (data.ContentTypeId == 10 && this.checkDeniedTools(deniedTools, "hbox-container-item")) {
                 return React.createElement(
-                    'div', { className: "videoWrapper cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
+                    'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan },
                     React.createElement(Hbox, { data: data.Json })
                 );
             } else if (data.ContentTypeId == 10) {
