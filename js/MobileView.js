@@ -51,9 +51,10 @@ function reactRender() {
 
     function onYouTubeIframeAPIReady(element, id) {
         var player = new YT.Player(element, {
-            heidth: 'auto',
+            height: 'auto',
             width: '100%',
             videoId: id,
+            playerVars: { rel: 0 },
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
@@ -964,6 +965,14 @@ function reactRender() {
             var tool = allTool.filter(function(e) { return e == thisTool }).length < 1;
             return tool
         },
+        checkInternetConnection: function() {
+            var networkState = navigator.connection.type;
+            if (networkState != Connection.NONE) {
+                return true;
+            } else if (networkState == Connection.NONE) {
+                return false;
+            }
+        },
         render: function render() {
             var data = this.props.data;
             var deniedTools = applicationData.DeniedTools.replace(/"/g, "'").replace(/]/).split("[")[1].replace(/'/g, '').split(",");
@@ -1008,9 +1017,9 @@ function reactRender() {
             } else if (data.ContentTypeId == 9) {
                 return null
             }
-            if (data.ContentTypeId == 7 && this.checkDeniedTools(deniedTools, "youtube-item")) {
+            if (data.ContentTypeId == 7 && this.checkDeniedTools(deniedTools, "youtube-item") && this.checkInternetConnection()) {
                 return React.createElement(
-                    'div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
+                    'div', { className: "videoWrapper cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
                     React.createElement(YoutubeContainer, { data: data.Value })
                 );
             } else if (data.ContentTypeId == 7) {
