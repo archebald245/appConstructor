@@ -62,7 +62,7 @@ function appStart() {
 
 function initYoutube() {
     var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
+    tag.src = "js/iframe/iframe_api.js";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
@@ -98,12 +98,15 @@ function updateResources() {
 function checkConnection() {
     var networkState = navigator.connection.type;
     if (networkState != Connection.NONE) {
+        //With internet
         var siteUrl = "http://appconstructor.newlinetechnologies.net"
         if ($.jStorage.get('appData') != null) {
+            //restart
             applicationData = JSON.parse($.jStorage.get('appData'));
             var projectId = applicationData.ProjectId;
             var versionId = applicationData.Version;
         } else {
+            //first start
             data = replaceData(data);
             applicationData = JSON.parse(data);
             var projectId = applicationData.ProjectId;
@@ -138,8 +141,8 @@ function checkConnection() {
                     applicationData = JSON.parse(data);
                     var jsonString = JSON.stringify(applicationData);
                     $.jStorage.set('appData', jsonString);
-                    checkUpdateRestaurantMenu(true);
                     updateResources();
+                    checkUpdateRestaurantMenu(true);
                     onCheckJson();
                 } else if (jsonObjectOfServer.InstitutionsUpdate) {
                     applicationData.Institutions = jsonObjectOfServer.Institutions;
@@ -157,10 +160,11 @@ function checkConnection() {
                     applicationData = JSON.parse(data);
                     var jsonString = JSON.stringify(applicationData);
                     $.jStorage.set('appData', jsonString);
-                    checkUpdateRestaurantMenu(true);
                     updateResources();
+                    checkUpdateRestaurantMenu(true);
                     onCheckJson();
                 } else {
+                    checkUpdateRestaurantMenu(true);
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
                     createMenu(applicationData);
@@ -173,11 +177,14 @@ function checkConnection() {
             }
         });
     } else {
+        //without internet
         if ($.jStorage.get('appData') != null) {
+            //Restart
             applicationData = JSON.parse($.jStorage.get('appData'));
             var projectId = applicationData.ProjectId;
             var versionId = applicationData.Version;
         } else {
+            //first start
             data = replaceData(data);
             applicationData = JSON.parse(data);
             var t = ReplaceResourcesPatchByLocal(applicationData);
