@@ -117,6 +117,10 @@ function checkConnection() {
         if (applicationData.UrlForUpdateApp != "" && applicationData.UrlForUpdateApp != null && typeof applicationData.UrlForUpdateApp != 'undefined') {
             siteUrl = applicationData.UrlForUpdateApp;
         }
+
+        if ($.jStorage.get('cultureName') == null) {
+            $.jStorage.set('cultureName', applicationData.CultureName);
+        }
         checkApplicationId();
 
         var collectionBookingId = [];
