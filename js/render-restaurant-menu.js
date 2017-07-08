@@ -62,14 +62,12 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 item.ProdName
                             ),
                             React.createElement(
-                                "p",
-                                null,
+                                "p", { className: "item-shop-description" },
                                 item.Description
                             ),
                             " ",
                             React.createElement(
-                                "button", { type: "button", className: "btn-restaurant-menu" },
-                                cultureRes.add
+                                "button", { type: "button", className: "btn-restaurant-menu" }
                             ),
                             React.createElement(
                                 "div", { className: "cartShop-price" },
@@ -101,13 +99,11 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 item.ProdName
                             ),
                             React.createElement(
-                                "p",
-                                null,
+                                "p", { className: "item-shop-description" },
                                 item.ShortDescription
                             ),
                             React.createElement(
-                                "button", { type: "button", className: "btn-restaurant-menu" },
-                                cultureRes.add
+                                "button", { type: "button", className: "btn-restaurant-menu" }
                             ),
                             React.createElement(
                                 "input", { type: "hidden", name: "shopItemId", value: item.Id }
@@ -128,8 +124,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 item.ProdName
                             ),
                             React.createElement(
-                                "p",
-                                null,
+                                "p", { className: "item-shop-description" },
                                 item.ShortDescription
                             )
                         ),
@@ -140,8 +135,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 item.Price
                             ),
                             React.createElement(
-                                "button", { type: "button", className: "btn-restaurant-menu" },
-                                cultureRes.add
+                                "button", { type: "button", className: "btn-restaurant-menu" }
                             ),
                             React.createElement(
                                 "input", { type: "hidden", name: "shopItemId", value: item.Id }
@@ -155,8 +149,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
             return React.createElement(
                 "div", { className: "custom-restaurant-menu-item" },
                 React.createElement(
-                    "label",
-                    null,
+                    "label", { className: "restaraunt-menu-name-label" },
                     " ",
                     this.state.data.Name,
                     " "

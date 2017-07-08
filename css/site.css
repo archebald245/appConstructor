@@ -353,10 +353,23 @@ form {
     margin-right: 1%;
 }
 
+h4.item-shop-title {
+    margin-top: 0px;
+    color: #545252;
+    font-weight: bold;
+}
 
-/*.item-shop-title{
-  text-transform: uppercase;
-}*/
+p.item-shop-description {
+    color: #545252;
+    text-align: justify;
+}
+
+.restaraunt-menu-name-label {
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    color: #545252;
+}
 
 .item-shop-categoty {
     display: inline-block;
@@ -379,22 +392,21 @@ form {
 .shopItem-row {
     overflow: hidden;
     word-break: break-word;
-    padding-bottom: 20px;
     background-color: #fff;
-    border-bottom: 1px solid #939393;
+    /*border-bottom: 1px solid #939393;*/
     color: #939393;
-    padding: 5px 0;
+    padding: 5px 0 30px;
+    position: relative;
 }
 
 .btn-restaurant-menu {
     border: none;
-    background-color: #939393;
-    width: 60px;
-    text-align: right;
-    color: #fff;
+    background-color: #929292;
+    width: 30px;
     height: 30px;
-    position: relative;
-    float: right;
+    position: absolute;
+    right: 0;
+    bottom: 20px;
 }
 
 .btn-restaurant-menu::after {
@@ -402,8 +414,8 @@ form {
     width: 2px;
     content: "";
     position: absolute;
-    top: 7px;
-    left: 19px;
+    top: 9px;
+    left: 14px;
     background-color: #fff;
 }
 
@@ -412,26 +424,29 @@ form {
     width: 12px;
     content: "";
     position: absolute;
-    top: 12px;
-    left: 14px;
+    top: 14px;
+    left: 9px;
     background-color: #fff;
 }
 
 .cartShop-price {
     height: 30px;
-    min-width: 50%;
-    float: right;
-    border: 2px solid #939393;
+    min-width: 5%;
     text-align: center;
-    margin-right: 5px;
     background-image: url(../baseimages/dollar.png);
-    background-position: 10%;
-    background-size: 10px;
+    background-position: 100%;
+    background-size: 15px;
     background-repeat: no-repeat;
     background-color: #fff;
-    color: #939393;
+    color: #545252;
     line-height: 30px;
-    padding-right: 9px;
+    padding-right: 15px;
+    position: absolute;
+    bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    box-sizing: border-box;
+    right: 7%;
 }
 
 .item-shop-categoty {
