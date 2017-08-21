@@ -232,8 +232,8 @@
              initGallaryClick();
              submitFormListener();
              unBlockUi()
-             console.log("error");
-             console.log(err);
+                 //console.log("error");
+                 //console.log(err);
          }
      });
 
