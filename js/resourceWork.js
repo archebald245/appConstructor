@@ -163,7 +163,7 @@ function compareResouces(oldResources, newResources, storePath) {
     var deleteOldResources = [];
     for (var i = 0; i < oldResources.length; i++) {
         for (var j = 0; j < newResources.length; j++) {
-            if (oldResources[i] == newResources[j]) {
+            if (oldResources[i] == newResources[j] && oldResources[i] !== null && newResources[j] !== null) {
                 equalResources.push(newResources[j]);
                 newResources[j] = null;
                 oldResources[i] = null;
@@ -236,12 +236,12 @@ function deleteImage(imagePath) {
     var localFileName = encodeURI("Phonegap/" + remoteFile.substring(remoteFile.lastIndexOf('/') + 1));
     window.myFileSystem.root.getFile(localFileName, { create: false }, function(fileEntry) {
         fileEntry.remove(function(file) {
-            console.log("File removed!");
+            // console.log("File removed!");
         }, function() {
-            console.log("error deleting the file ");
+            //console.log("error deleting the file ");
         });
     }, function() {
-        console.log("file does not exist");
+        //console.log("file does not exist");
     });
 }
 
@@ -252,7 +252,7 @@ function downloadResources() {
         promiseArray.push(download(fileNameImage));
     }
     Promise.all(promiseArray).then(callback).catch(function(err) {
-        console.log("downloadResources ERROR");
+        // console.log("downloadResources ERROR");
         callback();
     })
 
@@ -272,7 +272,7 @@ function download(fileName) {
     return new Promise(function(resolve, reject) {
         window.myFileSystem.root.getFile(localFileName, { create: true, exclusive: false }, function(fileEntry) {
             localPath = fileEntry.toURL();
-            console.log(localPath);
+            // console.log(localPath);
             var ft = new FileTransfer();
             // readFile(entry);
             // countFileDownload = countFileDownload + 1;
@@ -292,7 +292,7 @@ function download(fileName) {
 // }
 
 function fail(error) {
-    console.log(error.code);
+    //  console.log(error.code);
 }
 
 function replacePathToImageRestaurantMenu(restaurants) {
