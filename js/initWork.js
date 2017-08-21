@@ -48,15 +48,15 @@ function onDeviceReady() {
 }
 
 function onGetDirectorySuccess(dir) {
-    console.log("Created dir " + dir.name);
+    // console.log("Created dir " + dir.name);
 }
 
 function onGetDirectoryFail(error) {
-    console.log("Error creating directory " + error.code);
+    // console.log("Error creating directory " + error.code);
 }
 
 function appStart() {
-    console.log("add" + store)
+    // console.log("add " + store)
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {});
 }
 
@@ -99,7 +99,7 @@ function checkConnection() {
     var networkState = navigator.connection.type;
     if (networkState != Connection.NONE) {
         //With internet
-        var siteUrl = "http://appconstructor.newlinetechnologies.net"
+        var siteUrl = "http://appconstructor.newline.tech";
         if ($.jStorage.get('appData') != null) {
             //restart
             applicationData = JSON.parse($.jStorage.get('appData'));
