@@ -262,7 +262,7 @@ function initRuCulture() {
     //render-single-shopitem
     cultureRes.shopitem = "Магазин";
     cultureRes.shopitemDesc = "Описание:";
-    cultureRes.addToCart = "+ Добавиь в корзину";
+    cultureRes.addToCart = "+ Добавить в корзину";
 
     cultureRes.itemAdded = "Добавленно в корзину!";
     cultureRes.restConf = "В Вашей корзине есть заказ и предыдущего ресторана. Если вы добавите и подтвердите текущий заказ, заказ из предыдущего ресторана будет удален. Продолжить?";
