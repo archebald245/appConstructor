@@ -68,19 +68,17 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                         ),
                         React.createElement("div", { className: "price-column-shopItem" },
                             React.createElement(
-                                "div", { className: "btn-restaurant-menu" },
+                                "div", { className: "btn-restaurant-menu-container" },
                                 React.createElement(
                                     "div", { className: "cartShop-price" },
                                     item.Price + " ГРН"
                                 ),
                                 React.createElement(
-                                    "div", { className: "cartShop-buy" },
+                                    "div", { className: "cartShop-buy btn-restaurant-menu" },
                                     React.createElement(
                                         "span", { className: "cartShop-buy-label" }, "Заказать")
-
                                 )
                             ),
-
                             React.createElement(
                                 "input", { type: "hidden", name: "shopItemId", value: item.Id }
                             )
@@ -109,12 +107,19 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                         ),
                         React.createElement("div", { className: "price-column-shopItem" },
                             React.createElement(
-                                "button", { type: "button", className: "btn-restaurant-menu" }
+                                "div", { className: "btn-restaurant-menu-container" },
+                                React.createElement(
+                                    "div", { className: "cartShop-price" },
+                                    item.Price + " ГРН"
+                                ),
+                                React.createElement(
+                                    "div", { className: "cartShop-buy btn-restaurant-menu" },
+                                    React.createElement(
+                                        "span", { className: "cartShop-buy-label" }, "Заказать")
+
+                                )
                             ),
-                            React.createElement(
-                                "div", { className: "cartShop-price" },
-                                item.Price
-                            ),
+
                             React.createElement(
                                 "input", { type: "hidden", name: "shopItemId", value: item.Id }
                             )
@@ -141,11 +146,17 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                         ),
                         React.createElement("div", { className: "price-column-shopItem" },
                             React.createElement(
-                                "button", { type: "button", className: "btn-restaurant-menu" }
-                            ),
-                            React.createElement(
-                                "div", { className: "cartShop-price" },
-                                item.Price
+                                "div", { className: "btn-restaurant-menu-container" },
+                                React.createElement(
+                                    "div", { className: "cartShop-price" },
+                                    item.Price + " ГРН"
+                                ),
+                                React.createElement(
+                                    "div", { className: "cartShop-buy btn-restaurant-menu" },
+                                    React.createElement(
+                                        "span", { className: "cartShop-buy-label" }, "Заказать")
+
+                                )
                             ),
                             React.createElement(
                                 "input", { type: "hidden", name: "shopItemId", value: item.Id }

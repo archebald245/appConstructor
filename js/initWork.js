@@ -265,12 +265,12 @@ function doOnOrientationChange() {
         case -90:
         case 90:
             if (applicationData.Restaurants.length > 0) {
-                restarauntMenuModelItems();
+                // restarauntMenuModelItems();
             }
             break;
         default:
             if (applicationData.Restaurants.length > 0) {
-                restarauntMenuModelItems();
+                // restarauntMenuModelItems();
             }
             break;
     }

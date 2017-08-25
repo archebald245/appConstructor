@@ -345,12 +345,13 @@ form {
 .shopItem-row .content-column-shopItem {
     width: 50%;
     display: block;
-    padding: 0 2.5%;
+    padding: 0 20px 0 16px;
 }
 
 .shopItem-row .price-column-shopItem {
     width: 20%;
     display: block;
+    overflow: auto;
 }
 
 .shopItem-row.shopItem-row-left div {
@@ -407,34 +408,16 @@ p.item-shop-description {
     word-break: break-word;
     background-color: #fff;
     color: #939393;
-    padding: 10px 15px;
+    padding: 8px 16px;
     margin: 4% 2.5%;
     border: 1px solid #bdbdbd;
+    overflow: auto;
 }
 
-.btn-restaurant-menu {
+.btn-restaurant-menu-container {
     margin-top: 40px;
     width: 100%;
-}
-
-.btn-restaurant-menu::after {
-    height: 12px;
-    width: 2px;
-    content: "";
-    position: absolute;
-    top: 9px;
-    left: 14px;
-    background-color: #fff;
-}
-
-.btn-restaurant-menu::before {
-    height: 2px;
-    width: 12px;
-    content: "";
-    position: absolute;
-    top: 14px;
-    left: 9px;
-    background-color: #fff;
+    overflow: auto;
 }
 
 .cartShop-price {
@@ -455,6 +438,61 @@ p.item-shop-description {
     font-size: 22px;
     color: #fff;
     text-align: center;
+}
+
+.shopItem-column {
+    width: 95%;
+    margin: 4% 2.5%;
+    padding: 2% 4%;
+    border: 1px solid #bdbdbd;
+    overflow: auto;
+}
+
+.shopItem-column .img-column-shopItem {
+    width: 100%;
+    text-align: center;
+}
+
+.shopItem-column .img-column-shopItem img {
+    max-width: 100%;
+    max-height: 300px;
+}
+
+.shopItem-column .content-column-shopItem {
+    width: 100%;
+}
+
+.shopItem-column .content-column-shopItem .item-shop-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.shopItem-column .content-column-shopItem .item-shop-description {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #494949;
+}
+
+.shopItem-column .btn-restaurant-menu-container {
+    margin-top: 0;
+}
+
+.shopItem-column .price-column-shopItem {
+    clear: both;
+}
+
+.shopItem-column .price-column-shopItem .cartShop-price {
+    width: 30%;
+    float: left;
+    border: none;
+    font-size: 32px;
+}
+
+.shopItem-column .price-column-shopItem .cartShop-buy {
+    width: 30%;
+    float: right;
+    font-size: 24px;
 }
 
 .item-shop-categoty {
@@ -485,7 +523,7 @@ p.item-shop-description {
 }
 
 .btn-shop-column .cartShop-price,
-.btn-shop-column .btn-restaurant-menu,
+.btn-shop-column .btn-restaurant-menu-container,
 .btn-shop-column .item-shop-categoty {
     display: block;
     float: none;
@@ -755,7 +793,7 @@ label[for='nameOrder'] {
     width: 100%;
 }
 
-.img-column-shopItem img {
+.shopItem-row .img-column-shopItem img {
     width: 100%;
     height: auto;
 }
@@ -1154,6 +1192,74 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
         height: 6px;
         background-color: #555353;
         margin: 8px 0;
+    }
+    .shopItem-column {
+        width: 90%;
+        margin: 4% 5%;
+        padding: 2% 18%;
+        border: 1px solid #bdbdbd;
+    }
+}
+
+@media(max-width:960px) {
+    /*RESR MENU START*/
+    .shopItem-column .price-column-shopItem .cartShop-price,
+    .shopItem-row .price-column-shopItem .cartShop-price {
+        width: 40%;
+        float: left;
+        border: none;
+        font-size: 22px;
+    }
+    .shopItem-column .price-column-shopItem .cartShop-buy,
+    .shopItem-row .price-column-shopItem .cartShop-buy {
+        width: 40%;
+        float: right;
+        font-size: 14px;
+    }
+}
+
+@media(max-width:640px) {
+    .shopItem-column,
+    .shopItem-row {
+        width: 95%;
+        margin: 4% 2.5%;
+        padding: 2%px 4%px;
+        border: 1px solid #bdbdbd;
+    }
+    .shopItem-row .img-column-shopItem {
+        width: 100%;
+        text-align: center;
+    }
+    .shopItem-row .img-column-shopItem img {
+        max-width: 100%;
+        max-height: 300px;
+    }
+    .shopItem-row .content-column-shopItem {
+        width: 100%;
+    }
+    .shopItem-row .content-column-shopItem .item-shop-title {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .shopItem-row .content-column-shopItem .item-shop-description {
+        font-size: 15px;
+        line-height: 1.5;
+        color: #494949;
+    }
+    .shopItem-row .btn-restaurant-menu-container {
+        margin-top: 0;
+    }
+    .shopItem-row .price-column-shopItem .cartShop-price {
+        width: 45%;
+        float: left;
+        border: none;
+        font-size: 22px;
+    }
+    .shopItem-row .price-column-shopItem .cartShop-buy {
+        width: 45%;
+        float: right;
+        font-size: 14px;
     }
 }
 

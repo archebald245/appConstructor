@@ -236,15 +236,15 @@
                  //console.log(err);
          }
      });
-
-
  }
 
  function cartShopPrice() {
      $(".cartShop-price").each(function() {
          var price = $(this).text();
          if (price.indexOf('.') < 0) {
-             $(this).text(price + ".00");
+             var inIndex = price.indexOf(' ');
+             price = price.substr(0, inIndex) + ".00" + price.substr(inIndex);
+             $(this).text(price);
          }
      });
  }
