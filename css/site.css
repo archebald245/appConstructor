@@ -411,7 +411,6 @@ p.item-shop-description {
     padding: 8px 16px;
     margin: 4% 2.5%;
     border: 1px solid #bdbdbd;
-    overflow: auto;
 }
 
 .btn-restaurant-menu-container {
@@ -428,7 +427,7 @@ p.item-shop-description {
     color: #4a8b23;
     font-size: 24px;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
 }
 
 .cartShop-buy {
@@ -714,14 +713,22 @@ label[for='nameOrder'] {
     width: 100%;
 }
 
+.singleItem {
+    width: 95%;
+    margin: 0 2.5%;
+    padding: 2% 4%;
+}
+
 .singleShop-wrapper {
     margin-top: 70px;
     padding: 0 20px;
 }
 
 .singleShop-wrapper h4 {
-    color: #545252;
-    font-size: 20px;
+    color: #000;
+    font-size: 22px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .singleShop-description {
@@ -729,45 +736,62 @@ label[for='nameOrder'] {
 }
 
 .singleShop-description p {
-    margin-bottom: 50px;
-    color: #545252;
-}
-
-.singleShop-description h5 {
-    color: #545252;
-    font-weight: bold;
-    font-size: 20px;
-    border-top: 2px solid #545252;
-    padding-top: 30px;
+    margin-bottom: 65px;
+    font-size: 15px;
+    line-height: 1.47;
+    text-align: justify;
+    color: #494949;
 }
 
 .singleShop-price {
     float: left;
-    color: #545252;
-    font-size: 18px;
     width: 50%;
     text-align: right;
-    padding: 3px 0;
+    color: #4a8b23;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .singleShop-category {
     float: left;
     width: 50%;
-    color: #545252;
-    font-size: 18px;
+    color: #4a8b23;
+    font-size: 32px;
+    font-weight: bold;
 }
 
-.singleShop-btn {
+.singleShop-fixed-nav-bottom {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50px;
-    border: none;
-    color: #fff;
+    height: 65px;
+    text-transform: uppercase;
     font-size: 20px;
+    overflow: auto;
+    text-align: center;
     z-index: 30;
-    background-color: #939393;
+    -webkit-box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
+    -moz-box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
+    box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
+}
+
+.goToMenu-btn {
+    float: left;
+    width: 60%;
+    height: 100%;
+    background-color: #fff;
+    color: #494949;
+    z-index: 30;
+}
+
+.singleShop-btn {
+    width: 40%;
+    height: 100%;
+    float: left;
+    z-index: 30;
+    background-color: #4a8b23;
+    color: #fff;
 }
 
 .singleItem .cart-top-line {
@@ -775,7 +799,8 @@ label[for='nameOrder'] {
 }
 
 .singleShop-wrapper .swiper-container {
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 15px;
 }
 
 .img-dollar-singleItem {
@@ -1196,13 +1221,19 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     .shopItem-column {
         width: 90%;
         margin: 4% 5%;
-        padding: 2% 18%;
+        padding: 2% 10%;
         border: 1px solid #bdbdbd;
+    }
+    .singleItem {
+        width: 95%;
+        margin: 0 2.5%;
+        padding: 2% 10%;
     }
 }
 
-@media(max-width:960px) {
-    /*RESR MENU START*/
+
+/* @media(max-width:960px) {
+    RESR MENU START
     .shopItem-column .price-column-shopItem .cartShop-price,
     .shopItem-row .price-column-shopItem .cartShop-price {
         width: 40%;
@@ -1216,14 +1247,14 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
         float: right;
         font-size: 14px;
     }
-}
+} */
 
-@media(max-width:640px) {
+@media(max-width:639px) {
     .shopItem-column,
     .shopItem-row {
         width: 95%;
         margin: 4% 2.5%;
-        padding: 2%px 4%px;
+        padding: 2% 4%;
         border: 1px solid #bdbdbd;
     }
     .shopItem-row .img-column-shopItem {
@@ -1250,6 +1281,11 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     .shopItem-row .btn-restaurant-menu-container {
         margin-top: 0;
     }
+    .shopItem-row .price-column-shopItem {
+        width: 100%;
+        display: block;
+        overflow: auto;
+    }
     .shopItem-row .price-column-shopItem .cartShop-price {
         width: 45%;
         float: left;
@@ -1260,6 +1296,12 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
         width: 45%;
         float: right;
         font-size: 14px;
+    }
+    .singleShop-price {
+        font-size: 26px;
+    }
+    .singleShop-category {
+        font-size: 26px;
     }
 }
 

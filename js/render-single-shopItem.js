@@ -12,6 +12,14 @@ function renderSingleShopItem(singleItem) {
                 loop: true,
             });
             cartShopPrice();
+            $(".goToMenu-btn").on("click", function() {
+                $("#container").removeClass("hidden");
+                $(".classMenu").removeClass("hidden");
+                $(".classSwipeDropList").removeClass("hidden");
+                $(".cart").addClass("hidden");
+                $(".singleItem").addClass("hidden");
+                scrollTop();
+            });
             $(".singleShop-btn").on("click", function() {
                 var itemId = $("[name=singleItemId]").val();
                 workToClickBuy(itemId);
@@ -56,15 +64,10 @@ function renderSingleShopItem(singleItem) {
                             "span", { className: "img-dollar-singleItem" },
                             null
                         ),
-                        data.Price
+                        data.Price + " ГРН"
                     ),
                     React.createElement(
                         "div", { className: "singleShop-description" },
-                        React.createElement(
-                            "h5",
-                            null,
-                            cultureRes.shopitemDesc
-                        ),
                         React.createElement(
                             "p",
                             null,
@@ -75,10 +78,20 @@ function renderSingleShopItem(singleItem) {
                         )
                     )
                 ),
+
                 React.createElement(
-                    "button", { className: "singleShop-btn" },
-                    cultureRes.addToCart
+                    "div", { className: "singleShop-fixed-nav-bottom" },
+                    React.createElement(
+                        "div", { className: "goToMenu-btn" },
+                        "Перейти в меню"
+                    ),
+                    React.createElement(
+                        "div", { className: "singleShop-btn" },
+                        cultureRes.addToCart
+                    )
                 )
+
+
             );
         }
     });
