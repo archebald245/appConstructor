@@ -41,6 +41,13 @@ function renderSingleShopItem(singleItem) {
             return React.createElement(
                 "div", { className: "singleShop-item" },
                 React.createElement(
+                    "label", { className: "restaraunt-singleItem-name-label" },
+                    " ",
+                    "Меню/" + data.Category + "/" + data.ProdName,
+                    " "
+                ),
+
+                React.createElement(
                     "div", { className: "singleShop-wrapper" },
                     React.createElement(
                         "h4",

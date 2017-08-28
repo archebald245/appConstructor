@@ -373,6 +373,7 @@ p.item-shop-description {
     text-align: justify;
 }
 
+.restaraunt-singleItem-name-label,
 .restaraunt-menu-name-label {
     font-size: 18px;
     width: 95%;
@@ -549,7 +550,7 @@ p.item-shop-description {
     z-index: 10;
 }
 
-.cart-top-line button {
+.cart-top-line .back-to-container {
     position: absolute;
     left: 0;
     top: 6px;
@@ -560,6 +561,19 @@ p.item-shop-description {
     background-color: transparent;
     border: none;
     margin-left: 10px;
+}
+
+.cart-top-line .to-cart {
+    position: absolute;
+    right: 0;
+    top: 6px;
+    background-image: url(../baseimages/bag.png);
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+    margin-right: 10px;
 }
 
 .btn-order,

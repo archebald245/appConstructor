@@ -80,6 +80,16 @@ function bindListenerToClickBtn() {
         $(".singleItem").addClass("hidden");
         scrollTop();
     });
+
+    $(".to-cart").on("click", function() {
+        $("#container").addClass("hidden");
+        $(".classMenu").addClass("hidden");
+        $(".classSwipeDropList").addClass("hidden");
+        $(".cart").removeClass("hidden");
+        $(".singleItem").addClass("hidden");
+        window.scrollTo(0, 0);
+    });
+
     $(".back-to-cart").on("click", function() {
         $("#orderInfo").addClass("hidden");
         $(".singleItem").addClass("hidden");
