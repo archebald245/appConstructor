@@ -354,11 +354,11 @@ form {
     overflow: auto;
 }
 
-.shopItem-row.shopItem-row-left div {
+.shopItem-row.shopItem-row-left>div {
     float: left;
 }
 
-.shopItem-row.shopItem-row-right div {
+.shopItem-row.shopItem-row-right>div {
     float: right;
 }
 
@@ -382,7 +382,7 @@ p.item-shop-description {
     color: #000;
     background-color: rgba(0, 0, 0, 0.20);
     font-weight: normal;
-    line-height: 170%;
+    line-height: 32px;
 }
 
 .item-shop-categoty {
@@ -409,7 +409,7 @@ p.item-shop-description {
     background-color: #fff;
     color: #939393;
     padding: 8px 16px;
-    margin: 4% 2.5%;
+    margin: 15px 2.5%;
     border: 1px solid #bdbdbd;
 }
 
@@ -425,9 +425,10 @@ p.item-shop-description {
     border: 2px solid #4a8b23;
     border-bottom: none;
     color: #4a8b23;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
+    line-height: 40px;
 }
 
 .cartShop-buy {
@@ -436,12 +437,13 @@ p.item-shop-description {
     background-color: #4a8b23;
     font-size: 22px;
     color: #fff;
+    line-height: 40px;
     text-align: center;
 }
 
 .shopItem-column {
     width: 95%;
-    margin: 4% 2.5%;
+    margin: 15px 2.5%;
     padding: 2% 4%;
     border: 1px solid #bdbdbd;
     overflow: auto;
@@ -483,14 +485,12 @@ p.item-shop-description {
 
 .shopItem-column .price-column-shopItem .cartShop-price {
     width: 30%;
-    float: left;
     border: none;
-    font-size: 32px;
+    font-size: 20px;
 }
 
 .shopItem-column .price-column-shopItem .cartShop-buy {
     width: 30%;
-    float: right;
     font-size: 24px;
 }
 
@@ -767,7 +767,7 @@ label[for='nameOrder'] {
     width: 100%;
     height: 65px;
     text-transform: uppercase;
-    font-size: 20px;
+    font-size: 15px;
     overflow: auto;
     text-align: center;
     z-index: 30;
@@ -777,8 +777,9 @@ label[for='nameOrder'] {
 }
 
 .goToMenu-btn {
+    line-height: 65px;
     float: left;
-    width: 60%;
+    width: 45%;
     height: 100%;
     background-color: #fff;
     color: #494949;
@@ -786,9 +787,10 @@ label[for='nameOrder'] {
 }
 
 .singleShop-btn {
-    width: 40%;
-    height: 100%;
+    line-height: 65px;
     float: left;
+    width: 55%;
+    height: 100%;
     z-index: 30;
     background-color: #4a8b23;
     color: #fff;
@@ -1253,7 +1255,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     .shopItem-column,
     .shopItem-row {
         width: 95%;
-        margin: 4% 2.5%;
+        margin: 15px 2.5%;
         padding: 2% 4%;
         border: 1px solid #bdbdbd;
     }
@@ -1267,6 +1269,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     }
     .shopItem-row .content-column-shopItem {
         width: 100%;
+        padding: 0;
     }
     .shopItem-row .content-column-shopItem .item-shop-title {
         font-size: 22px;
@@ -1290,12 +1293,12 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
         width: 45%;
         float: left;
         border: none;
-        font-size: 22px;
+        font-size: 20px;
     }
     .shopItem-row .price-column-shopItem .cartShop-buy {
         width: 45%;
         float: right;
-        font-size: 14px;
+        font-size: 20px;
     }
     .singleShop-price {
         font-size: 26px;

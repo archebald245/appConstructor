@@ -114,10 +114,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 ),
                                 React.createElement(
                                     "div", { className: "cartShop-buy btn-restaurant-menu" },
-                                    React.createElement(
-                                        "span", { className: "cartShop-buy-label" }, "Заказать")
-
-                                )
+                                    "Заказать")
                             ),
 
                             React.createElement(
