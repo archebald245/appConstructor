@@ -39,6 +39,52 @@ function onDeviceReady() {
         format: "HH:mm",
         setCurrentTime: "false"
     });
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
+    var push = PushNotification.init({
+        android: {
+            //senderID: 418915081706
+            sound: true,
+            vibrate: true
+        },
+        browser: {
+            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+        },
+        ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
+        },
+        windows: {}
+    });
+
+    push.on('registration', function(data) {
+        // alert("registr " + data.registrationId);
+    });
+
+    PushNotification.hasPermission(function(data) {
+        // if (data.isEnabled) {
+        //     alert("is enabled");
+        // } else {
+        //     alert("is disabled");
+        // }
+    });
+
+    push.on('notification', function(data) {
+        // alert(data.title + "Message:" + data.message);
+        // data.message,
+        // data.title,
+        // data.count,
+        // data.sound,
+        // data.image,
+        // data.additionalData
+    });
+
+    push.on('error', function(e) {
+        // e.message
+        // alert("Error " + e.message);
+    });
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
+
     appStart();
     StatusBar.hide();
     $('[data-toggle="tooltip"]').tooltip();
