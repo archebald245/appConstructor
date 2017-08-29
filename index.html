@@ -135,14 +135,19 @@
 
         <div class="cart hidden">
             <input type="hidden" name="cartRestaurantId" value="" />
-            <div class="cart-top-line"><button class="back-to-container"></button><span>Your Order</span></div>
-            <div id="cart">
-
-
-
+            <!-- <div class="cart-top-line"><button class="back-to-container"></button><span>Your Order</span></div> -->
+            <div class="cart-top-line">
+                <button class="back-to-container"></button>
+                <span>Your Order</span>
             </div>
-            <div class="totalPrice"><span>Total $</span> <b>0</b></div>
-            <button class="btn-order"><span>Order</span></button>
+            <div id="cart">
+                <div class="title-menu-page">Корзина</div>
+            </div>
+            <div class="go-to-menu">Продолжить покупки</div>
+            <div class="menuCart-fixed-nav-bottom">
+                <div class="totalPrice"><span>Total $</span> <b>0</b></div>
+                <div class="btn-order"><span>Order</span></div>
+            </div>
         </div>
         <div id="orderInfo" class="hidden">
             <div class="cart-top-line"><button class="back-to-cart"></button><span>Your Order Info</span></div>
@@ -154,7 +159,13 @@
             <input type="text" id="emailOrder" class="emailOrder required" />
             <label for="commentOrder"><span>Your Order Comments</span></label>
             <textarea id="commentOrder" class="commentOrder"></textarea>
-            <button class="placeAnOrder btn-order"><span>Buy</span></button>
+
+            <div class="menuOrder-fixed-nav-bottom">
+                <div class="go-to-menu-btn">Продолжить покупки</div>
+                <div class="placeAnOrder btn-order"><span>Buy</span></div>
+            </div>
+
+
         </div>
         <div class="singleItem hidden">
             <div class="cart-top-line">
