@@ -170,9 +170,11 @@ function checkConnection() {
         checkApplicationId();
 
         //push notification
-        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
+        //        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
+        if (!$.jStorage.get('notificationTokenSuccess')) {
             sendPushNotificationToken();
         }
+        alert(!$.jStorage.get('notificationTokenSuccess'));
 
         var collectionBookingId = [];
 
@@ -259,18 +261,19 @@ function checkConnection() {
 }
 
 function sendPushNotificationToken() {
-    if ($.jStorage.get('notificationToken') == null) {
-        var token = $.jStorage.get('notificationToken');
-        var projectId = applicationData.ProjectId;
+    if ($.jStorage.get('notificationToken') !== null) {
+        var tokenToSend = $.jStorage.get('notificationToken');
+        var projectIdToSend = applicationData.ProjectId;
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/PushNotification/SaveUserToken",
-            data: { token: token, projectId: projectId },
+            data: { token: tokenToSend, projectId: projectIdToSend },
             cache: false,
             success: function(response) {
                 $.jStorage.set('notificationTokenSuccess', response);
             }
         });
+        alert("send");
     }
 }
 
