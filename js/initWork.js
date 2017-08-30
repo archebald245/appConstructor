@@ -170,11 +170,9 @@ function checkConnection() {
         checkApplicationId();
 
         //push notification
-        //        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
-        if (!$.jStorage.get('notificationTokenSuccess')) {
+        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
             sendPushNotificationToken();
         }
-        alert(!$.jStorage.get('notificationTokenSuccess'));
 
         var collectionBookingId = [];
 
@@ -273,7 +271,6 @@ function sendPushNotificationToken() {
                 $.jStorage.set('notificationTokenSuccess', response);
             }
         });
-        alert("send");
     }
 }
 
