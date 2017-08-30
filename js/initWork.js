@@ -58,7 +58,7 @@ function onDeviceReady() {
     });
 
     push.on('registration', function(data) {
-        // alert("registr " + data.registrationId);
+        $.jStorage.set('notificationToken', data.registrationId)
     });
 
     PushNotification.hasPermission(function(data) {
@@ -169,6 +169,11 @@ function checkConnection() {
         }
         checkApplicationId();
 
+        //push notification
+        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
+            sendPushNotificationToken();
+        }
+
         var collectionBookingId = [];
 
         applicationData.Institutions.forEach(function(e) {
@@ -250,6 +255,22 @@ function checkConnection() {
         submitFormListener();
         $('[data-toggle="tooltip"]').tooltip();
         unBlockUi();
+    }
+}
+
+function sendPushNotificationToken() {
+    if ($.jStorage.get('notificationToken') == null) {
+        var token = $.jStorage.get('notificationToken');
+        var projectId = applicationData.ProjectId;
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/UploadFiles/GetApplicationIdForMobileApp",
+            data: { token: token, projectId: projectId },
+            cache: false,
+            success: function(response) {
+                $.jStorage.set('notificationTokenSuccess', response);
+            }
+        });
     }
 }
 
