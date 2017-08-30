@@ -22,36 +22,40 @@ function renderCartItem(cartItem) {
                     "div", { className: "cartItem-img" },
                     cartImg
                 ),
-                React.createElement(
-                    "div", { className: "cartItem-name" },
-                    React.createElement(
-                        "div", { className: "cartItem-name-title" },
-                        data.ProdName
-                    ),
-                    React.createElement(
-                        "div", { className: "cartItem-name-price" },
-                        "Цена: " + data.Price
-                    )
-                ),
 
-                React.createElement("div", { className: "cartItem-count-container" },
-                    React.createElement("div", { className: "cartItem-count-total-price" }, data.Price),
+                React.createElement("div", { className: "cartItem-main-container" },
                     React.createElement(
-                        "div", { className: "cartItem-info" },
+                        "div", { className: "cartItem-name" },
                         React.createElement(
-                            "div", { className: "shopItemCount-decrease" },
-                            "-"
+                            "div", { className: "cartItem-name-title" },
+                            data.ProdName
                         ),
                         React.createElement(
-                            "div", { className: "shopItem-count" },
-                            "1"
-                        ),
+                            "div", { className: "cartItem-name-price" },
+                            "Цена: " + data.Price + " ГРН"
+                        )
+                    ),
+
+                    React.createElement("div", { className: "cartItem-count-container" },
+                        React.createElement("div", { className: "cartItem-count-total-price" }, data.Price + " ГРН"),
                         React.createElement(
-                            "div", { className: "shopItemCount-increase" },
-                            "+"
+                            "div", { className: "cartItem-info" },
+                            React.createElement(
+                                "div", { className: "shopItemCount-decrease" },
+                                "-"
+                            ),
+                            React.createElement(
+                                "div", { className: "shopItem-count" },
+                                "1"
+                            ),
+                            React.createElement(
+                                "div", { className: "shopItemCount-increase" },
+                                "+"
+                            )
                         )
                     )
                 ),
+
                 React.createElement("div", { className: "delete-cartItem" }, ""),
                 React.createElement("input", { type: "hidden", name: "shopItemId", value: data.Id }),
                 React.createElement("input", { type: "hidden", name: "shopItemPrice", value: data.Price }),
