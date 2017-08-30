@@ -264,7 +264,7 @@ function sendPushNotificationToken() {
         var projectId = applicationData.ProjectId;
         $.ajax({
             type: "POST",
-            url: applicationData.UrlForUpdateApp + "/UploadFiles/GetApplicationIdForMobileApp",
+            url: applicationData.UrlForUpdateApp + "/PushNotification/SaveUserToken",
             data: { token: token, projectId: projectId },
             cache: false,
             success: function(response) {
