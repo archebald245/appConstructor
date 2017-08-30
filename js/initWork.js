@@ -39,6 +39,52 @@ function onDeviceReady() {
         format: "HH:mm",
         setCurrentTime: "false"
     });
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
+    var push = PushNotification.init({
+        android: {
+            //senderID: 418915081706
+            sound: true,
+            vibrate: true
+        },
+        browser: {
+            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+        },
+        ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
+        },
+        windows: {}
+    });
+
+    push.on('registration', function(data) {
+        $.jStorage.set('notificationToken', data.registrationId)
+    });
+
+    PushNotification.hasPermission(function(data) {
+        // if (data.isEnabled) {
+        //     alert("is enabled");
+        // } else {
+        //     alert("is disabled");
+        // }
+    });
+
+    push.on('notification', function(data) {
+        // alert(data.title + "Message:" + data.message);
+        // data.message,
+        // data.title,
+        // data.count,
+        // data.sound,
+        // data.image,
+        // data.additionalData
+    });
+
+    push.on('error', function(e) {
+        // e.message
+        // alert("Error " + e.message);
+    });
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
+
     appStart();
     StatusBar.hide();
     $('[data-toggle="tooltip"]').tooltip();
@@ -48,15 +94,15 @@ function onDeviceReady() {
 }
 
 function onGetDirectorySuccess(dir) {
-    console.log("Created dir " + dir.name);
+    // console.log("Created dir " + dir.name);
 }
 
 function onGetDirectoryFail(error) {
-    console.log("Error creating directory " + error.code);
+    // console.log("Error creating directory " + error.code);
 }
 
 function appStart() {
-    console.log("add" + store)
+    // console.log("add " + store)
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {});
 }
 
@@ -99,7 +145,7 @@ function checkConnection() {
     var networkState = navigator.connection.type;
     if (networkState != Connection.NONE) {
         //With internet
-        var siteUrl = "http://appconstructor.newlinetechnologies.net"
+        var siteUrl = "http://appconstructor.newline.tech";
         if ($.jStorage.get('appData') != null) {
             //restart
             applicationData = JSON.parse($.jStorage.get('appData'));
@@ -117,7 +163,16 @@ function checkConnection() {
         if (applicationData.UrlForUpdateApp != "" && applicationData.UrlForUpdateApp != null && typeof applicationData.UrlForUpdateApp != 'undefined') {
             siteUrl = applicationData.UrlForUpdateApp;
         }
+
+        if ($.jStorage.get('cultureName') == null) {
+            $.jStorage.set('cultureName', applicationData.CultureName);
+        }
         checkApplicationId();
+
+        //push notification
+        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
+            sendPushNotificationToken();
+        }
 
         var collectionBookingId = [];
 
@@ -203,6 +258,22 @@ function checkConnection() {
     }
 }
 
+function sendPushNotificationToken() {
+    if ($.jStorage.get('notificationToken') !== null) {
+        var tokenToSend = $.jStorage.get('notificationToken');
+        var projectIdToSend = applicationData.ProjectId;
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/PushNotification/SaveUserToken",
+            data: { token: tokenToSend, projectId: projectIdToSend },
+            cache: false,
+            success: function(response) {
+                $.jStorage.set('notificationTokenSuccess', response);
+            }
+        });
+    }
+}
+
 function checkApplicationId() {
     if ($.jStorage.get('ApplicationId') == null) {
         $.ajax({
@@ -261,12 +332,12 @@ function doOnOrientationChange() {
         case -90:
         case 90:
             if (applicationData.Restaurants.length > 0) {
-                restarauntMenuModelItems();
+                // restarauntMenuModelItems();
             }
             break;
         default:
             if (applicationData.Restaurants.length > 0) {
-                restarauntMenuModelItems();
+                // restarauntMenuModelItems();
             }
             break;
     }
