@@ -248,6 +248,9 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId) {
         });
 
         function BookingAjax() {
+            var projectId = applicationData.ProjectId;
+            var contentId = applicationData.ContentId;
+            var token = $.jStorage.get('notificationToken');
             $.ajax({
                 type: "POST",
                 url: applicationData.UrlForUpdateApp + "/Booking/CreateOrder",
@@ -255,7 +258,10 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId) {
                     model: listServiceForBooking,
                     duration: duration,
                     start: dateVal + " " + timeVal,
-                    bookResourceId: bookResourceId
+                    bookResourceId: bookResourceId,
+                    projectId: projectId,
+                    contentId: contentId,
+                    notificationToken: token
                 },
                 cache: false,
                 success: function(object) {
@@ -306,7 +312,10 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId) {
                                     model: listServiceForBooking,
                                     duration: duration,
                                     start: dateVal + " " + timeVal,
-                                    bookResourceId: bookResourceId
+                                    bookResourceId: bookResourceId,
+                                    projectId: applicationData.ProjectId,
+                                    contentId: applicationData.ContentId,
+                                    notificationToken: $.jStorage.get('notificationToken')
                                 },
                                 cache: false,
                                 success: function(object) {
