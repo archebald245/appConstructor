@@ -50,7 +50,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                 if (position == 1) {
 
                     return React.createElement(
-                        "div", { className: "shopItem-row shopItem" },
+                        "div", { className: "shopItem-row shopItem-row-left shopItem" },
                         React.createElement(
                             "div", { className: "img-column-shopItem" },
                             image
@@ -62,18 +62,22 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 item.ProdName
                             ),
                             React.createElement(
-                                "p",
-                                null,
+                                "p", { className: "item-shop-description" },
                                 item.Description
-                            ),
-                            " ",
+                            )
+                        ),
+                        React.createElement("div", { className: "price-column-shopItem" },
                             React.createElement(
-                                "button", { type: "button", className: "btn-restaurant-menu" },
-                                cultureRes.add
-                            ),
-                            React.createElement(
-                                "div", { className: "cartShop-price" },
-                                item.Price
+                                "div", { className: "btn-restaurant-menu-container" },
+                                React.createElement(
+                                    "div", { className: "cartShop-price" },
+                                    item.Price + " ГРН"
+                                ),
+                                React.createElement(
+                                    "div", { className: "cartShop-buy btn-restaurant-menu" },
+                                    React.createElement(
+                                        "span", { className: "cartShop-buy-label" }, "Заказать")
+                                )
                             ),
                             React.createElement(
                                 "input", { type: "hidden", name: "shopItemId", value: item.Id }
@@ -85,14 +89,10 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                 } else if (position == 2) {
 
                     return React.createElement(
-                        "div", { className: "shopItem-row shopItem" },
+                        "div", { className: "shopItem-column shopItem" },
                         React.createElement(
                             "div", { className: "img-column-shopItem" },
-                            React.createElement("img", { src: image.props.src, className: "item-shop-img" }),
-                            React.createElement(
-                                "div", { className: "cartShop-price priceUnderImg" },
-                                item.Price
-                            )
+                            image
                         ),
                         React.createElement(
                             "div", { className: "content-column-shopItem" },
@@ -101,53 +101,65 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 item.ProdName
                             ),
                             React.createElement(
-                                "p",
-                                null,
-                                item.ShortDescription
-                            ),
+                                "p", { className: "item-shop-description" },
+                                item.Description
+                            )
+                        ),
+                        React.createElement("div", { className: "price-column-shopItem" },
                             React.createElement(
-                                "button", { type: "button", className: "btn-restaurant-menu" },
-                                cultureRes.add
+                                "div", { className: "btn-restaurant-menu-container" },
+                                React.createElement(
+                                    "div", { className: "cartShop-price" },
+                                    item.Price + " ГРН"
+                                ),
+                                React.createElement(
+                                    "div", { className: "cartShop-buy btn-restaurant-menu" },
+                                    "Заказать")
                             ),
+
                             React.createElement(
                                 "input", { type: "hidden", name: "shopItemId", value: item.Id }
                             )
-                        )
+                        ),
+                        " "
                     );
                 } else if (position == 3) {
                     return React.createElement(
-                        "div", { className: "shopItem-row shopItem" },
+                        "div", { className: "shopItem-row shopItem-row-right shopItem" },
                         React.createElement(
                             "div", { className: "img-column-shopItem" },
-                            React.createElement("img", { src: image.props.src, className: "item-shop-img" })
+                            image
                         ),
                         React.createElement(
-                            "div", { className: "content-column-shopItem shopMiddle-content" },
+                            "div", { className: "content-column-shopItem" },
                             React.createElement(
                                 "h4", { className: "item-shop-title" },
                                 item.ProdName
                             ),
                             React.createElement(
-                                "p",
-                                null,
-                                item.ShortDescription
+                                "p", { className: "item-shop-description" },
+                                item.Description
                             )
                         ),
-                        React.createElement(
-                            "div", { className: "btn-shop-column" },
+                        React.createElement("div", { className: "price-column-shopItem" },
                             React.createElement(
-                                "div", { className: "cartShop-price" },
-                                item.Price
-                            ),
-                            React.createElement(
-                                "button", { type: "button", className: "btn-restaurant-menu" },
-                                cultureRes.add
+                                "div", { className: "btn-restaurant-menu-container" },
+                                React.createElement(
+                                    "div", { className: "cartShop-price" },
+                                    item.Price + " ГРН"
+                                ),
+                                React.createElement(
+                                    "div", { className: "cartShop-buy btn-restaurant-menu" },
+                                    React.createElement(
+                                        "span", { className: "cartShop-buy-label" }, "Заказать")
+
+                                )
                             ),
                             React.createElement(
                                 "input", { type: "hidden", name: "shopItemId", value: item.Id }
                             )
-
-                        )
+                        ),
+                        " "
                     );
                 }
             });
@@ -155,8 +167,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
             return React.createElement(
                 "div", { className: "custom-restaurant-menu-item" },
                 React.createElement(
-                    "label",
-                    null,
+                    "label", { className: "restaraunt-menu-name-label" },
                     " ",
                     this.state.data.Name,
                     " "
