@@ -5,6 +5,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="cordova.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="js/hBoxSlider/swiper.min.css">
@@ -57,6 +58,7 @@
     <script src="js/menuWork.js"></script>
     <script src="js/blockUIWork.js"></script>
     <script src="js/initWork.js"></script>
+    <script src="js/notification/firebase.js"></script>
 
     <style>
         /* .blockUI{display:none !important;}*/
@@ -135,14 +137,19 @@
 
         <div class="cart hidden">
             <input type="hidden" name="cartRestaurantId" value="" />
-            <div class="cart-top-line"><button class="back-to-container"></button><span>Your Order</span></div>
-            <div id="cart">
-
-
-
+            <!-- <div class="cart-top-line"><button class="back-to-container"></button><span>Your Order</span></div> -->
+            <div class="cart-top-line">
+                <button class="back-to-container"></button>
+                <span>Your Order</span>
             </div>
-            <div class="totalPrice"><span>Total $</span> <b>0</b></div>
-            <button class="btn-order"><span>Order</span></button>
+            <div id="cart">
+                <!-- <div class="title-menu-page">Корзина</div> -->
+            </div>
+            <div class="go-to-menu">Продолжить покупки</div>
+            <div class="menuCart-fixed-nav-bottom">
+                <div class="totalPrice"><span>Total $</span> <b>0</b></div>
+                <div class="btn-order"><span>Order</span></div>
+            </div>
         </div>
         <div id="orderInfo" class="hidden">
             <div class="cart-top-line"><button class="back-to-cart"></button><span>Your Order Info</span></div>
@@ -154,10 +161,19 @@
             <input type="text" id="emailOrder" class="emailOrder required" />
             <label for="commentOrder"><span>Your Order Comments</span></label>
             <textarea id="commentOrder" class="commentOrder"></textarea>
-            <button class="placeAnOrder btn-order"><span>Buy</span></button>
+
+            <div class="menuOrder-fixed-nav-bottom">
+                <div class="go-to-menu-btn">Продолжить покупки</div>
+                <div class="placeAnOrder btn-order"><span>Buy</span></div>
+            </div>
+
+
         </div>
         <div class="singleItem hidden">
-            <div class="cart-top-line"><button class="back-to-container"></button></div>
+            <div class="cart-top-line">
+                <button class="back-to-container"></button>
+                <button class="to-cart"></button>
+            </div>
             <div id="singleItem"> </div>
         </div>
 
