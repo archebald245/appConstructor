@@ -101,21 +101,24 @@
 
 
      if ($("#cart").find("input[value='" + itemId + "']").length > 0) {
-         var itemThis = $("#cart").find("input[value='" + itemId + "']").siblings("input[name='shopItemCount']");
-         var itemCount = Number(itemThis.val());
-         itemThis.val(itemCount + 1);
-         $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItemCount-visible").html("");
-         var newItemCount = Number(itemThis.val());
-         $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItemCount-visible").append(newItemCount);
 
-         $(restaurantMenu).each(function(index, itemMenu) {
-             $(itemMenu.RestaurantMenuItems).each(function(i, e) {
-                 if (e.Id == itemId) {
-                     $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItem-price").text(Number(e.Price) * newItemCount);
-                     window.plugins.toast.showShortBottom(cultureRes.itemAdded);
-                 }
-             });
-         });
+         var itemThis = $("#cart").find("input[value='" + itemId + "']").siblings("input[name='shopItemCount']");
+         var itemCount = Number(itemThis.val()) + 1;
+         itemThis.val(itemCount);
+         updateCount($(itemThis).closest(".cartItem"), itemCount);
+         //OLD VERSION
+         //  $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItemCount-visible").html("");
+         //  var newItemCount = Number(itemThis.val());
+         //  $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItemCount-visible").append(newItemCount);
+
+         //  $(restaurantMenu).each(function(index, itemMenu) {
+         //      $(itemMenu.RestaurantMenuItems).each(function(i, e) {
+         //          if (e.Id == itemId) {
+         //              $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItem-price").text(Number(e.Price) * newItemCount);
+         //              window.plugins.toast.showShortBottom(cultureRes.itemAdded);
+         //          }
+         //      });
+         //  });
      } else {
 
 
@@ -156,18 +159,19 @@
      }
      $("#shopItem").attr("id", "");
 
-     function totalPrice() {
-         var totalPrice = 0;
-         $("#cart").find(".shopItem-price").each(function() {
-             totalPrice += Number($(this).text());
-         });
-         return totalPrice;
-     }
+     //  function totalPrice() {
+     //      var totalPrice = 0;
+     //      $("#cart").find(".shopItem-price").each(function() {
+     //          totalPrice += Number($(this).text());
+     //      });
+     //      return totalPrice;
+     //  }
+
      // var totalPrice = totalPrice();
      $(".totalPrice b").html("");
-     $(".totalPrice b").append(totalPrice());
+     $(".totalPrice b").append(totalPrice() + " ГРН");
      addListenerToClickDelete();
-
+     addListenerToChangeCount();
  }
 
  function addListenerToClickDelete() {
@@ -177,14 +181,51 @@
 
          // var totalPrice = totalPrice();
          $(".totalPrice b").html("");
-         $(".totalPrice b").append(totalPrice());
+         $(".totalPrice b").append(totalPrice() + " ГРН"); //add currency
      });
+ }
+
+ function addListenerToChangeCount() {
+     $(".shopItemCount-decrease, .shopItemCount-increase").unbind("click");
+     $(".shopItemCount-decrease").on("click", function() {
+         var counter = $(this).closest(".cartItem").find("input[name=shopItemCount]");
+         var count = Number($(counter).val()) - 1;
+         if (count < 1) {
+             count = 1;
+         }
+         $(counter).val(count);
+
+         updateCount(this, count);
+     });
+
+     $(".shopItemCount-increase").on("click", function() {
+         var counter = $(this).closest(".cartItem").find("input[name=shopItemCount]");
+         var count = Number($(counter).val()) + 1;
+         $(counter).val(count);
+
+         updateCount(this, count);
+     });
+
+ }
+
+ function updateCount(e, count) {
+     var newPrice = Number($(e).closest(".cartItem").find("input[name=shopItemPrice]").val()) * count;
+     $(e).closest(".cartItem").find(".cartItem-count-total-price").html("");
+     $(e).closest(".cartItem").find(".cartItem-count-total-price").append(newPrice + " ГРН");
+
+     $(e).siblings(".shopItem-count").html("");
+     $(e).siblings(".shopItem-count").append(count);
+
+     $(".totalPrice b").html("");
+     $(".totalPrice b").append(totalPrice() + " ГРН");
  }
 
  function totalPrice() {
      var totalPrice = 0;
-     $("#cart").find(".shopItem-price").each(function() {
-         totalPrice += Number($(this).text());
+     $("#cart").find(".cartItem").each(function(i, e) {
+         var count = $(e).find("input[name=shopItemCount]").val();
+         var price = $(e).find("input[name=shopItemPrice]").val();
+         totalPrice += count * price;
      });
      return totalPrice;
  }
@@ -236,15 +277,15 @@
                  //console.log(err);
          }
      });
-
-
  }
 
  function cartShopPrice() {
      $(".cartShop-price").each(function() {
          var price = $(this).text();
          if (price.indexOf('.') < 0) {
-             $(this).text(price + ".00");
+             var inIndex = price.indexOf(' ');
+             price = price.substr(0, inIndex) + ".00" + price.substr(inIndex);
+             $(this).text(price);
          }
      });
  }
