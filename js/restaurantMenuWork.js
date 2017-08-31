@@ -102,10 +102,8 @@
 
      if ($("#cart").find("input[value='" + itemId + "']").length > 0) {
 
-         var itemThis = $("#cart").find("input[value='" + itemId + "']").siblings("input[name='shopItemCount']");
-         var itemCount = Number(itemThis.val()) + 1;
-         itemThis.val(itemCount);
-         updateCount($(itemThis).closest(".cartItem"), itemCount);
+         $("#cart").find("input[value='" + itemId + "']").closest(".cartItem").find(".shopItemCount-increase").click();
+         window.plugins.toast.showShortBottom(cultureRes.itemAdded);
          //OLD VERSION
          //  $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItemCount-visible").html("");
          //  var newItemCount = Number(itemThis.val());
@@ -120,8 +118,6 @@
          //      });
          //  });
      } else {
-
-
          var restaurantId;
          $(restaurantMenu).each(function(index, itemMenu) {
              restaurantId = itemMenu.RestaurantId;
@@ -159,15 +155,6 @@
      }
      $("#shopItem").attr("id", "");
 
-     //  function totalPrice() {
-     //      var totalPrice = 0;
-     //      $("#cart").find(".shopItem-price").each(function() {
-     //          totalPrice += Number($(this).text());
-     //      });
-     //      return totalPrice;
-     //  }
-
-     // var totalPrice = totalPrice();
      $(".totalPrice b").html("");
      $(".totalPrice b").append(totalPrice() + " ГРН");
      addListenerToClickDelete();
@@ -179,7 +166,6 @@
      $(".delete-cartItem").on("click", function() {
          $(this).closest(".cartItem").parent().remove();
 
-         // var totalPrice = totalPrice();
          $(".totalPrice b").html("");
          $(".totalPrice b").append(totalPrice() + " ГРН"); //add currency
      });
