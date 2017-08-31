@@ -70,6 +70,15 @@ function onDeviceReady() {
     });
 
     push.on('notification', function(data) {
+        window.plugins.toast.hide();
+
+        window.plugins.toast.showWithOptions({
+            message: data.message,
+            duration: 7500,
+            position: "top",
+            addPixelsY: 50
+        });
+
         // alert(data.title + "Message:" + data.message);
         // data.message,
         // data.title,
