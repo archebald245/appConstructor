@@ -6,6 +6,7 @@ function renderForm(form, id) {
     var idRadioBtn;
     var isDropdownName;
     var isLogin = $.jStorage.get('isLogin');
+    var token = $.jStorage.get('notificationToken');
     var FormBlock = React.createClass({
         displayName: cultureRes.formBlock,
 
@@ -316,6 +317,7 @@ function renderForm(form, id) {
                     React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
                     React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
                     React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
+                    React.createElement("input", { className: "form-control", name: "NotificationToken", type: "hidden", value: token }),
                     fieldModels,
                     React.createElement(
                         "button", { type: "button", className: "formLogout btn btn-defoult" },
@@ -328,6 +330,7 @@ function renderForm(form, id) {
                     React.createElement("div", { className: "formId hidden", id: this.state.data.Id }),
                     React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
                     React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
+                    React.createElement("input", { className: "form-control", name: "NotificationToken", type: "hidden", value: token }),
                     fieldModels,
                     React.createElement(
                         "button", { type: "button", className: "formSubmit btn btn-defoult" },
