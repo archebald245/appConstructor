@@ -609,7 +609,7 @@ p.item-shop-description {
     width: 280px;
     height: 55px;
     background-color: #fff;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
     line-height: 55px;
     color: #4a8b23;
@@ -693,6 +693,7 @@ p.item-shop-description {
 .cartItem-main-container {
     width: 70%;
     float: left;
+    padding: 0 0 0 16px;
 }
 
 .cartItem-name {
@@ -796,6 +797,7 @@ p.item-shop-description {
 #orderInfo textarea,
 .order-booking textarea {
     padding-bottom: 80px;
+    margin-bottom: 85px;
 }
 
 label[for='nameOrder'] {
@@ -834,7 +836,7 @@ label[for='nameOrder'] {
 }
 
 .singleShop-description p {
-    margin-bottom: 65px;
+    margin-bottom: 85px;
     font-size: 15px;
     line-height: 1.47;
     text-align: justify;
