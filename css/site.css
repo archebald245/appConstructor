@@ -56,12 +56,12 @@ form {
 
 .menu-icon-right {
     position: absolute;
-    right: 10px;
+    right: 2.5%;
 }
 
 .menu-icon-left {
     position: absolute;
-    left: 10px;
+    left: 2.5%;
 }
 
 .classDropdownList {
@@ -566,7 +566,7 @@ p.item-shop-description {
     background-size: contain;
     background-color: transparent;
     border: none;
-    margin-left: 10px;
+    margin-left: 30px;
     background-repeat: no-repeat;
 }
 
@@ -575,12 +575,12 @@ p.item-shop-description {
     right: 0;
     top: 10px;
     background-image: url(../baseimages/bag.png);
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     background-size: contain;
     background-color: transparent;
     border: none;
-    margin-right: 10px;
+    margin-right: 30px;
     background-repeat: no-repeat;
 }
 
@@ -667,6 +667,9 @@ p.item-shop-description {
     border-radius: 50%;
     width: 50px;
     height: auto;
+    -webkit-box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
+    -moz-box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
+    box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
 }
 
 .cartItem {
@@ -801,7 +804,7 @@ p.item-shop-description {
 }
 
 label[for='nameOrder'] {
-    margin-top: 60px;
+    margin-top: 80px;
 }
 
 .swiper-slide img {
@@ -856,8 +859,9 @@ label[for='nameOrder'] {
     float: left;
     width: 50%;
     color: #4a8b23;
-    font-size: 32px;
+    font-size: 22px;
     font-weight: bold;
+    padding-top: 10px;
 }
 
 .menuOrder-fixed-nav-bottom,
@@ -869,7 +873,7 @@ label[for='nameOrder'] {
     width: 100%;
     height: 65px;
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 20px;
     overflow: auto;
     text-align: center;
     z-index: 30;
@@ -905,6 +909,9 @@ label[for='nameOrder'] {
 .singleShop-wrapper .swiper-container {
     margin-top: 20px;
     margin-bottom: 15px;
+    -webkit-box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
+    -moz-box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
+    box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
 }
 
 .img-dollar-singleItem {
@@ -1335,24 +1342,6 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     }
 }
 
-
-/* @media(max-width:960px) {
-    RESR MENU START
-    .shopItem-column .price-column-shopItem .cartShop-price,
-    .shopItem-row .price-column-shopItem .cartShop-price {
-        width: 40%;
-        float: left;
-        border: none;
-        font-size: 22px;
-    }
-    .shopItem-column .price-column-shopItem .cartShop-buy,
-    .shopItem-row .price-column-shopItem .cartShop-buy {
-        width: 40%;
-        float: right;
-        font-size: 14px;
-    }
-} */
-
 @media(max-width:639px) {
     .shopItem-column,
     .shopItem-row {
@@ -1447,6 +1436,14 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     .shopItem-count {
         border-top: 1px solid #4a8b23;
         border-bottom: 1px solid #4a8b23;
+    }
+    .menuOrder-fixed-nav-bottom,
+    .menuCart-fixed-nav-bottom,
+    .singleShop-fixed-nav-bottom {
+        font-size: 15px;
+    }
+    .cartItem-main-container {
+        padding: 0 0 0 8px;
     }
 }
 

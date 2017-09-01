@@ -35,28 +35,29 @@ function initCulture() {
     }
     $(".container-statusBooking .cart-top-line span").html(cultureRes.bookStatus);
     $(".bookingServices-container .cart-top-line span").html(cultureRes.services);
-    $(".bookingServices-container button.btn-order-booking span").html(cultureRes.orderBook);
-    $(".container-selectFreeBookTime button.back-to-container-from-book span").html(cultureRes.selectFreeTime);
+    $(".bookingServices-container .btn-order-booking span").html(cultureRes.orderBook);
+    $(".container-selectFreeBookTime .back-to-container-from-book span").html(cultureRes.selectFreeTime);
     $(".container-selectFreeBookTime p span").html(cultureRes.offerTimes);
-    $(".container-selectFreeBookTime button#bookAfterConfirmFreeTime span").html(cultureRes.book);
+    $(".container-selectFreeBookTime #bookAfterConfirmFreeTime span").html(cultureRes.book);
     $(".dateTimePicker-container .cart-top-line span").html(cultureRes.selectDate);
     $("label[for='dateTimePicker-time']").html(cultureRes.selectTime);
     $("label[for='dateTimePicker-date']").html(cultureRes.selectDate);
     $("label[for='nameOrder']").html(cultureRes.name);
     $("label[for='confirmMethod']").html(cultureRes.phone);
     $("label[for='commentOrder']").html(cultureRes.orderComments);
-    $(".dateTimePicker-container button.btn-confirmDateForBook span").html(cultureRes.confirmMeth);
+    $(".dateTimePicker-container .btn-confirmDateForBook span").html(cultureRes.confirmMeth);
     $(".order-booking .cart-top-line span").html(cultureRes.orderInfo);
-    $(".order-booking button.btn-send-order-booking span ").html(cultureRes.book);
+    $(".order-booking .btn-send-order-booking span ").html(cultureRes.book);
     $(".cart .cart-top-line span").html(cultureRes.yourOrder);
     $(".cart .totalPrice span ").html(cultureRes.total);
-    $(".cart Button.btn-order span ").html(cultureRes.order);
+    $(".cart .btn-order span ").html(cultureRes.order);
+    $(".cart .go-to-menu ").html(cultureRes.contShop);
     $("#orderInfo .cart-top-line span ").html(cultureRes.orderInfo);
     $("#orderInfo label[for='nameOrder']").html(cultureRes.name);
     $("#orderInfo label[for='phoneOrder']").html(cultureRes.phone);
     $("#orderInfo label[for='emailOrder']").html(cultureRes.email);
     $("#orderInfo label[for='commentOrder']").html(cultureRes.orderComments);
-    $("#orderInfo button.placeAnOrder span").html(cultureRes.buy);
+    $("#orderInfo .placeAnOrder span").html(cultureRes.buy);
 }
 
 function initEnCulture() {
@@ -78,6 +79,7 @@ function initEnCulture() {
     cultureRes.total = "Total ";
     cultureRes.order = "Order";
     cultureRes.buy = "Buy";
+    cultureRes.contShop = "Сontinue shopping"
 
     //day of week
     cultureRes.sunday = "Sunday";
@@ -157,6 +159,7 @@ function initEnCulture() {
     cultureRes.shopitem = "singleShopItem";
     cultureRes.shopitemDesc = "Description:";
     cultureRes.addToCart = "Add to Cart";
+    cultureRes.goToMenu = "Menu";
 
     cultureRes.itemAdded = "Item add to cart!";
     cultureRes.restConf = "Your shopping cart already has order from previous restaurant. If you add and confirm current order the order from previous restaurant will be removed. Continue?";
@@ -184,6 +187,7 @@ function initRuCulture() {
     cultureRes.total = "Всего: ";
     cultureRes.order = "Заказ";
     cultureRes.buy = "Купить";
+    cultureRes.contShop = "Продолжить покупки"
 
     //day of week
     cultureRes.sunday = "Воскресенье";
@@ -263,6 +267,7 @@ function initRuCulture() {
     cultureRes.shopitem = "Магазин";
     cultureRes.shopitemDesc = "Описание:";
     cultureRes.addToCart = "Добавить в корзину";
+    cultureRes.goToMenu = "Перейти к меню";
 
     cultureRes.itemAdded = "Добавленно в корзину!";
     cultureRes.restConf = "В Вашей корзине есть заказ и предыдущего ресторана. Если вы добавите и подтвердите текущий заказ, заказ из предыдущего ресторана будет удален. Продолжить?";
@@ -289,6 +294,7 @@ function initUaCulture() {
     cultureRes.total = "Всього ";
     cultureRes.order = "Резервування";
     cultureRes.buy = "Придбати";
+    cultureRes.contShop = "Продовжити покупки"
 
     //day of week
     cultureRes.sunday = "Неділя";
@@ -368,7 +374,7 @@ function initUaCulture() {
     cultureRes.shopitem = "Магазин";
     cultureRes.shopitemDesc = "Описання:";
     cultureRes.addToCart = "Додати в корзину";
-
+    cultureRes.goToMenu = "Перейти до меню";
     cultureRes.itemAdded = "Додано в корзину!";
     cultureRes.restConf = "У Вашій корзині є замовлення від попереднього ресторану. Якщо додати і підтвердити поточне замовлення, замовлення від попереднього ресторану буде видалено. Продовжити?";
     cultureRes.sorryOnline = "Вибачте, але для цього потрібне Інтернет з`єднання!";
