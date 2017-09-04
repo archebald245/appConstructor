@@ -249,7 +249,7 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId) {
 
         function BookingAjax() {
             var projectId = applicationData.ProjectId;
-            var contentId = applicationData.ContentId;
+            var contentId = applicationData.Id;
             var token = $.jStorage.get('notificationToken');
             $.ajax({
                 type: "POST",
@@ -314,7 +314,7 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId) {
                                     start: dateVal + " " + timeVal,
                                     bookResourceId: bookResourceId,
                                     projectId: applicationData.ProjectId,
-                                    contentId: applicationData.ContentId,
+                                    contentId: applicationData.Id,
                                     notificationToken: $.jStorage.get('notificationToken')
                                 },
                                 cache: false,

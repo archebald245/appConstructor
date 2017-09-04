@@ -70,6 +70,15 @@ function onDeviceReady() {
     });
 
     push.on('notification', function(data) {
+        window.plugins.toast.hide();
+
+        window.plugins.toast.showWithOptions({
+            message: data.message,
+            duration: 7500,
+            position: "top",
+            addPixelsY: 50
+        });
+
         // alert(data.title + "Message:" + data.message);
         // data.message,
         // data.title,
@@ -259,13 +268,13 @@ function checkConnection() {
 }
 
 function sendPushNotificationToken() {
-    if ($.jStorage.get('notificationToken') == null) {
-        var token = $.jStorage.get('notificationToken');
-        var projectId = applicationData.ProjectId;
+    if ($.jStorage.get('notificationToken') !== null) {
+        var tokenToSend = $.jStorage.get('notificationToken');
+        var projectIdToSend = applicationData.ProjectId;
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/PushNotification/SaveUserToken",
-            data: { token: token, projectId: projectId },
+            data: { token: tokenToSend, projectId: projectIdToSend },
             cache: false,
             success: function(response) {
                 $.jStorage.set('notificationTokenSuccess', response);
