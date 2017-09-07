@@ -56,13 +56,12 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
                 'div', { className: 'row-elementInstitution row-elementTimeLine' },
                 image,
                 React.createElement(
-                    'p', { className: 'name-elementInstitution' }, cultureRes.displayName,
+                    'p', { className: 'name-elementInstitution' },
                     data.Name
                 ),
                 data.UseDayTime ? data.DayForBookResource.map(function(day) {
                     return React.createElement(
-                        'div',
-                        null,
+                        'div', { className: 'time-elementTimeLine' },
                         React.createElement(
                             'time',
                             null, cultureRes.openTime,
@@ -79,32 +78,19 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
                         )
                     );
                 }) : React.createElement(
-                    'div',
-                    null,
+                    'div', { className: 'time-elementTimeLine' },
                     React.createElement(
                         'time',
                         null, cultureRes.openTime,
-                        data.OpenTime.split("T")[1]
-                    ),
-                    React.createElement(
-                        'time',
-                        null, cultureRes.closeTime,
-                        data.CloseTime.split("T")[1]
+                        data.OpenTime.split("T")[1] + " - " + data.CloseTime.split("T")[1]
                     )
                 ),
                 React.createElement(
-                    'p',
-                    null, cultureRes.startBookDay,
+                    'div', { className: 'sDay-elementTimeLine' }, cultureRes.startBookDay,
                     data.StartBookDay
                 ),
                 React.createElement(
-                    'p',
-                    null, cultureRes.stepMin,
-                    data.StepMinutes
-                ),
-                React.createElement(
-                    'p',
-                    null, cultureRes.countDay,
+                    'div', { className: 'cDay-elementTimeLine' }, cultureRes.countDay,
                     data.CountDaysForBook
                 ),
                 React.createElement('input', { type: 'hidden', className: 'timeLineId', value: data.Id })
@@ -126,28 +112,35 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
             }
             return React.createElement(
                 'div', { className: 'row-elementInstitution' },
-                image,
-                React.createElement(
-                    'p', { className: 'name-elementInstitution' },
-                    cultureRes.displayName,
-                    data.Name
+
+                React.createElement('div', { className: 'image-elementInstitution' }, image),
+                React.createElement('div', { className: 'content-elementInstitution' },
+                    React.createElement(
+                        'div', { className: 'name-elementInstitution' },
+                        cultureRes.displayName,
+                        data.Name
+                    ),
+                    React.createElement(
+                        'div', { className: 'dur-elementInstitution' },
+                        cultureRes.durationTime,
+                        data.Duration
+                    ),
+                    React.createElement(
+                        'div', { className: 'desc-elementInstitution' },
+                        cultureRes.description,
+                        data.Description
+                    ),
+                    React.createElement(
+                        'div', { className: 'price-elementInstitution' },
+                        data.Price + " " + data.Currency
+                    ),
+                    React.createElement(
+                        'button', { className: 'btn-bookThisService' },
+                        cultureRes.book
+                    )
                 ),
-                React.createElement(
-                    'p',
-                    null,
-                    cultureRes.description,
-                    data.Description
-                ),
-                React.createElement(
-                    'time',
-                    null,
-                    cultureRes.durationTime,
-                    data.Duration
-                ),
-                React.createElement(
-                    'button', { className: 'btn-bookThisService' },
-                    cultureRes.book
-                ),
+
+
                 React.createElement('input', { type: 'hidden', className: 'serviceId', value: data.Id }),
                 React.createElement('input', { type: 'hidden', className: 'serviceDuration', value: data.Duration }),
                 React.createElement('input', { type: 'hidden', value: data.BookResourceId, className: 'thisTimeLineId' }),

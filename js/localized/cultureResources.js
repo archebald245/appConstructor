@@ -15,17 +15,6 @@ function initCulture() {
         }
     }
 
-
-
-    // if ($.jStorage.get('cultureName') != null) {
-    //     cultureName = $.jStorage.get('cultureName');
-    // } else if ($.jStorage.get('cultureName') == null) {
-    //     if (applicationData.CultureName != null) {
-    //         cultureName = applicationData.CultureName;
-    //     }
-    //     $.jStorage.set('cultureName', cultureName);
-    // }
-
     if (cultureName == "ru" || cultureName == "Ru" || cultureName == "ru-RU") {
         initRuCulture();
     } else if (cultureName == "ua" || cultureName == "uk" || cultureName == "ua-UK") {
@@ -128,7 +117,7 @@ function initEnCulture() {
     cultureRes.orderBook = "Order Booking";
     cultureRes.timeLine = "Time Line";
     cultureRes.displayName = 'Name - ';
-    cultureRes.openTime = "Open Time";
+    cultureRes.openTime = "Working hours ";
     cultureRes.closeTime = "Close Time";
     cultureRes.startBookDay = "Start book day - ";
     cultureRes.stepMin = "Step Minutes - ";
@@ -236,11 +225,11 @@ function initRuCulture() {
     cultureRes.orderBook = "Бронирование заказа";
     cultureRes.timeLine = "График";
     cultureRes.displayName = 'Название - ';
-    cultureRes.openTime = "Время открытия";
+    cultureRes.openTime = "Время работы ";
     cultureRes.closeTime = "Время закрытия";
-    cultureRes.startBookDay = "Начало работы - ";
+    cultureRes.startBookDay = "Дни до начала работы - ";
     cultureRes.stepMin = "Шаг(минут) - ";
-    cultureRes.countDay = "Количество дней для бронирования - ";
+    cultureRes.countDay = "Дни бронирования - ";
     cultureRes.service = "Сервис";
     cultureRes.description = "Описание - ";
     cultureRes.durationTime = "Продолжительность - ";
@@ -343,11 +332,11 @@ function initUaCulture() {
     cultureRes.orderBook = "Заказ бронювання";
     cultureRes.timeLine = "Графік";
     cultureRes.displayName = 'Назва - ';
-    cultureRes.openTime = "Час відкріття";
+    cultureRes.openTime = "Час роботи";
     cultureRes.closeTime = "Час закріття";
-    cultureRes.startBookDay = "День початку роботи - ";
+    cultureRes.startBookDay = "Днів до початку роботи - ";
     cultureRes.stepMin = "Крок(хвилин) - ";
-    cultureRes.countDay = "Кількість днів для броннювання - ";
+    cultureRes.countDay = "Днів броннювання - ";
     cultureRes.service = "Сервіс";
     cultureRes.description = "Описання - ";
     cultureRes.durationTime = "Тривалість - ";
