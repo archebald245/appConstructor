@@ -3,9 +3,12 @@
 function renderServiceOfThisInstitution(thisInstitution) {
     var Institution = React.createClass({
         displayName: cultureRes.inst,
-
         componentDidMount: function componentDidMount() {
             addListenerToClickBookService();
+            $(".btn-bookThisService").on("click", function() {
+                var itemId = $(this).parents(".row-elementInstitution.inst-profile").find(".serviceId").val();
+                workToClickBook(itemId);
+            });
         },
         render: function render() {
             var data = this.props.data;
@@ -67,7 +70,6 @@ function renderServiceOfThisInstitution(thisInstitution) {
 
     var Service = React.createClass({
         displayName: cultureRes.service,
-
         render: function render() {
             var data = this.props.data;
             var isconfirm = this.props.isconfirm;
@@ -77,6 +79,7 @@ function renderServiceOfThisInstitution(thisInstitution) {
             } else {
                 image = null;
             }
+
             return React.createElement(
                 'div', { className: 'row-elementInstitution inst-profile' },
                 React.createElement(
@@ -120,55 +123,3 @@ function renderServiceOfThisInstitution(thisInstitution) {
 
     ReactDOM.render(React.createElement(Institution, { data: thisInstitution }), document.getElementById("bookingServices"));
 }
-
-// function renderServiceOfThisInstitution(thisInstitution){
-//   var Institution =  React.createClass({
-//         componentDidMount: function(){
-//          addListenerToClickBookService();
-//         },
-//         render: function() {
-//           var data = this.props.data;
-//           var CollectionOfElementsInstitution  =  data.BookServiceProvides.map(function(service){
-//                 return(
-//                   <Service data={service} isconfirm={data.NeedConfirmation} />
-//                 );
-//               });
-//           return (
-//                 <div>
-//                   <h1>Institution - {data.Name}</h1>
-//                   {CollectionOfElementsInstitution}
-//               </div>
-//               );
-//         }
-//     });
-
-//     var Service = React.createClass({
-//       render: function() {
-//         var data = this.props.data;
-//         var isconfirm = this.props.isconfirm;
-//         var image;
-//         if(data.ImagePath != null){
-//           image = <img src={data.ImagePath} />
-//         }else{
-//           image = null;
-//         }
-//           return (
-//               <div className='row-elementInstitution'>
-//                   {image}
-//                   <p className='name-elementInstitution'>Name - {data.Name}</p>
-//                   <p>Description - {data.Description}</p>
-//                   <time>Duration Time - {data.Duration}</time>
-//                   <button className='btn-bookThisService'>Book</button>
-//                   <input type='hidden' className='serviceId' value={data.Id} />
-//                   <input type='hidden' className='serviceDuration' value={data.Duration} />
-//                   <input type="hidden" value={data.BookResourceId} className="thisTimeLineId" />
-//                    <input type="hidden" value={isconfirm} className="thisTimeLineIsConfirm" />
-//                    <input type="hidden" value={data.Name} className="servicesName" />
-//               </div>
-//               );
-//       }
-//     });
-
-//     ReactDOM.render(<Institution data={thisInstitution}/>,document.getElementById("bookingServices"));
-
-// }
