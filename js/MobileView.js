@@ -149,7 +149,10 @@ function reactRender() {
 
                             $(".status-list").html("");
                             for (var i = 0; i < orderedArray.length; i++) {
-                                $(".status-list").append("<p>" + (collectionOrders[i].IsConfirmated ? cultureRes.confirmated : cultureRes.pending) + "</p> <p>" + orderedArray[i].nemesService + "</p>");
+                                $(".status-list").append("<div id='bookStatusList'></div>");
+                                console.log(orderedArray[i]);
+                                renderBookingStatusList(orderedArray[i]);
+                                //$(".status-list").append("<p>" + (collectionOrders[i].IsConfirmated ? cultureRes.confirmated : cultureRes.pending) + "</p> <p>" + orderedArray[i].nemesService + "</p>");
                             }
                         }
                     });

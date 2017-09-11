@@ -71,7 +71,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 "div", { className: "btn-restaurant-menu-container" },
                                 React.createElement(
                                     "div", { className: "cartShop-price" },
-                                    item.Price + " ГРН"
+                                    item.Price + " " + item.Currency
                                 ),
                                 React.createElement(
                                     "div", { className: "cartShop-buy btn-restaurant-menu" },
@@ -110,7 +110,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 "div", { className: "btn-restaurant-menu-container" },
                                 React.createElement(
                                     "div", { className: "cartShop-price" },
-                                    item.Price + " ГРН"
+                                    item.Price + " " + item.Currency
                                 ),
                                 React.createElement(
                                     "div", { className: "cartShop-buy btn-restaurant-menu" },
@@ -146,7 +146,7 @@ function renderRestaurantMenu(menuCollection, position, responsiveModel, stateNa
                                 "div", { className: "btn-restaurant-menu-container" },
                                 React.createElement(
                                     "div", { className: "cartShop-price" },
-                                    item.Price + " ГРН"
+                                    item.Price + " " + item.Currency
                                 ),
                                 React.createElement(
                                     "div", { className: "cartShop-buy btn-restaurant-menu" },

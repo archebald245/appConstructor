@@ -62,7 +62,7 @@ function initEnCulture() {
     cultureRes.phone = "Phone Number";
     cultureRes.email = "Email";
     cultureRes.orderComments = "Your Order Comments";
-    cultureRes.confirmMeth = "Confirm Method";
+    cultureRes.confirmMeth = "Сontinue";
     cultureRes.orderInfo = "Your Order Info";
     cultureRes.yourOrder = "Your Order";
     cultureRes.total = "Total ";
@@ -126,6 +126,7 @@ function initEnCulture() {
     cultureRes.description = "Description - ";
     cultureRes.durationTime = "Duration Time - ";
     cultureRes.book = "Book";
+    cultureRes.resource = "Resource";
 
     //render-*-form
     cultureRes.formBlock = "FormBlock";
@@ -170,7 +171,7 @@ function initRuCulture() {
     cultureRes.phone = "Номер телефона";
     cultureRes.email = "Email";
     cultureRes.orderComments = "Коментарии к заказу";
-    cultureRes.confirmMeth = "Метод подтверждения";
+    cultureRes.confirmMeth = "Продолжить";
     cultureRes.orderInfo = "Информация и заказе";
     cultureRes.yourOrder = "Ваш заказ";
     cultureRes.total = "Всего: ";
@@ -234,6 +235,7 @@ function initRuCulture() {
     cultureRes.description = "Описание - ";
     cultureRes.durationTime = "Продолжительность - ";
     cultureRes.book = "Бронировать";
+    cultureRes.resource = "Ресурс";
 
     //render-*-form
     cultureRes.formBlock = "Форма";
@@ -277,7 +279,7 @@ function initUaCulture() {
     cultureRes.phone = "Номер телефону";
     cultureRes.email = "Email";
     cultureRes.orderComments = "Коментарі до Вашого резервування";
-    cultureRes.confirmMeth = "Метод підтвердження";
+    cultureRes.confirmMeth = "Продовжити";
     cultureRes.orderInfo = "Інофрмація про резервування";
     cultureRes.yourOrder = "Ваше резервування";
     cultureRes.total = "Всього ";
@@ -340,7 +342,8 @@ function initUaCulture() {
     cultureRes.service = "Сервіс";
     cultureRes.description = "Описання - ";
     cultureRes.durationTime = "Тривалість - ";
-    cultureRes.book = "Бронівання";
+    cultureRes.book = "Бронювання";
+    cultureRes.resource = "Ресурс";
 
     //render-*-form
     cultureRes.formBlock = "Форма";

@@ -563,6 +563,7 @@ p.item-shop-description {
 
 .cart-top-line .back-to-container,
 .cart-top-line .back-to-timelines,
+.back-to-container-from-book,
 .btn-back-toservices,
 .back-to-services,
 .back-to-cart {
@@ -1087,6 +1088,8 @@ label[for='nameOrder'] {
     background-color: #000000;
     color: #fff;
     float: right;
+    outline: none;
+    border: none;
 }
 
 .inst-profile .btn-bookThisService {
@@ -1222,24 +1225,37 @@ label[for='nameOrder'] {
     margin-top: 30px;
 }
 
-.cartItem-data {
+.bookingCartItem-data {
     width: 70%;
     min-width: 150px;
     float: left;
 }
 
+.bookingCartItem-data div {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 15px;
+    text-align: left;
+    color: #494949;
+}
+
 .cartItem-delete {
     float: right;
     width: 30%;
+    height: 100%;
     min-width: 25px;
     background: url(../baseimages/booking-icons/tresh.png);
     background-size: 24px 33px;
     background-repeat: no-repeat;
-    background-position: 0 0;
+    background-position: center;
 }
 
 #booking-order .bookingCartItem {
-    height: 100px;
+    height: 155px;
+}
+
+#booking-order div:last-child {
+    margin-bottom: 80px;
 }
 
 .btn-confirmDateForBook,
@@ -1261,6 +1277,11 @@ label[for='nameOrder'] {
     box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
 }
 
+.btn-confirmDateForBook {
+    background-color: #2c2a50;
+    color: #fff;
+}
+
 .kc_fab_wrapper {
     z-index: 9999;
 }
@@ -1269,6 +1290,7 @@ label[for='nameOrder'] {
     background: red;
     width: 50px;
     height: 50px;
+    line-height: 50px;
     border-radius: 50%;
     text-align: center;
     color: #FFF;
@@ -1282,6 +1304,11 @@ label[for='nameOrder'] {
     z-index: 999;
 }
 
+#masterfab span {
+    vertical-align: top;
+    line-height: 50px;
+}
+
 .fab.bottom-menu,
 .cart-btn.bottom-menu {
     bottom: 80px;
@@ -1290,9 +1317,9 @@ label[for='nameOrder'] {
 .fab span {}
 
 .fab.child {
-    right: 40px;
-    width: 30px;
-    height: 30px;
+    right: 37px;
+    width: 35px;
+    height: 35px;
     display: none;
     opacity: 0;
     font-size: 1em;
@@ -1643,6 +1670,15 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 @media (max-width: 480px) {
+    .resource-info,
+    .resource-desc {
+        float: none;
+        width: 100%;
+    }
+    .resource-desc {
+        padding: 0;
+        font-size: 16px;
+    }
     .time-elementTimeLine,
     .sDay-elementTimeLine,
     .cDay-elementTimeLine {
@@ -1700,7 +1736,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 .first {
     background-image: url(../baseimages/booking-icons/calendar-white.png);
-    background-size: contain;
+    background-size: 65%;
     background-position: center;
     background-repeat: no-repeat;
 }
