@@ -52,11 +52,42 @@ function renderBookingStatusList(listItem) {
         getInitialState: function getInitialState() {
             return { data: listItem };
         },
-
         render: function render() {
             var data = this.state.data;
+            var date = data.serviceObject.StringFromTime.split(" ");
             return React.createElement(
-                "div", { className: "status-list" }
+                "div", { className: "status-list-container" },
+                React.createElement(
+                    "div", { className: "status-list-date" },
+                    React.createElement(
+                        "div", { className: "status-list-date-time" },
+                        React.createElement("span", { className: "status-list-data" }, date[1])
+                    ),
+                    React.createElement(
+                        "div", { className: "status-list-date-day" },
+                        React.createElement("span", { className: "status-list-data" }, date[0])
+                    )
+                ),
+                React.createElement(
+                    "div", { className: "status-list-info" },
+                    React.createElement(
+                        "p", null, cultureRes.resource + " - ",
+                        React.createElement("span", { className: "status-list-data" }, data.resourceName)
+                    ),
+                    React.createElement(
+                        "p", null, cultureRes.service + " - ",
+                        React.createElement("span", { className: "status-list-data" }, data.nemesService)
+                    ),
+                    React.createElement(
+                        "p", null, cultureRes.durationTime, React.createElement("span", { className: "status-list-data" }, data.serviceObject.Duration)
+                    )
+                ),
+                React.createElement(
+                    "div", { className: "status-list-status" },
+                    React.createElement(
+                        "div", null, "Статус: ", React.createElement("span", { className: "status-list-data" }, data.status)
+                    )
+                )
             )
         }
     });

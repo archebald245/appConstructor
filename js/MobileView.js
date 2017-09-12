@@ -153,6 +153,7 @@ function reactRender() {
                                 console.log(orderedArray[i]);
                                 renderBookingStatusList(orderedArray[i]);
                                 //$(".status-list").append("<p>" + (collectionOrders[i].IsConfirmated ? cultureRes.confirmated : cultureRes.pending) + "</p> <p>" + orderedArray[i].nemesService + "</p>");
+                                $("#bookStatusList").attr("id", "");
                             }
                         }
                     });

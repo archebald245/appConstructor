@@ -293,9 +293,22 @@ function addOrderBookingInJStorage(listServiceForBooking, listOfOrders) {
 
     var arrayForOrder = [];
     listServiceForBooking.forEach(function(service) {
+        var resourceName;
+        $(applicationData.Institutions).each(function() {
+            $(this.BookResources).each(function() {
+                var res = this.Name;
+                $(this.BookServiceProvides).each(function() {
+                    if (this.Id == service.BookDateTime.BookServiceProvideId) {
+                        resourceName = res;
+                    }
+                });
+            });
+        });
         arrayForOrder.push({
             status: "pending",
             nemesService: service.BookDateTime.NameServices,
+            serviceObject: service.BookDateTime,
+            resourceName: resourceName,
             id: 0
         });
     });

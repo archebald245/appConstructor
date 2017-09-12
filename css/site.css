@@ -555,6 +555,7 @@ p.item-shop-description {
     z-index: 10;
 }
 
+.container-statusBooking .cart-top-line,
 .order-booking .cart-top-line,
 .bookingServices-container .cart-top-line,
 .dateTimePicker-container .cart-top-line {
@@ -686,7 +687,8 @@ p.item-shop-description {
 }
 
 .bookingCartItem,
-.cartItem {
+.cartItem,
+.status-list-container {
     width: 95%;
     margin: 8px 2.5%;
     padding: 8px 32px 8px 16px;
@@ -1107,6 +1109,7 @@ label[for='nameOrder'] {
     line-height: 25px;
 }
 
+.status-list-date-day,
 .time-elementTimeLine {
     background: url(../baseimages/booking-icons/clock-large.png);
     background-size: 25px 25px;
@@ -1114,6 +1117,7 @@ label[for='nameOrder'] {
     background-position: 0 0;
 }
 
+.status-list-date-time,
 .sDay-elementTimeLine {
     background: url(../baseimages/booking-icons/calendar-large.png);
     background-size: 25px 25px;
@@ -1223,6 +1227,7 @@ label[for='nameOrder'] {
     border-top: 1px solid #000048;
     padding-top: 30px;
     margin-top: 30px;
+    margin-bottom: 80px;
 }
 
 .bookingCartItem-data {
@@ -1255,7 +1260,7 @@ label[for='nameOrder'] {
 }
 
 #booking-order div:last-child {
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 }
 
 .btn-confirmDateForBook,
@@ -1277,13 +1282,30 @@ label[for='nameOrder'] {
     box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
 }
 
+
+/* 
 .btn-confirmDateForBook {
     background-color: #2c2a50;
     color: #fff;
-}
+} */
 
 .kc_fab_wrapper {
     z-index: 9999;
+}
+
+.status-list-date {
+    width: 25%;
+    float: left;
+}
+
+.status-list-info {
+    width: 50%;
+    float: left;
+}
+
+.status-list-status {
+    width: 25%;
+    float: right;
 }
 
 .fab {
@@ -1340,6 +1362,21 @@ label[for='nameOrder'] {
 
 .status-list {
     padding-top: 60px;
+}
+
+.status-list .status-list-data {
+    font-weight: bold;
+}
+
+.status-list-status,
+.status-list-info p,
+.status-list-date-time,
+.status-list-date-day {
+    padding-left: 40px;
+    height: 25px;
+    margin-top: 15px;
+    font-size: 18px;
+    color: #000;
 }
 
 .container-selectFreeBookTime p {
