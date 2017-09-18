@@ -60,7 +60,7 @@ function submitFormListener() {
     $(".formLogout").on("click", function() {
         var tokenToSend = $.jStorage.get('notificationToken');
         var projectIdToSend = applicationData.ProjectId;
-        var deviceIdToSend = $.jStorage.get('deviceId');
+        var deviceIdToSend = $.jStorage.get('ApplicationId');
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/PushNotification/LogoutUserToken",

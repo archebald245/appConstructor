@@ -7,7 +7,7 @@ function renderForm(form, id) {
     var isDropdownName;
     var isLogin = $.jStorage.get('isLogin');
     var token = $.jStorage.get('notificationToken');
-    var deviceId = $.jStorage.get('deviceId');
+    var deviceId = $.jStorage.get('ApplicationId');
     var FormBlock = React.createClass({
         displayName: cultureRes.formBlock,
 
