@@ -58,7 +58,8 @@ function onDeviceReady() {
     });
 
     push.on('registration', function(data) {
-        $.jStorage.set('notificationToken', data.registrationId)
+        $.jStorage.set('notificationToken', data.registrationId);
+        $.jStorage.set('deviceId', data.registrationId);
     });
 
     PushNotification.hasPermission(function(data) {
@@ -278,6 +279,21 @@ function sendPushNotificationToken() {
             cache: false,
             success: function(response) {
                 $.jStorage.set('notificationTokenSuccess', response);
+            }
+        });
+    }
+}
+
+function updatePushNotificationToken(oldToken, newToken) {
+    if ($.jStorage.get('notificationToken') !== null) {
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/PushNotification/UpdateUserToken",
+            data: { oldToken: oldToken, newToken: newToken },
+            cache: false,
+            success: function(response) {
+                $.jStorage.set('notificationTokenSuccess', response);
+                //check for bad request TODO
             }
         });
     }
