@@ -64,7 +64,11 @@ function submitFormListener() {
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/PushNotification/LogoutUserToken",
-            data: { token: tokenToSend, projectId: projectIdToSend, deviceId = deviceIdToSend },
+            data: {
+                token: tokenToSend,
+                projectId: projectIdToSend,
+                deviceId: deviceIdToSend
+            },
             cache: false,
             success: function(response) {}
         });

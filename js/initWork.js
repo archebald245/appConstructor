@@ -271,10 +271,15 @@ function sendPushNotificationToken() {
     if ($.jStorage.get('notificationToken') !== null) {
         var tokenToSend = $.jStorage.get('notificationToken');
         var projectIdToSend = applicationData.ProjectId;
+        var deviceId = $.jStorage.get('ApplicationId');
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/PushNotification/SaveUserToken",
-            data: { token: tokenToSend, projectId: projectIdToSend },
+            data: {
+                token: tokenToSend,
+                projectId: projectIdToSend,
+                deviceId: deviceId
+            },
             cache: false,
             success: function(response) {
                 $.jStorage.set('notificationTokenSuccess', response);
