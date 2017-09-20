@@ -7,6 +7,7 @@ var countFileDownload = 0;
 var countFileDownloadFail = 0;
 var swipeMenuInGallary = false;
 var jsonStringify;
+var push;
 
 initYoutube();
 
@@ -17,30 +18,8 @@ function init() {
     $('[data-toggle="tooltip"]').tooltip();
 }
 
-function onDeviceReady() {
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-        window.myFileSystem = fileSystem;
-        if (!window.Promise) {
-            window.Promise = Promise;
-        }
-        fileSystem.root.getDirectory("Phonegap", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
-        checkConnection();
-        store = fileSystem.root.nativeURL + "Phonegap/";
-    });
-    $("#dateTimePicker-date").dateDropper({
-        dropBorder: "1px solid #939393",
-        dropPrimaryColor: "#939393",
-        dropWidth: "250",
-        format: "m/d/Y l"
-    });
-    $("#dateTimePicker-time").timeDropper({
-        primaryColor: "#939393",
-        borderColor: "#939393",
-        format: "HH:mm",
-        setCurrentTime: "false"
-    });
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
-    var push = PushNotification.init({
+function initPushNotification() {
+    push = PushNotification.init({
         android: {
             //senderID: 418915081706
             sound: true,
@@ -57,16 +36,24 @@ function onDeviceReady() {
         windows: {}
     });
 
+}
+
+function checkNotificationTimeOut() {
+    PushNotification.hasPermission(function(data) {
+        alert('P timeout ' + data.isEnabled);
+        if (data.isEnabled) {
+            initPushNotificationHandlers();
+        }
+    });
+}
+
+function initPushNotificationHandlers() {
     push.on('registration', function(data) {
         $.jStorage.set('notificationToken', data.registrationId);
-    });
+        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
+            checkApplicationId(sendPushNotificationToken);
+        }
 
-    PushNotification.hasPermission(function(data) {
-        // if (data.isEnabled) {
-        //     alert("is enabled");
-        // } else {
-        //     alert("is disabled");
-        // }
     });
 
     push.on('notification', function(data) {
@@ -78,21 +65,58 @@ function onDeviceReady() {
             position: "top",
             addPixelsY: 50
         });
-
-        // alert(data.title + "Message:" + data.message);
-        // data.message,
-        // data.title,
-        // data.count,
-        // data.sound,
-        // data.image,
-        // data.additionalData
     });
 
     push.on('error', function(e) {
         // e.message
         // alert("Error " + e.message);
     });
+}
+
+function onDeviceReady() {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+        window.myFileSystem = fileSystem;
+        if (!window.Promise) {
+            window.Promise = Promise;
+        }
+        fileSystem.root.getDirectory("Phonegap", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
+        checkConnection();
+        store = fileSystem.root.nativeURL + "Phonegap/";
+    });
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
+    if ($.jStorage.get('notificationToken') == null) {
+        PushNotification.hasPermission(function(data) {
+            if (data.isEnabled) {
+                alert("P true");
+                initPushNotification();
+                initPushNotificationHandlers();
+            } else {
+                alert("P false");
+                initPushNotification();
+
+                setTimeout(checkNotificationTimeOut, 10000);
+
+            }
+        });
+    } else {
+        if (!$.jStorage.get('notificationTokenSuccess')) {
+            checkApplicationId(sendPushNotificationToken);
+        }
+    }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
+
+    $("#dateTimePicker-date").dateDropper({
+        dropBorder: "1px solid #939393",
+        dropPrimaryColor: "#939393",
+        dropWidth: "250",
+        format: "m/d/Y l"
+    });
+    $("#dateTimePicker-time").timeDropper({
+        primaryColor: "#939393",
+        borderColor: "#939393",
+        format: "HH:mm",
+        setCurrentTime: "false"
+    });
 
     appStart();
     StatusBar.hide();
@@ -176,12 +200,7 @@ function checkConnection() {
         if ($.jStorage.get('cultureName') == null) {
             $.jStorage.set('cultureName', applicationData.CultureName);
         }
-        checkApplicationId();
-
-        //push notification
-        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
-            sendPushNotificationToken();
-        }
+        // checkApplicationId(sendPushNotificationToken);
 
         var collectionBookingId = [];
 
@@ -296,6 +315,7 @@ function updatePushNotificationToken(oldToken, newToken) {
             data: { oldToken: oldToken, newToken: newToken },
             cache: false,
             success: function(response) {
+                alert("save token responce " + response);
                 $.jStorage.set('notificationTokenSuccess', response);
                 //check for bad request TODO
             }
@@ -303,17 +323,28 @@ function updatePushNotificationToken(oldToken, newToken) {
     }
 }
 
-function checkApplicationId() {
+function checkApplicationId(sendPushNotificationTokenCallback) {
     if ($.jStorage.get('ApplicationId') == null) {
+        alert("app id null ")
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/UploadFiles/GetApplicationIdForMobileApp",
             cache: false,
             success: function(applicationId) {
-                $.jStorage.set('ApplicationId', applicationId)
+                $.jStorage.set('ApplicationId', applicationId);
+                alert("get app id");
+                if (applicationData.EnablePushNotification) {
+                    sendPushNotificationTokenCallback();
+                }
             }
         });
+    } else {
+        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
+            alert("send token");
+            sendPushNotificationTokenCallback();
+        }
     }
+
 }
 
 function initMenuYoutunbe() {
