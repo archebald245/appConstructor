@@ -8,6 +8,7 @@ var countFileDownloadFail = 0;
 var swipeMenuInGallary = false;
 var jsonStringify;
 var push;
+var checkCount = 0;
 
 initYoutube();
 
@@ -18,32 +19,17 @@ function init() {
     $('[data-toggle="tooltip"]').tooltip();
 }
 
-function initPushNotification() {
-    push = PushNotification.init({
-        android: {
-            //senderID: 418915081706
-            sound: true,
-            vibrate: true
-        },
-        browser: {
-            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-        },
-        ios: {
-            alert: "true",
-            badge: "true",
-            sound: "true"
-        },
-        windows: {}
-    });
-
-}
 
 function checkNotificationTimeOut() {
     PushNotification.hasPermission(function(data) {
-        alert('P timeout ' + data.isEnabled);
+        checkCount += 1;
+        alert('P timeout ' + data.isEnabled + checkCount);
         if (data.isEnabled) {
             initPushNotificationHandlers();
+        } else {
+            if (checkCount < 3) { initPushNotificationHandlers(); }
         }
+
     });
 }
 
@@ -84,25 +70,33 @@ function onDeviceReady() {
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
-    if ($.jStorage.get('notificationToken') == null) {
-        PushNotification.hasPermission(function(data) {
-            if (data.isEnabled) {
-                alert("P true");
-                initPushNotification();
-                initPushNotificationHandlers();
-            } else {
-                alert("P false");
-                initPushNotification();
 
-                setTimeout(checkNotificationTimeOut, 10000);
+    push = PushNotification.init({
+        android: {
+            //senderID: 418915081706
+            sound: true,
+            vibrate: true
+        },
+        browser: {
+            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+        },
+        ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
+        },
+        windows: {}
+    });
 
-            }
-        });
-    } else {
-        if (!$.jStorage.get('notificationTokenSuccess')) {
-            checkApplicationId(sendPushNotificationToken);
+    PushNotification.hasPermission(function(data) {
+        if (data.isEnabled) {
+            initPushNotificationHandlers();
+        } else {
+            alert("P false " + checkCount);
+            setTimeout(checkNotificationTimeOut, 10000);
         }
-    }
+    });
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
 
     $("#dateTimePicker-date").dateDropper({
@@ -200,7 +194,7 @@ function checkConnection() {
         if ($.jStorage.get('cultureName') == null) {
             $.jStorage.set('cultureName', applicationData.CultureName);
         }
-        // checkApplicationId(sendPushNotificationToken);
+        //checkApplicationId(sendPushNotificationToken);
 
         var collectionBookingId = [];
 
@@ -315,7 +309,6 @@ function updatePushNotificationToken(oldToken, newToken) {
             data: { oldToken: oldToken, newToken: newToken },
             cache: false,
             success: function(response) {
-                alert("save token responce " + response);
                 $.jStorage.set('notificationTokenSuccess', response);
                 //check for bad request TODO
             }
