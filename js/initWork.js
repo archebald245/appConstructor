@@ -23,11 +23,10 @@ function init() {
 function checkNotificationTimeOut() {
     PushNotification.hasPermission(function(data) {
         checkCount += 1;
-        alert('P timeout ' + data.isEnabled + checkCount);
         if (data.isEnabled) {
             initPushNotificationHandlers();
         } else {
-            if (checkCount < 3) { initPushNotificationHandlers(); }
+            if (checkCount < 3) { checkNotificationTimeOut(); }
         }
 
     });
@@ -55,7 +54,7 @@ function initPushNotificationHandlers() {
 
     push.on('error', function(e) {
         // e.message
-        // alert("Error " + e.message);
+        alert("Error " + e.message);
     });
 }
 
@@ -92,7 +91,6 @@ function onDeviceReady() {
         if (data.isEnabled) {
             initPushNotificationHandlers();
         } else {
-            alert("P false " + checkCount);
             setTimeout(checkNotificationTimeOut, 10000);
         }
     });
@@ -318,14 +316,12 @@ function updatePushNotificationToken(oldToken, newToken) {
 
 function checkApplicationId(sendPushNotificationTokenCallback) {
     if ($.jStorage.get('ApplicationId') == null) {
-        alert("app id null ")
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/UploadFiles/GetApplicationIdForMobileApp",
             cache: false,
             success: function(applicationId) {
                 $.jStorage.set('ApplicationId', applicationId);
-                alert("get app id");
                 if (applicationData.EnablePushNotification) {
                     sendPushNotificationTokenCallback();
                 }
@@ -333,7 +329,6 @@ function checkApplicationId(sendPushNotificationTokenCallback) {
         });
     } else {
         if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
-            alert("send token");
             sendPushNotificationTokenCallback();
         }
     }
