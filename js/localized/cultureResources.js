@@ -40,7 +40,8 @@ function initCulture() {
     $(".cart .cart-top-line span").html(cultureRes.yourOrder);
     $(".cart .totalPrice span ").html(cultureRes.total);
     $(".cart .btn-order span ").html(cultureRes.order);
-    $(".cart .go-to-menu ").html(cultureRes.contShop);
+    $(".cart .go-to-menu").html(cultureRes.contShop);
+    $("#orderInfo .go-to-menu-btn").html(cultureRes.contShop);
     $("#orderInfo .cart-top-line span ").html(cultureRes.orderInfo);
     $("#orderInfo label[for='nameOrder']").html(cultureRes.name);
     $("#orderInfo label[for='phoneOrder']").html(cultureRes.phone);

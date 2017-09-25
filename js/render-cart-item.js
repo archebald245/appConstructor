@@ -1,6 +1,15 @@
 "use strict";
 
 function renderCartItem(cartItem) {
+    var currency = "";
+    applicationData.Restaurants.forEach(function(e, i) {
+        e.RestaurantMenus.forEach(function(menu, id) {
+            if (menu.Id == cartItem.RestaurantMenuId) {
+                currency = menu.Currency;
+            }
+        });
+    });
+
     var cartShopItem = React.createClass({
         displayName: "cartShopItem",
 
@@ -32,12 +41,12 @@ function renderCartItem(cartItem) {
                         ),
                         React.createElement(
                             "div", { className: "cartItem-name-price" },
-                            "Цена: " + data.Price + " " + data.Currency
+                            "Цена: " + data.Price + " " + currency
                         )
                     ),
 
                     React.createElement("div", { className: "cartItem-count-container" },
-                        React.createElement("div", { className: "cartItem-count-total-price" }, data.Price + " " + data.Currency),
+                        React.createElement("div", { className: "cartItem-count-total-price" }, data.Price + " " + currency),
                         React.createElement(
                             "div", { className: "cartItem-info" },
                             React.createElement(

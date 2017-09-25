@@ -12,6 +12,13 @@ function renderServiceOfThisInstitution(thisInstitution) {
         },
         render: function render() {
             var data = this.props.data;
+
+            var oTime = this.props.data.OpenTime.split("T")[1];
+            oTime = oTime.substring(0, oTime.lastIndexOf(":"));
+
+            var cTime = this.props.data.CloseTime.split("T")[1];
+            cTime = cTime.substring(0, cTime.lastIndexOf(":"));
+
             var image;
             if (data.ImagePath != null) {
                 image = React.createElement('img', { src: data.ImagePath });
@@ -50,7 +57,7 @@ function renderServiceOfThisInstitution(thisInstitution) {
                             React.createElement(
                                 'time',
                                 null, cultureRes.openTime,
-                                data.OpenTime.split("T")[1] + " - " + data.CloseTime.split("T")[1]
+                                oTime + " - " + cTime
                             )
                         ),
                         React.createElement(
