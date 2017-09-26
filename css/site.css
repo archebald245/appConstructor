@@ -692,7 +692,7 @@ p.item-shop-description {
 .status-list-container {
     width: 95%;
     margin: 8px 2.5%;
-    padding: 8px 32px 8px 16px;
+    padding: 16px;
     overflow: hidden;
     position: relative;
     -webkit-box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
@@ -1123,7 +1123,7 @@ label[for='nameOrder'] {
 .status-list-date-day,
 .time-elementTimeLine {
     background: url(../baseimages/booking-icons/clock-large.png);
-    background-size: 25px 25px;
+    /* background-size: 25px 25px; */
     background-repeat: no-repeat;
     background-position: 0 0;
 }
@@ -1131,14 +1131,14 @@ label[for='nameOrder'] {
 .status-list-date-time,
 .sDay-elementTimeLine {
     background: url(../baseimages/booking-icons/calendar-large.png);
-    background-size: 25px 25px;
+    /* background-size: 25px 25px; */
     background-repeat: no-repeat;
     background-position: 0 0;
 }
 
 .cDay-elementTimeLine {
     background: url(../baseimages/booking-icons/calendar-clock-large.png);
-    background-size: 25px 25px;
+    /* background-size: 25px 25px; */
     background-repeat: no-repeat;
     background-position: 0 0;
 }
@@ -1146,7 +1146,7 @@ label[for='nameOrder'] {
 .resource-data {
     width: 95%;
     margin: 25px 2.5% 15px;
-    padding: 18px 25px 25px 16px;
+    padding: 18px 16px 25px 16px;
     overflow: auto;
     -webkit-box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
     -moz-box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
@@ -1727,6 +1727,12 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 @media (max-width: 480px) {
+    .btn-bookThisService {
+        width: 195px;
+    }
+    .desc-elementInstitution {
+        margin-bottom: 0px;
+    }
     .order-booking label[for='nameOrder'] {
         margin-top: 20px
     }

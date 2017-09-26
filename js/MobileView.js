@@ -205,8 +205,7 @@ function reactRender() {
                             'div', { className: 'fab bottom-menu', id: 'masterfab' },
                             React.createElement(
                                 'span',
-                                null,
-                                '+'
+                                null
                             )
                         ),
                         React.createElement(
@@ -229,8 +228,7 @@ function reactRender() {
                             'div', { className: 'fab bottom-menu', id: 'masterfab' },
                             React.createElement(
                                 'span',
-                                null,
-                                '+'
+                                null
                             )
                         ),
                         React.createElement(
@@ -318,8 +316,7 @@ function reactRender() {
                             'div', { className: 'fab', id: 'masterfab' },
                             React.createElement(
                                 'span',
-                                null,
-                                '+'
+                                null
                             )
                         ),
                         React.createElement(
