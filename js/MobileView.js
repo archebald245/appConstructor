@@ -287,8 +287,7 @@ function reactRender() {
                             'div', { className: 'fab', id: 'masterfab' },
                             React.createElement(
                                 'span',
-                                null,
-                                '+'
+                                null
                             )
                         ),
                         React.createElement(

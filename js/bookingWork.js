@@ -75,9 +75,6 @@ function addListenerToClickBookService() {
             $(".bookingServices-container").removeClass("hidden");
             scrollTop();
         }
-        // $("#dateTimePicker-time").val(cultureRes.time);
-        // $("#dateTimePicker-date").val(cultureRes.date);
-
     });
     $(".btn-confirmDateForBook").unbind("click");
     $(".btn-confirmDateForBook").click(function() {
