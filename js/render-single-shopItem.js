@@ -80,7 +80,7 @@ function renderSingleShopItem(singleItem) {
                             "span", { className: "img-dollar-singleItem" },
                             null
                         ),
-                        data.Price + " " + currency
+                        data.Price, " ", currency != null ? currency : ""
                     ),
                     React.createElement(
                         "div", { className: "singleShop-description" },
