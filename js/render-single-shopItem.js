@@ -1,6 +1,15 @@
 "use strict";
 
 function renderSingleShopItem(singleItem) {
+    var currency = "";
+    applicationData.Restaurants.forEach(function(e, i) {
+        e.RestaurantMenus.forEach(function(menu, id) {
+            if (menu.Id == singleItem.RestaurantMenuId) {
+                currency = menu.Currency;
+            }
+        });
+    });
+
     var singleShopItem = React.createClass({
         displayName: cultureRes.shopitem,
 
@@ -71,7 +80,7 @@ function renderSingleShopItem(singleItem) {
                             "span", { className: "img-dollar-singleItem" },
                             null
                         ),
-                        data.Price + " ГРН"
+                        data.Price, " ", currency != null ? currency : ""
                     ),
                     React.createElement(
                         "div", { className: "singleShop-description" },
