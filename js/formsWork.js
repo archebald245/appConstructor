@@ -58,6 +58,20 @@ function submitFormListener() {
         $(".formLogout").prop("disabled", false);
     }
     $(".formLogout").on("click", function() {
+        var tokenToSend = $.jStorage.get('notificationToken');
+        var projectIdToSend = applicationData.ProjectId;
+        var deviceIdToSend = $.jStorage.get('ApplicationId');
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/PushNotification/LogoutUserToken",
+            data: {
+                token: tokenToSend,
+                projectId: projectIdToSend,
+                deviceId: deviceIdToSend
+            },
+            cache: false,
+            success: function(response) {}
+        });
         $.jStorage.set('isLogin', false);
         goToPage(indexPage);
     });
