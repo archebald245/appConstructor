@@ -15,17 +15,6 @@ function initCulture() {
         }
     }
 
-
-
-    // if ($.jStorage.get('cultureName') != null) {
-    //     cultureName = $.jStorage.get('cultureName');
-    // } else if ($.jStorage.get('cultureName') == null) {
-    //     if (applicationData.CultureName != null) {
-    //         cultureName = applicationData.CultureName;
-    //     }
-    //     $.jStorage.set('cultureName', cultureName);
-    // }
-
     if (cultureName == "ru" || cultureName == "Ru" || cultureName == "ru-RU") {
         initRuCulture();
     } else if (cultureName == "ua" || cultureName == "uk" || cultureName == "ua-UK") {
@@ -51,7 +40,8 @@ function initCulture() {
     $(".cart .cart-top-line span").html(cultureRes.yourOrder);
     $(".cart .totalPrice span ").html(cultureRes.total);
     $(".cart .btn-order span ").html(cultureRes.order);
-    $(".cart .go-to-menu ").html(cultureRes.contShop);
+    $(".cart .go-to-menu").html(cultureRes.contShop);
+    $("#orderInfo .go-to-menu-btn").html(cultureRes.contShop);
     $("#orderInfo .cart-top-line span ").html(cultureRes.orderInfo);
     $("#orderInfo label[for='nameOrder']").html(cultureRes.name);
     $("#orderInfo label[for='phoneOrder']").html(cultureRes.phone);
@@ -73,7 +63,7 @@ function initEnCulture() {
     cultureRes.phone = "Phone Number";
     cultureRes.email = "Email";
     cultureRes.orderComments = "Your Order Comments";
-    cultureRes.confirmMeth = "Confirm Method";
+    cultureRes.confirmMeth = "Сontinue";
     cultureRes.orderInfo = "Your Order Info";
     cultureRes.yourOrder = "Your Order";
     cultureRes.total = "Total ";
@@ -128,7 +118,7 @@ function initEnCulture() {
     cultureRes.orderBook = "Order Booking";
     cultureRes.timeLine = "Time Line";
     cultureRes.displayName = 'Name - ';
-    cultureRes.openTime = "Open Time";
+    cultureRes.openTime = "Working hours ";
     cultureRes.closeTime = "Close Time";
     cultureRes.startBookDay = "Start book day - ";
     cultureRes.stepMin = "Step Minutes - ";
@@ -137,6 +127,7 @@ function initEnCulture() {
     cultureRes.description = "Description - ";
     cultureRes.durationTime = "Duration Time - ";
     cultureRes.book = "Book";
+    cultureRes.resource = "Resource";
 
     //render-*-form
     cultureRes.formBlock = "FormBlock";
@@ -181,7 +172,7 @@ function initRuCulture() {
     cultureRes.phone = "Номер телефона";
     cultureRes.email = "Email";
     cultureRes.orderComments = "Коментарии к заказу";
-    cultureRes.confirmMeth = "Метод подтверждения";
+    cultureRes.confirmMeth = "Продолжить";
     cultureRes.orderInfo = "Информация и заказе";
     cultureRes.yourOrder = "Ваш заказ";
     cultureRes.total = "Всего: ";
@@ -236,15 +227,16 @@ function initRuCulture() {
     cultureRes.orderBook = "Бронирование заказа";
     cultureRes.timeLine = "График";
     cultureRes.displayName = 'Название - ';
-    cultureRes.openTime = "Время открытия";
+    cultureRes.openTime = "Время работы ";
     cultureRes.closeTime = "Время закрытия";
-    cultureRes.startBookDay = "Начало работы - ";
+    cultureRes.startBookDay = "Дни до начала работы - ";
     cultureRes.stepMin = "Шаг(минут) - ";
-    cultureRes.countDay = "Количество дней для бронирования - ";
+    cultureRes.countDay = "Дни бронирования - ";
     cultureRes.service = "Сервис";
     cultureRes.description = "Описание - ";
     cultureRes.durationTime = "Продолжительность - ";
     cultureRes.book = "Бронировать";
+    cultureRes.resource = "Ресурс";
 
     //render-*-form
     cultureRes.formBlock = "Форма";
@@ -288,7 +280,7 @@ function initUaCulture() {
     cultureRes.phone = "Номер телефону";
     cultureRes.email = "Email";
     cultureRes.orderComments = "Коментарі до Вашого резервування";
-    cultureRes.confirmMeth = "Метод підтвердження";
+    cultureRes.confirmMeth = "Продовжити";
     cultureRes.orderInfo = "Інофрмація про резервування";
     cultureRes.yourOrder = "Ваше резервування";
     cultureRes.total = "Всього ";
@@ -343,15 +335,16 @@ function initUaCulture() {
     cultureRes.orderBook = "Заказ бронювання";
     cultureRes.timeLine = "Графік";
     cultureRes.displayName = 'Назва - ';
-    cultureRes.openTime = "Час відкріття";
+    cultureRes.openTime = "Час роботи";
     cultureRes.closeTime = "Час закріття";
-    cultureRes.startBookDay = "День початку роботи - ";
+    cultureRes.startBookDay = "Днів до початку роботи - ";
     cultureRes.stepMin = "Крок(хвилин) - ";
-    cultureRes.countDay = "Кількість днів для броннювання - ";
+    cultureRes.countDay = "Днів броннювання - ";
     cultureRes.service = "Сервіс";
     cultureRes.description = "Описання - ";
     cultureRes.durationTime = "Тривалість - ";
-    cultureRes.book = "Бронівання";
+    cultureRes.book = "Бронювання";
+    cultureRes.resource = "Ресурс";
 
     //render-*-form
     cultureRes.formBlock = "Форма";
