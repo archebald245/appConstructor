@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:418915081706:android:fd3f63cc043f38fd",
+        "mobilesdk_app_id": "1:418915081706:android:e973d9f1a867d857",
         "android_client_info": {
-          "package_name": "net.nlt.testapp"
+          "package_name": "com.appconstructor.aaaaaaaaaaaaa"
         }
       },
       "oauth_client": [
@@ -39,9 +39,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:418915081706:android:e973d9f1a867d857",
+        "mobilesdk_app_id": "1:418915081706:android:fd3f63cc043f38fd",
         "android_client_info": {
-          "package_name": "com.appconstructor.aaaaaaaaaaaaa"
+          "package_name": "net.nlt.testapp"
         }
       },
       "oauth_client": [
