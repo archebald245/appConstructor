@@ -149,7 +149,11 @@ function reactRender() {
 
                             $(".status-list").html("");
                             for (var i = 0; i < orderedArray.length; i++) {
-                                $(".status-list").append("<p>" + (collectionOrders[i].IsConfirmated ? cultureRes.confirmated : cultureRes.pending) + "</p> <p>" + orderedArray[i].nemesService + "</p>");
+                                $(".status-list").append("<div id='bookStatusList'></div>");
+                                console.log(orderedArray[i]);
+                                renderBookingStatusList(orderedArray[i]);
+                                //$(".status-list").append("<p>" + (collectionOrders[i].IsConfirmated ? cultureRes.confirmated : cultureRes.pending) + "</p> <p>" + orderedArray[i].nemesService + "</p>");
+                                $("#bookStatusList").attr("id", "");
                             }
                         }
                     });
@@ -201,8 +205,7 @@ function reactRender() {
                             'div', { className: 'fab bottom-menu', id: 'masterfab' },
                             React.createElement(
                                 'span',
-                                null,
-                                '+'
+                                null
                             )
                         ),
                         React.createElement(
@@ -225,8 +228,7 @@ function reactRender() {
                             'div', { className: 'fab bottom-menu', id: 'masterfab' },
                             React.createElement(
                                 'span',
-                                null,
-                                '+'
+                                null
                             )
                         ),
                         React.createElement(
@@ -283,8 +285,7 @@ function reactRender() {
                             'div', { className: 'fab', id: 'masterfab' },
                             React.createElement(
                                 'span',
-                                null,
-                                '+'
+                                null
                             )
                         ),
                         React.createElement(
@@ -315,8 +316,7 @@ function reactRender() {
                             'div', { className: 'fab', id: 'masterfab' },
                             React.createElement(
                                 'span',
-                                null,
-                                '+'
+                                null
                             )
                         ),
                         React.createElement(
