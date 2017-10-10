@@ -27,6 +27,63 @@ function onDeviceReady() {
         checkConnection();
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
+    if (applicationData.EnablePushNotification) {
+        var push = PushNotification.init({
+            android: {
+                //senderID: 418915081706
+                sound: true,
+                vibrate: true
+            },
+            browser: {
+                pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+            },
+            ios: {
+                alert: "true",
+                badge: "true",
+                sound: "true"
+            },
+            windows: {}
+        });
+
+        push.on('registration', function(data) {
+            $.jStorage.set('notificationToken', data.registrationId);
+        });
+
+        // PushNotification.hasPermission(function(data) {
+
+        //     if (data.isEnabled) {
+        //         alert("is enabled");
+        //     } else {
+        //         alert("is disabled");
+        //     }
+        // });
+
+        push.on('notification', function(data) {
+            // data.message,
+            // data.title,
+            // data.count,
+            // data.sound,
+            // data.image,
+            // data.additionalData
+            window.plugins.toast.hide();
+
+            window.plugins.toast.showWithOptions({
+                message: data.message,
+                duration: 7500,
+                position: "top",
+                addPixelsY: 50
+            });
+
+        });
+
+        push.on('error', function(e) {
+            // e.message
+            // alert("Error " + e.message);
+        });
+    }
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
+
     $("#dateTimePicker-date").dateDropper({
         dropBorder: "1px solid #939393",
         dropPrimaryColor: "#939393",
@@ -39,6 +96,7 @@ function onDeviceReady() {
         format: "HH:mm",
         setCurrentTime: "false"
     });
+
     appStart();
     StatusBar.hide();
     $('[data-toggle="tooltip"]').tooltip();
@@ -121,7 +179,8 @@ function checkConnection() {
         if ($.jStorage.get('cultureName') == null) {
             $.jStorage.set('cultureName', applicationData.CultureName);
         }
-        checkApplicationId();
+
+        checkApplicationId(sendPushNotificationToken);
 
         var collectionBookingId = [];
 
@@ -207,17 +266,61 @@ function checkConnection() {
     }
 }
 
-function checkApplicationId() {
+function sendPushNotificationToken() {
+    if ($.jStorage.get('notificationToken') !== null) {
+        var tokenToSend = $.jStorage.get('notificationToken');
+        var projectIdToSend = applicationData.ProjectId;
+        var deviceId = $.jStorage.get('ApplicationId');
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/PushNotification/SaveUserToken",
+            data: {
+                token: tokenToSend,
+                projectId: projectIdToSend,
+                deviceId: deviceId
+            },
+            cache: false,
+            success: function(response) {
+                $.jStorage.set('notificationTokenSuccess', response);
+            }
+        });
+    }
+}
+
+function updatePushNotificationToken(oldToken, newToken) {
+    if ($.jStorage.get('notificationToken') !== null) {
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/PushNotification/UpdateUserToken",
+            data: { oldToken: oldToken, newToken: newToken },
+            cache: false,
+            success: function(response) {
+                $.jStorage.set('notificationTokenSuccess', response);
+                //check for bad request TODO
+            }
+        });
+    }
+}
+
+function checkApplicationId(sendPushNotificationTokenCallback) {
     if ($.jStorage.get('ApplicationId') == null) {
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/UploadFiles/GetApplicationIdForMobileApp",
             cache: false,
             success: function(applicationId) {
-                $.jStorage.set('ApplicationId', applicationId)
+                $.jStorage.set('ApplicationId', applicationId);
+                if (applicationData.EnablePushNotification) {
+                    sendPushNotificationTokenCallback();
+                }
             }
         });
+    } else {
+        if (applicationData.EnablePushNotification && !$.jStorage.get('notificationTokenSuccess')) {
+            sendPushNotificationTokenCallback();
+        }
     }
+
 }
 
 function initMenuYoutunbe() {
@@ -265,12 +368,12 @@ function doOnOrientationChange() {
         case -90:
         case 90:
             if (applicationData.Restaurants.length > 0) {
-                restarauntMenuModelItems();
+                // restarauntMenuModelItems();
             }
             break;
         default:
             if (applicationData.Restaurants.length > 0) {
-                restarauntMenuModelItems();
+                // restarauntMenuModelItems();
             }
             break;
     }
