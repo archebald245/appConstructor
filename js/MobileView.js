@@ -150,7 +150,6 @@ function reactRender() {
                             $(".status-list").html("");
                             for (var i = 0; i < orderedArray.length; i++) {
                                 $(".status-list").append("<div id='bookStatusList'></div>");
-                                console.log(orderedArray[i]);
                                 renderBookingStatusList(orderedArray[i]);
                                 //$(".status-list").append("<p>" + (collectionOrders[i].IsConfirmated ? cultureRes.confirmated : cultureRes.pending) + "</p> <p>" + orderedArray[i].nemesService + "</p>");
                                 $("#bookStatusList").attr("id", "");
@@ -807,7 +806,7 @@ function reactRender() {
                         url, 'application/pdf', options, onShow);
                 });
             }
-            if (data.ContentTypeId == 2 || data.ContentTypeId == 4) {
+            if (data.ContentTypeId == 2 || data.ContentTypeId == 4 || data.ContentTypeId == 9) {
                 $(ReactDOM.findDOMNode(this)).click(function(e) {
                     e.preventDefault();
                     window.open($(this).attr("href"), '_system')
