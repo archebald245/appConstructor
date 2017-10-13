@@ -16,7 +16,7 @@ function submitFormListener() {
             $(".form-container").append("<input type='hidden' name='projectId' value='" + idProject + "'/><input type='hidden' name='formId' value='" + idForm + "'/>")
 
             var siteUrl = applicationData.UrlForUpdateApp;
-            var formData = new FormData(form)
+            // var formData = new FormData(form)
             if (isLoginForm == "true") {
                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(form).serialize(), function(data) {
                     if (data.Success == true) {
@@ -33,7 +33,7 @@ function submitFormListener() {
             } else if (isRegisterForm == "true") {
                 $.post('' + siteUrl + '/MobileUserAuth/Register/', $(form).serialize(), function(data) {
                     if (data.Success == true) {
-                        alert(data.Message + "\nPlease login.");
+                        alert(data.Message + "\n" + cultureRes.loginPlease + ".");
                         $(form).find(".formBlock").find("input, textarea").val("");
                         $(form).find("input[type='checkbox']").removeAttr("checked");
                     } else {
@@ -54,24 +54,12 @@ function submitFormListener() {
             alert(cultureRes.noInternet);
         }
     });
+
     if ($.jStorage.get("isLogin")) {
         $(".formLogout").prop("disabled", false);
     }
+
     $(".formLogout").on("click", function() {
-        var tokenToSend = $.jStorage.get('notificationToken');
-        var projectIdToSend = applicationData.ProjectId;
-        var deviceIdToSend = $.jStorage.get('ApplicationId');
-        $.ajax({
-            type: "POST",
-            url: applicationData.UrlForUpdateApp + "/PushNotification/LogoutUserToken",
-            data: {
-                token: tokenToSend,
-                projectId: projectIdToSend,
-                deviceId: deviceIdToSend
-            },
-            cache: false,
-            success: function(response) {}
-        });
         $.jStorage.set('isLogin', false);
         goToPage(indexPage);
     });
@@ -115,7 +103,7 @@ function bindChangeValForms() {
                             } else if (isRegisterForm == "true") {
                                 $.post('' + siteUrl + '/MobileUserAuth/Register/', $(elem).serialize(), function(data) {
                                     if (data.Success == true) {
-                                        alert(data.Message + "\nPlease login.");
+                                        alert(data.Message + "\n" + cultureRes.loginPlease + ".");
                                         $(elem).find(".formBlock").find("input, textarea").val("");
                                         $(elem).find("input[type='checkbox']").removeAttr("checked");
                                         goToPage(indexPage);
@@ -153,7 +141,7 @@ function bindChangeValForms() {
                         var check = checkValidationAndRequired(elem);
                         if (check != false) {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
-                                alert("Thank you!");
+                                alert(cultureRes.thankYou);
                                 $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
 
