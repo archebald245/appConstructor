@@ -95,15 +95,34 @@ function bindListenerToClickBtn() {
     $(".btn-order").unbind("click");
     $(".btn-order").on("click", function() {
         if ($("#cart").children().length > 0) {
-            $("#orderInfo").removeClass("hidden");
-            $(".cart").addClass("hidden");
-            scrollTop();
+
+            initPayment();
+
+            //ADD VALIDATION TO ENABLED PAYMENT
+            // if (true) {
+            //     initPayment();
+
+            //     $(".placeAnOrder").on("click", function() {
+            //         $("#payment-form").submit();
+            //     });
+            // } else {
+            //     $("#orderInfo").removeClass("hidden");
+            //     $(".cart").addClass("hidden");
+            //     scrollTop();
+
+            //     $(".placeAnOrder").on("click", function() {
+            //         clickPlaceAnOrder();
+            //     });
+            // }
+
         } else {
             alert(cultureRes.nothingOrdered);
         }
     });
 
     $(".placeAnOrder").on("click", function() {
+        $("#payment-form").submit();
+
         clickPlaceAnOrder();
     });
 }

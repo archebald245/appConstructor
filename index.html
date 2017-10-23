@@ -159,14 +159,45 @@
         <div id="orderInfo" class="hidden">
             <div class="cart-top-line">
                 <div class="back-to-cart"></div><span>Your Order Info</span></div>
-            <label for="nameOrder"><span>Nam</span>e</label>
+            <!-- <label for="nameOrder"><span>Nam</span>e</label>
             <input type="text" id="nameOrder" class="nameOrder required" />
             <label for="phoneOrder"><span>Phone Number</span></label>
             <input type="text" id="phoneOrder" class="phoneOrder required" />
             <label for="emailOrder"><span>Email</span></label>
             <input type="text" id="emailOrder" class="emailOrder required" />
             <label for="commentOrder"><span>Your Order Comments</span></label>
-            <textarea id="commentOrder" class="commentOrder"></textarea>
+            <textarea id="commentOrder" class="commentOrder"></textarea> -->
+
+            <div class="braintree-container hidden">
+                <div class="checkout container">
+                    <p>Payment Form </p>
+                    <form id="payment-form" method="post" action="/CustomerBraintree/SubmitPayment">
+                        <section>
+                            <label for="amount">
+                                    <span class="input-label">Amount</span>
+                                    <div class="input-wrapper amount-wrapper">
+                                        <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
+                                    </div>
+                            </label>
+                            <label for="nameOrder"><span>Name</span></label>
+                            <input type="text" id="nameOrder" class="nameOrder required" />
+                            <label for="phoneOrder"><span>Phone Number</span></label>
+                            <input type="text" id="phoneOrder" class="phoneOrder" />
+                            <label for="emailOrder"><span>Email</span></label>
+                            <input type="text" id="emailOrder" class="emailOrder" />
+                            <label for="commentOrder"><span>Your Order Comments</span></label>
+                            <textarea id="commentOrder" class="commentOrder"></textarea>
+                            <div class="bt-drop-in-wrapper">
+                                <div id="bt-dropin"></div>
+                            </div>
+                        </section>
+
+                        <input id="nonce" name="payment_method_nonce" type="hidden" />
+                        <button class="button" type="submit"><span>Test Transaction</span></button>
+                    </form>
+
+                </div>
+            </div>
 
             <div class="menuOrder-fixed-nav-bottom">
                 <div class="go-to-menu-btn">Сontinue shopping</div>
