@@ -6,9 +6,7 @@ function InitBraintree(token) {
     braintree.dropin.create({
         authorization: client_token,
         container: '#bt-dropin',
-        paypal: {
-            flow: 'vault'
-        }
+        locale: 'ru_Ru'
     }, function(createErr, instance) {
         form.addEventListener('submit', function(event) {
             event.preventDefault();
@@ -21,15 +19,28 @@ function InitBraintree(token) {
                 }
 
                 // Add the nonce to the form and submit
-                document.querySelector('#nonce').value = payload.nonce;
+                //document.querySelector('#nonce').value = payload.nonce;
 
                 if (checkValidationAndRequired($("#orderInfo"))) {
 
-                    var data = $(form).serialize();
+                    var name = $("#orderInfo").find(".nameOrder").val();
+                    var phone = $("#orderInfo").find(".phoneOrder").val();
+                    var email = $("#orderInfo").find(".emailOrder").val();
+                    var comment = $("#orderInfo").find(".commentOrder").val();
+                    var nonce = payload.nonce;
                     $.ajax({
-                        type: 'POST',
-                        url: applicationData.UrlForUpdateApp + "/CustomerBraintree/SubmitPayment",
-                        data: data,
+                        type: "POST",
+                        url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CreateOrder",
+                        data: {
+                            OrderItems: collectionOrderItems,
+                            Name: name,
+                            Phone: phone,
+                            Email: email,
+                            Comment: comment,
+                            ProjectId: applicationData.ProjectId,
+                            ContentId: applicationData.Id,
+                            Nonce: nonce
+                        },
                         dataType: 'json',
                         success: function(data) {
                             if (data.result == "Error") {
@@ -44,19 +55,18 @@ function InitBraintree(token) {
         });
     });
 }
-var checkout = new Demo({
-    formID: "payment-form"
-});
+// var checkout = new Demo({
+//     formID: "payment-form"
+// });
 
 function GetClientToken(InitBraintree) {
     $.ajax({
         type: "POST",
-        url: applicationData.UrlForUpdateApp + "/CustomerBraintree/GetClienToken",
-        data: {
-            ContentId: applicationData.Id
-        },
+        url: applicationData.UrlForUpdateApp + "/CustomerBraintree/GetClientToken",
+        data: applicationData.Id,
         cache: false,
         success: function(data) {
+            alert(data);
             InitBraintree(data);
 
             $("#orderInfo").removeClass("hidden");

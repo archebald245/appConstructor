@@ -26,6 +26,7 @@
     <script src="js/buttonMaterialUI/buttonMaterialUI.min.js"></script>
     <script src="js/lightGallery/lightgallery.min.js"></script>
 
+    <script src="js/payment/dropin.min.js"></script>
     <script src="js/localized/cultureResources.js"></script>
     <script src="js/render-form.js"></script>
     <script src="js/render-custom-form.js"></script>
@@ -44,6 +45,7 @@
     <script src="js/resourceWork.js"></script>
     <script src="js/formsWork.js"></script>
     <script src="js/bookingWork.js"></script>
+    <script src="js/paymentWork.js"></script>
     <script src="js/restaurantMenuWork.js"></script>
     <script src="js/cartWork.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -159,25 +161,16 @@
         <div id="orderInfo" class="hidden">
             <div class="cart-top-line">
                 <div class="back-to-cart"></div><span>Your Order Info</span></div>
-            <!-- <label for="nameOrder"><span>Nam</span>e</label>
-            <input type="text" id="nameOrder" class="nameOrder required" />
-            <label for="phoneOrder"><span>Phone Number</span></label>
-            <input type="text" id="phoneOrder" class="phoneOrder required" />
-            <label for="emailOrder"><span>Email</span></label>
-            <input type="text" id="emailOrder" class="emailOrder required" />
-            <label for="commentOrder"><span>Your Order Comments</span></label>
-            <textarea id="commentOrder" class="commentOrder"></textarea> -->
-
             <div class="braintree-container hidden">
                 <div class="checkout container">
                     <p>Payment Form </p>
-                    <form id="payment-form" method="post" action="/CustomerBraintree/SubmitPayment">
+                    <form id="payment-form" method="post" action="/RestaurantMenu/CreateOrder">
                         <section>
                             <label for="amount">
                                     <span class="input-label">Amount</span>
-                                    <div class="input-wrapper amount-wrapper">
+                                    <!-- <div class="input-wrapper amount-wrapper"> -->
                                         <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
-                                    </div>
+                                    <!-- </div> -->
                             </label>
                             <label for="nameOrder"><span>Name</span></label>
                             <input type="text" id="nameOrder" class="nameOrder required" />

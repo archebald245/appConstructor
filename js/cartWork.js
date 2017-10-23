@@ -96,7 +96,7 @@ function bindListenerToClickBtn() {
     $(".btn-order").on("click", function() {
         if ($("#cart").children().length > 0) {
 
-            initPayment();
+            InitPayment();
 
             //ADD VALIDATION TO ENABLED PAYMENT
             // if (true) {
