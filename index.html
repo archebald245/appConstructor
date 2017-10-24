@@ -118,28 +118,37 @@
 
         <div class="order-booking hidden">
             <div class="cart-top-line">
-                <div class="btn-back-toservices"></div><span>Your Order Info</span></div>
-            <label for="nameOrder"><span>Name</span></label>
-            <input type="text" id="booking-nameOrder" class="nameOrder required" />
-            <label for="phoneOrder"><span>Phone Number</span></label>
-            <input type="text" id="booking-phoneOrder" class="phoneOrder required" />
-            <label for="emailOrder"><span>Email</span></label>
-            <input type="text" id="booking-emailOrder" class="emailOrder required" />
+                <div class="btn-back-toservices"></div><span>Your Order Info</span>
+            </div>
+            <form id="payment-form-booking" method="post" action="/Booking/CreateOrder">
 
-            <span class="hidden">
-        <label for="confirmMethod"><span>Confirm Method</span></label>
-            <select id="confirmMethod" class="required">
-            <option value="SMS"><span>SMS</span></option>
-            <option value="InApplication"><span>In Application</span></option>
-            <option value="Email"><span>Email</span></option>
+                <label for="nameOrder"><span>Name</span></label>
+                <input type="text" id="booking-nameOrder" class="nameOrder required" />
+                <label for="phoneOrder"><span>Phone Number</span></label>
+                <input type="text" id="booking-phoneOrder" class="phoneOrder" />
+                <label for="emailOrder"><span>Email</span></label>
+                <input type="text" id="booking-emailOrder" class="emailOrder" />
+                <span class="hidden">
+            <label for="confirmMethod"><span>Confirm Method</span></label>
+                <select id="confirmMethod" class="required">
+                <option value="SMS"><span>SMS</span></option>
+                <option value="InApplication"><span>In Application</span></option>
+                <option value="Email"><span>Email</span></option>
             </select>
-            </span>
+                </span>
+                <label for="commentOrder"><span>Your Order Comments</span></label>
+                <textarea id="booking-commentOrder" class="commentOrder"></textarea>
 
+                <section>
+                    <div class="bt-drop-in-wrapper">
+                        <div id="bt-dropin-booking"></div>
+                    </div>
+                </section>
 
-            <label for="commentOrder"><span>Your Order Comments</span></label>
-            <textarea id="booking-commentOrder" class="commentOrder"></textarea>
+                <input id="nonce" name="Nonce" type="hidden" />
+                <button class="button" type="submit"><span>Pay</span></button>
+            </form>
             <div class="btn-send-order-booking"><span>Book</span></div>
-
         </div>
 
         <div class="cart hidden">
@@ -163,30 +172,32 @@
                 <div class="back-to-cart"></div><span>Your Order Info</span></div>
             <div class="braintree-container hidden">
                 <div class="checkout container">
-                    <p>Payment Form </p>
                     <form id="payment-form" method="post" action="/RestaurantMenu/CreateOrder">
                         <section>
-                            <label for="amount">
-                                    <span class="input-label">Amount</span>
-                                    <!-- <div class="input-wrapper amount-wrapper"> -->
-                                        <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
-                                    <!-- </div> -->
-                            </label>
+                            <!-- <label for="amount">
+                                <span class="input-label">Amount</span>
+                            </label> -->
+                            <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
+
                             <label for="nameOrder"><span>Name</span></label>
                             <input type="text" id="nameOrder" class="nameOrder required" />
+
                             <label for="phoneOrder"><span>Phone Number</span></label>
                             <input type="text" id="phoneOrder" class="phoneOrder" />
+
                             <label for="emailOrder"><span>Email</span></label>
                             <input type="text" id="emailOrder" class="emailOrder" />
+
                             <label for="commentOrder"><span>Your Order Comments</span></label>
                             <textarea id="commentOrder" class="commentOrder"></textarea>
+
                             <div class="bt-drop-in-wrapper">
                                 <div id="bt-dropin"></div>
                             </div>
                         </section>
 
                         <input id="nonce" name="payment_method_nonce" type="hidden" />
-                        <button class="button" type="submit"><span>Test Transaction</span></button>
+                        <button class="button" type="submit"><span>Pay</span></button>
                     </form>
 
                 </div>

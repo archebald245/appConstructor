@@ -55,7 +55,6 @@ function clickPlaceAnOrder() {
                 if ($('.classMenuTop').length > 0 || $('.classMenuBottom').length > 0) {
                     $(".classMenu").removeClass("hidden");
                 }
-
             },
             error: function() {
                 alert(cultureRes.sorryError);
@@ -96,7 +95,7 @@ function bindListenerToClickBtn() {
     $(".btn-order").on("click", function() {
         if ($("#cart").children().length > 0) {
 
-            InitPayment();
+            InitRestarauntPayment();
 
             //ADD VALIDATION TO ENABLED PAYMENT
             // if (true) {
@@ -120,9 +119,9 @@ function bindListenerToClickBtn() {
         }
     });
 
-    $(".placeAnOrder").on("click", function() {
-        $("#payment-form").submit();
+    // $(".placeAnOrder").on("click", function() {
+    //     $("#payment-form").submit();
 
-        clickPlaceAnOrder();
-    });
+    //     clickPlaceAnOrder();
+    // });
 }
