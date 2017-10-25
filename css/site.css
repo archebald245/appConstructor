@@ -847,10 +847,6 @@ p.item-shop-description {
     padding-bottom: 80px;
 }
 
-.order-booking textarea {
-    margin-bottom: 85px;
-}
-
 form#payment-form-booking button,
 form#payment-form button {
     border: 1px solid #777;
@@ -862,10 +858,9 @@ form#payment-form button {
     background-color: #4a8b23;
 }
 
-
-/* label[for='nameOrder'] {
-    margin-top: 80px;
-} */
+form#payment-form-booking {
+    padding-bottom: 100px;
+}
 
 .swiper-slide img {
     margin: auto;

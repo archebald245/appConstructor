@@ -122,6 +122,10 @@ function GetClientTokenForBooking(callback, dateVal, timeVal, needConfirmation, 
                 scrollTop();
 
                 callback(dateVal, timeVal, needConfirmation, bookResourceId, data);
+            } else {
+                if (checkValidationAndRequired($(".order-booking"))) {
+                    BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId);
+                }
             }
         },
         error: function() {
