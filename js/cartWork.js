@@ -23,12 +23,12 @@ function clickOrder() {
 }
 
 function clickPlaceAnOrder() {
-    clickOrder();
     if (checkValidationAndRequired($("#orderInfo"))) {
         var name = $("#orderInfo").find(".nameOrder").val();
         var phone = $("#orderInfo").find(".phoneOrder").val();
         var email = $("#orderInfo").find(".emailOrder").val();
         var comment = $("#orderInfo").find(".commentOrder").val();
+
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CreateOrder",
@@ -39,7 +39,8 @@ function clickPlaceAnOrder() {
                 Email: email,
                 Comment: comment,
                 ProjectId: applicationData.ProjectId,
-                ContentId: applicationData.Id
+                ContentId: applicationData.Id,
+                Nonce: ""
             },
             cache: false,
             success: function() {
@@ -95,7 +96,24 @@ function bindListenerToClickBtn() {
     $(".btn-order").on("click", function() {
         if ($("#cart").children().length > 0) {
 
-            InitRestarauntPayment();
+            var restAmount = TotalRestAmount();
+            if (restAmount >= 1) {
+                $("#restAmount").val(restAmount);
+                InitRestarauntPayment();
+            } else {
+                //RestOrderHandlers();
+                $("#orderInfo").removeClass("hidden");
+                $(".cart").addClass("hidden");
+                scrollTop();
+
+                $(".placeAnOrder").unbind().on("click", function() {
+                    clickPlaceAnOrder();
+                });
+            }
+
+
+
+
 
             //ADD VALIDATION TO ENABLED PAYMENT
             // if (true) {
@@ -124,4 +142,15 @@ function bindListenerToClickBtn() {
 
     //     clickPlaceAnOrder();
     // });
+}
+
+function TotalRestAmount() {
+    clickOrder();
+    var total = 0;
+    collectionOrderItems.forEach(function(element) {
+        if (element.Price !== "") {
+            total = total + parseInt(element.Price);
+        }
+    });
+    return total;
 }

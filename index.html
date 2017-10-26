@@ -171,15 +171,10 @@
         <div id="orderInfo" class="hidden">
             <div class="cart-top-line">
                 <div class="back-to-cart"></div><span>Your Order Info</span></div>
-            <div class="braintree-container hidden">
+            <div class="braintree-container">
                 <div class="checkout container">
                     <form id="payment-form" method="post" action="/RestaurantMenu/CreateOrder">
                         <section>
-                            <!-- <label for="amount">
-                                <span class="input-label">Amount</span>
-                            </label> -->
-                            <input id="restAmount" name="amount" type="tel" min="1" value="1" disabled />
-
                             <label for="nameOrder"><span>Name</span></label>
                             <input type="text" id="nameOrder" class="nameOrder required" />
 
@@ -192,12 +187,15 @@
                             <label for="commentOrder"><span>Your Order Comments</span></label>
                             <textarea id="commentOrder" class="commentOrder"></textarea>
 
-                            <div class="bt-drop-in-wrapper">
+                            <div class="bt-drop-in-wrapper hidden">
+                                <label for="amount"><span class="input-label">Amount</span></label>
+                                <input id="restAmount" name="amount" type="tel" min="1" value="1" disabled />
+
                                 <div id="bt-dropin"></div>
                             </div>
                         </section>
 
-                        <input id="nonce" name="payment_method_nonce" type="hidden" />
+                        <input id="nonceRest" name="payment_method_nonce" type="hidden" />
                         <button class="button" type="submit"><span>Pay</span></button>
                     </form>
 

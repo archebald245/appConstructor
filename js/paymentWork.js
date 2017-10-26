@@ -21,8 +21,7 @@ function InitRestarauntBraintree(token) {
                     }
 
                     // Add the nonce to the form and submit
-                    //document.querySelector('#nonce').value = payload.nonce;
-                    clickOrder(); //set collectionOrderItems
+                    document.querySelector('#nonceRest').value = payload.nonce;
 
                     var name = $("#orderInfo").find(".nameOrder").val();
                     var phone = $("#orderInfo").find(".phoneOrder").val();
@@ -46,6 +45,8 @@ function InitRestarauntBraintree(token) {
                         data: requestdata,
                         dataType: 'json',
                         success: function(data) {
+                            $(".bt-dropin").html("");
+                            $(".bt-drop-in-wrapper").addClass("hidden");
                             if (data.Success) {
                                 alert(cultureRes.thankYou);
                                 $("#cart").html("");
@@ -54,7 +55,7 @@ function InitRestarauntBraintree(token) {
                                 $("#orderInfo input, #orderInfo textarea").val("");
                                 $("#container").removeClass("hidden");
                                 $("#orderInfo, .cart").addClass("hidden");
-                                $(".bt-dropin").html("");
+
                                 scrollTop();
                                 if ($('.classMenuTop').length > 0 || $('.classMenuBottom').length > 0) {
                                     $(".classMenu").removeClass("hidden");
@@ -65,28 +66,15 @@ function InitRestarauntBraintree(token) {
 
                         }
                     });
-                    //form.submit();
                 });
             }
         });
 
-        $(".placeAnOrder").on("click", function() {
+        $(".placeAnOrder").unbind().on("click", function() {
             $("#payment-form").submit();
-            // clickPlaceAnOrder();
         });
     });
 }
-
-// function InitBookingBraintree(token) {
-//     if (token !== "") {
-//         $(".dateTimePicker-container").addClass("hidden");
-//         $(".order-booking").removeClass("hidden");
-//         scrollTop();
-//     }
-// }
-// var checkout = new Demo({
-//     formID: "payment-form"
-// });
 
 function GetClientToken(InitBraintree) {
     $.ajax({
@@ -95,12 +83,13 @@ function GetClientToken(InitBraintree) {
         data: { projectId: applicationData.ProjectId },
         cache: false,
         success: function(data) {
-            InitBraintree(data);
             $("#orderInfo").removeClass("hidden");
             $(".braintree-container").removeClass("hidden");
+            $(".bt-drop-in-wrapper").removeClass("hidden");
             $(".cart").addClass("hidden");
-            scrollTop();
+            InitBraintree(data);
 
+            scrollTop();
         },
         error: function() {
             alert(cultureRes.sorryError);
