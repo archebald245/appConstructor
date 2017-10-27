@@ -28,21 +28,20 @@ function InitRestarauntBraintree(token) {
                     var email = $("#orderInfo").find(".emailOrder").val();
                     var comment = $("#orderInfo").find(".commentOrder").val();
                     var nonce = payload.nonce;
-                    var requestdata = {};
-
-                    requestdata.OrderItems = collectionOrderItems;
-                    requestdata.Name = name;
-                    requestdata.Phone = phone;
-                    requestdata.Email = email;
-                    requestdata.Comment = comment;
-                    requestdata.ProjectId = applicationData.ProjectId;
-                    requestdata.ContentId = applicationData.Id;
-                    requestdata.Nonce = nonce;
 
                     $.ajax({
                         type: "POST",
                         url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CreateOrder",
-                        data: requestdata,
+                        data: {
+                            OrderItems: collectionOrderItems,
+                            Name: name,
+                            Phone: phone,
+                            Email: email,
+                            Comment: comment,
+                            ProjectId: applicationData.ProjectId,
+                            ContentId: applicationData.Id,
+                            Nonce: nonce
+                        },
                         dataType: 'json',
                         success: function(data) {
                             $(".bt-dropin").html("");
@@ -71,7 +70,7 @@ function InitRestarauntBraintree(token) {
         });
 
         $(".placeAnOrder").unbind().on("click", function() {
-            $("#payment-form").submit();
+            $("#payment-form button.button").click();
         });
     });
 }
