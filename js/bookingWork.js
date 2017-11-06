@@ -117,6 +117,7 @@ function addListenerToClickBookService() {
                 var totalAmount = TotalBookingAmount();
                 if (totalAmount > 0) {
                     $("#bookingAmount").val(totalAmount);
+                    $(".booking-amount-count").html(totalAmount);
                     $(".bt-drop-in-wrapper-booking").removeClass("hidden");
                     GetClientTokenForBooking(sendOrderBooking, dateVal, timeVal, needConfirmation, bookResourceId);
                 } else {
@@ -156,7 +157,17 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId, to
 
     braintree.dropin.create({
         authorization: client_token,
-        container: '#bt-dropin-booking'
+        container: '#bt-dropin-booking',
+        card: {
+            overrides: {
+                fields: {
+                    number: {
+                        placeholder: 'XXXX XXXX XXXX XXXX XXXX'
+                    },
+                    cvv: { placeholder: "XXX" }
+                }
+            }
+        }
     }, function(createErr, instance) {
         form.addEventListener('submit', function(event) {
             event.preventDefault();

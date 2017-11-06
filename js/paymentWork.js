@@ -8,7 +8,17 @@ function InitRestarauntBraintree(token) {
 
     braintree.dropin.create({
         authorization: client_token,
-        container: '#bt-dropin'
+        container: '#bt-dropin',
+        card: {
+            overrides: {
+                fields: {
+                    number: {
+                        placeholder: 'XXXX XXXX XXXX XXXX XXXX' // Update the number field placeholder
+                    },
+                    cvv: { placeholder: "XXX" }
+                }
+            }
+        }
     }, function(createErr, instance) {
         form.addEventListener('submit', function(event) {
             event.preventDefault();

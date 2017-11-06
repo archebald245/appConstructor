@@ -70,7 +70,7 @@
 </head>
 
 <body>
-    <div data-role="header" data-position="fixed" class="classMenu">
+   <div data-role="header" data-position="fixed" class="classMenu">
         <div class="menu-icon" onclick="onClickButtonMenu()">
             <div></div>
             <div></div>
@@ -115,7 +115,7 @@
             <input type="hidden" class="thisIdForTimeLine" />
             <input type="hidden" class="thisIsConfirm" />
         </div>
-
+        <!--BOOKING-->
         <div class="order-booking hidden">
             <div class="cart-top-line">
                 <div class="btn-back-toservices"></div><span>Your Order Info</span>
@@ -141,11 +141,18 @@
 
                 <section>
                     <div class="bt-drop-in-wrapper-booking hidden">
-                        <label for="amount"><span class="input-label">Amount</span></label>
-                        <input id="bookingAmount" name="amount" type="tel" min="1" value="1" disabled />
+                        <input id="bookingAmount" name="amount" type="hidden" />
+                        <div class="amount-container">
+                            <div class="booking-amount-label">
+                                <span class="input-label">Amount</span>
+                            </div>
+                            <div class="booking-amount-count">
+                                <span></span>
+                            </div>
+                        </div>
                         <div id="bt-dropin-booking"></div>
                         <input id="nonce" name="Nonce" type="hidden" />
-                        <button class="button" type="submit"><span>Pay</span></button>
+                        <button class="button hidden" type="submit"><span>Pay</span></button>
                     </div>
                 </section>
             </form>
@@ -168,6 +175,7 @@
                 <div class="btn-order"><span>Order</span></div>
             </div>
         </div>
+        <!--REST-->
         <div id="orderInfo" class="hidden">
             <div class="cart-top-line">
                 <div class="back-to-cart"></div><span>Your Order Info</span></div>
@@ -188,15 +196,21 @@
                             <textarea id="commentOrder" class="commentOrder"></textarea>
 
                             <div class="bt-drop-in-wrapper hidden">
-                                <label for="amount"><span class="input-label">Amount</span></label>
-                                <input id="restAmount" name="amount" type="tel" min="1" value="1" disabled />
-
+                                <input id="restAmount" name="amount" type="hidden" />
+                                <div class="amount-container">
+                                    <div class="rest-amount-label">
+                                        <span class="input-label">Amount</span>
+                                    </div>
+                                    <div class="rest-amount-count">
+                                        <span></span>
+                                    </div>
+                                </div>
                                 <div id="bt-dropin"></div>
                             </div>
                         </section>
 
                         <input id="nonceRest" name="payment_method_nonce" type="hidden" />
-                        <button class="button" type="submit"><span>Pay</span></button>
+                        <button class="button hidden" type="submit"><span>Pay</span></button>
                     </form>
 
                 </div>
