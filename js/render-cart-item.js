@@ -1,15 +1,6 @@
 "use strict";
 
 function renderCartItem(cartItem) {
-    var currency = "";
-    applicationData.Restaurants.forEach(function(e, i) {
-        e.RestaurantMenus.forEach(function(menu, id) {
-            if (menu.Id == cartItem.RestaurantMenuId) {
-                currency = menu.Currency;
-            }
-        });
-    });
-
     var cartShopItem = React.createClass({
         displayName: "cartShopItem",
 
@@ -19,6 +10,17 @@ function renderCartItem(cartItem) {
         render: function render() {
             var data = this.state.data;
             var cartImg;
+            var restId = $("[name=cartRestaurantId]").val();
+            var curr;
+            applicationData.Restaurants.forEach(function(element) {
+                if (element.Id = restId) {
+                    element.RestaurantMenus.forEach(function(el) {
+                        if (el.Id == data.RestaurantMenuId) {
+                            curr = el.Currency;
+                        }
+                    });
+                }
+            }, this);
             if (data.RestaurantMenuImages.length == 0) {
                 cartImg = React.createElement('img', { src: 'baseimages/cartItem.png', className: 'restaurantMenuNoImages ' });
             } else {
@@ -41,12 +43,12 @@ function renderCartItem(cartItem) {
                         ),
                         React.createElement(
                             "div", { className: "cartItem-name-price" },
-                            "Цена: " + data.Price + " " + currency
+                            "Цена: " + data.Price + " " + curr
                         )
                     ),
 
                     React.createElement("div", { className: "cartItem-count-container" },
-                        React.createElement("div", { className: "cartItem-count-total-price" }, data.Price + " " + currency),
+                        React.createElement("div", { className: "cartItem-count-total-price" }, data.Price + " " + curr),
                         React.createElement(
                             "div", { className: "cartItem-info" },
                             React.createElement(
