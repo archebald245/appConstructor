@@ -1,3 +1,5 @@
+var dropinInstance;
+
 function InitRestarauntPayment() {
     GetClientToken(InitRestarauntBraintree);
 }
@@ -9,6 +11,37 @@ function InitRestarauntBraintree(token) {
     braintree.dropin.create({
         authorization: client_token,
         container: '#bt-dropin',
+        translations: {
+            payingWith: cultureRes.payingWith,
+            chooseAnotherWayToPay: cultureRes.chooseAnotherWayToPay,
+            chooseAWayToPay: cultureRes.chooseAWayToPay,
+            otherWaysToPay: cultureRes.otherWaysToPay,
+            cardVerification: cultureRes.cardVerification,
+
+            fieldEmptyForCvv: cultureRes.fieldEmptyForCvv,
+            fieldEmptyForExpirationDate: cultureRes.fieldEmptyForExpirationDate,
+            fieldEmptyForCardholderName: cultureRes.fieldEmptyForCardholderName,
+            fieldEmptyForNumber: cultureRes.fieldEmptyForNumber,
+            fieldInvalidForCvv: cultureRes.fieldInvalidForCvv,
+            fieldInvalidForExpirationDate: cultureRes.fieldInvalidForExpirationDate,
+            fieldInvalidForNumber: cultureRes.fieldInvalidForNumber,
+            genericError: cultureRes.genericError,
+            hostedFieldsFailedTokenizationError: cultureRes.hostedFieldsFailedTokenizationError,
+            hostedFieldsTokenizationCvvVerificationFailedError: cultureRes.hostedFieldsTokenizationCvvVerificationFailedError,
+            hostedFieldsTokenizationNetworkErrorError: cultureRes.hostedFieldsTokenizationNetworkErrorError,
+            hostedFieldsFieldsInvalidError: cultureRes.hostedFieldsFieldsInvalidError,
+            unsupportedCardTypeError: cultureRes.unsupportedCardTypeError,
+            cvvThreeDigitLabelSubheading: cultureRes.cvvThreeDigitLabelSubheading,
+            cardNumberLabel: cultureRes.cardNumberLabel,
+            cvvLabel: cultureRes.cvvLabel,
+            expirationDateLabel: cultureRes.expirationDateLabel,
+            expirationDateLabelSubheading: cultureRes.expirationDateLabelSubheading,
+            expirationDatePlaceholder: cultureRes.expirationDatePlaceholderexpirationDatePlaceholder,
+            payWithCard: cultureRes.payWithCard,
+            endingIn: cultureRes.endingIn,
+            Card: cultureRes.Card,
+            PayPal: cultureRes.PayPal
+        },
         card: {
             overrides: {
                 fields: {
@@ -20,6 +53,7 @@ function InitRestarauntBraintree(token) {
             }
         }
     }, function(createErr, instance) {
+        dropinInstance = instance;
         form.addEventListener('submit', function(event) {
             event.preventDefault();
             if (checkValidationAndRequired($("#orderInfo"))) {
@@ -29,6 +63,7 @@ function InitRestarauntBraintree(token) {
                         alert(err);
                         return;
                     }
+                    $(".spinner-container").removeClass("hidden");
 
                     // Add the nonce to the form and submit
                     document.querySelector('#nonceRest').value = payload.nonce;
@@ -54,7 +89,8 @@ function InitRestarauntBraintree(token) {
                         },
                         dataType: 'json',
                         success: function(data) {
-                            $(".bt-dropin").html("");
+                            $(".spinner-container").addClass("hidden");
+                            destroyPayment()
                             $(".bt-drop-in-wrapper").addClass("hidden");
                             if (data.Success) {
                                 alert(cultureRes.thankYou);
@@ -96,8 +132,12 @@ function GetClientToken(InitBraintree) {
             $(".braintree-container").removeClass("hidden");
             $(".bt-drop-in-wrapper").removeClass("hidden");
             $(".cart").addClass("hidden");
-            InitBraintree(data);
-
+            if (data != "") {
+                InitBraintree(data);
+            } else {
+                alert(cultureRes.sorryError);
+                return false;
+            }
             scrollTop();
         },
         error: function() {
@@ -130,4 +170,12 @@ function GetClientTokenForBooking(callback, dateVal, timeVal, needConfirmation, 
             alert(cultureRes.sorryError);
         }
     });
+}
+
+function destroyPayment() {
+    dropinInstance.teardown(function(err) {
+        if (err) { console.error('An error occurred during teardown:', err); }
+    });
+    $("#bt-dropin-booking").html("");
+    $("#bt-dropin").html("");
 }

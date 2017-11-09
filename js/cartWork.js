@@ -24,6 +24,8 @@ function clickOrder() {
 
 function clickPlaceAnOrder() {
     if (checkValidationAndRequired($("#orderInfo"))) {
+        $(".spinner-container").removeClass("hidden");
+
         var name = $("#orderInfo").find(".nameOrder").val();
         var phone = $("#orderInfo").find(".phoneOrder").val();
         var email = $("#orderInfo").find(".emailOrder").val();
@@ -44,6 +46,8 @@ function clickPlaceAnOrder() {
             },
             cache: false,
             success: function() {
+                $(".spinner-container").addClass("hidden");
+                destroyPayment();
                 alert(cultureRes.thankYou);
                 $("#cart").html("");
                 $(".totalPrice b").html("0");
@@ -99,7 +103,8 @@ function bindListenerToClickBtn() {
             var restAmount = TotalRestAmount();
             if (restAmount >= 1) {
                 $("#restAmount").val(restAmount);
-                $(".rest-amount-count").html(restAmount);
+                var curr = $(".totalPrice b").html().split(" ")[1];
+                $(".rest-amount-count").html(restAmount + " " + curr);
                 InitRestarauntPayment();
             } else {
                 //RestOrderHandlers();
@@ -150,7 +155,7 @@ function TotalRestAmount() {
     var total = 0;
     collectionOrderItems.forEach(function(element) {
         if (element.Price !== "") {
-            total = total + parseInt(element.Price);
+            total = total + (parseInt(element.Price) * parseInt(element.Count));
         }
     });
     return total;

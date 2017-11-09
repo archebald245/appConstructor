@@ -98,6 +98,7 @@ function addListenerToClickBookService() {
                     var totalAmount = TotalBookingAmount();
                     if (totalAmount >= 1) {
                         $("#bookingAmount").val(totalAmount);
+                        $(".booking-amount-count").html(totalAmount + " " + listServiceForBooking[0].BookDateTime.Currency);
                         $(".bt-drop-in-wrapper-booking").removeClass("hidden");
                         GetClientTokenForBooking(sendOrderBooking, dateVal, timeVal, needConfirmation, bookResourceId);
                     } else {
@@ -115,9 +116,9 @@ function addListenerToClickBookService() {
             } else {
 
                 var totalAmount = TotalBookingAmount();
-                if (totalAmount > 0) {
+                if (totalAmount >= 1) {
                     $("#bookingAmount").val(totalAmount);
-                    $(".booking-amount-count").html(totalAmount);
+                    $(".booking-amount-count").html(totalAmount + " " + listServiceForBooking[0].BookDateTime.Currency);
                     $(".bt-drop-in-wrapper-booking").removeClass("hidden");
                     GetClientTokenForBooking(sendOrderBooking, dateVal, timeVal, needConfirmation, bookResourceId);
                 } else {
@@ -158,6 +159,38 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId, to
     braintree.dropin.create({
         authorization: client_token,
         container: '#bt-dropin-booking',
+        translations: {
+            payingWith: cultureRes.payingWith,
+            chooseAnotherWayToPay: cultureRes.chooseAnotherWayToPay,
+            chooseAWayToPay: cultureRes.chooseAWayToPay,
+            otherWaysToPay: cultureRes.otherWaysToPay,
+            cardVerification: cultureRes.cardVerification,
+
+            fieldEmptyForCvv: cultureRes.fieldEmptyForCvv,
+            fieldEmptyForExpirationDate: cultureRes.fieldEmptyForExpirationDate,
+            fieldEmptyForCardholderName: cultureRes.fieldEmptyForCardholderName,
+            fieldEmptyForNumber: cultureRes.fieldEmptyForNumber,
+            fieldInvalidForCvv: cultureRes.fieldInvalidForCvv,
+            fieldInvalidForExpirationDate: cultureRes.fieldInvalidForExpirationDate,
+            fieldInvalidForNumber: cultureRes.fieldInvalidForNumber,
+            genericError: cultureRes.genericError,
+            hostedFieldsFailedTokenizationError: cultureRes.hostedFieldsFailedTokenizationError,
+            hostedFieldsTokenizationCvvVerificationFailedError: cultureRes.hostedFieldsTokenizationCvvVerificationFailedError,
+            hostedFieldsTokenizationNetworkErrorError: cultureRes.hostedFieldsTokenizationNetworkErrorError,
+            hostedFieldsFieldsInvalidError: cultureRes.hostedFieldsFieldsInvalidError,
+            unsupportedCardTypeError: cultureRes.unsupportedCardTypeError,
+
+            cvvThreeDigitLabelSubheading: cultureRes.cvvThreeDigitLabelSubheading,
+            cardNumberLabel: cultureRes.cardNumberLabel,
+            cvvLabel: cultureRes.cvvLabel,
+            expirationDateLabel: cultureRes.expirationDateLabel,
+            expirationDateLabelSubheading: cultureRes.expirationDateLabelSubheading,
+            expirationDatePlaceholder: cultureRes.expirationDatePlaceholderexpirationDatePlaceholder,
+            payWithCard: cultureRes.payWithCard,
+            endingIn: cultureRes.endingIn,
+            Card: cultureRes.Card,
+            PayPal: cultureRes.PayPal
+        },
         card: {
             overrides: {
                 fields: {
@@ -169,6 +202,7 @@ function sendOrderBooking(dateVal, timeVal, needConfirmation, bookResourceId, to
             }
         }
     }, function(createErr, instance) {
+        dropinInstance = instance;
         form.addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -430,6 +464,7 @@ function BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId
 
 
     function BookingAjax() {
+        $(".spinner-container").removeClass("hidden")
         var projectId = applicationData.ProjectId;
         var contentId = applicationData.Id;
         var token = $.jStorage.get('notificationToken');
@@ -449,6 +484,8 @@ function BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId
             },
             cache: false,
             success: function(object) {
+                destroyPayment();
+                $(".spinner-container").addClass("hidden");
                 duration = 0;
                 object = JSON.parse(object);
                 if (object.IsCreated == true) {
@@ -474,6 +511,7 @@ function BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId
                     });
                     var selectDate = selectFreeTimeBook.val();
                     $("#bookAfterConfirmFreeTime").unbind().click(function() {
+                        $(".spinner-container").removeClass("hidden");
                         var hours = selectDate.split("T")[1].split(":")[0];
                         var minutes = selectDate.split("T")[1].split(":")[1];
                         var timeVal = hours + ":" + minutes;
@@ -508,9 +546,12 @@ function BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId
                             },
                             cache: false,
                             success: function(object) {
+                                $(".spinner-container").addClass("hidden");
+                                destroyPayment();
                                 duration = 0;
                                 object = JSON.parse(object);
                                 if (object.IsCreated == true) {
+
                                     alert("success");
                                     if (listServiceForBooking[0].ConfirmMethod == "InApplication") {
                                         addOrderBookingInJStorage(listServiceForBooking, object.resourceModel);
@@ -527,7 +568,6 @@ function BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId
                 } else {
                     alert(cultureRes.sorryError);
                 }
-                $("#bt-dropin-booking").html("");
                 $(".bt-drop-in-wrapper-booking").addClass("hidden");
             }
         });
