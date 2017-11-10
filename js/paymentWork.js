@@ -64,7 +64,6 @@ function InitRestarauntBraintree(token) {
                         return;
                     }
                     $(".spinner-container").removeClass("hidden");
-
                     // Add the nonce to the form and submit
                     document.querySelector('#nonceRest').value = payload.nonce;
 
@@ -90,7 +89,6 @@ function InitRestarauntBraintree(token) {
                         dataType: 'json',
                         success: function(data) {
                             $(".spinner-container").addClass("hidden");
-                            destroyPayment()
                             $(".bt-drop-in-wrapper").addClass("hidden");
                             if (data.Success) {
                                 alert(cultureRes.thankYou);
@@ -116,6 +114,7 @@ function InitRestarauntBraintree(token) {
         });
 
         $(".placeAnOrder").unbind().on("click", function() {
+            $(".spinner-container").removeClass("hidden");
             $("#payment-form button.button").click();
         });
     });
