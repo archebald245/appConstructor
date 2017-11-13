@@ -145,7 +145,7 @@ function addListenerToClickBookService() {
                     });
                 });
                 var totalAmount = TotalBookingAmount();
-                if (totalAmount >= 1) {
+                if (isInstUsePayment && totalAmount >= 1) {
                     $("#bookingAmount").val(totalAmount);
                     $(".booking-amount-count").html(totalAmount + " " + listServiceForBooking[0].BookDateTime.Currency);
                     $(".bt-drop-in-wrapper-booking").removeClass("hidden");
