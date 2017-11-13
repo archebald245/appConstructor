@@ -6,7 +6,7 @@ function goToPage(index) {
         window.plugins.toast.showShortBottom(cultureRes.lockedPage);
         return false
     }
-     if (thisPage.IsPrivate) {
+    if (thisPage.IsPrivate) {
         if (!$.jStorage.get('isLogin')) {
             var findLoginForm = false;
             var pageWithForm = [];
@@ -55,16 +55,25 @@ function goToPage(index) {
     });
     $(".my-youtube").attr("height", "auto");
 
+    // applicationData.Pages.forEach(function(element) {
+    //     if (element.Id == indexPage && element.BackgroundImagePath != null) {
+    //         pageStyles = element.Style;
+    //     }
+    // }, this);
+
     var pageStyles = "";
+
+    applicationData.Pages.forEach(function(element) {
+        if (element.Id == indexPage) {
+            pageStyles = element.Style;
+        }
+    }, this);
+
     var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
     if (pageWithGeneralBg.length > 0) {
         pageStyles = pageWithGeneralBg[0].Style;
     }
-    applicationData.Pages.forEach(function(element) {
-        if (element.Id == indexPage && element.BackgroundImagePath != null) {
-            pageStyles = element.Style;
-        }
-    }, this);
+
 
     $("#container").attr("style", pageStyles);
     submitFormListener();

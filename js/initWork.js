@@ -78,15 +78,18 @@ function onCheckJson() {
     createMenu(applicationData);
     $(".my-youtube").attr("height", "auto");
     var pageStyles = "";
+
+    applicationData.Pages.forEach(function(element) {
+        if (element.Id == indexPage) {
+            pageStyles = element.Style;
+        }
+    }, this);
+
     var pageWithGeneralBg = applicationData.Pages.filter(function(page) { return page.BackgroundForApplication });
     if (pageWithGeneralBg.length > 0) {
         pageStyles = pageWithGeneralBg[0].Style;
     }
-    applicationData.Pages.forEach(function(element) {
-        if (element.Id == indexPage && element.BackgroundImagePath != null) {
-            pageStyles = element.Style;
-        }
-    }, this);
+
     $("#container").attr("style", pageStyles);
 }
 
