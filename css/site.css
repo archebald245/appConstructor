@@ -1971,7 +1971,6 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     margin: 0 auto;
     width: 15%;
     height: 15%;
-    /* background-color: #333; */
     background-color: #fff;
     border-radius: 100%;
     -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
