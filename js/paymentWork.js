@@ -168,6 +168,27 @@ function GetClientTokenForBooking(callback, dateVal, timeVal, needConfirmation, 
             alert(cultureRes.sorryError);
         }
     });
+
+    //paymentMethodBookingHandler
+    $("select#payMethod-booking").on("change", function() {
+        var payMethod = $("select#payMethod-booking option:selected").val();
+        if (payMethod === "card") {
+            $(".bt-drop-in-wrapper-booking").removeClass("hidden");
+
+            $(".btn-send-order-booking").unbind().on("click", function() {
+                $("#payment-form-booking button.button").click();
+            });
+
+        } else if (payMethod === "cash") {
+
+            $(".btn-send-order-booking").unbind().on("click", function() {
+                if (checkValidationAndRequired($(".order-booking"))) {
+                    BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId);
+                }
+            });
+            $(".bt-drop-in-wrapper-booking").addClass("hidden");
+        }
+    });
 }
 
 function destroyPayment() {
@@ -197,3 +218,25 @@ function paymentMethodHandler() {
         }
     });
 }
+
+// function paymentMethodBookingHandler() {
+//     $("select#payMethod-booking").on("change", function() {
+//         var payMethod = $("select#payMethod-booking option:selected").val();
+//         if (payMethod === "card") {
+//             $(".bt-drop-in-wrapper-booking").removeClass("hidden");
+
+//             $(".btn-send-order-booking").unbind().on("click", function() {
+//                 $("#payment-form button.button").click();
+//             });
+
+//         } else if (payMethod === "cash") {
+
+//             $(".btn-send-order-booking").unbind().on("click", function() {
+//                 if (checkValidationAndRequired($(".order-booking"))) {
+//                     BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId);
+//                 }
+//             });
+//             $(".bt-drop-in-wrapper-booking").addClass("hidden");
+//         }
+//     });
+// }
