@@ -46,7 +46,7 @@ function InitRestarauntBraintree(token) {
             overrides: {
                 fields: {
                     number: {
-                        placeholder: 'XXXX XXXX XXXX XXXX XXXX' // Update the number field placeholder
+                        placeholder: 'XXXX XXXX XXXX XXXX' // Update the number field placeholder
                     },
                     cvv: { placeholder: "XXX" }
                 }
@@ -114,7 +114,6 @@ function InitRestarauntBraintree(token) {
         });
 
         $(".placeAnOrder").unbind().on("click", function() {
-            $(".spinner-container").removeClass("hidden");
             $("#payment-form button.button").click();
         });
     });
@@ -129,9 +128,9 @@ function GetClientToken(InitBraintree) {
         success: function(data) {
             $("#orderInfo").removeClass("hidden");
             $(".braintree-container").removeClass("hidden");
-            $(".bt-drop-in-wrapper").removeClass("hidden");
             $(".cart").addClass("hidden");
             if (data != "") {
+                paymentMethodHandler();
                 InitBraintree(data);
             } else {
                 alert(cultureRes.sorryError);
@@ -177,4 +176,24 @@ function destroyPayment() {
     });
     $("#bt-dropin-booking").html("");
     $("#bt-dropin").html("");
+}
+
+function paymentMethodHandler() {
+    $("select#payMethod").on("change", function() {
+        var payMethod = $("select#payMethod option:selected").val();
+        if (payMethod === "card") {
+            $(".bt-drop-in-wrapper").removeClass("hidden");
+
+            $(".placeAnOrder").unbind().on("click", function() {
+                $("#payment-form button.button").click();
+            });
+
+        } else if (payMethod === "cash") {
+
+            $(".placeAnOrder").unbind().on("click", function() {
+                clickPlaceAnOrder();
+            });
+            $(".bt-drop-in-wrapper").addClass("hidden");
+        }
+    });
 }

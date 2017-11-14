@@ -86,7 +86,7 @@
             <div class="sk-circle12 sk-circle"></div>
         </div>
     </div>
-   <div data-role="header" data-position="fixed" class="classMenu">
+    <div data-role="header" data-position="fixed" class="classMenu">
         <div class="menu-icon" onclick="onClickButtonMenu()">
             <div></div>
             <div></div>
@@ -156,16 +156,22 @@
                 <textarea id="booking-commentOrder" class="commentOrder"></textarea>
 
                 <section>
+                    <div class="amount-container">
+                        <div class="booking-amount-label">
+                            <span class="input-label">Amount</span>
+                        </div>
+                        <div class="booking-amount-count">
+                            <span></span>
+                        </div>
+                        <label for="payMethod-booking"><span>Payment Method</span></label>
+                        <select id="payMethod-booking" class="required">
+                            <option value="SMS"><span>Cash</span></option>
+                            <option value="InApplication"><span>Card</span></option>
+                        </select>
+                    </div>
+
                     <div class="bt-drop-in-wrapper-booking hidden">
                         <input id="bookingAmount" name="amount" type="hidden" />
-                        <div class="amount-container">
-                            <div class="booking-amount-label">
-                                <span class="input-label">Amount</span>
-                            </div>
-                            <div class="booking-amount-count">
-                                <span></span>
-                            </div>
-                        </div>
                         <div id="bt-dropin-booking"></div>
                         <input id="nonce" name="Nonce" type="hidden" />
                         <button class="button hidden" type="submit"><span>Pay</span></button>
@@ -211,16 +217,27 @@
                             <label for="commentOrder"><span>Your Order Comments</span></label>
                             <textarea id="commentOrder" class="commentOrder"></textarea>
 
+                            <div class="amount-container">
+                                <div class="rest-amount-label">
+                                    <span class="input-label">Amount</span>
+                                </div>
+                                <div class="rest-amount-count">
+                                    <span></span>
+                                </div>
+
+                            </div>
+                            <div class="payment-method-container">
+                                <label for="payMethod"><span>Payment Method</span></label>
+                                <select id="payMethod" class="required">
+                                    <option value="cash"><span>Cash</span></option>
+                                    <option value="card"><span>Card</span></option>
+                                    </select>
+                            </div>
+
+
                             <div class="bt-drop-in-wrapper hidden">
                                 <input id="restAmount" name="amount" type="hidden" />
-                                <div class="amount-container">
-                                    <div class="rest-amount-label">
-                                        <span class="input-label">Amount</span>
-                                    </div>
-                                    <div class="rest-amount-count">
-                                        <span></span>
-                                    </div>
-                                </div>
+
                                 <div id="bt-dropin"></div>
                             </div>
                         </section>
