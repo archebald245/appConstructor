@@ -89,9 +89,9 @@ function createMenu() {
                     'border-top': '2px solid ' + sandwichColor,
                     'max-height': $(document).height() / 1.5
                 });
-                $(".menu-icon").css({
-                    'border': '2px solid ' + sandwichColor
-                });
+                // $(".menu-icon").css({
+                //     'border': '2px solid ' + sandwichColor
+                // });
             }
         }
         addListener();

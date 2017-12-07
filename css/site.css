@@ -46,12 +46,8 @@ form {
     width: 37px;
     height: 46px;
     text-indent: -9999px;
-    margin-left: 10px;
     cursor: pointer;
     display: block;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding-left: 3px;
 }
 
 .menu-icon-right {
@@ -1725,9 +1721,6 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
         margin-left: 10px;
         cursor: pointer;
         display: block;
-        border: 2px solid black;
-        border-radius: 5px;
-        padding-left: 3px;
     }
     .classMenu .menu-icon>div {
         width: 35px;
