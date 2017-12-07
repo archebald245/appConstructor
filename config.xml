@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <widget xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="test.nlt.app2" version="0.0.8">
-  <name>PrivateTestApp</name>
+  <name>EventApp Private</name>
   <description>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</description>
   <plugin name="cordova-plugin-inappbrowser" spec="1.5.0" source="npm" />
   <plugin name="cordova-plugin-file-transfer" spec="1.6.0" source="npm" />
