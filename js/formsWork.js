@@ -3,10 +3,12 @@ function submitFormListener() {
     $(".form-container").find(".formSubmit").on("click", function() {
         var networkState = navigator.connection.type;
         if (networkState != Connection.NONE) {
+            $(".spinner-container").removeClass("hidden");
             var check = true;
             var form = $(this).closest(".form-container");
             check = checkValidationAndRequired(form);
             if (check == false) {
+                $(".spinner-container").addClass("hidden");
                 return;
             }
             var isLoginForm = $(form).find("input[name='LoginForm']").val();
@@ -16,9 +18,10 @@ function submitFormListener() {
             $(".form-container").append("<input type='hidden' name='projectId' value='" + idProject + "'/><input type='hidden' name='formId' value='" + idForm + "'/>")
 
             var siteUrl = applicationData.UrlForUpdateApp;
-            var formData = new FormData(form)
+            // var formData = new FormData(form)
             if (isLoginForm == "true") {
                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(form).serialize(), function(data) {
+                    $(".spinner-container").addClass("hidden");
                     if (data.Success == true) {
                         $.jStorage.set('isLogin', true);
                         alert(data.Message);
@@ -32,8 +35,9 @@ function submitFormListener() {
 
             } else if (isRegisterForm == "true") {
                 $.post('' + siteUrl + '/MobileUserAuth/Register/', $(form).serialize(), function(data) {
+                    $(".spinner-container").addClass("hidden");
                     if (data.Success == true) {
-                        alert(data.Message + "\nPlease login.");
+                        alert(data.Message + "\n" + cultureRes.loginPlease + ".");
                         $(form).find(".formBlock").find("input, textarea").val("");
                         $(form).find("input[type='checkbox']").removeAttr("checked");
                     } else {
@@ -44,6 +48,7 @@ function submitFormListener() {
                 });
             } else {
                 $.post('' + siteUrl + '/Form/SaveFormData', $(form).serialize(), function() {
+                    $(".spinner-container").addClass("hidden");
                     alert(cultureRes.thankYou);
                     $(form).find(".formBlock").find("input, textarea").val("");
                     $(form).find("input[type='checkbox']").removeAttr("checked");
@@ -54,24 +59,12 @@ function submitFormListener() {
             alert(cultureRes.noInternet);
         }
     });
+
     if ($.jStorage.get("isLogin")) {
         $(".formLogout").prop("disabled", false);
     }
+
     $(".formLogout").on("click", function() {
-        var tokenToSend = $.jStorage.get('notificationToken');
-        var projectIdToSend = applicationData.ProjectId;
-        var deviceIdToSend = $.jStorage.get('ApplicationId');
-        $.ajax({
-            type: "POST",
-            url: applicationData.UrlForUpdateApp + "/PushNotification/LogoutUserToken",
-            data: {
-                token: tokenToSend,
-                projectId: projectIdToSend,
-                deviceId: deviceIdToSend
-            },
-            cache: false,
-            success: function(response) {}
-        });
         $.jStorage.set('isLogin', false);
         goToPage(indexPage);
     });
@@ -96,12 +89,14 @@ function bindChangeValForms() {
                 $(button).on("click", function() {
                     var networkState = navigator.connection.type;
                     if (networkState != Connection.NONE) {
+                        $(".spinner-container").removeClass("hidden");
                         var check = checkValidationAndRequired(elem);
                         var isLoginForm = $(elem).find("input[name='LoginForm']").val();
                         var isRegisterForm = $(elem).find("input[name='RegistrationForm']").val();
                         if (check != false) {
                             if (isLoginForm == "true") {
                                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(elem).serialize(), function(data) {
+                                    $(".spinner-container").addClass("hidden");
                                     if (data.Success == true) {
                                         $.jStorage.set('isLogin', true);
                                         alert(data.Message);
@@ -114,8 +109,9 @@ function bindChangeValForms() {
                                 });
                             } else if (isRegisterForm == "true") {
                                 $.post('' + siteUrl + '/MobileUserAuth/Register/', $(elem).serialize(), function(data) {
+                                    $(".spinner-container").addClass("hidden");
                                     if (data.Success == true) {
-                                        alert(data.Message + "\nPlease login.");
+                                        alert(data.Message + "\n" + cultureRes.loginPlease + ".");
                                         $(elem).find(".formBlock").find("input, textarea").val("");
                                         $(elem).find("input[type='checkbox']").removeAttr("checked");
                                         goToPage(indexPage);
@@ -127,6 +123,7 @@ function bindChangeValForms() {
                                 });
                             } else {
                                 $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
+                                    $(".spinner-container").addClass("hidden");
                                     alert(cultureRes.thankYou);
                                     $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
@@ -134,6 +131,8 @@ function bindChangeValForms() {
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
                                 });
                             }
+                        } else {
+                            $(".spinner-container").addClass("hidden");
                         }
                     } else {
                         alert(cultureRes.noInternet);
@@ -148,18 +147,22 @@ function bindChangeValForms() {
             if ($(element).find("button").length > 0) {
                 $(element).find("button").unbind("click");
                 $(element).find("button").on("click", function() {
+                    $(".spinner-container").removeClass("hidden");
                     var networkState = navigator.connection.type;
                     if (networkState != Connection.NONE) {
                         var check = checkValidationAndRequired(elem);
                         if (check != false) {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
-                                alert("Thank you!");
+                                $(".spinner-container").addClass("hidden");
+                                alert(cultureRes.thankYou);
                                 $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
 
                                 $(elem).find("input[type='checkbox']").removeAttr("checked");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
                             });
+                        } else {
+                            $(".spinner-container").addClass("hidden");
                         }
                     } else {
                         alert(cultureRes.noInternet);
