@@ -13,14 +13,17 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
         }
-
-
     }
     if (jsonObject.Restaurants != null) {
         jsonObject.Restaurants = resourcesOfRestaurantMenus(jsonObject.Restaurants, storePath);
     }
     if (jsonObject.Institutions != null) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
+    }
+    if (jsonObject.Menu != null) {
+        jsonObject.Menu.MenuItems.forEach(function(item) {
+            item = resourcesOfMenu(item, storePath);
+        });
     }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
@@ -56,6 +59,14 @@ function searchResourcesAndReplacePatch(jsonObject) {
     $.jStorage.set('replaceImagePachJson', JSON.stringify(jsonObject));
     $.jStorage.set('resources', resources);
     return resourcesToDownload;
+}
+
+function resourcesOfMenu(item, storePath) {
+    if (item.IconPath != null) {
+        resources.push(item.IconPath);
+        item.IconPath = replacementMenuItemIconPath(item.IconPath, storePath);
+    }
+    return item;
 }
 
 function resourcesOfCellContainer(cellContainer, storePath) {
@@ -100,6 +111,8 @@ function resourcesOfBackground(page, storePath) {
     page.Style = replacementBackgroundImagePath(page.Style, page.BackgroundImagePath, storePath);
     return page;
 }
+
+
 
 function resourcesOfRestaurantMenus(restaurants, storePath) {
     restaurants = replacePathToImageRestaurantMenu(restaurants);
@@ -205,6 +218,12 @@ function replacementPathImages(jsonObjectValue, arrayResources, storePath) {
 }
 
 function replacementPathImagesRestaurantMenu(oldPath, storePath) {
+    var nameImage = oldPath.split("/");
+    nameImage = nameImage[nameImage.length - 1];
+    return storePath + nameImage;
+}
+
+function replacementMenuItemIconPath(oldPath, storePath) {
     var nameImage = oldPath.split("/");
     nameImage = nameImage[nameImage.length - 1];
     return storePath + nameImage;
