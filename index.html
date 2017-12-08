@@ -49,6 +49,11 @@
     <script src="js/restaurantMenuWork.js"></script>
     <script src="js/cartWork.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <!-- EVENTS-->
+    <script src="js/render-event.js"></script>
+    <script src="js/eventWork.js"></script>
+
     <!-- lightGallery-->
     <link rel="stylesheet" href="js/lightGallery/lightgallery.css">
     <link rel="stylesheet" href="js/dateTimePicker-forDate/datedropper.min.css">
@@ -260,8 +265,6 @@
                 <div class="go-to-menu-btn">Сontinue shopping</div>
                 <div class="placeAnOrder btn-order"><span>Buy</span></div>
             </div>
-
-
         </div>
         <div class="singleItem hidden">
             <div class="cart-top-line">
@@ -269,6 +272,13 @@
                 <div class="to-cart"></div>
             </div>
             <div id="singleItem"> </div>
+        </div>
+        <div class="event-list hidden">
+            <div id='event-container'></div>
+        </div>
+
+        <div class="event-profile hidden">
+            <div id='event-profile-container'></div>
         </div>
 
         <div id="custom-hide-container" class="hidden">

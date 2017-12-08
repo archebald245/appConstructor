@@ -12,7 +12,6 @@ var renderBooking = function renderBooking(thisInstitution, sortByService) {
             if (sortByService) {
                 $(".fab").addClass("fab-moved");
             }
-
         },
         render: function render() {
             var data = this.props.data;
