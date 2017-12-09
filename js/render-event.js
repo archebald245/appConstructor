@@ -32,7 +32,7 @@ var renderEvent = function renderEvent(events) {
                         ""
                     ),
                     React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
-                ),
+                )
             );
         }
     });
