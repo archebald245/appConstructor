@@ -860,9 +860,12 @@ function reactRender() {
             if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
                 $(ReactDOM.findDOMNode(this)).append("<div class='custom-container-event' id='event-container'></div>");
 
-                var eventData = this.Json;
-                if ($.jStorage.get('EventsData').length) {
+                var eventData;
+                if ($.jStorage.get('EventsData') != null) {
                     eventData = $.jStorage.get('EventsData');
+                } else {
+                    eventData = JSON.parse(Base64.decode(this.Json));
+                    $.jStorage.set('EventsData', eventData);
                 }
 
                 renderEvent(eventData);
