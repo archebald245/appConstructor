@@ -13,7 +13,6 @@ var renderEvent = function renderEvent(events) {
             if ($.jStorage.get('FavoriteEvents') != null) {
                 isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
             }
-            var isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
             if (data.ImagePath != null) {
                 image = React.createElement('img', { src: data.ImagePath });
             } else {
