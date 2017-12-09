@@ -46,7 +46,7 @@ var renderEvent = function renderEvent(events) {
             });
 
             return React.createElement(
-                'div', { className: "" },
+                'div', { className: "custom-container-event" },
                 eventCollectionForRender
             );
         }

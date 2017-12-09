@@ -2163,3 +2163,44 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
         transform: rotate(360deg);
     }
 }
+
+
+/*EVENT SECTION*/
+
+.custom-container-event {
+    width: 100%;
+}
+
+.event-data-container {
+    display: inline-block;
+    width: 45%;
+    height: 500px;
+    margin: 0 2.5% 20px;
+}
+
+.event-data-container img {
+    width: 100%;
+}
+
+.event-data {
+    position: relative;
+    width: 100%;
+    background-color: #a0a0a0;
+    text-align: left;
+    padding-left: 20px;
+    color: #000;
+    font-weight: bold;
+}
+
+.event-favorite {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 50%;
+    border: 2px solid #d24a45;
+    background-color: #a0a0a0;
+}
+
+.event-favorite-active {
+    background-color: red;
+}
