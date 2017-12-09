@@ -12,13 +12,29 @@ function addListenerToClickBookService() {
 
     $(".event-favorite").unbind("click").on("click", function() {
         var id = $(this).siblings(".eventId").val();
-        if ($(this).hasClass("event-favorite-active")) {
-            var favorites = $.jStorage.get('FavoriteEvents');
-            $(this).removeClass("event-favorite-active");
-        } else {
-            $(this).addClass("event-favorite-active");
-        }
+        UpdateFavorite(this, id);
     });
 }
+
 //check event for favorite, save in local storage, add class
-function UpdateFavorite(e, id) {}
+function UpdateFavorite(e, id) {
+    var favorites = $.jStorage.get('FavoriteEvents');
+    if (favorites != null) {
+        if ($(this).hasClass("event-favorite-active")) {
+            //remove from favorites
+            var index = favorites.indexOf(id);
+            if (index > -1) {
+                favorites.splice(index, 1);
+            }
+            $(this).removeClass("event-favorite-active");
+        } else {
+            //add to favorites
+            $(this).addClass("event-favorite-active");
+        }
+    } else {
+        //add to favorites
+        var arr = [];
+        arr.push(id);
+        $.jStorage.set('FavoriteEvents', array);
+    }
+}
