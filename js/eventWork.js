@@ -1,7 +1,7 @@
 function addListenerToClickBookService() {
     $(".event-data-container").unbind("click").on("click", function() {
         var id = $(this).find(".eventId").val();
-        var events = $.jStorage.get('Events');
+        var events = $.jStorage.get('EventsData');
         events.forEach(function(item, index) {
             if (item.Id == id) {
                 RenderEventProfile(item);

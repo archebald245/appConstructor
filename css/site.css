@@ -2174,7 +2174,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 .event-data-container {
     display: inline-block;
     width: 45%;
-    height: 500px;
+    height: 400px;
     margin: 0 2.5% 20px;
 }
 
@@ -2185,6 +2185,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 .event-data {
     position: relative;
     width: 100%;
+    height: 100px;
     background-color: #a0a0a0;
     text-align: left;
     padding-left: 20px;
@@ -2194,11 +2195,14 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 .event-favorite {
     position: absolute;
+    width: 25px;
+    height: 25px;
     bottom: 5px;
     right: 5px;
     border-radius: 50%;
     border: 2px solid #d24a45;
     background-color: #a0a0a0;
+    content: "";
 }
 
 .event-favorite-active {
