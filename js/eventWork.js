@@ -22,16 +22,18 @@ function addListenerToClickEvent() {
 function UpdateFavorite(e, id) {
     var favorites = $.jStorage.get('FavoriteEvents');
     if (favorites != null) {
-        if ($(this).hasClass("event-favorite-active")) {
+        if ($(e).hasClass("event-favorite-active")) {
             //remove from favorites
             var index = favorites.indexOf(id);
             if (index > -1) {
                 favorites.splice(index, 1);
             }
-            $(this).removeClass("event-favorite-active");
+            $(e).removeClass("event-favorite-active");
         } else {
             //add to favorites
-            $(this).addClass("event-favorite-active");
+            $(e).addClass("event-favorite-active");
+            favorites.push(id);
+            $.jStorage.set('FavoriteEvents', favorites);
         }
     } else {
         //add to favorites
