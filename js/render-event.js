@@ -84,7 +84,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
             }
             return React.createElement(
 
-                'div', { className: "event-data-container" },
+                'div', { className: "event-profile-container" },
                 React.createElement(
                     'div', { className: 'event-profile-header' },
                     data.Name

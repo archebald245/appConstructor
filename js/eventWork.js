@@ -37,6 +37,6 @@ function UpdateFavorite(e, id) {
         //add to favorites
         var arr = [];
         arr.push(id);
-        $.jStorage.set('FavoriteEvents', array);
+        $.jStorage.set('FavoriteEvents', arr);
     }
 }
