@@ -1,5 +1,5 @@
 function addListenerToClickEvent() {
-    $(".event-data-container").unbind("click").on("click", function() {
+    $(".event-data-container img").unbind("click").on("click", function() {
         var id = $(this).find(".eventId").val();
         var events = $.jStorage.get('EventsData');
         events.forEach(function(item, index) {

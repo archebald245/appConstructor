@@ -2171,7 +2171,6 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     width: 100%;
 }
 
-.event-profile-container,
 .event-data-container {
     display: inline-block;
     width: 45%;
@@ -2216,6 +2215,6 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .event-profile-container {
-    width: 100%;
+    width: 95%;
     margin: 0 2.5% 20px;
 }

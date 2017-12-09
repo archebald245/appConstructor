@@ -99,11 +99,12 @@ var RenderEventProfile = function RenderEventProfile(event) {
                     React.createElement(
                         'div', { className: 'event-start-time' },
                         startDate + " - " + finishDate
-                    ),
-                    React.createElement(
-                        'div', { className: 'event-favorite' },
-                        data.MapData
                     )
+                    // ,
+                    // React.createElement(
+                    //     'div', { className: 'event-favorite' },
+                    //     data.MapData
+                    // )
                 ),
                 React.createElement(
                     'div', { className: 'event-name' },
