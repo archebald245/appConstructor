@@ -864,7 +864,7 @@ function reactRender() {
                 if ($.jStorage.get('EventsData') != null) {
                     eventData = $.jStorage.get('EventsData');
                 } else {
-                    eventData = JSON.parse(Base64.decode(this.Json));
+                    eventData = JSON.parse(Base64.decode(data.Json));
                     $.jStorage.set('EventsData', eventData);
                 }
 
