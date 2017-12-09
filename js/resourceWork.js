@@ -85,7 +85,25 @@ function resourcesOfCellContainer(cellContainer, storePath) {
         if (cellContainer[i].ContentTypeId == 8) {
             cellContainer[i] = resourcesOfGallary(cellContainer[i], storePath);
         }
+        if (cellContainer[i].ContentTypeId == 19) {
+            cellContainer[i] = resourcesOfEvent(cellContainer[i], storePath);
+        }
     }
+    return cellContainer;
+}
+
+function resourcesOfEvent(cellContainer, storePath) {
+    var eventsData = JSON.parse(Base64.decode(cellContainer.Json));
+
+    cellContainer.Json
+    eventsData.forEach(function(item, index) {
+        if (item.ImagePath.length) {
+            resources.push(item.ImagePath);
+            item.ImagePath = replacementMenuItemIconPath(item.ImagePath, storePath); //work for events too
+        }
+    });
+    cellContainer.Json = eventsData;
+    $.jStorage.set('EventsData', eventsData);
     return cellContainer;
 }
 
@@ -222,7 +240,7 @@ function replacementPathImagesRestaurantMenu(oldPath, storePath) {
     nameImage = nameImage[nameImage.length - 1];
     return storePath + nameImage;
 }
-
+//work for events too
 function replacementMenuItemIconPath(oldPath, storePath) {
     var nameImage = oldPath.split("/");
     nameImage = nameImage[nameImage.length - 1];
