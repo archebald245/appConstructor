@@ -32,13 +32,13 @@ function UpdateFavorite(e, id) {
         } else {
             //add to favorites
             $(e).addClass("event-favorite-active");
-            favorites.push(id);
+            favorites.push(+id);
             $.jStorage.set('FavoriteEvents', favorites);
         }
     } else {
         //add to favorites
         var arr = [];
-        arr.push(id);
+        arr.push(+id);
         $.jStorage.set('FavoriteEvents', arr);
     }
 }
