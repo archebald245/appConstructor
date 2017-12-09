@@ -2208,3 +2208,12 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 .event-favorite-active {
     background-color: red;
 }
+
+.event-profile {
+    margin-top: 75px;
+}
+
+.event-profile-container {
+    width: 100%;
+    margin: 0 2.5% 20px;
+}

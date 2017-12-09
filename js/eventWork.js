@@ -1,9 +1,11 @@
-function addListenerToClickBookService() {
+function addListenerToClickEvent() {
     $(".event-data-container").unbind("click").on("click", function() {
         var id = $(this).find(".eventId").val();
         var events = $.jStorage.get('EventsData');
         events.forEach(function(item, index) {
             if (item.Id == id) {
+                $("#container").addClass("hidden");
+                $(".event-profile").removeClass("hidden");
                 RenderEventProfile(item);
                 //HIDE 
             }

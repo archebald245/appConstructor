@@ -3,7 +3,7 @@
 var renderEvent = function renderEvent(events) {
     var SingleEvent = React.createClass({
         componentDidMount: function componentDidMount() {
-            addListenerToClickBookService();
+            addListenerToClickEvent();
         },
         render: function render() {
             var data = this.props.data;
@@ -114,4 +114,60 @@ var RenderEventProfile = function RenderEventProfile(event) {
         }
     });
     ReactDOM.render(React.createElement(Event, { data: event }), document.getElementById("event-profile-container"));
+};
+
+//RENDER FAVORITE EVENT
+var renderFavorite = function renderFavorite(events) {
+    var SingleEvent = React.createClass({
+        componentDidMount: function componentDidMount() {
+            addListenerToClickEvent();
+        },
+        render: function render() {
+            var data = this.props.data;
+            var startTime = data.startTime;
+            var image;
+            if (data.ImagePath != null) {
+                image = React.createElement('img', { src: data.ImagePath });
+            } else {
+                image = null;
+            }
+            return React.createElement(
+                'div', { className: "event-data-container" },
+                image,
+                React.createElement(
+                    'div', { className: 'event-data' },
+                    React.createElement(
+                        'div', { className: 'event-name' },
+                        data.Name
+                    ),
+                    React.createElement(
+                        'div', { className: 'event-start-time' },
+                        startTime
+                    ),
+                    React.createElement(
+                        'div', { className: 'event-favorite event-favorite-active' },
+                        ""
+                    ),
+                    React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
+                )
+            );
+        }
+    });
+
+    var Events = React.createClass({
+        render: function render() {
+
+            var data = this.props.data;
+            var eventCollectionForRender = data.map(function(event) {
+                return React.createElement(SingleEvent, { data: event });
+            });
+
+            return React.createElement(
+                'div', { className: "custom-container-event" },
+                eventCollectionForRender
+            );
+        }
+    });
+
+    ReactDOM.render(React.createElement(Events, { data: events }), document.getElementById("event-favorite-container"));
 };

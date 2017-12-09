@@ -41,6 +41,9 @@ function goToPage(index) {
     if (applicationData.IsTrackingLastPage == true) {
         setLastOpenPage(indexPage);
     }
+    $("#container").removeClass("hidden");
+    $(".event-profile").addClass("hidden");
+
     showActivePageInMenu(indexPage);
     $("#container").empty();
     slideUp();
