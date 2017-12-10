@@ -22,23 +22,21 @@ function addListenerToClickEvent() {
 function UpdateFavorite(e, id) {
     var favorites = $.jStorage.get('FavoriteEvents');
     if (favorites != null) {
-        if ($(e).hasClass("event-favorite-active")) {
-            //remove from favorites
-            var index = favorites.indexOf(+id);
-            if (index > -1) {
-                favorites.splice(index, 1);
-            }
+        var index = favorites.indexOf(+id);
+        if (index > -1) {
+            favorites.splice(index, 1);
             $(e).removeClass("event-favorite-active");
         } else {
             //add to favorites
-            $(e).addClass("event-favorite-active");
             favorites.push(+id);
-            $.jStorage.set('FavoriteEvents', favorites);
+            $(e).addClass("event-favorite-active");
         }
+        $.jStorage.set('FavoriteEvents', favorites);
     } else {
         //add to favorites
         var arr = [];
         arr.push(+id);
         $.jStorage.set('FavoriteEvents', arr);
+        $(e).addClass("event-favorite-active");
     }
 }
