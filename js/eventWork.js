@@ -24,7 +24,7 @@ function UpdateFavorite(e, id) {
     if (favorites != null) {
         if ($(e).hasClass("event-favorite-active")) {
             //remove from favorites
-            var index = favorites.indexOf(id);
+            var index = favorites.indexOf(+id);
             if (index > -1) {
                 favorites.splice(index, 1);
             }
