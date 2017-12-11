@@ -180,6 +180,9 @@ function checkConnection(callbackInitPN) {
                     checkUpdateRestaurantMenu(true);
                     onCheckJson();
                 } else {
+                    if (jsonObjectOfServer.Events.length) {
+                        updateResources();
+                    }
                     checkUpdateRestaurantMenu(true);
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
