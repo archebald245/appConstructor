@@ -17,7 +17,7 @@ var renderEvent = function renderEvent(events) {
             var divStyle = {};
             if (data.ImagePath != null) {
                 divStyle = {
-                    backgroundImage: 'url(' + imgUrl + ')'
+                    backgroundImage: 'url(' + data.ImagePath + ')'
                 };
 
             } else {
