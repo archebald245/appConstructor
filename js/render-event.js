@@ -1,5 +1,5 @@
 'use strict';
-
+//RENDER EVENT LIST
 var renderEvent = function renderEvent(events) {
     var SingleEvent = React.createClass({
         componentDidMount: function componentDidMount() {

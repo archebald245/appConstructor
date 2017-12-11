@@ -94,7 +94,7 @@ function resourcesOfCellContainer(cellContainer, storePath) {
         if (cellContainer[i].ContentTypeId == 19) {
             var eventsData = JSON.parse(Base64.decode(cellContainer[i].Json));
             eventsData = resourcesOfEvent(eventsData, storePath);
-            cellContainer[i].Json = eventsData;
+            // cellContainer[i].Json = eventsData;
         }
     }
     return cellContainer;
