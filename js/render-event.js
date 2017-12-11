@@ -13,19 +13,7 @@ var renderEvent = function renderEvent(events) {
             if ($.jStorage.get('FavoriteEvents') != null) {
                 isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
             }
-
-            // var divStyle = {};
-            // if (data.ImagePath != null) {
-            //     divStyle = {
-            //         backgroundImage: 'url(' + data.ImagePath + ')'
-            //     };
-
-            // } else {
-            //     divStyle = {
-            //         backgroundImage: 'none'
-            //     };
-            // }
-            var image = React.createElement('div', { className: 'event-image', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
+            var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
             return React.createElement(
                 'div', { className: "event-data-container" },
                 image,
