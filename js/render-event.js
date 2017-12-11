@@ -78,7 +78,8 @@ var RenderEventProfile = function RenderEventProfile(event) {
 
             var image;
             if (data.ImagePath != null) {
-                image = React.createElement('img', { src: data.ImagePath });
+                image = React.createElement('div', { className: 'image-container' },
+                    React.createElement('img', { src: data.ImagePath }));
             } else {
                 image = null;
             }
@@ -99,15 +100,14 @@ var RenderEventProfile = function RenderEventProfile(event) {
                     React.createElement(
                         'div', { className: 'event-start-time' },
                         startDate + " - " + finishDate
+                    ),
+                    React.createElement(
+                        'div', { className: 'event-location' },
+                        data.MapData
                     )
-                    // ,
-                    // React.createElement(
-                    //     'div', { className: 'event-favorite' },
-                    //     data.MapData
-                    // )
                 ),
                 React.createElement(
-                    'div', { className: 'event-name' },
+                    'div', { className: 'event-description' },
                     data.Description
                 ),
                 React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })

@@ -2167,6 +2167,9 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 /*EVENT SECTION*/
 
+
+/*EVENT SECTION*/
+
 .custom-container-event {
     width: 100%;
     overflow: hiiden;
@@ -2203,16 +2206,20 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 .event-data .event-name {
     font-size: 16px;
-    width: 100%;
+    width: 70%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding: 5%;
+    padding: 5% 5% 5% 5%;
 }
 
 .event-data .event-start-time {
     font-size: 16px;
     padding: 0 5% 0 5%;
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .event-data-container .event-favorite {
@@ -2222,4 +2229,88 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     width: 32px;
     height: 32px;
     border: 1px solid #ff0000;
+}
+
+
+/*~~~~~~~~~~~~~~PROFILE OF EVENT~~~~~~~~~~~~~~~~~*/
+
+.event-profile {
+    font-family: arial;
+    padding: 5%;
+}
+
+.event-profile .event-profile-header {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.event-profile .image-container img {
+    width: 100%;
+}
+
+.event-profile .event-description {
+    padding: 20px 0 10px 0;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.event-time-container {
+    padding: 20px 0 0 0;
+}
+
+.event-time-container .event-start-time {
+    background: url(clock-large.png) no-repeat 10px 50%;
+    padding: 0 0 0 40px;
+    background-size: 25px;
+    height: 25px;
+    line-height: 25px;
+}
+
+.event-time-container .event-start-date {
+    background: url(calendar-large.png) no-repeat 10px 50%;
+    padding: 0 0 0 40px;
+    background-size: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin: 10px 0 10px 0;
+}
+
+.event-time-container .event-location {
+    background: url(ic_venue_bl.png) no-repeat 10px 50%;
+    padding: 0 0 0 40px;
+    height: 25px;
+    line-height: 25px;
+}
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+@media only screen and (max-width: 769px) {
+    .event-data-container .event-image-container {
+        min-height: 260px;
+    }
+    .event-data-container .event-data {
+        min-height: 90px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .event-data-container .event-image-container {
+        min-height: 200px;
+    }
+    .event-data-container .event-data {
+        min-height: 80px;
+    }
+    .event-profile .event-profile-header {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .event-data-container .event-image-container {
+        min-height: 170px;
+    }
+    .event-data-container .event-data {
+        min-height: 70px;
+    }
 }

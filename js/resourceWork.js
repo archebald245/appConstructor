@@ -52,9 +52,7 @@ function searchResourcesAndReplacePatch(jsonObject) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
     if ($.jStorage.get('EventsDataUpdate') != null) {
-
         var events = resourcesOfEvent($.jStorage.get('EventsDataUpdate'), storePath);
-        $.jStorage.deleteKey('EventsDataUpdate');
         $.jStorage.deleteKey('EventsDataUpdate');
     }
 
