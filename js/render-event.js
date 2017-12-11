@@ -30,13 +30,13 @@ var renderEvent = function renderEvent(events) {
                     React.createElement(
                         'div', { className: 'event-start-time' },
                         startTime
-                    ),
-                    React.createElement(
-                        'div', { className: isFavorite > -1 ? 'event-favorite event-favorite-active' : 'event-favorite' },
-                        ""
-                    ),
-                    React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
-                )
+                    )
+                ),
+                React.createElement(
+                    'div', { className: isFavorite > -1 ? 'event-favorite event-favorite-active' : 'event-favorite' },
+                    ""
+                ),
+                React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
             );
         }
     });
