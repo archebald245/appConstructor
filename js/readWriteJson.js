@@ -1,10 +1,6 @@
 var jsonStringify;
 
 function onCheckJson() {
-
-
-
-
     if ($.jStorage.get('appData') != null) {
 
         applicationData = JSON.parse($.jStorage.get('appData'));

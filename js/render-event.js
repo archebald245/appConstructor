@@ -13,11 +13,19 @@ var renderEvent = function renderEvent(events) {
             if ($.jStorage.get('FavoriteEvents') != null) {
                 isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
             }
+
+            var divStyle = {};
             if (data.ImagePath != null) {
-                image = React.createElement('img', { src: data.ImagePath });
+                divStyle = {
+                    backgroundImage: 'url(' + imgUrl + ')'
+                };
+
             } else {
-                image = null;
+                divStyle = {
+                    backgroundImage: 'none'
+                };
             }
+            var image = React.createElement('div', { className: 'event-image', style: { divStyle } });
             return React.createElement(
                 'div', { className: "event-data-container" },
                 image,
