@@ -2231,12 +2231,16 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     border: 1px solid #ff0000;
 }
 
+.event-favorite-active {
+    background-color: red;
+}
+
 
 /*~~~~~~~~~~~~~~PROFILE OF EVENT~~~~~~~~~~~~~~~~~*/
 
 .event-profile {
     font-family: arial;
-    padding: 5%;
+    padding: 60px 5% 5% 5%;
 }
 
 .event-profile .event-profile-header {
@@ -2259,7 +2263,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .event-time-container .event-start-time {
-    background: url(clock-large.png) no-repeat 10px 50%;
+    background: url(../baseimages/booking-icons/clock-large.png) no-repeat 10px 50%;
     padding: 0 0 0 40px;
     background-size: 25px;
     height: 25px;
@@ -2267,7 +2271,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .event-time-container .event-start-date {
-    background: url(calendar-large.png) no-repeat 10px 50%;
+    background: url(../baseimages/booking-icons/calendar-large.png) no-repeat 10px 50%;
     padding: 0 0 0 40px;
     background-size: 25px;
     height: 25px;
@@ -2276,7 +2280,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .event-time-container .event-location {
-    background: url(ic_venue_bl.png) no-repeat 10px 50%;
+    background: url(../baseimages/booking-icons/map-pin.png) no-repeat 10px 50%;
     padding: 0 0 0 40px;
     height: 25px;
     line-height: 25px;
