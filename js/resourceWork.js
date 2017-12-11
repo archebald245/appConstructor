@@ -51,6 +51,12 @@ function searchResourcesAndReplacePatch(jsonObject) {
     if (jsonObject.Institutions != null) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
+    if ($.jStorage.get('EventsData') != null) {
+
+        var events = resourcesOfEvent($.jStorage.get('EventsData'), storePath);
+
+    }
+
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
     } else {
@@ -86,25 +92,23 @@ function resourcesOfCellContainer(cellContainer, storePath) {
             cellContainer[i] = resourcesOfGallary(cellContainer[i], storePath);
         }
         if (cellContainer[i].ContentTypeId == 19) {
-            cellContainer[i] = resourcesOfEvent(cellContainer[i], storePath);
+            var eventsData = JSON.parse(Base64.decode(cellContainer[i].Json));
+            eventsData = resourcesOfEvent(eventsData, storePath);
+            cellContainer[i].Json = eventsData;
         }
     }
     return cellContainer;
 }
 
-function resourcesOfEvent(cellContainer, storePath) {
-    var eventsData = JSON.parse(Base64.decode(cellContainer.Json));
-
-    cellContainer.Json
-    eventsData.forEach(function(item, index) {
+function resourcesOfEvent(events, storePath) {
+    events.forEach(function(item, index) {
         if (item.ImagePath.length) {
             resources.push(item.ImagePath);
             item.ImagePath = replacementMenuItemIconPath(item.ImagePath, storePath); //work for events too
         }
     });
-    cellContainer.Json = eventsData;
-    $.jStorage.set('EventsData', eventsData);
-    return cellContainer;
+    $.jStorage.set('EventsData', events);
+    return events;
 }
 
 function resourcesOfBoxConteiner(boxConteiner, storePath) {
@@ -129,8 +133,6 @@ function resourcesOfBackground(page, storePath) {
     page.Style = replacementBackgroundImagePath(page.Style, page.BackgroundImagePath, storePath);
     return page;
 }
-
-
 
 function resourcesOfRestaurantMenus(restaurants, storePath) {
     restaurants = replacePathToImageRestaurantMenu(restaurants);
