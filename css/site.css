@@ -2198,7 +2198,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     position: absolute;
     width: 45px;
     height: 45px;
-    bottom: 5px;
+    top: 5px;
     right: 5px;
     border-radius: 50%;
     border: 2px solid #d24a45;
