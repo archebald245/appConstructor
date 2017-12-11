@@ -149,7 +149,7 @@ function checkConnection(callbackInitPN) {
             success: function(jsonObjectOfServer) {
                 jsonObjectOfServer = JSON.parse(jsonObjectOfServer);
                 if (jsonObjectOfServer.Events.length) {
-                    $.jStorage.set('EventsData', jsonObjectOfServer.Events);
+                    $.jStorage.set('EventsDataUpdate', jsonObjectOfServer.Events);
                 }
                 if (jsonObjectOfServer.IsUpdated) {
                     jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
