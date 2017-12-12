@@ -44,6 +44,7 @@ function createMenu() {
             }
             div.appendTo(menu);
         }
+        var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()"><label>Favorite Events</label></div>');
         var style = applicationData.Menu.Styles + "; display:block";
         var sandwichStyle = applicationData.Menu.SandwichColor;
         if (sandwichStyle == null) {
@@ -103,6 +104,13 @@ function createMenu() {
 function clickPageOnDropdownMenu(link) {
     slideUp();
     goToPage(link);
+}
+
+function clickPageOnDropdownMenuFavorite() {
+    slideUp();
+    $("#container").addClass("hidden");
+    renderFavorite($.jStorage.get('FavoriteEvents'));
+    $(".event-favorite").removeClass("hidden");
 }
 
 function addListener() {

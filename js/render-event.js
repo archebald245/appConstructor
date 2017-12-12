@@ -60,13 +60,8 @@ var RenderEventProfile = function RenderEventProfile(event) {
     var Event = React.createClass({
         componentDidMount: function componentDidMount() {
             $(".event-favorite").unbind("click").on("click", function() {
-                var id = $(this).siblings(".eventId").val();
-                if ($(this).hasClass("event-favorite-active")) {
-                    var favorites = $.jStorage.get('FavoriteEvents');
-                    $(this).removeClass("event-favorite-active");
-                } else {
-                    $(this).addClass("event-favorite-active");
-                }
+                var id = $(this).parent().siblings(".eventId").val();
+                UpdateFavorite(this, id);
             });
         },
         render: function render() {
@@ -84,13 +79,19 @@ var RenderEventProfile = function RenderEventProfile(event) {
                 image = null;
             }
             return React.createElement(
-
                 'div', { className: "event-profile-container" },
                 React.createElement(
                     'div', { className: 'event-profile-header' },
                     data.Name
                 ),
-                image,
+                React.createElement(
+                    'div', { className: 'event-image-profile' },
+                    image,
+                    React.createElement(
+                        'div', { className: 'event-favorite event-favorite-active' },
+                        ""
+                    ),
+                ),
                 React.createElement(
                     'div', { className: 'event-time-container' },
                     React.createElement(
@@ -98,7 +99,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
                         startTime + " - " + finishTime
                     ),
                     React.createElement(
-                        'div', { className: 'event-start-time' },
+                        'div', { className: 'event-start-date' },
                         startDate + " - " + finishDate
                     ),
                     React.createElement(
@@ -127,11 +128,11 @@ var renderFavorite = function renderFavorite(events) {
             var data = this.props.data;
             var startTime = data.startTime;
             var image;
-            if (data.ImagePath != null) {
-                image = React.createElement('img', { src: data.ImagePath });
-            } else {
-                image = null;
+            var isFavorite = -1;
+            if ($.jStorage.get('FavoriteEvents') != null) {
+                isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
             }
+            var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
             return React.createElement(
                 'div', { className: "event-data-container" },
                 image,
@@ -144,13 +145,13 @@ var renderFavorite = function renderFavorite(events) {
                     React.createElement(
                         'div', { className: 'event-start-time' },
                         startTime
-                    ),
-                    React.createElement(
-                        'div', { className: 'event-favorite event-favorite-active' },
-                        ""
-                    ),
-                    React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
-                )
+                    )
+                ),
+                React.createElement(
+                    'div', { className: isFavorite > -1 ? 'event-favorite event-favorite-active' : 'event-favorite' },
+                    ""
+                ),
+                React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
             );
         }
     });
