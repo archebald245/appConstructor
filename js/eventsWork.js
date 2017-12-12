@@ -43,7 +43,7 @@ function goToPage(index) {
     }
     $("#container").removeClass("hidden");
     $(".event-profile").addClass("hidden");
-    $(".event-favorite").addClass("hidden");
+    $(".event-favorite-wrapper").addClass("hidden");
     showActivePageInMenu(indexPage);
     $("#container").empty();
     slideUp();

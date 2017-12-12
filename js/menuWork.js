@@ -127,7 +127,7 @@ function clickPageOnDropdownMenuFavorite() {
     $("#favorite-events").addClass("activePage");
     showActivePageInMenu("favorite-events");
     renderFavorite(toRender);
-    $(".event-favorite").removeClass("hidden");
+    $(".event-favorite-wrapper").removeClass("hidden");
 }
 
 function addListener() {
