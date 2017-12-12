@@ -120,7 +120,9 @@ function clickPageOnDropdownMenuFavorite() {
             return favEvents.indexOf(item.Id) > -1;
         });
     }
+    $(".classPageLink.activePage").attr('style', "");
 
+    $(".event-profile").addClass("hidden");
     $(".classPageLink").removeClass("activePage");
     $("#favorite-events").addClass("activePage");
     showActivePageInMenu("favorite-events");
