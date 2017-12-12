@@ -55,7 +55,6 @@ function searchResourcesAndReplacePatch(jsonObject) {
         var events = resourcesOfEvent($.jStorage.get('EventsDataUpdate'), storePath);
         $.jStorage.deleteKey('EventsDataUpdate');
     }
-
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
     } else {

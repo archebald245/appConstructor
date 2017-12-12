@@ -5,7 +5,7 @@ function addListenerToClickEvent() {
         events.forEach(function(item, index) {
             if (item.Id == id) {
                 $("#container").addClass("hidden");
-                $(".event-favorite").addClass("hidden");
+                $(".event-favorite-wrapper").addClass("hidden");
                 $(".event-profile").removeClass("hidden");
                 RenderEventProfile(item);
             }
