@@ -36,7 +36,7 @@ function createMenu() {
         var label;
         for (var i = 0; i < menuItems.length; i++) {
             //var img = applicationData.Menu.MenuItems[i].IconPath != "" ? $('<img>').attr({ src: applicationData.Menu.MenuItems[i].IconPath, class: "menu-item-icon" }) : "";
-            var img = applicationData.Menu.MenuItems[i].IconPath != null ? "<img src='" + applicationData.Menu.MenuItems[i].IconPath + "' class='menu-item-icon';/>" : "<img src='' class='menu-item-icon menu-item-icon-hidden';/>";
+            var img = applicationData.Menu.MenuItems[i].IconPath != null ? "<img src='" + applicationData.Menu.MenuItems[i].IconPath + "' class='menu-item-icon'/>" : "<img src='' class='menu-item-icon menu-item-icon-hidden'/>";
             if (applicationData.Menu.MenuItems[i].IsExternal == true) {
                 div = $('<a href=' + menuItems[i].Link + ' class="menu-item-href"><div class="classPageLink">' + img + '<label>' + menuItems[i].Title + '</label></div></a>');
             } else {
@@ -44,7 +44,8 @@ function createMenu() {
             }
             div.appendTo(menu);
         }
-        var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()"><label>Favorite Events</label></div>');
+        var favImg = "<img src='../baseimages/booking-icons/calendar-large.png' class='menu-item-icon menu-item-icon-hidden'/>";
+        var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()">' + favImg + '<label>Favorite Events</label></div>');
         favoriteMenu.appendTo(menu);
 
         var style = applicationData.Menu.Styles + "; display:block";
