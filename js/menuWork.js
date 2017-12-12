@@ -44,7 +44,7 @@ function createMenu() {
             }
             div.appendTo(menu);
         }
-        var favImg = "<img src='../baseimages/booking-icons/favorite.png' class='menu-item-icon menu-item-icon-hidden'/>";
+        var favImg = "<img src='baseimages/booking-icons/favorite.png' class='menu-item-icon menu-item-icon-hidden'/>";
         var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()">' + favImg + '<label>Favorite Events</label></div>');
         favoriteMenu.appendTo(menu);
 
@@ -123,6 +123,7 @@ function clickPageOnDropdownMenuFavorite() {
 
     $(".classPageLink").removeClass("activePage");
     $("#favorite-events").addClass("activePage");
+    showActivePageInMenu("favorite-events");
     renderFavorite(toRender);
     $(".event-favorite").removeClass("hidden");
 }

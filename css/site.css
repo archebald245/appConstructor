@@ -2219,18 +2219,18 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     white-space: nowrap;
 }
 
-.event-image-profile .event-profile,
+.event-image-profile .event-favorite,
 .event-data-container .event-favorite {
     position: absolute;
     bottom: 5%;
     right: 5%;
     width: 32px;
     height: 32px;
-    background: url(../baseimages/booking-icons/favorite.png) no-repeat 10px 50%;
+    background: url(../baseimages/booking-icons/favorite.png) no-repeat;
 }
 
 .event-favorite-active {
-    background: url(../baseimages/booking-icons/favorite-active.png) no-repeat 10px 50%;
+    background: url(../baseimages/booking-icons/favorite-active.png) no-repeat !important;
 }
 
 
