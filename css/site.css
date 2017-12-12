@@ -2219,17 +2219,18 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     white-space: nowrap;
 }
 
+.event-image-profile .event-profile,
 .event-data-container .event-favorite {
     position: absolute;
     bottom: 5%;
     right: 5%;
     width: 32px;
     height: 32px;
-    border: 1px solid #ff0000;
+    background: url(../baseimages/booking-icons/favorite.png) no-repeat 10px 50%;
 }
 
 .event-favorite-active {
-    background-color: red;
+    background: url(../baseimages/booking-icons/favorite-active.png) no-repeat 10px 50%;
 }
 
 
@@ -2281,6 +2282,10 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     padding: 0 0 0 40px;
     height: 25px;
     line-height: 25px;
+}
+
+.event-image-profile {
+    position: relative;
 }
 
 

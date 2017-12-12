@@ -44,7 +44,7 @@ function createMenu() {
             }
             div.appendTo(menu);
         }
-        var favImg = "<img src='../baseimages/booking-icons/calendar-large.png' class='menu-item-icon menu-item-icon-hidden'/>";
+        var favImg = "<img src='../baseimages/booking-icons/favorite.png' class='menu-item-icon menu-item-icon-hidden'/>";
         var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()">' + favImg + '<label>Favorite Events</label></div>');
         favoriteMenu.appendTo(menu);
 
@@ -114,11 +114,16 @@ function clickPageOnDropdownMenuFavorite() {
     $("#container").addClass("hidden");
     var favEvents = $.jStorage.get('FavoriteEvents');
     var allEvents = $.jStorage.get('EventsData');
-    var toRender = allEvents.filter(function(item) {
-        return favEvents.indexOf(item.Id) > -1;
-        //favorites.indexOf(+id)
-    });
-    renderFavorite(allEvents);
+    var toRender = [];
+    if (favEvents != null) {
+        toRender = allEvents.filter(function(item) {
+            return favEvents.indexOf(item.Id) > -1;
+        });
+    }
+
+    $(".classPageLink").removeClass("activePage");
+    $("#favorite-events").addClass("activePage");
+    renderFavorite(toRender);
     $(".event-favorite").removeClass("hidden");
 }
 
