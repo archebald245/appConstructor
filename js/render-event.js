@@ -90,7 +90,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
                     React.createElement(
                         'div', { className: 'event-favorite event-favorite-active' },
                         ""
-                    ),
+                    )
                 ),
                 React.createElement(
                     'div', { className: 'event-time-container' },

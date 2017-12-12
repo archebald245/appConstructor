@@ -45,6 +45,8 @@ function createMenu() {
             div.appendTo(menu);
         }
         var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()"><label>Favorite Events</label></div>');
+        favoriteMenu.appendTo(menu);
+
         var style = applicationData.Menu.Styles + "; display:block";
         var sandwichStyle = applicationData.Menu.SandwichColor;
         if (sandwichStyle == null) {
