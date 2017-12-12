@@ -111,7 +111,13 @@ function clickPageOnDropdownMenu(link) {
 function clickPageOnDropdownMenuFavorite() {
     slideUp();
     $("#container").addClass("hidden");
-    renderFavorite($.jStorage.get('FavoriteEvents'));
+    var favEvents = $.jStorage.get('FavoriteEvents');
+    var allEvents = $.jStorage.get('EventsData');
+    var toRender = allEvents.filter(function(item) {
+        return favEvents.indexOf(item.Id) > -1;
+        //favorites.indexOf(+id)
+    });
+    renderFavorite(allEvents);
     $(".event-favorite").removeClass("hidden");
 }
 
