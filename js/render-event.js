@@ -87,7 +87,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
                     'div', { className: 'event-image-profile' },
                     image,
                     React.createElement(
-                        'div', { className: 'event-favorite event-favorite-active' },
+                        'div', { className: 'event-favorite' },
                         ""
                     )
                 ),
