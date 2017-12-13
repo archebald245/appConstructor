@@ -148,9 +148,9 @@ function checkConnection(callbackInitPN) {
             cache: false,
             success: function(jsonObjectOfServer) {
                 jsonObjectOfServer = JSON.parse(jsonObjectOfServer);
-                // if (jsonObjectOfServer.Events.length) {
-                //     $.jStorage.set('EventsDataUpdate', jsonObjectOfServer.Events);
-                // }
+                if (jsonObjectOfServer.Events.length) {
+                    $.jStorage.set('EventsDataUpdate', jsonObjectOfServer.Events);
+                }
                 if (jsonObjectOfServer.IsUpdated) {
                     jsonObjectOfServer.Content.DeniedTools.replace(/"/g, "'");
                     data = JSON.stringify(jsonObjectOfServer.Content);
@@ -180,10 +180,10 @@ function checkConnection(callbackInitPN) {
                     checkUpdateRestaurantMenu(true);
                     onCheckJson();
                 } else {
-                    // if (jsonObjectOfServer.Events.length) {
-                    //     updateResources();
-                    //     console.log("EVENTS RESOURCE");
-                    // }
+                    if (jsonObjectOfServer.Events.length) {
+                        updateResources();
+                        console.log("EVENTS RESOURCE");
+                    }
                     checkUpdateRestaurantMenu(true);
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
