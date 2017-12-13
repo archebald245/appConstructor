@@ -8,7 +8,7 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
     storePath = "file://" + storePath + "images/";
     for (var i = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
-            jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
+            jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainerLocal(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
@@ -73,7 +73,7 @@ function resourcesOfMenu(item, storePath) {
     return item;
 }
 
-function resourcesOfCellContainer(cellContainer, storePath) {
+function resourcesOfCellContainerLocal(cellContainer, storePath) {
     for (var i = 0; i < cellContainer.length; i++) {
         if ((cellContainer[i].IsDownloadable == true) &
             (cellContainer[i].ContentType != "Empty")) {
@@ -93,6 +93,27 @@ function resourcesOfCellContainer(cellContainer, storePath) {
             var eventsData = JSON.parse(Base64.decode(cellContainer[i].Json));
             eventsData = resourcesOfEvent(eventsData, storePath);
             // cellContainer[i].Json = eventsData;
+        }
+    }
+    return cellContainer;
+}
+
+
+function resourcesOfCellContainer(cellContainer, storePath) {
+    for (var i = 0; i < cellContainer.length; i++) {
+        if ((cellContainer[i].IsDownloadable == true) &
+            (cellContainer[i].ContentType != "Empty")) {
+            resourcesPushInArray(cellContainer[i]);
+            cellContainer[i].Value = replacementPathImages(cellContainer[i].Value, cellContainer[i].Resourceses, storePath);
+        }
+        if ((cellContainer[i].ContentTypeId == 10)) {
+            cellContainer[i] = resourcesOfBoxConteiner(cellContainer[i], storePath);
+        }
+        if ((cellContainer[i].ContentTypeId == 11)) {
+            cellContainer[i] = resourcesOfBoxConteiner(cellContainer[i], storePath);
+        }
+        if (cellContainer[i].ContentTypeId == 8) {
+            cellContainer[i] = resourcesOfGallary(cellContainer[i], storePath);
         }
     }
     return cellContainer;

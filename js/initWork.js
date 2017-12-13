@@ -180,10 +180,10 @@ function checkConnection(callbackInitPN) {
                     checkUpdateRestaurantMenu(true);
                     onCheckJson();
                 } else {
-                    if (jsonObjectOfServer.Events.length) {
-                        updateResources();
-                        console.log("EVENTS RESOURCE");
-                    }
+                    // if (jsonObjectOfServer.Events.length) {
+                    //     updateResources();
+                    //     console.log("EVENTS RESOURCE");
+                    // }
                     checkUpdateRestaurantMenu(true);
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
