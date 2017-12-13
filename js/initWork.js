@@ -119,7 +119,6 @@ function checkConnection(callbackInitPN) {
             applicationData = JSON.parse(data);
             var projectId = applicationData.ProjectId;
             var versionId = applicationData.Version;
-            console.log("1");
             var tempRes = ReplaceResourcesPatchByLocal(applicationData);
         }
 
@@ -150,7 +149,6 @@ function checkConnection(callbackInitPN) {
             success: function(jsonObjectOfServer) {
                 jsonObjectOfServer = JSON.parse(jsonObjectOfServer);
                 if (jsonObjectOfServer.Events.length) {
-                    console.log("2");
                     $.jStorage.set('EventsDataUpdate', jsonObjectOfServer.Events);
                 }
                 if (jsonObjectOfServer.IsUpdated) {
@@ -183,9 +181,7 @@ function checkConnection(callbackInitPN) {
                     onCheckJson();
                 } else {
                     if (jsonObjectOfServer.Events.length) {
-                        console.log("21");
                         updateResources();
-
                     }
                     checkUpdateRestaurantMenu(true);
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;

@@ -8,7 +8,6 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
     storePath = "file://" + storePath + "images/";
     for (var i = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
-            console.log("11");
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainerLocal(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
@@ -53,7 +52,6 @@ function searchResourcesAndReplacePatch(jsonObject) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
     if ($.jStorage.get('EventsDataUpdate') != null) {
-        console.log("23");
         var events = resourcesOfEvent($.jStorage.get('EventsDataUpdate'), storePath);
         $.jStorage.deleteKey('EventsDataUpdate');
     }
