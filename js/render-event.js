@@ -2,9 +2,6 @@
 //RENDER EVENT LIST
 var renderEvent = function renderEvent(events) {
     var SingleEvent = React.createClass({
-        componentDidMount: function componentDidMount() {
-            addListenerToClickEvent();
-        },
         render: function render() {
             var data = this.props.data;
             var startTime = data.startTime;
@@ -38,13 +35,15 @@ var renderEvent = function renderEvent(events) {
     });
 
     var Events = React.createClass({
+        componentDidMount: function componentDidMount() {
+            console.log("EVENTS RENDER");
+            addListenerToClickEvent();
+        },
         render: function render() {
-
             var data = this.props.data;
             var eventCollectionForRender = data.map(function(event) {
                 return React.createElement(SingleEvent, { data: event });
             });
-
             return React.createElement(
                 'div', { className: "custom-container-event" },
                 eventCollectionForRender
