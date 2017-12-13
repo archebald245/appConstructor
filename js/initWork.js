@@ -183,8 +183,9 @@ function checkConnection(callbackInitPN) {
                     onCheckJson();
                 } else {
                     if (jsonObjectOfServer.Events.length) {
-                        updateResources();
                         console.log("21");
+                        updateResources();
+
                     }
                     checkUpdateRestaurantMenu(true);
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;

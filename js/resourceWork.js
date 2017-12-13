@@ -8,8 +8,8 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
     storePath = "file://" + storePath + "images/";
     for (var i = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
-            jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainerLocal(jsonObject.Pages[i].Rows[p].CellContents, storePath);
             console.log("11");
+            jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainerLocal(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
@@ -94,7 +94,7 @@ function resourcesOfCellContainerLocal(cellContainer, storePath) {
         if (cellContainer[i].ContentTypeId == 19) {
             console.log("12");
             var eventsData = JSON.parse(Base64.decode(cellContainer[i].Json));
-            eventsData = resourcesOfEvent(eventsData, storePath);
+            eventsData = resourcesOfEventLocal(eventsData, storePath);
             // cellContainer[i].Json = eventsData;
         }
     }
@@ -121,6 +121,18 @@ function resourcesOfCellContainer(cellContainer, storePath) {
         }
     }
     return cellContainer;
+}
+
+function resourcesOfEventLocal(events, storePath) {
+    events.forEach(function(item, index) {
+        if (item.ImagePath.length) {
+            //resources.push(item.ImagePath);
+            item.ImagePath = replacementMenuItemIconPath(item.ImagePath, storePath); //work for events too
+        }
+    });
+    $.jStorage.set('EventsData', events);
+    console.log("33");
+    return events;
 }
 
 function resourcesOfEvent(events, storePath) {
