@@ -9,6 +9,7 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
     for (var i = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
             jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainerLocal(jsonObject.Pages[i].Rows[p].CellContents, storePath);
+            console.log("11");
         }
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
@@ -52,6 +53,7 @@ function searchResourcesAndReplacePatch(jsonObject) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
     if ($.jStorage.get('EventsDataUpdate') != null) {
+        console.log("23");
         var events = resourcesOfEvent($.jStorage.get('EventsDataUpdate'), storePath);
         $.jStorage.deleteKey('EventsDataUpdate');
     }
@@ -90,6 +92,7 @@ function resourcesOfCellContainerLocal(cellContainer, storePath) {
             cellContainer[i] = resourcesOfGallary(cellContainer[i], storePath);
         }
         if (cellContainer[i].ContentTypeId == 19) {
+            console.log("12");
             var eventsData = JSON.parse(Base64.decode(cellContainer[i].Json));
             eventsData = resourcesOfEvent(eventsData, storePath);
             // cellContainer[i].Json = eventsData;
@@ -100,6 +103,7 @@ function resourcesOfCellContainerLocal(cellContainer, storePath) {
 
 
 function resourcesOfCellContainer(cellContainer, storePath) {
+    console.log("24");
     for (var i = 0; i < cellContainer.length; i++) {
         if ((cellContainer[i].IsDownloadable == true) &
             (cellContainer[i].ContentType != "Empty")) {
@@ -127,6 +131,7 @@ function resourcesOfEvent(events, storePath) {
         }
     });
     $.jStorage.set('EventsData', events);
+    console.log("3");
     return events;
 }
 
