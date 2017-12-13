@@ -7,19 +7,27 @@ var renderEvent = function renderEvent(events) {
             var startTime = data.startTime;
             var image;
             var isFavorite = -1;
+
+            var img1 = new Image();
+            img1.src = data.ImagePath;
+
             if ($.jStorage.get('FavoriteEvents') != null) {
                 isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
             }
             var imageTest;
             if (data.ImagePath != null) {
+
+                var img1 = new Image();
+                img1.src = data.ImagePath;
+
                 imageTest = React.createElement('div', { className: 'image-container' },
                     React.createElement('img', { src: data.ImagePath }));
             } else {
                 imageTest = null;
             }
 
-            var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } }, imageTest);
-
+            //var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } }, imageTest);
+            var image = React.createElement('div', { className: 'event-image-container' }, imageTest);
             return React.createElement(
                 'div', { className: "event-data-container" },
                 image,
