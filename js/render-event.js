@@ -98,6 +98,17 @@ var RenderEventProfile = function RenderEventProfile(event) {
             } else {
                 image = null;
             }
+
+            var locationData;
+            if (data.MapData != null) {
+                locationData = React.createElement(
+                    'div', { className: 'event-location' },
+                    data.MapData
+                );
+            } else {
+                locationData = null;
+            }
+
             return React.createElement(
                 'div', { className: "event-profile-container" },
                 React.createElement(
@@ -122,10 +133,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
                         'div', { className: 'event-start-date' },
                         date
                     ),
-                    React.createElement(
-                        'div', { className: 'event-location' },
-                        data.MapData
-                    )
+                    locationData
                 ),
                 React.createElement(
                     'div', { className: 'event-description' },
