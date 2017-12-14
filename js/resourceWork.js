@@ -8,7 +8,7 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
     storePath = "file://" + storePath + "images/";
     for (var i = 0; i < jsonObject.Pages.length; i++) {
         for (var p = 0; p < jsonObject.Pages[i].Rows.length; p++) {
-            jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainerLocal(jsonObject.Pages[i].Rows[p].CellContents, storePath);
+            jsonObject.Pages[i].Rows[p].CellContents = resourcesOfCellContainer(jsonObject.Pages[i].Rows[p].CellContents, storePath);
         }
         if (jsonObject.Pages[i].BackgroundImagePath != null) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
@@ -51,10 +51,10 @@ function searchResourcesAndReplacePatch(jsonObject) {
     if (jsonObject.Institutions != null) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
-    if ($.jStorage.get('EventsDataUpdate') != null) {
-        var events = resourcesOfEvent($.jStorage.get('EventsDataUpdate'), storePath);
-        $.jStorage.deleteKey('EventsDataUpdate');
-    }
+    // if ($.jStorage.get('EventsDataUpdate') != null) {
+    //     var events = resourcesOfEvent($.jStorage.get('EventsDataUpdate'), storePath);
+    //     $.jStorage.deleteKey('EventsDataUpdate');
+    // }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
     } else {
@@ -73,7 +73,34 @@ function resourcesOfMenu(item, storePath) {
     return item;
 }
 
-function resourcesOfCellContainerLocal(cellContainer, storePath) {
+// function resourcesOfCellContainerLocal(cellContainer, storePath) {
+//     for (var i = 0; i < cellContainer.length; i++) {
+//         if ((cellContainer[i].IsDownloadable == true) &
+//             (cellContainer[i].ContentType != "Empty")) {
+//             resourcesPushInArray(cellContainer[i]);
+//             cellContainer[i].Value = replacementPathImages(cellContainer[i].Value, cellContainer[i].Resourceses, storePath);
+//         }
+//         if ((cellContainer[i].ContentTypeId == 10)) {
+//             cellContainer[i] = resourcesOfBoxConteiner(cellContainer[i], storePath);
+//         }
+//         if ((cellContainer[i].ContentTypeId == 11)) {
+//             cellContainer[i] = resourcesOfBoxConteiner(cellContainer[i], storePath);
+//         }
+//         if (cellContainer[i].ContentTypeId == 8) {
+//             cellContainer[i] = resourcesOfGallary(cellContainer[i], storePath);
+//         }
+//         if (cellContainer[i].ContentTypeId == 19) {
+//             console.log("12");
+//             var eventsData = JSON.parse(Base64.decode(cellContainer[i].Json));
+//             eventsData = resourcesOfEventLocal(eventsData, storePath);
+//             // cellContainer[i].Json = eventsData;
+//         }
+//     }
+//     return cellContainer;
+// }
+
+
+function resourcesOfCellContainer(cellContainer, storePath) {
     for (var i = 0; i < cellContainer.length; i++) {
         if ((cellContainer[i].IsDownloadable == true) &
             (cellContainer[i].ContentType != "Empty")) {
@@ -90,48 +117,25 @@ function resourcesOfCellContainerLocal(cellContainer, storePath) {
             cellContainer[i] = resourcesOfGallary(cellContainer[i], storePath);
         }
         if (cellContainer[i].ContentTypeId == 19) {
-            console.log("12");
             var eventsData = JSON.parse(Base64.decode(cellContainer[i].Json));
-            eventsData = resourcesOfEventLocal(eventsData, storePath);
+            eventsData = resourcesOfEvent(eventsData, storePath);
             // cellContainer[i].Json = eventsData;
         }
     }
     return cellContainer;
 }
 
-
-function resourcesOfCellContainer(cellContainer, storePath) {
-    console.log("24");
-    for (var i = 0; i < cellContainer.length; i++) {
-        if ((cellContainer[i].IsDownloadable == true) &
-            (cellContainer[i].ContentType != "Empty")) {
-            resourcesPushInArray(cellContainer[i]);
-            cellContainer[i].Value = replacementPathImages(cellContainer[i].Value, cellContainer[i].Resourceses, storePath);
-        }
-        if ((cellContainer[i].ContentTypeId == 10)) {
-            cellContainer[i] = resourcesOfBoxConteiner(cellContainer[i], storePath);
-        }
-        if ((cellContainer[i].ContentTypeId == 11)) {
-            cellContainer[i] = resourcesOfBoxConteiner(cellContainer[i], storePath);
-        }
-        if (cellContainer[i].ContentTypeId == 8) {
-            cellContainer[i] = resourcesOfGallary(cellContainer[i], storePath);
-        }
-    }
-    return cellContainer;
-}
-
-function resourcesOfEventLocal(events, storePath) {
-    events.forEach(function(item, index) {
-        if (item.ImagePath.length) {
-            //resources.push(item.ImagePath);
-            item.ImagePath = replacementMenuItemIconPath(item.ImagePath, storePath); //work for events too
-        }
-    });
-    $.jStorage.set('EventsData', events);
-    console.log("33");
-    return events;
-}
+// function resourcesOfEventLocal(events, storePath) {
+//     events.forEach(function(item, index) {
+//         if (item.ImagePath.length) {
+//             //resources.push(item.ImagePath);
+//             item.ImagePath = replacementMenuItemIconPath(item.ImagePath, storePath); //work for events too
+//         }
+//     });
+//     $.jStorage.set('EventsData', events);
+//     console.log("33");
+//     return events;
+// }
 
 function resourcesOfEvent(events, storePath) {
     events.forEach(function(item, index) {
@@ -141,7 +145,6 @@ function resourcesOfEvent(events, storePath) {
         }
     });
     $.jStorage.set('EventsData', events);
-    console.log("3");
     return events;
 }
 
