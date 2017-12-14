@@ -4,7 +4,7 @@ var renderEvent = function renderEvent(events) {
     var SingleEvent = React.createClass({
         render: function render() {
             var data = this.props.data;
-            var startTime = data.startTime;
+            var startTime = data.DateStartString.split(" ")[1];
             var image;
             var isFavorite = -1;
 
