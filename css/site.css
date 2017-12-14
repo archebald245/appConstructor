@@ -2196,9 +2196,9 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .event-data-container img {
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
-    max-height: 80%;
+    max-height: 90%;
 }
 
 .event-data-container .event-image-container {
@@ -2299,6 +2299,10 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 .event-image-profile {
     position: relative;
+}
+
+.event-image-profile img {
+    width: 100%;
 }
 
 .event-data-container .orange-event {
