@@ -20,14 +20,14 @@ var renderEvent = function renderEvent(events) {
                 var img1 = new Image();
                 img1.src = data.ImagePath;
 
-                imageTest = React.createElement('div', { className: 'image-container' },
+                imageTest = React.createElement('div', null,
                     React.createElement('img', { src: data.ImagePath }));
             } else {
                 imageTest = null;
             }
 
-            var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
-            //var image = React.createElement('div', { className: 'event-image-container' }, imageTest);
+            //var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
+            var image = React.createElement('div', { className: 'event-image-container' }, imageTest);
             return React.createElement(
                 'div', { className: "event-data-container" },
                 image,
@@ -82,7 +82,6 @@ var RenderEventProfile = function RenderEventProfile(event) {
         },
         render: function render() {
             var data = this.props.data;
-            //
 
             var startTime = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
             var finishTime = moment(data.DateFinishString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
@@ -94,7 +93,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
 
             var image;
             if (data.ImagePath != null) {
-                image = React.createElement('div', { className: 'image-container' },
+                image = React.createElement('div', null,
                     React.createElement('img', { src: data.ImagePath }));
             } else {
                 image = null;
@@ -153,7 +152,19 @@ var renderFavorite = function renderFavorite(events) {
             if ($.jStorage.get('FavoriteEvents') != null) {
                 isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
             }
-            var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
+            var imageTest;
+            if (data.ImagePath != null) {
+
+                var img1 = new Image();
+                img1.src = data.ImagePath;
+
+                imageTest = React.createElement('div', null,
+                    React.createElement('img', { src: data.ImagePath }));
+            } else {
+                imageTest = null;
+            }
+
+            var image = React.createElement('div', { className: 'event-image-container' }, imageTest);
             return React.createElement(
                 'div', { className: "event-data-container" },
                 image,

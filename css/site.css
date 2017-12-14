@@ -2184,13 +2184,26 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     position: relative;
 }
 
+.event-image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.event-image-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .event-data-container img {
-    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    max-height: 80%;
 }
 
 .event-data-container .event-image-container {
     width: 100%;
-    min-height: 330px;
+    min-height: 340px;
     background-size: cover;
     background-position: 50% 0%;
     background-repeat: no-repeat;
@@ -2288,27 +2301,27 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     position: relative;
 }
 
-.orange-event {
+.event-data-container .orange-event {
     background-color: orange;
 }
 
-.green-event {
+.event-data-container .green-event {
     background-color: green;
 }
 
-.pink-event {
+.event-data-container .pink-event {
     background-color: pink;
 }
 
-.purple-event {
+.event-data-container .purple-event {
     background-color: purple;
 }
 
-.blue-event {
+.event-data-container .blue-event {
     background-color: blue;
 }
 
-.grey-event {
+.event-data-container .grey-event {
     background-color: gray;
 }
 
@@ -2317,7 +2330,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 @media only screen and (max-width: 769px) {
     .event-data-container .event-image-container {
-        min-height: 260px;
+        height: 260px;
     }
     .event-data-container .event-data {
         min-height: 90px;
@@ -2326,7 +2339,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 @media only screen and (max-width: 640px) {
     .event-data-container .event-image-container {
-        min-height: 200px;
+        height: 200px;
     }
     .event-data-container .event-data {
         min-height: 80px;
@@ -2338,7 +2351,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 @media only screen and (max-width: 480px) {
     .event-data-container .event-image-container {
-        min-height: 170px;
+        height: 150px;
     }
     .event-data-container .event-data {
         min-height: 70px;
