@@ -4,7 +4,7 @@ var renderEvent = function renderEvent(events) {
     var SingleEvent = React.createClass({
         render: function render() {
             var data = this.props.data;
-            var startTime = data.DateStartString.split(" ")[1];
+            var startTime = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
             var image;
             var isFavorite = -1;
 
@@ -26,8 +26,8 @@ var renderEvent = function renderEvent(events) {
                 imageTest = null;
             }
 
-            //var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } }, imageTest);
-            var image = React.createElement('div', { className: 'event-image-container' }, imageTest);
+            var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
+            //var image = React.createElement('div', { className: 'event-image-container' }, imageTest);
             return React.createElement(
                 'div', { className: "event-data-container" },
                 image,
@@ -82,10 +82,15 @@ var RenderEventProfile = function RenderEventProfile(event) {
         },
         render: function render() {
             var data = this.props.data;
-            var startTime = data.DateStartString;
-            var finishTime = data.DateFinishString;
-            var startDate = data.DateStartString;
-            var finishDate = data.DateFinishString;
+            //
+
+            var startTime = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
+            var finishTime = moment(data.DateFinishString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
+
+            var startDate = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('DD.MM.');
+            var finishDate = moment(data.DateFinishString, 'DD/MM/YYYY hh:mm').format('DD.MM.');
+
+            var date = startDate === finishDate ? startDate : startDate + ' - ' + finishDate;
 
             var image;
             if (data.ImagePath != null) {
@@ -116,7 +121,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
                     ),
                     React.createElement(
                         'div', { className: 'event-start-date' },
-                        startDate + " - " + finishDate
+                        date
                     ),
                     React.createElement(
                         'div', { className: 'event-location' },
@@ -142,7 +147,7 @@ var renderFavorite = function renderFavorite(events) {
         },
         render: function render() {
             var data = this.props.data;
-            var startTime = data.startTime;
+            var startTime = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
             var image;
             var isFavorite = -1;
             if ($.jStorage.get('FavoriteEvents') != null) {
