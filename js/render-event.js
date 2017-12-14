@@ -32,7 +32,7 @@ var renderEvent = function renderEvent(events) {
                 'div', { className: "event-data-container" },
                 image,
                 React.createElement(
-                    'div', { className: 'event-data' },
+                    'div', { className: 'event-data ' + data.FloorPlanUrl },
                     React.createElement(
                         'div', { className: 'event-name' },
                         data.Name
@@ -158,7 +158,7 @@ var renderFavorite = function renderFavorite(events) {
                 'div', { className: "event-data-container" },
                 image,
                 React.createElement(
-                    'div', { className: 'event-data' },
+                    'div', { className: 'event-data ' + data.FloorPlanUrl },
                     React.createElement(
                         'div', { className: 'event-name' },
                         data.Name

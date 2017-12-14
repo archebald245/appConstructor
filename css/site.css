@@ -2288,6 +2288,30 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     position: relative;
 }
 
+.orange-event {
+    background-color: orange;
+}
+
+.green-event {
+    background-color: green;
+}
+
+.pink-event {
+    background-color: pink;
+}
+
+.purple-event {
+    background-color: purple;
+}
+
+.blue-event {
+    background-color: blue;
+}
+
+.grey-event {
+    background-color: gray;
+}
+
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
