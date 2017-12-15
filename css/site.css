@@ -2310,23 +2310,23 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .event-data-container .green-event {
-    background-color: green;
+    background-color: #92d050;
 }
 
 .event-data-container .pink-event {
-    background-color: pink;
+    background-color: #f4b183;
 }
 
 .event-data-container .purple-event {
-    background-color: purple;
+    background-color: #df9bff;
 }
 
 .event-data-container .blue-event {
-    background-color: blue;
+    background-color: #bdd7ee;
 }
 
 .event-data-container .grey-event {
-    background-color: gray;
+    background-color: #d9d9d9;
 }
 
 
