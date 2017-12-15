@@ -2203,7 +2203,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 .event-data-container .event-image-container {
     width: 100%;
-    min-height: 340px;
+    height: 340px;
     background-size: cover;
     background-position: 50% 0%;
     background-repeat: no-repeat;

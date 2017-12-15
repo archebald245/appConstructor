@@ -121,7 +121,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
             return React.createElement(
                 'div', { className: "event-profile-container" },
                 React.createElement(
-                    'div', { className: 'back-to-event-list' },
+                    'div', { className: 'back-to-event-list hidden' },
                     "back"
                 ),
                 React.createElement(
