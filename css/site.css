@@ -2306,7 +2306,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .event-data-container .orange-event {
-    background-color: orange;
+    background-color: #ffc000;
 }
 
 .event-data-container .green-event {
