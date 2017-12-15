@@ -53,7 +53,6 @@ var renderEvent = function renderEvent(events) {
 
     var Events = React.createClass({
         componentDidMount: function componentDidMount() {
-            console.log("EVENTS RENDER");
             addListenerToClickEvent();
         },
         render: function render() {
@@ -78,6 +77,16 @@ var RenderEventProfile = function RenderEventProfile(event) {
             $(".event-favorite").unbind("click").on("click", function() {
                 var id = $(this).parent().siblings(".eventId").val();
                 UpdateFavorite(this, id);
+            });
+            $(".back-to-event-list").on("click", function() {
+
+                if ($("#favorite-events").hasClass("activePage")) {
+                    $(".event-profile").addClass("hidden");
+                    $(".event-favorite-wrapper").removeClass("hidden");
+                } else {
+                    $(".event-profile").addClass("hidden");
+                    $("#container").removeClass("hidden");
+                }
             });
         },
         render: function render() {
@@ -111,6 +120,10 @@ var RenderEventProfile = function RenderEventProfile(event) {
 
             return React.createElement(
                 'div', { className: "event-profile-container" },
+                React.createElement(
+                    'div', { className: 'back-to-event-list' },
+                    "back"
+                ),
                 React.createElement(
                     'div', { className: 'event-profile-header' },
                     data.Name
