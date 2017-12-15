@@ -44,8 +44,8 @@ function createMenu() {
             }
             div.appendTo(menu);
         }
-        var favImg = "<img src='baseimages/booking-icons/favorite.png' class='menu-item-icon'/>";
-        var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()">' + favImg + '<label>Favorite Events</label></div>');
+        var favImg = "<img src='baseimages/booking-icons/shedule.png' class='menu-item-icon'/>";
+        var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()">' + favImg + '<label>Schedule</label></div>');
         favoriteMenu.appendTo(menu);
 
         var style = applicationData.Menu.Styles + "; display:block";
