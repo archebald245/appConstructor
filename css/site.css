@@ -100,12 +100,10 @@ form {
     padding-bottom: 64px;
 }
 
-
-/* .blockMsg {
-    width: 80% !important;
-    left: 50% !important;
-    margin-left: -40% !important;
-} */
+.blockMsg {
+    border: none;
+    background-color: none;
+}
 
 .youtube-container {
     position: relative;
@@ -2406,6 +2404,6 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 #block-ui-container {
-    background-image: url("landings/Default-Portrait@2x~ipad.png") no-repeat 50% 50%;
-    background-size: contain;
+    background: url("../landings/Default-Portrait@2x~ipad.png") no-repeat;
+    background-size: 100% 100%;
 }
