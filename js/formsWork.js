@@ -24,7 +24,8 @@ function submitFormListener() {
                     $(".spinner-container").addClass("hidden");
                     if (data.Success == true) {
                         $.jStorage.set('isLogin', true);
-                        alert(data.Message);
+                        // alert(data.Message);
+                        indexPage = 3411;
                         goToPage(indexPage);
                     } else {
                         $(form).find(".formBlock").find(".passElement").val("");
@@ -99,7 +100,8 @@ function bindChangeValForms() {
                                     $(".spinner-container").addClass("hidden");
                                     if (data.Success == true) {
                                         $.jStorage.set('isLogin', true);
-                                        alert(data.Message);
+                                        // alert(data.Message);
+                                        indexPage = 3411;
                                         goToPage(indexPage);
                                     } else {
                                         $(elem).find(".formBlock").find(".passElement").val("");
