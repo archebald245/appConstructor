@@ -1,6 +1,10 @@
 function blockUi() {
     $.blockUI({
-        message: $('#block-ui-container')
+        message: $('#block-ui-container'),
+        css: {
+            top: 0,
+            left: 0,
+        }
     });
 
     // $.blockUI({
