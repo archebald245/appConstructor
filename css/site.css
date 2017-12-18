@@ -2400,7 +2400,12 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     }
 }
 
-#block-ui-container img {
-    max-width: 100%;
-    max-height: 100%;
+#block-ui-container {
+    width: 100%;
+    height: 100%;
+}
+
+#block-ui-container {
+    background-image: url("landings/Default-Portrait@2x~ipad.png") no-repeat 50% 50%;
+    background-size: contain;
 }
