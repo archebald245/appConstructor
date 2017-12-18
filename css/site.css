@@ -2398,3 +2398,8 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
         height: 800px;
     }
 }
+
+#block-ui-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
