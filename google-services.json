@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "540064451778",
+    "firebase_url": "https://wpp-ces.firebaseio.com",
+    "project_id": "wpp-ces",
+    "storage_bucket": "wpp-ces.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540064451778:android:891a8953f66b03c8",
+        "android_client_info": {
+          "package_name": "ces.wpp.wyamee.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540064451778-fubfu2noj8tccgdrljsl64gfb6u0glr5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgDUsaI93gjXr58hbrx0TvKi7BmtZjpzc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
