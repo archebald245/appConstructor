@@ -2169,9 +2169,13 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 .custom-container-event {
     width: 100%;
     overflow: hidden;
-    padding: 60px 0 0 0;
+    padding: 20px 0 0 0;
     font-size: 0px;
     font-family: arial;
+}
+
+#event-favorite-container .custom-container-event {
+    padding: 80px 0 0 0;
 }
 
 .event-data-container {
@@ -2260,6 +2264,10 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     font-size: 30px;
     margin-bottom: 10px;
     padding: 10px 0;
+}
+
+.event-list-header {
+    margin-bottom: 30px;
 }
 
 .event-profile .image-container img {
