@@ -51,6 +51,14 @@ var renderEvent = function renderEvent(events) {
         }
     });
 
+    var DaySeparator = React.createClass({
+
+        render: function render() {
+            var day = this.props.data;
+            return React.createElement('div', { className: 'event-day-container' }, day);
+        }
+    });
+
     var Events = React.createClass({
         componentDidMount: function componentDidMount() {
             addListenerToClickEvent();
@@ -68,8 +76,10 @@ var renderEvent = function renderEvent(events) {
                     //eventCollectionForRender.push(day);
                     dayOfWeek = eventDay;
                 }
-                return (React.createElement('div', { className: 'event-day-container' }, eventDay),
-                    React.createElement(SingleEvent, { data: event }));
+                return (
+                    React.createElement(DaySeparator, { data: eventDay }),
+                    React.createElement(SingleEvent, { data: event })
+                );
             });
             return React.createElement(
                 'div', { className: "custom-container-event" },
