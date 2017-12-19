@@ -2254,6 +2254,9 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .event-profile .event-profile-header {
+    text-align: center;
+    height: 100px;
+    background-color: #e8e8e8;
     font-size: 30px;
     margin-bottom: 10px;
 }
@@ -2326,6 +2329,15 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 .event-data-container .grey-event {
     background-color: #d9d9d9;
+}
+
+.back-to-event-list {
+    width: 100%;
+    height: 100px;
+}
+
+.back-to-event-list img {
+    margin: 0 auto;
 }
 
 
