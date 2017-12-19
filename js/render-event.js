@@ -58,7 +58,7 @@ var renderEvent = function renderEvent(events) {
         render: function render() {
             var data = this.props.data;
             var dayOfWeek = moment(data[0].DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
-
+            var eventCollectionForRender = [];
             var eventCollectionForRender = data.map(function(event) {
                 var eventDay = moment(event.DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
                 if (dayOfWeek == "") {
