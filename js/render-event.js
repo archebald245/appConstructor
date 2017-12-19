@@ -76,10 +76,12 @@ var renderEvent = function renderEvent(events) {
                     //eventCollectionForRender.push(day);
                     dayOfWeek = eventDay;
                 }
-                return ([
-                    React.createElement(SingleEvent, { data: event }),
-                    React.createElement(DaySeparator, { data: eventDay })
-                ]);
+                return (
+                    React.createElement('div', { className: 'event-day-container' },
+                        React.createElement(SingleEvent, { data: event }),
+                        React.createElement(DaySeparator, { data: eventDay })
+                    )
+                );
             });
             return React.createElement(
                 'div', { className: "custom-container-event" },
