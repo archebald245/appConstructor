@@ -2,11 +2,11 @@ function blockUi() {
     $.blockUI({
         message: $('#block-ui-container'),
         css: {
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%"
-        }
+            top: ($(window).height() - 400) / 2 + 'px',
+            left: ($(window).width() - 400) / 2 + 'px',
+            width: '400px'
+        },
+        overlayCSS: { backgroundColor: '#10b781' }
     });
 
     // $.blockUI({
