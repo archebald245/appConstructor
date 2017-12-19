@@ -62,6 +62,10 @@ var renderEvent = function renderEvent(events) {
             });
             return React.createElement(
                 'div', { className: "custom-container-event" },
+                React.createElement(
+                    'div', { className: 'event-list-header' },
+                    "Agenda"
+                ),
                 eventCollectionForRender
             );
         }
@@ -219,6 +223,10 @@ var renderFavorite = function renderFavorite(events) {
 
             return React.createElement(
                 'div', { className: "custom-container-event" },
+                React.createElement(
+                    'div', { className: 'event-list-header' },
+                    "Schedule"
+                ),
                 eventCollectionForRender
             );
         }
