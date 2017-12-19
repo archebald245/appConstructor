@@ -122,7 +122,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
                 'div', { className: "event-profile-container" },
                 React.createElement(
                     'div', { className: 'back-to-event-list' },
-                    React.createElement('img', { src: "../baseimages/backtoevents.png" })
+                    React.createElement('img', { src: "baseimages/backtoevents.png" })
                 ),
                 React.createElement(
                     'div', { className: 'event-profile-header' },
