@@ -57,7 +57,18 @@ var renderEvent = function renderEvent(events) {
         },
         render: function render() {
             var data = this.props.data;
+            var dayOfWeek = moment(data[0].DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
+
             var eventCollectionForRender = data.map(function(event) {
+                eventDay = moment(event.DateStartString, 'DD/MM/YYYY hh:mm').format('dddd')
+                if (dayOfWeek == "") {
+                    dayOfWeek = eventDay;
+                }
+                if (dayOfWeek != eventDay) {
+                    var day = React.createElement('div', { className: 'event-day-container' }, eventDay);
+                    eventCollectionForRender.push(day);
+                    dayOfWeek = eventDay;
+                }
                 return React.createElement(SingleEvent, { data: event });
             });
             return React.createElement(

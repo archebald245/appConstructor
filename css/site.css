@@ -2166,6 +2166,11 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 /*EVENT SECTION*/
 
+.event-day-container {
+    width: 100;
+    background: #E9E9E9;
+}
+
 .custom-container-event {
     width: 100%;
     overflow: hidden;
