@@ -60,7 +60,7 @@ var renderEvent = function renderEvent(events) {
             var dayOfWeek = moment(data[0].DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
 
             var eventCollectionForRender = data.map(function(event) {
-                eventDay = moment(event.DateStartString, 'DD/MM/YYYY hh:mm').format('dddd')
+                var eventDay = moment(event.DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
                 if (dayOfWeek == "") {
                     dayOfWeek = eventDay;
                 }
