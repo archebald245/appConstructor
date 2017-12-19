@@ -77,8 +77,9 @@ var renderEvent = function renderEvent(events) {
                     dayOfWeek = eventDay;
                 }
                 return (
-                    React.createElement(DaySeparator, { data: eventDay }),
-                    React.createElement(SingleEvent, { data: event })
+                    React.createElement(SingleEvent, { data: event }),
+                    React.createElement(DaySeparator, { data: eventDay })
+
                 );
             });
             return React.createElement(
