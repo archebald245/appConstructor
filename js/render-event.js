@@ -55,7 +55,7 @@ var renderEvent = function renderEvent(events) {
 
         render: function render() {
             var day = this.props.data;
-            return React.createElement('div', { className: 'event-day-container' }, day);
+            return React.createElement('div', { className: 'event-day' }, day);
         }
     });
 
@@ -72,7 +72,7 @@ var renderEvent = function renderEvent(events) {
                     dayOfWeek = eventDay;
                 }
                 if (dayOfWeek != eventDay) {
-                    var day = React.createElement('div', { className: 'event-day-container' }, eventDay);
+                    var day = React.createElement('div', { className: 'event-day' }, eventDay);
                     //eventCollectionForRender.push(day);
                     dayOfWeek = eventDay;
                 }
