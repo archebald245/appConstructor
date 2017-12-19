@@ -1,12 +1,13 @@
 function blockUi() {
     $.blockUI({
         message: $('#block-ui-container'),
+        overlayCSS: { backgroundColor: '#10b781' },
         css: {
-            top: ($(window).height() - 400) / 2 + 'px',
-            left: ($(window).width() - 400) / 2 + 'px',
-            width: '400px'
-        },
-        overlayCSS: { backgroundColor: '#10b781' }
+            top: ($(window).height() - 300) / 2 + 'px',
+            left: ($(window).width() - 300) / 2 + 'px',
+            width: '300px',
+            height: '300px'
+        }
     });
 
     // $.blockUI({
