@@ -4,6 +4,7 @@ var renderEvent = function renderEvent(events) {
     var SingleEvent = React.createClass({
         render: function render() {
             var data = this.props.data;
+            // var day = this.props.day;
             var startTime = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
             var image;
             var isFavorite = -1;
@@ -28,6 +29,7 @@ var renderEvent = function renderEvent(events) {
 
             //var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
             var image = React.createElement('div', { className: 'event-image-container' }, imageTest);
+
             return React.createElement(
                 'div', { className: "event-data-container" },
                 image,
@@ -48,6 +50,7 @@ var renderEvent = function renderEvent(events) {
                 ),
                 React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
             );
+
         }
     });
 
@@ -66,21 +69,28 @@ var renderEvent = function renderEvent(events) {
         render: function render() {
             var data = this.props.data;
             var dayOfWeek = moment(data[0].DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
-            var eventCollectionForRender = data.map(function(event) {
-                var eventDay = moment(event.DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
-                if (dayOfWeek == "") {
-                    dayOfWeek = eventDay;
-                }
-                if (dayOfWeek != eventDay) {
-                    var day = React.createElement('div', { className: 'event-day-container' }, eventDay);
-                    //eventCollectionForRender.push(day);
-                    dayOfWeek = eventDay;
-                }
-                return (
-                    React.createElement(SingleEvent, { data: event }),
-                    React.createElement(DaySeparator, { data: eventDay })
-                );
-            });
+            var eventCollectionForRender = [];
+            for (var i = 0; i < data.length;) {
+                var day = React.createElement('div', { className: 'event-day-container' }, data[i].DateStartString);
+                var event = React.createElement(SingleEvent, { data: data[i] });
+                eventCollectionForRender.push(day);
+                eventCollectionForRender.push(event);
+                i++;
+            }
+            // eventCollectionForRender = data.map(function(event) {
+            //     var eventDay = moment(event.DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
+            //     if (dayOfWeek == "") {
+            //         dayOfWeek = eventDay;
+            //     }
+            //     if (dayOfWeek != eventDay) {
+            //         var day = React.createElement('div', { className: 'event-day-container' }, eventDay);
+            //         //eventCollectionForRender.push(day);
+            //         dayOfWeek = eventDay;
+            //     }
+            //     return (
+            //         React.createElement(SingleEvent, { data: event, day: eventDay })
+            //     );
+            // });
             return React.createElement(
                 'div', { className: "custom-container-event" },
                 React.createElement(
