@@ -38,6 +38,18 @@ function goToPage(index) {
             }
         }
     }
+    if ($.jStorage.get('isLogin') != null) {
+        var isLogin = $.jStorage.get('isLogin');
+        if (isLogin) {
+            //indexPage = 3411;
+            //user is login
+            $(".classMenu").removeClass("hidden");
+        } else if (!isLogin) {
+            //user not login
+            $(".classMenu").addClass("hidden");
+        }
+    }
+
     if (applicationData.IsTrackingLastPage == true) {
         setLastOpenPage(indexPage);
     }

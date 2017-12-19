@@ -211,8 +211,9 @@ function checkConnection(callbackInitPN) {
             var versionId = applicationData.Version;
         }
 
-        var StartPage = applicationData.Pages.filter(function(p) { return p.IsStartPage })[0];
-        indexPage = StartPage.Id;
+        // var StartPage = applicationData.Pages.filter(function(p) { return p.IsStartPage })[0];
+        // indexPage = StartPage.Id;
+        indexPage = 3411; //notice board page
         createMenu(applicationData);
         reactRender();
         initGallaryClick();

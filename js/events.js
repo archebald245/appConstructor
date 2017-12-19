@@ -8,21 +8,21 @@ var countFileDownload = 0;
 var countFileDownloadFail = 0;
 var swipeMenuInGallary = false;
 
-function initSwipe(){
-    $(document).swipe( {
+function initSwipe() {
+    $(document).swipe({
         //Generic swipe handler for all directions
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-            if((direction == "right")&(indexPage>0)){
+        swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+            if ((direction == "right") & (indexPage > 0)) {
                 goToPage(indexPage - 1);
-            }else if((direction == "left")&(indexPage<applicationData.Pages.length-1)){
+            } else if ((direction == "left") & (indexPage < applicationData.Pages.length - 1)) {
                 goToPage(Number(indexPage) + 1);
             }
         },
-        allowPageScroll:"vertical"
+        allowPageScroll: "vertical"
     });
 }
 
-function init(){
+function init() {
     blockUi();
     document.addEventListener("deviceready", onDeviceReady, false);
     $(".classDropdownList").addClass("classHide");
@@ -31,13 +31,13 @@ function init(){
 
 function onDeviceReady() {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-        window.myFileSystem=fileSystem;
-         fileSystem.root.getDirectory("Phonegap", {create: true, exclusive: false}, onGetDirectorySuccess, onGetDirectoryFail);
-         checkConnection();
-         store = fileSystem.root.nativeURL + "Phonegap/" ;
-         console.log(store);
+        window.myFileSystem = fileSystem;
+        fileSystem.root.getDirectory("Phonegap", { create: true, exclusive: false }, onGetDirectorySuccess, onGetDirectoryFail);
+        checkConnection();
+        store = fileSystem.root.nativeURL + "Phonegap/";
+        console.log(store);
 
-     });
+    });
 
 
 
@@ -48,36 +48,37 @@ function onDeviceReady() {
 
 function download() {
     var remoteFile = encodeURI(fileNameImage);
-    var localFileName = encodeURI("Phonegap/" + remoteFile.substring(remoteFile.lastIndexOf('/')+1));
+    var localFileName = encodeURI("Phonegap/" + remoteFile.substring(remoteFile.lastIndexOf('/') + 1));
     var localPath;
     var resourcesArr = [];
-    for(var i = 0, iterator = 0;i<resources.length; i++, iterator++){
-        if(resources[i]!="undefined"){
+    for (var i = 0, iterator = 0; i < resources.length; i++, iterator++) {
+        if (resources[i] != "undefined") {
             resourcesArr[iterator] = resources[i];
         }
     }
     resources = resourcesArr;
 
-        window.myFileSystem.root.getFile(localFileName, {create: true, exclusive: false}, function(fileEntry) {
+    window.myFileSystem.root.getFile(localFileName, { create: true, exclusive: false }, function(fileEntry) {
 
-             localPath = fileEntry.toURL();
-            console.log( localPath );
-            var ft = new FileTransfer();
-            ft.download(remoteFile,
-                localPath, function(entry) {
-                   countFileDownload = countFileDownload+1;
-                   if((countFileDownload+countFileDownloadFail) === resources.length){
-                     callback();
-                   }
+        localPath = fileEntry.toURL();
+        console.log(localPath);
+        var ft = new FileTransfer();
+        ft.download(remoteFile,
+            localPath,
+            function(entry) {
+                countFileDownload = countFileDownload + 1;
+                if ((countFileDownload + countFileDownloadFail) === resources.length) {
+                    callback();
+                }
 
 
 
-                }, failDownload);
-        }, fail);
+            }, failDownload);
+    }, fail);
 }
 
- function failDownload(error) {
-     countFileDownloadFail = countFileDownloadFail+1;
+function failDownload(error) {
+    countFileDownloadFail = countFileDownloadFail + 1;
 
     console.log(error.code);
 }
@@ -87,11 +88,11 @@ function fail(error) {
 }
 
 function onGetDirectorySuccess(dir) {
-      console.log("Created dir "+dir.name);
+    console.log("Created dir " + dir.name);
 }
 
 function onGetDirectoryFail(error) {
-     console.log("Error creating directory "+error.code);
+    console.log("Error creating directory " + error.code);
 }
 
 function appStart() {
@@ -102,64 +103,66 @@ function appStart() {
     });
 }
 
-function createMenu(){
-    if(applicationData.Menu!=null){
-    var menu = getPositionMenu(applicationData.Menu.Position);
-    var div;
-    $(menu).html("");
-    var label;
-    for(var i =0;i<applicationData.Menu.MenuItems.length;i++){
-        if(applicationData.Menu.MenuItems[i].IsExternal == true){
-            div = $('<a href=' +applicationData.Menu.MenuItems[i].Link + ' class="menu-item-href"><div class="classPageLink"><label>' + applicationData.Menu.MenuItems[i].Title + '</label></div></a>');
-        }else{
-            div =  $('<div class="classPageLink" id ='+ applicationData.Menu.MenuItems[i].Link +' onClick="clickPageOnDropdownMenu(' + applicationData.Menu.MenuItems[i].Link +')"><label>' + applicationData.Menu.MenuItems[i].Title + '</label></div>');
+// function createMenu(){
+//     if(applicationData.Menu!=null){
+//     var menu = getPositionMenu(applicationData.Menu.Position);
+//     var div;
+//     $(menu).html("");
+//     var label;
+//     for(var i =0;i<applicationData.Menu.MenuItems.length;i++){
+//         if(applicationData.Menu.MenuItems[i].IsExternal == true){
+//             div = $('<a href=' +applicationData.Menu.MenuItems[i].Link + ' class="menu-item-href"><div class="classPageLink"><label>' + applicationData.Menu.MenuItems[i].Title + '</label></div></a>');
+//         }else{
+//             div =  $('<div class="classPageLink" id ='+ applicationData.Menu.MenuItems[i].Link +' onClick="clickPageOnDropdownMenu(' + applicationData.Menu.MenuItems[i].Link +')"><label>' + applicationData.Menu.MenuItems[i].Title + '</label></div>');
 
-        }
-        //  label.appendTo(div);
-       div.appendTo(menu);
-    }
-    addListener();
-    slideUp();
-    showActivePageInMenu(applicationData.Pages[0].Id);
-    }
-    indexPage = applicationData.Pages[0].Id;
-}
+//         }
+//         //  label.appendTo(div);
+//        div.appendTo(menu);
+//     }
+//     addListener();
+//     slideUp();
+//     showActivePageInMenu(applicationData.Pages[0].Id);
+//     }
+//     indexPage = applicationData.Pages[0].Id;
+// }
 
-function clickPageOnDropdownMenu(link){
+function clickPageOnDropdownMenu(link) {
     slideUp();
     goToPage(link);
 }
-function addListener(){
-    document.querySelector('body').addEventListener('click',slideUp,true);
+
+function addListener() {
+    document.querySelector('body').addEventListener('click', slideUp, true);
 }
 
-function slideUp(){
-     $( ".classDropdownList" ).slideUp( "fast");
+function slideUp() {
+    $(".classDropdownList").slideUp("fast");
 }
-$('.menu-icon').click(function(){
-  $( ".classDropdownList" ).slideToggle();
+$('.menu-icon').click(function() {
+    $(".classDropdownList").slideToggle();
 })
 
-function openMenu(){
-    if ( $(".classDropdownList").is( ":hidden" ) ) {
-    $(".classDropdownList").slideDown( "fast" );
-  }else{
-      $(".classDropdownList").slideUp( "fast" );
-  }
+function openMenu() {
+    if ($(".classDropdownList").is(":hidden")) {
+        $(".classDropdownList").slideDown("fast");
+    } else {
+        $(".classDropdownList").slideUp("fast");
+    }
 }
 
-function showActivePageInMenu(page){
+function showActivePageInMenu(page) {
     $(".classPageLink").removeClass("activePage");
-    $("#"+ page +"").addClass("activePage");
+    $("#" + page + "").addClass("activePage");
 }
 
-function onClickButtonMenu(){
+function onClickButtonMenu() {
 
-  openMenu()
+    openMenu()
 }
 
-function blockUi(){
-     $.blockUI({ css: {
+function blockUi() {
+    $.blockUI({
+        css: {
             border: 'none',
             padding: '15px',
             backgroundColor: '#000',
@@ -167,14 +170,15 @@ function blockUi(){
             '-moz-border-radius': '10px',
             opacity: .5,
             color: '#fff'
-        } });
+        }
+    });
 }
 
-function unBlockUi(){
+function unBlockUi() {
     $.unblockUI();
 }
 
-function cutImageOfYoutubeContainer(){
+function cutImageOfYoutubeContainer() {
     $(".youtube-image").remove();
 
     // var val;
@@ -191,169 +195,167 @@ function cutImageOfYoutubeContainer(){
 }
 
 
-function getPositionMenu(positionMenu)
-{
-    switch(positionMenu)
-    {
+function getPositionMenu(positionMenu) {
+    switch (positionMenu) {
 
         case 'top-left':
-        $('span.menu-icon').show().addClass('menu-icon-left');
-        $('.classMenu').show().addClass('classMenuTop');
-        $('.classDropdownList').addClass('classDropdownList-topMenu');
-        $('#container').addClass('containerTop');
-        return '.classDropdownList';
-        
+            $('span.menu-icon').show().addClass('menu-icon-left');
+            $('.classMenu').show().addClass('classMenuTop');
+            $('.classDropdownList').addClass('classDropdownList-topMenu');
+            $('#container').addClass('containerTop');
+            return '.classDropdownList';
+
 
         case 'left-swipe':
-        $('span.menu-icon').hide();
-        $('.classMenu').hide();
-        $('.classSwipeDropList') .addClass('side-menu-left');
-        //  $("#container").swipe( {
-        // //Generic swipe handler for all directions
-        //      swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-        //       //   alert("swipe");
-        //          if (direction == "right") {
-        //              $('.classSwipeDropList').show("slide", { direction: "right" }, 2000);
-        //          }else if(direction == "left"){
-        //              $('.classSwipeDropList').hide("slide", { direction: "left" }, 2000);
-        //          }
-                 
-        //      },
-        //      allowPageScroll: "vertical"
-        //  });
-        $("body").swipe( {
-        //Generic swipe handler for all directions
-            swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-                if (swipeMenuInGallary == false) {
-                    if (direction == "right") {
-                        $(".classSwipeDropList").animate({
-                            width: "70%"
-                        }, { queue: false }, 1500);
-                    } else if (direction == "left") {
-                        $(".classSwipeDropList").animate({
-                            width: "0px"
-                        }, { queue: false }, 1500);
+            $('span.menu-icon').hide();
+            $('.classMenu').hide();
+            $('.classSwipeDropList').addClass('side-menu-left');
+            //  $("#container").swipe( {
+            // //Generic swipe handler for all directions
+            //      swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+            //       //   alert("swipe");
+            //          if (direction == "right") {
+            //              $('.classSwipeDropList').show("slide", { direction: "right" }, 2000);
+            //          }else if(direction == "left"){
+            //              $('.classSwipeDropList').hide("slide", { direction: "left" }, 2000);
+            //          }
+
+            //      },
+            //      allowPageScroll: "vertical"
+            //  });
+            $("body").swipe({
+                //Generic swipe handler for all directions
+                swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+                    if (swipeMenuInGallary == false) {
+                        if (direction == "right") {
+                            $(".classSwipeDropList").animate({
+                                width: "70%"
+                            }, { queue: false }, 1500);
+                        } else if (direction == "left") {
+                            $(".classSwipeDropList").animate({
+                                width: "0px"
+                            }, { queue: false }, 1500);
+                        }
                     }
-                }
-        },
-        allowPageScroll:"vertical"
-        });
-        $("body").on("click",function(){
-            $(".classSwipeDropList").animate({
-                   width: "0px"
-               },{queue: false}, 1500);
-        } );
-        
-    // });
-    //     $("#container").on('swiperight', function(){
-    //         $(".classSwipeDropList").animate({
-    //                width: "70%"
-    //            },{queue: false}, 1500);
-    //     });
-    //     $("#container").on('swipeleft', function(){
-    //         $(".classSwipeDropList").animate({
-    //                width: "0px"
-    //            },{queue: false}, 1500);
-    //     });
-        //  document.querySelector('body').addEventListener('click',function(){
-        //      $('.classSwipeDropList').hide("slide", { direction: "left" }, 2000);
-        //  },true);
-         console.log("leftSwipe");
-        return '.classSwipeDropList';
+                },
+                allowPageScroll: "vertical"
+            });
+            $("body").on("click", function() {
+                $(".classSwipeDropList").animate({
+                    width: "0px"
+                }, { queue: false }, 1500);
+            });
+
+            // });
+            //     $("#container").on('swiperight', function(){
+            //         $(".classSwipeDropList").animate({
+            //                width: "70%"
+            //            },{queue: false}, 1500);
+            //     });
+            //     $("#container").on('swipeleft', function(){
+            //         $(".classSwipeDropList").animate({
+            //                width: "0px"
+            //            },{queue: false}, 1500);
+            //     });
+            //  document.querySelector('body').addEventListener('click',function(){
+            //      $('.classSwipeDropList').hide("slide", { direction: "left" }, 2000);
+            //  },true);
+            console.log("leftSwipe");
+            return '.classSwipeDropList';
 
         case 'bottom-left':
-        $('span.menu-icon').show().addClass('menu-icon-left');
-        $('.classMenu').show().addClass('classMenuBottom');
-        $('.classDropdownList').addClass('classDropdownList-downMenu');
-        $('#container').addClass('containerBottom');
-        return '.classDropdownList';
-        
+            $('span.menu-icon').show().addClass('menu-icon-left');
+            $('.classMenu').show().addClass('classMenuBottom');
+            $('.classDropdownList').addClass('classDropdownList-downMenu');
+            $('#container').addClass('containerBottom');
+            return '.classDropdownList';
+
 
         case 'top-right':
-        $('span.menu-icon').show().addClass('menu-icon-right');
-        $('.classMenu').show().addClass('classMenuTop');
-        $('.classDropdownList').addClass('classDropdownList-topMenu');
-        $('#container').addClass('containerTop');
-        return '.classDropdownList';
-        
+            $('span.menu-icon').show().addClass('menu-icon-right');
+            $('.classMenu').show().addClass('classMenuTop');
+            $('.classDropdownList').addClass('classDropdownList-topMenu');
+            $('#container').addClass('containerTop');
+            return '.classDropdownList';
+
 
         case 'right-swipe':
-        $('span.menu-icon').hide()
-         $('.classMenu').hide();
-         $('.classSwipeDropList').addClass('side-menu-right');
-           $("body").swipe( {
-        //Generic swipe handler for all directions
-               swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-                   if (swipeMenuInGallary == false) {
-                       if (direction == "right") {
-                           $(".classSwipeDropList").animate({
-                               width: "0px"
-                           }, { queue: false }, 1500);
-                       } else if (direction == "left") {
-                           $(".classSwipeDropList").animate({
-                               width: "70%"
-                           }, { queue: false },
-                               1500);
-                       }
-                   }
-               },
-        allowPageScroll:"vertical"
-        });
-        $("body").on("click",function(){
-            $(".classSwipeDropList").animate({
-                   width: "0px"
-               },{queue: false}, 1500);
-        } );
-        //    $("#container").on('swiperight', function(){
-        //         $(".classSwipeDropList").animate({
-        //            width: "0px"
-        //        },{queue: false}, 1500);
-        // });
-        // $("#container").on('swipeleft', function(){
-            
-        //         $(".classSwipeDropList").animate({
-        //            width: "70%"
-        //        }, {queue: false},
-        //         1500);
-        
-        // });
-       
-        return '.classSwipeDropList';
+            $('span.menu-icon').hide()
+            $('.classMenu').hide();
+            $('.classSwipeDropList').addClass('side-menu-right');
+            $("body").swipe({
+                //Generic swipe handler for all directions
+                swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+                    if (swipeMenuInGallary == false) {
+                        if (direction == "right") {
+                            $(".classSwipeDropList").animate({
+                                width: "0px"
+                            }, { queue: false }, 1500);
+                        } else if (direction == "left") {
+                            $(".classSwipeDropList").animate({
+                                    width: "70%"
+                                }, { queue: false },
+                                1500);
+                        }
+                    }
+                },
+                allowPageScroll: "vertical"
+            });
+            $("body").on("click", function() {
+                $(".classSwipeDropList").animate({
+                    width: "0px"
+                }, { queue: false }, 1500);
+            });
+            //    $("#container").on('swiperight', function(){
+            //         $(".classSwipeDropList").animate({
+            //            width: "0px"
+            //        },{queue: false}, 1500);
+            // });
+            // $("#container").on('swipeleft', function(){
+
+            //         $(".classSwipeDropList").animate({
+            //            width: "70%"
+            //        }, {queue: false},
+            //         1500);
+
+            // });
+
+            return '.classSwipeDropList';
 
         case 'bottom-righ':
-        $('span.menu-icon').show().addClass('menu-icon-right');
-        $('.classMenu').show().addClass('classMenuBottom');
-        $('.classDropdownList').addClass('classDropdownList-downMenu');
-        $('#container').addClass('containerBottom');
-        return '.classDropdownList';
-        
-        case null:
-        $('span.menu-icon').hide();
-        $('.classMenu').hide();
-        break;
+            $('span.menu-icon').show().addClass('menu-icon-right');
+            $('.classMenu').show().addClass('classMenuBottom');
+            $('.classDropdownList').addClass('classDropdownList-downMenu');
+            $('#container').addClass('containerBottom');
+            return '.classDropdownList';
 
-        // default:
-        // $('span.menu-icon').show().addClass('menu-icon-left');
-        // $('.classMenu').show().addClass('classMenuTop');
-        // $('.classDropdownList').addClass('classDropdownList-topMenu');
-        // break;
+        case null:
+            $('span.menu-icon').hide();
+            $('.classMenu').hide();
+            break;
+
+            // default:
+            // $('span.menu-icon').show().addClass('menu-icon-left');
+            // $('.classMenu').show().addClass('classMenuTop');
+            // $('.classDropdownList').addClass('classDropdownList-topMenu');
+            // break;
 
 
 
     }
-    
+
 
 }
 
 
-    // var player;
-    // function onYouTubeIframeAPIReady(){
-    //            player = new YT.Player("video" ,{
-    //                heidth: '390',
-    //                width: '640',
-    //                wideoId: "L4bWC70gmxU"
-    //            })
-    //        }
+// var player;
+// function onYouTubeIframeAPIReady(){
+//            player = new YT.Player("video" ,{
+//                heidth: '390',
+//                width: '640',
+//                wideoId: "L4bWC70gmxU"
+//            })
+//        }
 var Base64 = {
 
 
@@ -438,12 +440,10 @@ var Base64 = {
 
             if (c < 128) {
                 utftext += String.fromCharCode(c);
-            }
-            else if ((c > 127) && (c < 2048)) {
+            } else if ((c > 127) && (c < 2048)) {
                 utftext += String.fromCharCode((c >> 6) | 192);
                 utftext += String.fromCharCode((c & 63) | 128);
-            }
-            else {
+            } else {
                 utftext += String.fromCharCode((c >> 12) | 224);
                 utftext += String.fromCharCode(((c >> 6) & 63) | 128);
                 utftext += String.fromCharCode((c & 63) | 128);
@@ -466,13 +466,11 @@ var Base64 = {
             if (c < 128) {
                 string += String.fromCharCode(c);
                 i++;
-            }
-            else if ((c > 191) && (c < 224)) {
+            } else if ((c > 191) && (c < 224)) {
                 c2 = utftext.charCodeAt(i + 1);
                 string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
                 i += 2;
-            }
-            else {
+            } else {
                 c2 = utftext.charCodeAt(i + 1);
                 c3 = utftext.charCodeAt(i + 2);
                 string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
@@ -485,5 +483,3 @@ var Base64 = {
     }
 
 }
-    
-    

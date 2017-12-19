@@ -25,7 +25,9 @@ function submitFormListener() {
                     if (data.Success == true) {
                         $.jStorage.set('isLogin', true);
                         // alert(data.Message);
-                        indexPage = 3411;
+                        indexPage = 3411; //notice board page
+                        $(".classMenu").removeClass("hidden");
+
                         goToPage(indexPage);
                     } else {
                         $(form).find(".formBlock").find(".passElement").val("");
@@ -67,6 +69,7 @@ function submitFormListener() {
 
     $(".formLogout").on("click", function() {
         $.jStorage.set('isLogin', false);
+        $(".classMenu").addClass("hidden");
         goToPage(indexPage);
     });
 }
@@ -101,7 +104,9 @@ function bindChangeValForms() {
                                     if (data.Success == true) {
                                         $.jStorage.set('isLogin', true);
                                         // alert(data.Message);
-                                        indexPage = 3411;
+                                        indexPage = 3411; //notice board page
+                                        $(".classMenu").removeClass("hidden");
+
                                         goToPage(indexPage);
                                     } else {
                                         $(elem).find(".formBlock").find(".passElement").val("");

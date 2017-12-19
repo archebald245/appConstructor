@@ -98,9 +98,22 @@ function createMenu() {
                 // });
             }
         }
+        if ($.jStorage.get('isLogin') != null) {
+            var isLogin = $.jStorage.get('isLogin');
+            if (isLogin) {
+                //user is login
+                indexPage = 3411;
+                $(".classMenu").removeClass("hidden");
+            } else if (!isLogin) {
+                //user not login
+                $(".classMenu").addClass("hidden");
+            }
+        }
         addListener();
         slideUp();
         showActivePageInMenu(indexPage);
+
+
     }
 }
 
