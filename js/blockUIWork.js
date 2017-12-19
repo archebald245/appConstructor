@@ -1,8 +1,12 @@
 function blockUi() {
     $.blockUI({
         message: $('#block-ui-container'),
-        overlayCSS: { backgroundColor: '#10b781' },
+        overlayCSS: {
+            backgroundColor: '#10b781',
+            opacity: 0
+        },
         css: {
+            backgroundColor: none,
             top: ($(window).height() - 300) / 2 + 'px',
             left: ($(window).width() - 300) / 2 + 'px',
             width: '300px',
