@@ -2172,11 +2172,13 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     text-align: left;
     line-height: 50px;
     padding-left: 2.5%;
+    margin-bottom: 10px;
     background: #E9E9E9;
     font-size: 14pt;
     font-weight: bold;
     display: block;
     overflow: hidden;
+    margin: 10% 0 5%;
 }
 
 .custom-container-event {
