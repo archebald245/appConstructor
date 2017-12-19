@@ -3,7 +3,7 @@ function blockUi() {
         message: $('#block-ui-container'),
         overlayCSS: {
             backgroundColor: '#10b781',
-            opacity: 0
+            opacity: 1
         },
         css: {
             backgroundColor: 'none',
