@@ -6,7 +6,7 @@ function blockUi() {
             opacity: 0
         },
         css: {
-            backgroundColor: none,
+            backgroundColor: 'none',
             top: ($(window).height() - 300) / 2 + 'px',
             left: ($(window).width() - 300) / 2 + 'px',
             width: '300px',
