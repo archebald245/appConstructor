@@ -108,12 +108,13 @@ function createMenu() {
                 //user not login
                 $(".classMenu").addClass("hidden");
             }
+        } else {
+            //user not login
+            $(".classMenu").addClass("hidden");
         }
         addListener();
         slideUp();
         showActivePageInMenu(indexPage);
-
-
     }
 }
 
