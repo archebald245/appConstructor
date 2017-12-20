@@ -2331,27 +2331,27 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     width: 100%;
 }
 
-.event-data-container .orange-event {
+.orange-event {
     background-color: #ffc000;
 }
 
-.event-data-container .green-event {
+.green-event {
     background-color: #92d050;
 }
 
-.event-data-container .pink-event {
+.pink-event {
     background-color: #f4b183;
 }
 
-.event-data-container .purple-event {
+.purple-event {
     background-color: #df9bff;
 }
 
-.event-data-container .blue-event {
+.blue-event {
     background-color: #bdd7ee;
 }
 
-.event-data-container .grey-event {
+.grey-event {
     background-color: #d9d9d9;
 }
 

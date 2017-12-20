@@ -90,10 +90,6 @@ var renderEvent = function renderEvent(events) {
 
             return React.createElement(
                 'div', { className: "custom-container-event" },
-                React.createElement(
-                    'div', { className: 'event-list-header' },
-                    "Agenda"
-                ),
                 eventCollectionForRender
             );
         }
