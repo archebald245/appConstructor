@@ -44,12 +44,15 @@
     <resource-file src="GoogleService-Info.plist" />
   </platform>
   
-  <!-- <preference name="fullscreen" value="false" /> -->
-  
+  <preference name="fullscreen" value="false" />
   <preference name="DisallowOverscroll" value="true" /> 
-  <!-- <preference name="EnableViewportScale" value="true" /> -->
- <!-- <preference name="android-windowSoftInputMode" value="adjustResize" />  -->
-  
+  <preference name="EnableViewportScale" value="true" />
+ 
+  <platform name="android">
+   <preference name="android-manifest/application/@android:theme" value="@android:style/Theme.NoTitleBar.Fullscreen" />
+   <preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="stateHidden|adjustPan" />
+   <preference name="android-manifest/application/activity/@android:configChanges" value="keyboardHidden|orientation" />
+ </platform>
   
   <preference name="orientation" value="default" />
   <preference name="phonegap-version" value="cli-7.0.1" />
