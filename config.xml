@@ -40,7 +40,7 @@
   <feature name="FileTransfer">
     <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
   </feature>
-  <platform name="android" />
+
   <platform name="android">
     <resource-file src="google-services.json" target="google-services.json" />
 	<preference name="android-manifest/application/@android:theme" value="@android:style/Theme.NoTitleBar.Fullscreen" />
