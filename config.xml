@@ -47,7 +47,7 @@
   <!-- <preference name="fullscreen" value="false" /> -->
   
   <!-- <preference name="DisallowOverscroll" value="true" />  -->
-  <preference name="EnableViewportScale"value="true" />
+  <preference name="EnableViewportScale" value="true" />
  <!-- <preference name="android-windowSoftInputMode" value="adjustResize" />  -->
   
   
