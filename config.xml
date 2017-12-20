@@ -16,8 +16,8 @@
   <access origin="*" />
   
   <preference name="fullscreen" value="false" /> 
-  <!-- <preference name="DisallowOverscroll" value="true" />  -->
-  <!-- <preference name="EnableViewportScale" value="true" /> -->
+  <preference name="DisallowOverscroll" value="true" /> 
+  <preference name="EnableViewportScale" value="true" />
   
   <feature name="http://api.phonegap.com/1.0/file">
     <param name="" value="" />
