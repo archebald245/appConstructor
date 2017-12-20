@@ -16,7 +16,7 @@
   <access origin="*" />
   
   <preference name="fullscreen" value="false" /> 
-  <preference name="StatusBarOverlaysWebView" value="true" />
+  <preference name="StatusBarOverlaysWebView" value="false" />
   <preference name="DisallowOverscroll" value="true" /> 
   <preference name="EnableViewportScale" value="true" />
   
