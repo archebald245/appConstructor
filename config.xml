@@ -44,8 +44,8 @@
     <resource-file src="GoogleService-Info.plist" />
   </platform>
   
-   <preference name="DisallowOverscroll" value="true" />
-  <!-- <preference name="EnableViewportScale" value="true" /> -->
+   <!-- <preference name="DisallowOverscroll" value="true" /> -->
+   <preference name="EnableViewportScale" value="true" />
  
   
   
