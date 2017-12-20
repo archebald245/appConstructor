@@ -14,6 +14,11 @@
   <allow-navigation href="https://*youtube.com/*" />
   <allow-intent href="*" />
   <access origin="*" />
+  
+  <preference name="fullscreen" value="true" />
+  <preference name="DisallowOverscroll" value="true" /> 
+  <preference name="EnableViewportScale" value="true" />
+  
   <feature name="http://api.phonegap.com/1.0/file">
     <param name="" value="" />
   </feature>
@@ -46,9 +51,7 @@
   <platform name="ios">
     <resource-file src="GoogleService-Info.plist" />
   </platform>
-  <preference name="fullscreen" value="true" />
-  <preference name="DisallowOverscroll" value="true" /> 
-  <preference name="EnableViewportScale" value="true" />
+
   <preference name="orientation" value="default" />
   <preference name="phonegap-version" value="cli-7.0.1" />
   <icon src="icon.png" />
