@@ -245,10 +245,25 @@ var renderFavorite = function renderFavorite(events) {
         render: function render() {
 
             var data = this.props.data;
-            var eventCollectionForRender = data.map(function(event) {
-                return React.createElement(SingleEvent, { data: event });
-            });
+            var dayOfWeek = "";
+            var eventCollectionForRender = [];
+            for (var i = 0; i < data.length; i++) {
 
+                var event = React.createElement(SingleEvent, { data: data[i] });
+                var eventDay = moment(data[i].DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
+
+                if (dayOfWeek == "") {
+                    var day = React.createElement('div', { className: 'event-day-container' }, eventDay);
+                    eventCollectionForRender.push(day);
+                    dayOfWeek = eventDay;
+                }
+                if (dayOfWeek != eventDay) {
+                    var day = React.createElement('div', { className: 'event-day-container' }, eventDay);
+                    eventCollectionForRender.push(day);
+                    dayOfWeek = eventDay;
+                }
+                eventCollectionForRender.push(event);
+            }
             return React.createElement(
                 'div', { className: "custom-container-event" },
                 React.createElement(
