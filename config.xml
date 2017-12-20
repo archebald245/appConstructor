@@ -38,24 +38,17 @@
   <platform name="android" />
   <platform name="android">
     <resource-file src="google-services.json" target="google-services.json" />
+	<preference name="android-manifest/application/@android:theme" value="@android:style/Theme.NoTitleBar.Fullscreen" />
+    <preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="stateHidden|adjustPan" />
+    <preference name="android-manifest/application/activity/@android:configChanges" value="keyboardHidden|orientation" />
   </platform>
   <platform name="ios" />
   <platform name="ios">
     <resource-file src="GoogleService-Info.plist" />
   </platform>
-  
-
- 
-  <platform name="android">
-   <preference name="android-manifest/application/@android:theme" value="@android:style/Theme.NoTitleBar.Fullscreen" />
-   <preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="stateHidden|adjustPan" />
-   <preference name="android-manifest/application/activity/@android:configChanges" value="keyboardHidden|orientation" />
- </platform>
-
   <preference name="fullscreen" value="true" />
   <preference name="DisallowOverscroll" value="true" /> 
   <preference name="EnableViewportScale" value="true" />
-  
   <preference name="orientation" value="default" />
   <preference name="phonegap-version" value="cli-7.0.1" />
   <icon src="icon.png" />
