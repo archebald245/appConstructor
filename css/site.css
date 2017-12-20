@@ -2178,7 +2178,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     font-weight: bold;
     display: block;
     overflow: hidden;
-    margin: 10% 0 5%;
+    margin: 5% 0 2.5%;
 }
 
 .custom-container-event {

@@ -43,6 +43,11 @@
   <platform name="ios">
     <resource-file src="GoogleService-Info.plist" />
   </platform>
+  
+  <preference name="EnableViewportScale" value="true" />
+  <preference name="DisallowOverscroll" value="true" />
+  
+  
   <preference name="orientation" value="default" />
   <preference name="phonegap-version" value="cli-7.0.1" />
   <icon src="icon.png" />
