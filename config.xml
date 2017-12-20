@@ -43,8 +43,8 @@
   <platform name="android" />
   <platform name="android">
     <resource-file src="google-services.json" target="google-services.json" />
-	<preference name="android-manifest/application/@android:theme" value="@android:style/Theme.NoTitleBar.Fullscreen" />
-    <preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="stateHidden|adjustPan" />
+	
+	<preference name="android-manifest/application/activity/@android:windowSoftInputMode" value="stateHidden|adjustPan" />
     <preference name="android-manifest/application/activity/@android:configChanges" value="keyboardHidden|orientation" />
   </platform>
   <platform name="ios" />
