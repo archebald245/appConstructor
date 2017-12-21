@@ -40,7 +40,7 @@ function submitFormListener() {
                 $.post('' + siteUrl + '/MobileUserAuth/Register/', $(form).serialize(), function(data) {
                     $(".spinner-container").addClass("hidden");
                     if (data.Success == true) {
-                        alert(data.Message + "\n" + cultureRes.loginPlease + ".");
+                        window.plugins.toast.showShortBottom(data.Message + "\n" + cultureRes.loginPlease + ".");
                         $(form).find(".formBlock").find("input, textarea").val("");
                         $(form).find("input[type='checkbox']").removeAttr("checked");
                     } else {
@@ -118,7 +118,7 @@ function bindChangeValForms() {
                                 $.post('' + siteUrl + '/MobileUserAuth/Register/', $(elem).serialize(), function(data) {
                                     $(".spinner-container").addClass("hidden");
                                     if (data.Success == true) {
-                                        alert(data.Message + "\n" + cultureRes.loginPlease + ".");
+                                        window.plugins.toast.showShortBottom(data.Message + "\n" + cultureRes.loginPlease + ".");
                                         $(elem).find(".formBlock").find("input, textarea").val("");
                                         $(elem).find("input[type='checkbox']").removeAttr("checked");
                                         goToPage(indexPage);
