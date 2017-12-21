@@ -15,8 +15,6 @@
   <allow-intent href="*" />
   <access origin="*" />
   
-  <preference name="StatusBarOverlaysWebView" value="true" />
-  
   <preference name="fullscreen" value="false" /> 
   <preference name="DisallowOverscroll" value="true" /> 
   <preference name="EnableViewportScale" value="true" />
