@@ -14,7 +14,7 @@
   <allow-navigation href="https://*youtube.com/*" />
   <allow-intent href="*" />
   <access origin="*" />
-  
+  <preference name="StatusBarBackgroundColor" value="#cbf442" />
   <preference name="fullscreen" value="false" /> 
   <preference name="DisallowOverscroll" value="true" /> 
   <preference name="EnableViewportScale" value="true" />
