@@ -2332,27 +2332,27 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 }
 
 .orange-event {
-    background-color: #ffc000;
+    background-color: #ffc000 !important;
 }
 
 .green-event {
-    background-color: #92d050;
+    background-color: #92d050 !important;
 }
 
 .pink-event {
-    background-color: #f4b183;
+    background-color: #f4b183 !important;
 }
 
 .purple-event {
-    background-color: #df9bff;
+    background-color: #df9bff !important;
 }
 
 .blue-event {
-    background-color: #bdd7ee;
+    background-color: #bdd7ee !important;
 }
 
 .grey-event {
-    background-color: #d9d9d9;
+    background-color: #d9d9d9 !important;
 }
 
 .back-to-event-list {
