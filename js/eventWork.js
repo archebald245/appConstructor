@@ -6,10 +6,13 @@ function addListenerToClickEvent() {
         var events = $.jStorage.get('EventsData');
         events.forEach(function(item, index) {
             if (item.Id == id) {
+                scrollData = $("body").scrollTop();
                 $("#container").addClass("hidden");
                 $(".event-favorite-wrapper").addClass("hidden");
                 $(".event-profile").removeClass("hidden");
                 RenderEventProfile(item);
+
+
             }
         });
     });
