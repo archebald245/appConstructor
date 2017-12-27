@@ -114,6 +114,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
                 } else {
                     $(".event-profile").addClass("hidden");
                     $("#container").removeClass("hidden");
+                    $("#container").scrollTo(scrollData);
                 }
             });
         },

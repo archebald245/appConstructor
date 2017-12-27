@@ -1,3 +1,5 @@
+var scrollData = 0;
+
 function addListenerToClickEvent() {
     $(".event-image-container, .event-data").unbind("click").on("click", function() {
         var id = $(this).siblings(".eventId").val();
