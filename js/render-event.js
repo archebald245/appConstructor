@@ -115,7 +115,7 @@ var RenderEventProfile = function RenderEventProfile(event) {
                     $(".event-profile").addClass("hidden");
                     $("#container").removeClass("hidden");
                 }
-                $("#container").scrollTo(0, scrollData);
+                window.scrollTo(0, scrollData);
             });
         },
         render: function render() {
