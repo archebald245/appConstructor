@@ -47,10 +47,10 @@ function createMenu() {
         var favImg = "<img src='baseimages/booking-icons/shedule.png' class='menu-item-icon'/>";
         var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()">' + favImg + '<label>Schedule</label></div>');
         favoriteMenu.appendTo(menu);
-
+        onclick = "window.open('http://12example.pdf', '_blank', 'location=no');"
 
         var pdfImg = "<img src='baseimages/booking-icons/shedule.png' class='menu-item-icon'/>";
-        var pdfMenu = $('<div class="classPageLink" id ="favorite-events">' + favImg + '<label><a href="file:///android_asset/www/images/pdfa202dfad-4b43-45e4-ad22-c197fedbf382.pdf">PDF Link</a></label></div>');
+        var pdfMenu = $('<div class="classPageLink" id ="favorite-events">' + favImg + '<label><a href="#"  onclick="window.open("file:///android_asset/www/images/pdfa202dfad-4b43-45e4-ad22-c197fedbf382.pdf", "_blank", "location=no");">PDF Link</a></label></div>');
         pdfMenu.appendTo(menu);
 
         var style = applicationData.Menu.Styles + "; display:block";
