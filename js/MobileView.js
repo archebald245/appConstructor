@@ -843,7 +843,19 @@ function reactRender() {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
                     alert("pdf click")
-                    PDFViewer.openPDF(url);
+
+                    DocumentHandler.previewFileFromUrlOrPath(
+                        function() {
+                            console.log('success');
+                        },
+                        function(error) {
+                            if (error == 53) {
+                                console.log('No app that handles this file type.');
+                            } else if (error == 2) {
+                                console.log('Invalid link');
+                            }
+                        },
+                        url, 'pdf-sample');
 
                     // var options = {
                     //     openWith: {
