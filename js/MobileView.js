@@ -845,13 +845,17 @@ function reactRender() {
                     alert("pdf click")
 
 
-                    var success = function(data) {
-                        console.log(data);
-                    }
-                    var error = function(data) {
-                        console.log(data);
-                    }
-                    window.FoxitPdf.preview(url, success, error);
+                    cordova.plugins.fileOpener2.open(
+                        url, // You can also use a Cordova-style file uri: cdvfile://localhost/persistent/Download/starwars.pdf
+                        'application/pdf', {
+                            error: function(e) {
+                                console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
+                            },
+                            success: function() {
+                                console.log('file opened successfully');
+                            }
+                        }
+                    );
 
                     // var options = {
                     //     openWith: {
