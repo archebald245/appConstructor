@@ -842,7 +842,25 @@ function reactRender() {
             if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
-                    document.location.href = url;
+
+
+                    window.resolveLocalFileSystemURL(url, function(fileEntry) {
+                        window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
+                            fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
+                                cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf', {
+                                    error: function(e) {
+                                        console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
+                                    },
+                                    success: function() {
+                                        console.log('file opened successfully');
+                                    }
+                                });
+                            });
+                        });
+                    });
+
+
+
                     // var options = {
                     //     openWith: {
                     //         enabled: true
