@@ -844,18 +844,14 @@ function reactRender() {
                     var url = $(this).attr("data-locationpdf");
                     alert("pdf click")
 
-                    DocumentHandler.previewFileFromUrlOrPath(
-                        function() {
-                            console.log('success');
-                        },
-                        function(error) {
-                            if (error == 53) {
-                                console.log('No app that handles this file type.');
-                            } else if (error == 2) {
-                                console.log('Invalid link');
-                            }
-                        },
-                        url, 'pdf-sample');
+
+                    var success = function(data) {
+                        console.log(data);
+                    }
+                    var error = function(data) {
+                        console.log(data);
+                    }
+                    window.FoxitPdf.preview(url, success, error);
 
                     // var options = {
                     //     openWith: {

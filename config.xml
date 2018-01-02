@@ -8,7 +8,8 @@
   <plugin name="cordova-plugin-whitelist" spec="1.3.0" source="npm" />
   <plugin name="cordova-plugin-x-toast" spec="2.5.2" source="npm" />
   <!-- <plugin name="cordova-plugin-statusbar" spec="2.3.0" source="npm" /> -->
-  <plugin name="polarcape-cordova-plugin-document-handler" spec="1.0.10" source="npm" />
+  <!-- <plugin name="cordova-plugin-document-viewer" spec="0.8.1" source="npm" /> -->
+  <plugin name="cordova-plugin-foxitpdf" spec="5.0.0" source="npm" />
   
   <plugin name="phonegap-plugin-push" spec="2.0.0" />
   <allow-navigation href="http://*/*" />
