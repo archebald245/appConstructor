@@ -842,33 +842,19 @@ function reactRender() {
             if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
-                    alert("pdf click")
 
-
-                    cordova.plugins.fileOpener2.open(
-                        url, // You can also use a Cordova-style file uri: cdvfile://localhost/persistent/Download/starwars.pdf
-                        'application/pdf', {
-                            error: function(e) {
-                                console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
-                            },
-                            success: function() {
-                                console.log('file opened successfully');
-                            }
+                    var options = {
+                        openWith: {
+                            enabled: true
                         }
-                    );
+                    }
 
-                    // var options = {
-                    //     openWith: {
-                    //         enabled: true
-                    //     }
-                    // }
-
-                    // function onShow() {
-                    //     window.console.log('document shown');
-                    //     //e.g. track document usage
-                    // }
-                    // cordova.plugins.SitewaertsDocumentViewer.viewDocument(
-                    //     url, 'application/pdf', options, onShow);
+                    function onShow() {
+                        window.console.log('document shown');
+                        //e.g. track document usage
+                    }
+                    cordova.plugins.SitewaertsDocumentViewer.viewDocument(
+                        url, 'application/pdf', options, onShow);
                 });
             }
 
