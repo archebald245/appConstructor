@@ -48,6 +48,11 @@ function createMenu() {
         var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()">' + favImg + '<label>Schedule</label></div>');
         favoriteMenu.appendTo(menu);
 
+
+        var pdfImg = "<img src='baseimages/booking-icons/shedule.png' class='menu-item-icon'/>";
+        var pdfMenu = $('<div class="classPageLink" id ="favorite-events">' + favImg + '<label><a href="file:///android_asset/www/images/pdfa202dfad-4b43-45e4-ad22-c197fedbf382.pdf">PDF Link</a></label></div>');
+        pdfMenu.appendTo(menu);
+
         var style = applicationData.Menu.Styles + "; display:block";
         var sandwichStyle = applicationData.Menu.SandwichColor;
         if (sandwichStyle == null) {
