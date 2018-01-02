@@ -849,6 +849,9 @@ function reactRender() {
                             fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
                                 cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf', {
                                     error: function(e) {
+                                        if (e.message.indexOf("Activity not found: No Activity found to handle Intent") > -1) {
+                                            window.plugins.toast.showShortBottom("Please, install some PDF reader.");
+                                        }
                                         console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
                                     },
                                     success: function() {
