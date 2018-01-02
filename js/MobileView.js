@@ -842,18 +842,21 @@ function reactRender() {
             if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
-                    var options = {
-                        openWith: {
-                            enabled: true
-                        }
-                    }
+                    alert("pdf click")
+                    PDFViewer.openPDF(url);
 
-                    function onShow() {
-                        window.console.log('document shown');
-                        //e.g. track document usage
-                    }
-                    cordova.plugins.SitewaertsDocumentViewer.viewDocument(
-                        url, 'application/pdf', options, onShow);
+                    // var options = {
+                    //     openWith: {
+                    //         enabled: true
+                    //     }
+                    // }
+
+                    // function onShow() {
+                    //     window.console.log('document shown');
+                    //     //e.g. track document usage
+                    // }
+                    // cordova.plugins.SitewaertsDocumentViewer.viewDocument(
+                    //     url, 'application/pdf', options, onShow);
                 });
             }
 
