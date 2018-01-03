@@ -844,7 +844,7 @@ function reactRender() {
                     var url = $(this).attr("data-locationpdf");
 
 
-                    window.resolveLocalFileSystemURL(url, function(fileEntry) {
+                    /*window.resolveLocalFileSystemURL(url, function(fileEntry) {
                         window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
                             fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
                                 cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf', {
@@ -860,22 +860,22 @@ function reactRender() {
                                 });
                             });
                         });
-                    });
+                    });*/
 
 
 
-                    // var options = {
-                    //     openWith: {
-                    //         enabled: true
-                    //     }
-                    // }
+                    var options = {
+                        openWith: {
+                            enabled: true
+                        }
+                    }
 
-                    // function onShow() {
-                    //     window.console.log('document shown');
-                    //     //e.g. track document usage
-                    // }
-                    // cordova.plugins.SitewaertsDocumentViewer.viewDocument(
-                    //     url, 'application/pdf', options, onShow);
+                    function onShow() {
+                        window.console.log('document shown');
+                        //e.g. track document usage
+                    }
+                    cordova.plugins.SitewaertsDocumentViewer.viewDocument(
+                        url, 'application/pdf', options, onShow);
                 });
             }
 
