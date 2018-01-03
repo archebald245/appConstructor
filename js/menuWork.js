@@ -47,7 +47,6 @@ function createMenu() {
         var favImg = "<img src='baseimages/booking-icons/shedule.png' class='menu-item-icon'/>";
         var favoriteMenu = $('<div class="classPageLink" id ="favorite-events" onClick="clickPageOnDropdownMenuFavorite()">' + favImg + '<label>Schedule</label></div>');
         favoriteMenu.appendTo(menu);
-        onclick = "window.open('http://12example.pdf', '_blank', 'location=no');"
 
         var style = applicationData.Menu.Styles + "; display:block";
         var sandwichStyle = applicationData.Menu.SandwichColor;
