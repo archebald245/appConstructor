@@ -86,6 +86,7 @@ function addListenerToClickBuy() {
         var itemId = $(this).closest(".shopItem").find("input[name='shopItemId']").attr("value");
         workToClickBuy(itemId);
         event.stopPropagation();
+        TotalRestCount();
     });
 
 }
