@@ -52,11 +52,11 @@ function searchResourcesAndReplacePatch(jsonObject) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
 
-    if (jsonObject.Menu != null) {
-        jsonObject.Menu.MenuItems.forEach(function(item) {
-            item = resourcesOfMenu(item, storePath);
-        });
-    }
+    // if (jsonObject.Menu != null) {
+    //     jsonObject.Menu.MenuItems.forEach(function(item) {
+    //         item = resourcesOfMenu(item, storePath);
+    //     });
+    // }
     // if ($.jStorage.get('EventsDataUpdate') != null) {
     //     var events = resourcesOfEvent($.jStorage.get('EventsDataUpdate'), storePath);
     //     $.jStorage.deleteKey('EventsDataUpdate');
