@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<widget xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="ces.wpp.wyamee.com" version="0.0.5">
+<widget xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" id="ces.wpp.wyamee.com" version="0.0.6">
   <name>WPP CES</name>
   <description>Event application for CES event for internal staff working for WPP for navigation.</description>
   <plugin name="cordova-plugin-inappbrowser" spec="1.5.0" source="npm" />
