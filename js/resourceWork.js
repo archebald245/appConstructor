@@ -51,6 +51,11 @@ function searchResourcesAndReplacePatch(jsonObject) {
     if (jsonObject.Institutions != null) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
+    if (jsonObject.Menu != null) {
+        jsonObject.Menu.MenuItems.forEach(function(item) {
+            item = resourcesOfMenu(item, storePath);
+        });
+    }
     if ($.jStorage.get('resources') != null) {
         resourcesToDownload = compareResouces($.jStorage.get('resources'), resources, storePath);
     } else {
