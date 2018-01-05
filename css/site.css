@@ -695,6 +695,20 @@ p.item-shop-description {
     background-size: cover;
 }
 
+.cart-btn-counter {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    text-align: center;
+    line-height: 25px;
+    background-color: #545252;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+
 .cart-btn img {
     border-radius: 50%;
     width: 50px;
@@ -811,7 +825,7 @@ p.item-shop-description {
 
 .order-booking {
     width: 95%;
-    margin: 50px 2.5% 80px;
+    margin: 50px 2.5% 90px;
 }
 
 #orderInfo input,
@@ -1319,7 +1333,7 @@ select#payMethod {
 }
 
 .bookingCartItem-data {
-    width: 70%;
+    width: 80%;
     min-width: 150px;
     float: left;
 }
@@ -1338,17 +1352,17 @@ select#payMethod {
 
 .cartItem-delete {
     float: right;
-    width: 30%;
-    height: 100%;
+    width: 20%;
+    height: 50px;
     min-width: 25px;
     background: url(../baseimages/booking-icons/tresh.png);
     background-size: 24px 33px;
     background-repeat: no-repeat;
     background-position: right;
-}
-
-#booking-order .bookingCartItem {
-    height: 165px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -25px;
 }
 
 #booking-order div:last-child {

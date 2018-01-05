@@ -86,9 +86,18 @@ function addListenerToClickBuy() {
         var itemId = $(this).closest(".shopItem").find("input[name='shopItemId']").attr("value");
         workToClickBuy(itemId);
         event.stopPropagation();
-        TotalRestCount();
-    });
+        //TotalRestCount();
+        //update counter
+        var data = $(".cart-btn-counter").html();
 
+        if (data !== "") {
+            var count = parseInt(data);
+            $(".cart-btn-counter").html(++count);
+        } else {
+            $(".cart-btn-counter").removeClass("hidden")
+            $(".cart-btn-counter").html("1");
+        }
+    });
 }
 
 function workToClickBuy(itemId) {
@@ -183,6 +192,7 @@ function addListenerToChangeCount() {
         $(counter).val(count);
 
         updateCount(this, count);
+        TotalRestCount(-1);
     });
 
     $(".shopItemCount-increase").on("click", function() {
@@ -191,6 +201,7 @@ function addListenerToChangeCount() {
         $(counter).val(count);
 
         updateCount(this, count);
+        TotalRestCount(1);
     });
 
 }

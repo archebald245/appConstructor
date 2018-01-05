@@ -153,9 +153,20 @@ function TotalRestAmount() {
             total = total + (Number(element.Price) * parseInt(element.Count));
         }
     });
+
     return total;
 }
 
-function TotalRestCount() {
-    window.plugins.toast.showShortBottom($("#cart>div").length);
+function TotalRestCount(coef) {
+    var data = $(".cart-btn-counter").html();
+
+    if (data !== "") {
+        var count = parseInt(data);
+        $(".cart-btn-counter").html(count + coef);
+    } else {
+        $(".cart-btn-counter").removeClass("hidden")
+        $(".cart-btn-counter").html("1");
+    }
+
+    //window.plugins.toast.showShortBottom($("#cart>div").length);
 }

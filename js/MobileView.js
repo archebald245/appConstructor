@@ -362,7 +362,8 @@ function reactRender() {
                     return React.createElement(
                         'div',
                         null,
-                        React.createElement('div', { className: 'cart-btn' }),
+                        React.createElement('div', { className: 'cart-btn' }, React.createElement(
+                            'div', { className: 'cart-btn-counter hidden' })),
                         React.createElement(
                             'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
