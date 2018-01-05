@@ -395,7 +395,7 @@ p.item-shop-description {
     height: 32px;
     padding-left: 17px;
     color: #000;
-    background-color: rgba(0, 0, 0, 0.20);
+    background-color: rgba(255, 255, 255, 0.85);
     font-weight: normal;
     line-height: 32px;
 }
@@ -699,14 +699,14 @@ p.item-shop-description {
     width: 25px;
     height: 25px;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -5px;
+    right: -5px;
     color: #fff;
     text-align: center;
-    line-height: 25px;
+    line-height: 22px;
     background-color: #545252;
     border-radius: 50%;
-    border: 1px solid #fff;
+    border: 2px solid #fff;
 }
 
 .cart-btn img {
