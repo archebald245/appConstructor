@@ -2321,6 +2321,7 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     padding: 0 0 0 40px;
     height: 25px;
     line-height: 25px;
+    display: inline-block;
 }
 
 .event-image-profile {
