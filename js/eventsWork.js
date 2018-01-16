@@ -4,7 +4,7 @@ function goToPage(index) {
     var thisPageIsLocked = thisPage.IsLocked;
     if (thisPageIsLocked) {
         window.plugins.toast.showShortBottom(cultureRes.lockedPage);
-        return false
+        return false;
     }
     if (thisPage.IsPrivate) {
         if (!$.jStorage.get('isLogin')) {
