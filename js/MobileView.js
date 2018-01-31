@@ -857,6 +857,17 @@ function reactRender() {
                         url, 'application/pdf', options, onShow);
                 });
             }
+            if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
+                $(ReactDOM.findDOMNode(this)).append("<div id='event-container'></div>");
+
+                $(applicationData.Events).each(function() {
+                    if (this.Id == data.Json.Id) {
+                        renderEvent(this);
+                    }
+                });
+                $("#event-container").attr("id", "");
+            }
+
             if (data.ContentTypeId == 2 || data.ContentTypeId == 4 || data.ContentTypeId == 9) {
                 $(ReactDOM.findDOMNode(this)).click(function(e) {
                     e.preventDefault();
@@ -1129,6 +1140,11 @@ function reactRender() {
                     React.createElement(GoogleMapContainer, { data: data })
                 );
             } else if (data.ContentTypeId == 18) {
+                return null
+            }
+            if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
+                return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell });
+            } else if (data.ContentTypeId == 19) {
                 return null
             }
         }

@@ -90,6 +90,9 @@ function resourcesOfCellContainer(cellContainer, storePath) {
         if (cellContainer[i].ContentTypeId == 8) {
             cellContainer[i] = resourcesOfGallary(cellContainer[i], storePath);
         }
+        if (cellContainer[i].ContentTypeId == 19) {
+            cellContainer[i].Json = JSON.parse(Base64.decode(cellContainer[i].Json));
+        }
     }
     return cellContainer;
 }
