@@ -102,6 +102,7 @@ function reactRender() {
     }
 
     function onPlayerStateChange(event) {}
+    var isEvent = false;
     var isBooking = false;
     var isRestaurant = false;
     var Rows = React.createClass({
@@ -205,6 +206,9 @@ function reactRender() {
                             if (element.ContentTypeId == 16) {
                                 isBooking = true;
                             }
+                            if (element.ContentTypeId == 19) {
+                                isEvent = true;
+                            }
                         });
                     });
                 }
@@ -274,6 +278,15 @@ function reactRender() {
                         'div',
                         null,
                         React.createElement('div', { className: 'cart-btn bottom-menu' }),
+                        React.createElement(
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
+                        )
+                    );
+                } else if (isEvent == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'event-btn bottom-menu' }),
                         React.createElement(
                             'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
@@ -364,6 +377,15 @@ function reactRender() {
                         null,
                         React.createElement('div', { className: 'cart-btn' }, React.createElement(
                             'div', { className: 'cart-btn-counter hidden' })),
+                        React.createElement(
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
+                        )
+                    );
+                } else if (isEvent == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'event-btn' }),
                         React.createElement(
                             'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
@@ -860,7 +882,7 @@ function reactRender() {
             if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
                 $(ReactDOM.findDOMNode(this)).append("<div id='event-container'></div>");
 
-                $(applicationData.Events).each(function() {
+                $(applicationData.MainEvents).each(function() {
                     if (this.Id == data.Json.Id) {
                         renderEvent(this);
                     }

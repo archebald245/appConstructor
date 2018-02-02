@@ -1,20 +1,35 @@
 'use strict';
 //RENDER EVENT LIST
 var renderEvent = function renderEvent(event) {
+    var isRenderFavorite = false;
+    var networkState = navigator.connection.type;
+    if (networkState != Connection.NONE && $.jStorage.get('isLogin') != null) {
+        isRenderFavorite = true;
+    }
+
     var SingleEvent = React.createClass({
         render: function render() {
             var data = this.props.data;
             // var day = this.props.day;
-            var startTime = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
+            var startTime = moment(data.DateStart, 'YYYY/MM/DD hh:mm').format('hh:mm A');
             var image;
+            var favorite = null;
             var isFavorite = -1;
 
             var img1 = new Image();
             img1.src = data.ImagePath;
 
-            if ($.jStorage.get('FavoriteEvents') != null) {
-                isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
+            if (this.props.isRenderFavorite) {
+
+                if ($.jStorage.get('FavoriteEvents') != null) {
+                    isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
+                }
+                favorite = React.createElement(
+                    'div', { className: isFavorite > -1 ? 'event-favorite event-favorite-active' : 'event-favorite' },
+                    ""
+                )
             }
+
             var imageTest;
             if (data.ImagePath != null) {
 
@@ -26,8 +41,6 @@ var renderEvent = function renderEvent(event) {
             } else {
                 imageTest = null;
             }
-
-            //var image = React.createElement('div', { className: 'event-image-container', style: { backgroundImage: 'url(' + data.ImagePath + ')' } });
             var image = React.createElement('div', { className: 'event-image-container' }, imageTest);
 
             return React.createElement(
@@ -44,10 +57,7 @@ var renderEvent = function renderEvent(event) {
                         startTime
                     )
                 ),
-                React.createElement(
-                    'div', { className: isFavorite > -1 ? 'event-favorite event-favorite-active' : 'event-favorite' },
-                    ""
-                ),
+                favorite,
                 React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
             );
 
@@ -63,7 +73,7 @@ var renderEvent = function renderEvent(event) {
 
     var MainEvent = React.createClass({
         componentDidMount: function componentDidMount() {
-            //addListenerToClickEvent();
+            addListenerToClickEvent();
         },
         render: function render() {
             var data = this.props.data;
@@ -71,8 +81,8 @@ var renderEvent = function renderEvent(event) {
             var eventCollectionForRender = [];
             for (var i = 0; i < data.Events.length; i++) {
 
-                var event = React.createElement(SingleEvent, { data: data.Events[i] });
-                var eventDay = moment(data.Events[i].DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
+                var event = React.createElement(SingleEvent, { data: data.Events[i], isRenderFavorite: this.props.isRenderFavorite });
+                var eventDay = moment(data.Events[i].DateStart, 'YYYY/MM/DD hh:mm').format('dddd');
 
                 if (dayOfWeek == "") {
                     var day = React.createElement('div', { className: 'event-day-container' }, eventDay);
@@ -101,7 +111,7 @@ var renderEvent = function renderEvent(event) {
                     React.createElement(
                         'div', { className: "main-event-description" },
                         data.Description
-                    ),
+                    )
                 ),
                 React.createElement(
                     'div', { className: "custom-container-event" },
@@ -111,11 +121,16 @@ var renderEvent = function renderEvent(event) {
         }
     });
 
-    ReactDOM.render(React.createElement(MainEvent, { data: event }), document.getElementById("event-container"));
+    ReactDOM.render(React.createElement(MainEvent, { data: event, isRenderFavorite: isRenderFavorite }), document.getElementById("event-container"));
 };
 
 //RENDER EVENT PROFILE
 var RenderEventProfile = function RenderEventProfile(event) {
+    var isRenderFavorite = false;
+    var networkState = navigator.connection.type;
+    if (networkState != Connection.NONE && $.jStorage.get('isLogin') != null) {
+        isRenderFavorite = true;
+    }
     var Event = React.createClass({
         componentDidMount: function componentDidMount() {
             $(".event-favorite").unbind("click").on("click", function() {
@@ -124,26 +139,33 @@ var RenderEventProfile = function RenderEventProfile(event) {
             });
             $(".back-to-event-list").on("click", function() {
 
-                if ($("#favorite-events").hasClass("activePage")) {
-                    $(".event-profile").addClass("hidden");
-                    $(".event-favorite-wrapper").removeClass("hidden");
-                } else {
-                    $(".event-profile").addClass("hidden");
-                    $("#container").removeClass("hidden");
-                }
+                $(".event-profile").removeClass("hidden");
+                $(".event-favorite-wrapper, #container").addClass("hidden");
                 window.scrollTo(0, scrollData);
             });
         },
         render: function render() {
             var data = this.props.data;
 
-            var startTime = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
-            var finishTime = moment(data.DateFinishString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
+            var startTime = moment(data.DateStart, 'YYYY/MM/DD hh:mm').format('hh:mm A');
+            var finishTime = moment(data.DateFinish, 'YYYY/MM/DD hh:mm').format('hh:mm A');
 
-            var startDate = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('DD.MM.');
-            var finishDate = moment(data.DateFinishString, 'DD/MM/YYYY hh:mm').format('DD.MM.');
+            var startDate = moment(data.DateStart, 'YYYY/MM/DD hh:mm').format('DD.MM.');
+            var finishDate = moment(data.DateFinish, 'YYYY/MM/DD hh:mm').format('DD.MM.');
 
             var date = startDate === finishDate ? startDate : startDate + ' - ' + finishDate;
+
+            var favorite = null;
+            if (this.props.isRenderFavorite) {
+                var isFavorite = -1;
+                if ($.jStorage.get('FavoriteEvents') != null) {
+                    isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
+                }
+                favorite = React.createElement(
+                    'div', { className: isFavorite > -1 ? 'event-favorite event-favorite-active' : 'event-favorite' },
+                    ""
+                )
+            }
 
             var image;
             if (data.ImagePath != null) {
@@ -165,21 +187,24 @@ var RenderEventProfile = function RenderEventProfile(event) {
 
             return React.createElement(
                 'div', { className: "event-profile-container" },
-                React.createElement(
-                    'div', { className: 'back-to-event-list' },
-                    React.createElement('img', { src: "baseimages/backtoevents.png" })
-                ),
+                // React.createElement(
+                //     'div', { className: 'back-to-event-list' },
+                //     React.createElement('img', { src: "baseimages/backtoevents.png" })
+                // ),
                 React.createElement(
                     'div', { className: 'event-profile-header' },
-                    data.Name
+
+                    React.createElement(
+                        'span', { className: 'event-profile-name' },
+                        data.Name
+                    ), React.createElement(
+                        'div', { className: 'back-to-event-list' }, null
+                    )
                 ),
                 React.createElement(
                     'div', { className: 'event-image-profile' },
                     image,
-                    React.createElement(
-                        'div', { className: 'event-favorite' },
-                        ""
-                    )
+                    favorite
                 ),
                 React.createElement(
                     'div', { className: 'event-time-container' },
@@ -201,22 +226,34 @@ var RenderEventProfile = function RenderEventProfile(event) {
             );
         }
     });
-    ReactDOM.render(React.createElement(Event, { data: event }), document.getElementById("event-profile-container"));
+    ReactDOM.render(React.createElement(Event, { data: event, isRenderFavorite: isRenderFavorite }), document.getElementById("custom-hide-container"));
 };
 
 //RENDER FAVORITE EVENT
 var renderFavorite = function renderFavorite(events) {
+    var isRenderFavorite = false;
+    var networkState = navigator.connection.type;
+    if (networkState != Connection.NONE && $.jStorage.get('isLogin') != null) {
+        isRenderFavorite = true;
+    }
     var SingleEvent = React.createClass({
         componentDidMount: function componentDidMount() {
             addListenerToClickEvent();
         },
         render: function render() {
             var data = this.props.data;
-            var startTime = moment(data.DateStartString, 'DD/MM/YYYY hh:mm').format('hh:mm A');
+            var startTime = moment(data.DateStart, 'YYYY/MM/DD hh:mm').format('hh:mm A');
             var image;
+            var favorite = null;
             var isFavorite = -1;
-            if ($.jStorage.get('FavoriteEvents') != null) {
-                isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
+            if (this.props.isRenderFavorite) {
+                if ($.jStorage.get('FavoriteEvents') != null) {
+                    isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
+                }
+                favorite = React.createElement(
+                    'div', { className: isFavorite > -1 ? 'event-favorite event-favorite-active' : 'event-favorite' },
+                    ""
+                )
             }
             var imageTest;
             if (data.ImagePath != null) {
@@ -245,10 +282,7 @@ var renderFavorite = function renderFavorite(events) {
                         startTime
                     )
                 ),
-                React.createElement(
-                    'div', { className: isFavorite > -1 ? 'event-favorite event-favorite-active' : 'event-favorite' },
-                    ""
-                ),
+                favorite,
                 React.createElement('input', { type: 'hidden', className: 'eventId', value: data.Id })
             );
         }
@@ -263,7 +297,7 @@ var renderFavorite = function renderFavorite(events) {
             for (var i = 0; i < data.length; i++) {
 
                 var event = React.createElement(SingleEvent, { data: data[i] });
-                var eventDay = moment(data[i].DateStartString, 'DD/MM/YYYY hh:mm').format('dddd');
+                var eventDay = moment(data[i].DateStart, 'YYYY/MM/DD hh:mm').format('dddd');
 
                 if (dayOfWeek == "") {
                     var day = React.createElement('div', { className: 'event-day-container' }, eventDay);
@@ -288,5 +322,5 @@ var renderFavorite = function renderFavorite(events) {
         }
     });
 
-    ReactDOM.render(React.createElement(Events, { data: events }), document.getElementById("event-favorite-container"));
+    ReactDOM.render(React.createElement(Events, { data: events }), document.getElementById("event-favorite-wrapper"));
 };

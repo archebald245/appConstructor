@@ -155,7 +155,7 @@ function checkConnection(callbackInitPN) {
                     var jsonString = JSON.stringify(applicationData);
                     $.jStorage.set('appData', jsonString);
                     updateResources();
-                    checkUpdateRestaurantMenu(true);
+                    checkRestarauntsAndEventsUpdate();
                     onCheckJson();
                 } else if (jsonObjectOfServer.InstitutionsUpdate) {
                     applicationData.Institutions = jsonObjectOfServer.Institutions;
@@ -174,10 +174,10 @@ function checkConnection(callbackInitPN) {
                     var jsonString = JSON.stringify(applicationData);
                     $.jStorage.set('appData', jsonString);
                     updateResources();
-                    checkUpdateRestaurantMenu(true);
+                    checkRestarauntsAndEventsUpdate();
                     onCheckJson();
                 } else {
-                    checkUpdateRestaurantMenu(true);
+                    checkRestarauntsAndEventsUpdate();
                     applicationData.NameOfPricingPlan = jsonObjectOfServer.NameOfPricingPlan;
                     applicationData.DeniedTools = jsonObjectOfServer.DeniedTools.replace(/"/g, "'");
                     createMenu(applicationData);

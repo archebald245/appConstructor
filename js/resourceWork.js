@@ -20,6 +20,10 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
     if (jsonObject.Institutions != null) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
+    if (jsonObject.MainEvents != null) {
+        console.log("replace local");
+        jsonObject.MainEvents = resourcesOfEvents(jsonObject.MainEvents, storePath);
+    }
     if (jsonObject.Menu != null) {
         jsonObject.Menu.MenuItems.forEach(function(item) {
             item = resourcesOfMenu(item, storePath);
@@ -51,6 +55,10 @@ function searchResourcesAndReplacePatch(jsonObject) {
     if (jsonObject.Institutions != null) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
+    if (jsonObject.MainEvents != null) {
+        console.log("replace update");
+        jsonObject.MainEvents = resourcesOfEvents(jsonObject.MainEvents, storePath);
+    }
     if (jsonObject.Menu != null) {
         jsonObject.Menu.MenuItems.forEach(function(item) {
             item = resourcesOfMenu(item, storePath);
@@ -69,7 +77,7 @@ function searchResourcesAndReplacePatch(jsonObject) {
 function resourcesOfMenu(item, storePath) {
     if (item.IconPath != null) {
         resources.push(item.IconPath);
-        item.IconPath = replacementMenuItemIconPath(item.IconPath, storePath);
+        item.IconPath = replacementPath(item.IconPath, storePath);
     }
     return item;
 }
@@ -138,8 +146,22 @@ function resourcesOfRestaurantMenus(restaurants, storePath) {
 
         });
     });
-
     return restaurants;
+}
+
+function resourcesOfEvents(mainEvents, storePath) {
+    // restaurants = replacePathToImageRestaurantMenu(restaurants);
+    console.log("start ");
+    console.log(mainEvents);
+    $(mainEvents).each(function() {
+        $(this.Events).each(function() {
+            resources.push(this.ImagePath);
+            this.ImagePath = replacementPath(this.ImagePath, storePath);
+        });
+    });
+    console.log("finish");
+    console.log(mainEvents);
+    return mainEvents;
 }
 
 function resourcesOfBooking(institutions, storePath) {
@@ -231,10 +253,14 @@ function replacementPathImagesRestaurantMenu(oldPath, storePath) {
     return storePath + nameImage;
 }
 
-function replacementMenuItemIconPath(oldPath, storePath) {
-    var nameImage = oldPath.split("/");
-    nameImage = nameImage[nameImage.length - 1];
-    return storePath + nameImage;
+function replacementPath(oldPath, storePath) {
+    //work for events too
+    if (oldPath) {
+        var nameImage = oldPath.split("/");
+        nameImage = nameImage[nameImage.length - 1];
+        return storePath + nameImage;
+    }
+    return oldPath;
 }
 
 function replacementBackgroundImagePath(jsonObjectValue, arrayResources, storePath) {

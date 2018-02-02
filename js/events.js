@@ -89,6 +89,12 @@ function goToPage(index) {
         scrollTop();
     });
 
+    $(".event-btn").on("click", function() {
+        $(".event-profile").addClass("hidden");
+        $("#container").addClass("hidden");
+        $(".event-favorite-wrapper").removeClass("hidden");
+        window.scrollTo(0, scrollData);
+    });
     changeRestaurant();
     changeMenu();
     $('[data-toggle="tooltip"]').tooltip();
@@ -104,4 +110,89 @@ function setLastOpenPage(pageId) {
 
 function getLastOpenPage() {
     return $.jStorage.get('lastPageId');
+}
+
+function checkRestarauntsAndEventsUpdate() {
+    var eventCollection = [];
+    var collectionRestaurantMenu = [];
+    $(applicationData.MainEvents).each(function(i, elem) {
+        eventCollection.push({
+            Id: this.Id,
+            Version: this.Version
+        });
+    });
+    $(applicationData.Restaurants).each(function(i, elem) {
+        $(elem.RestaurantMenus).each(function() {
+            collectionRestaurantMenu.push({
+                Id: this.Id,
+                Version: this.Version
+            });
+        });
+    });
+    console.log("WHEN");
+    $.when(
+        //Restaraunt request
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CheckUpdateRestaurantMenu",
+            data: {
+                model: collectionRestaurantMenu
+            },
+            cache: false,
+            success: function(object) {
+                object = JSON.parse(object);
+                console.log("rest" + object);
+                if (object.IsUpdated == true) {
+                    applicationData.Restaurants = object.Restaurants;
+                    var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
+                    applicationData.Restaurants = resourcesOfRestaurantMenus(applicationData.Restaurants, storePath);
+                    // var appJsonString = JSON.stringify(applicationData);
+                    // $.jStorage.set('replaceImagePachJson', appJsonString);
+                    // downloadResources();
+
+                    // } else if (!isNewVersion) {
+                    //     reactRender();
+                    //     initGallaryClick();
+                    //     submitFormListener();
+                    //     unBlockUi()
+                }
+            }
+        }),
+
+        //Event request
+        $.ajax({
+            type: "POST",
+            url: applicationData.UrlForUpdateApp + "/api/Event/GetUpdatedEvents",
+            data: JSON.stringify(eventCollection),
+            cache: false,
+            success: function(object) {
+                object = JSON.parse(object);
+                console.log("event " + object);
+                if (object.IsUpdated == true) {
+                    applicationData.MainEvents = object.MainEvents;
+                    var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
+                    applicationData.MainEvents = resourcesOfEvents(applicationData.MainEvents, storePath);
+                    // var appJsonString = JSON.stringify(applicationData);
+                    // $.jStorage.set('replaceImagePachJson', appJsonString);
+                    // downloadResources();
+
+                    // // } else if (!isNewVersion) {
+                    // reactRender();
+                    // initGallaryClick();
+                    // submitFormListener();
+                    // unBlockUi()
+                }
+            }
+        })
+    ).then(function() {
+        console.log("then");
+        var appJsonString = JSON.stringify(applicationData);
+        $.jStorage.set('replaceImagePachJson', appJsonString);
+        downloadResources();
+
+        reactRender();
+        initGallaryClick();
+        submitFormListener();
+        unBlockUi()
+    });
 }
