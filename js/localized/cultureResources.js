@@ -194,6 +194,10 @@ function initEnCulture() {
     cultureRes.Card = 'Card';
     cultureRes.PayPal = 'PayPal';
 
+    //EventsWork
+    cultureRes.AddFavorite = 'Event was added to favorites';
+    cultureRes.RemoveFavorite = 'Event was removed to favorites';
+
 
 }
 
@@ -344,6 +348,11 @@ function initRuCulture() {
     cultureRes.endingIn = 'Последние две цифры номера карты: XX{{lastTwoCardDigits}}';
     cultureRes.Card = 'Карта';
     cultureRes.PayPal = 'PayPal';
+
+    //EventsWork
+    cultureRes.AddFavorite = 'Событие добавленно в избранное';
+    cultureRes.RemoveFavorite = 'Событие было удаленно из избранного';
+
 }
 
 function initUaCulture() {
@@ -492,5 +501,9 @@ function initUaCulture() {
     cultureRes.endingIn = 'Останні дві цифри номера карти: XX {{lastTwoCardDigits}}';
     cultureRes.Card = 'Картка';
     cultureRes.PayPal = 'PayPal';
+
+    //EventsWork
+    cultureRes.AddFavorite = 'Подія була додана до обраного';
+    cultureRes.RemoveFavorite = 'Подія була видалена с обраного';
 
 }

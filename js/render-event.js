@@ -138,9 +138,8 @@ var RenderEventProfile = function RenderEventProfile(event) {
                 UpdateFavorite(this, id);
             });
             $(".back-to-event-list").on("click", function() {
-
-                $(".event-profile").removeClass("hidden");
-                $(".event-favorite-wrapper, #container").addClass("hidden");
+                $("#container").removeClass("hidden");
+                $(".event-profile, .event-favorite-wrapper").addClass("hidden");
                 window.scrollTo(0, scrollData);
             });
         },
@@ -230,7 +229,9 @@ var RenderEventProfile = function RenderEventProfile(event) {
 };
 
 //RENDER FAVORITE EVENT
-var renderFavorite = function renderFavorite(events) {
+var renderFavorite = function renderFavorite() {
+    var events = $.jStorage.get('FavoriteEvents');
+
     var isRenderFavorite = false;
     var networkState = navigator.connection.type;
     if (networkState != Connection.NONE && $.jStorage.get('isLogin') != null) {
@@ -289,6 +290,9 @@ var renderFavorite = function renderFavorite(events) {
     });
 
     var Events = React.createClass({
+        getInitialState: function() {
+            return { events: [] };
+        },
         render: function render() {
 
             var data = this.props.data;

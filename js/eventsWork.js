@@ -28,6 +28,7 @@ function addListenerToClickEvent() {
 function UpdateFavorite(e, id) {
     var favorites = $.jStorage.get('FavoriteEvents');
     var userId = $.jStorage.get('isLogin');
+    console.log("id- " + id + " :userId- " + userId);
     if (userId) {
         if (favorites != null) {
             var index = favorites.indexOf(+id);
@@ -35,20 +36,23 @@ function UpdateFavorite(e, id) {
                 var networkState = navigator.connection.type;
                 if (networkState != Connection.NONE) {
                     //With internet
-                    //AddEventToFavoritForUser
+                    //remove
                     $.ajax({
-                        type: "GET",
-                        url: applicationData.UrlForUpdateApp + "api/Event/AddEventToFavoritForUser",
-                        data: {
-                            eventId: id,
-                            userId: 1
-                        },
+                        type: "delete",
+                        url: applicationData.UrlForUpdateApp + "/api/FavoriteEvent",
+                        data: JSON.stringify({
+                            EventId: id,
+                            UserId: userId
+                        }),
                         cache: false,
+                        contentType: "application/json",
+                        datatype: 'json',
                         success: function(object) {
                             if (object) {
                                 favorites.splice(index, 1);
                                 $(e).removeClass("event-favorite-active");
                                 $.jStorage.set('FavoriteEvents', favorites);
+                                window.plugins.toast.showShortBottom(cultureRes.RemoveFavorite);
                             } else {
                                 window.plugins.toast.showShortBottom(cultureRes.sorryError);
                             }
@@ -62,18 +66,22 @@ function UpdateFavorite(e, id) {
                     //With internet
                     //AddEventToFavoritForUser
                     $.ajax({
-                        type: "GET",
-                        url: applicationData.UrlForUpdateApp + "api/Event/AddEventToFavoritForUser",
-                        data: {
-                            eventId: id,
-                            userId: 1
-                        },
+                        type: "POST",
+                        url: applicationData.UrlForUpdateApp + "/api/FavoriteEvent",
+                        data: JSON.stringify({
+                            EventId: id,
+                            UserId: userId
+                        }),
                         cache: false,
+                        contentType: "application/json",
+                        datatype: 'json',
                         success: function(object) {
+                            console.log(object);
                             if (object) {
                                 favorites.push(+id);
                                 $(e).addClass("event-favorite-active");
                                 $.jStorage.set('FavoriteEvents', favorites);
+                                window.plugins.toast.showShortBottom(cultureRes.AddFavorite);
                             } else {
                                 window.plugins.toast.showShortBottom(cultureRes.sorryError);
                             }
@@ -81,7 +89,6 @@ function UpdateFavorite(e, id) {
                     });
                 } else { window.plugins.toast.showShortBottom(cultureRes.noInternet); }
             }
-
         } else {
             //add to favorites
             var arr = [];
@@ -90,18 +97,22 @@ function UpdateFavorite(e, id) {
                 //With internet
                 //AddEventToFavoritForUser
                 $.ajax({
-                    type: "GET",
-                    url: applicationData.UrlForUpdateApp + "api/Event/AddEventToFavoritForUser",
-                    data: {
-                        eventId: id,
-                        userId: 1
-                    },
+                    type: "POST",
+                    url: applicationData.UrlForUpdateApp + "/api/FavoriteEvent",
+                    data: JSON.stringify({
+                        EventId: id,
+                        UserId: userId
+                    }),
                     cache: false,
+                    contentType: "application/json",
+                    datatype: 'json',
                     success: function(object) {
+                        console.log(object);
                         if (object) {
                             arr.push(+id);
                             $.jStorage.set('FavoriteEvents', arr);
                             $(e).addClass("event-favorite-active");
+                            window.plugins.toast.showShortBottom(cultureRes.AddFavorite);
                         } else {
                             window.plugins.toast.showShortBottom(cultureRes.sorryError);
                         }
@@ -110,4 +121,8 @@ function UpdateFavorite(e, id) {
             } else { window.plugins.toast.showShortBottom(cultureRes.noInternet); }
         }
     }
+}
+
+function GetEventsIds(evetns) {
+    return evetns.map(function(event) { return event.Id; });
 }

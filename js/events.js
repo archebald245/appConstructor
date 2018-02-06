@@ -55,12 +55,6 @@ function goToPage(index) {
     });
     $(".my-youtube").attr("height", "auto");
 
-    // applicationData.Pages.forEach(function(element) {
-    //     if (element.Id == indexPage && element.BackgroundImagePath != null) {
-    //         pageStyles = element.Style;
-    //     }
-    // }, this);
-
     var pageStyles = "";
 
     applicationData.Pages.forEach(function(element) {
@@ -90,6 +84,7 @@ function goToPage(index) {
     });
 
     $(".event-btn").on("click", function() {
+        renderFavorite();
         $(".event-profile").addClass("hidden");
         $("#container").addClass("hidden");
         $(".event-favorite-wrapper").removeClass("hidden");
@@ -115,6 +110,9 @@ function getLastOpenPage() {
 function checkRestarauntsAndEventsUpdate() {
     var eventCollection = [];
     var collectionRestaurantMenu = [];
+
+    var userId = $.jStorage.get('isLogin');
+
     $(applicationData.MainEvents).each(function(i, elem) {
         eventCollection.push({
             Id: this.Id,
@@ -129,7 +127,6 @@ function checkRestarauntsAndEventsUpdate() {
             });
         });
     });
-    console.log("WHEN");
     $.when(
         //Restaraunt request
         $.ajax({
@@ -141,55 +138,55 @@ function checkRestarauntsAndEventsUpdate() {
             cache: false,
             success: function(object) {
                 object = JSON.parse(object);
-                console.log("rest" + object);
                 if (object.IsUpdated == true) {
                     applicationData.Restaurants = object.Restaurants;
                     var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
                     applicationData.Restaurants = resourcesOfRestaurantMenus(applicationData.Restaurants, storePath);
-                    // var appJsonString = JSON.stringify(applicationData);
-                    // $.jStorage.set('replaceImagePachJson', appJsonString);
-                    // downloadResources();
-
-                    // } else if (!isNewVersion) {
-                    //     reactRender();
-                    //     initGallaryClick();
-                    //     submitFormListener();
-                    //     unBlockUi()
                 }
             }
         }),
-
         //Event request
         $.ajax({
             type: "POST",
             url: applicationData.UrlForUpdateApp + "/api/Event/GetUpdatedEvents",
             data: JSON.stringify(eventCollection),
             cache: false,
+            contentType: "application/json",
+            datatype: 'json',
             success: function(object) {
                 object = JSON.parse(object);
-                console.log("event " + object);
                 if (object.IsUpdated == true) {
                     applicationData.MainEvents = object.MainEvents;
                     var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
                     applicationData.MainEvents = resourcesOfEvents(applicationData.MainEvents, storePath);
-                    // var appJsonString = JSON.stringify(applicationData);
-                    // $.jStorage.set('replaceImagePachJson', appJsonString);
-                    // downloadResources();
-
-                    // // } else if (!isNewVersion) {
-                    // reactRender();
-                    // initGallaryClick();
-                    // submitFormListener();
-                    // unBlockUi()
                 }
             }
+        }),
+        //get favorites
+
+        $.ajax({
+            url: applicationData.UrlForUpdateApp + '/api/FavoriteEvent',
+            type: "get",
+            data: { userId: userId },
+            contentType: "application/json",
+            datatype: 'json',
+            success: function(data) {
+                if (data) {
+                    data = JSON.parse(data);
+                    $.jStorage.set('FavoriteEvents', GetEventsIds(data));
+                } else {
+                    $.jStorage.deleteKey('FavoriteEvents');
+                }
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(xhr, status, err.toString());
+            }.bind(this)
         })
+
     ).then(function() {
-        console.log("then");
         var appJsonString = JSON.stringify(applicationData);
         $.jStorage.set('replaceImagePachJson', appJsonString);
         downloadResources();
-
         reactRender();
         initGallaryClick();
         submitFormListener();

@@ -698,6 +698,9 @@ p.item-shop-description {
 
 .event-btn {
     background-image: url(../baseimages/favorites.png);
+    -webkit-box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
+    -moz-box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
+    box-shadow: 0px 0px 1px 0px rgba(74, 74, 74, 1);
 }
 
 .cart-btn-counter {
@@ -2310,11 +2313,12 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
 
 .back-to-event-list {
     position: absolute;
-    top: 0;
+    top: 3px;
     left: 10px;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background: url(../baseimages/back-black.png) no-repeat;
+    background-size: 35px;
 }
 
 .event-list-header {
