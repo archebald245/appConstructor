@@ -21,7 +21,6 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
     }
     if (jsonObject.MainEvents != null) {
-        console.log("replace local");
         jsonObject.MainEvents = resourcesOfEvents(jsonObject.MainEvents, storePath);
     }
     if (jsonObject.Menu != null) {
@@ -151,16 +150,12 @@ function resourcesOfRestaurantMenus(restaurants, storePath) {
 
 function resourcesOfEvents(mainEvents, storePath) {
     // restaurants = replacePathToImageRestaurantMenu(restaurants);
-    console.log("start ");
-    console.log(mainEvents);
     $(mainEvents).each(function() {
         $(this.Events).each(function() {
             resources.push(this.ImagePath);
             this.ImagePath = replacementPath(this.ImagePath, storePath);
         });
     });
-    console.log("finish");
-    console.log(mainEvents);
     return mainEvents;
 }
 
