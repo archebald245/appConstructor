@@ -230,7 +230,15 @@ var RenderEventProfile = function RenderEventProfile(event) {
 
 //RENDER FAVORITE EVENT
 var renderFavorite = function renderFavorite() {
-    var events = $.jStorage.get('FavoriteEvents');
+    var eventIds = $.jStorage.get('FavoriteEvents');
+    var events = [];
+    applicationData.MainEvents.forEach(function(mainEvent) {
+        mainEvent.Events.forEach(function(event) {
+            if (eventIds.indexOf(event.Id) > -1) {
+                events.push(event);
+            }
+        });
+    });
 
     var isRenderFavorite = false;
     var networkState = navigator.connection.type;
@@ -247,7 +255,7 @@ var renderFavorite = function renderFavorite() {
             var image;
             var favorite = null;
             var isFavorite = -1;
-            if (this.props.isRenderFavorite) {
+            if (isRenderFavorite) {
                 if ($.jStorage.get('FavoriteEvents') != null) {
                     isFavorite = $.jStorage.get('FavoriteEvents').indexOf(data.Id);
                 }
@@ -290,9 +298,14 @@ var renderFavorite = function renderFavorite() {
     });
 
     var Events = React.createClass({
-        getInitialState: function() {
-            return { events: [] };
+        componentDidMount: function componentDidMount() {
+            $(".back-to-event-list").on("click", function() {
+                $("#container").removeClass("hidden");
+                $(".event-profile, .event-favorite-wrapper").addClass("hidden");
+                window.scrollTo(0, scrollData);
+            });
         },
+
         render: function render() {
 
             var data = this.props.data;
@@ -319,7 +332,12 @@ var renderFavorite = function renderFavorite() {
                 'div', { className: "custom-container-event" },
                 React.createElement(
                     'div', { className: 'event-list-header' },
-                    "Schedule"
+                    React.createElement(
+                        'span', { className: 'event-favorite-label' },
+                        cultureRes.favoriteEvents
+                    ), React.createElement(
+                        'div', { className: 'back-to-event-list' }, null
+                    )
                 ),
                 eventCollectionForRender
             );

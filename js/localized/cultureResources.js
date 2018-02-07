@@ -195,6 +195,7 @@ function initEnCulture() {
     cultureRes.PayPal = 'PayPal';
 
     //EventsWork
+    cultureRes.favoriteEvents = 'Favorites';
     cultureRes.AddFavorite = 'Event was added to favorites';
     cultureRes.RemoveFavorite = 'Event was removed to favorites';
 
@@ -350,6 +351,7 @@ function initRuCulture() {
     cultureRes.PayPal = 'PayPal';
 
     //EventsWork
+    cultureRes.favoriteEvents = 'Избранное';
     cultureRes.AddFavorite = 'Событие добавленно в избранное';
     cultureRes.RemoveFavorite = 'Событие было удаленно из избранного';
 
@@ -503,6 +505,7 @@ function initUaCulture() {
     cultureRes.PayPal = 'PayPal';
 
     //EventsWork
+    cultureRes.favoriteEvents = 'Обрані події';
     cultureRes.AddFavorite = 'Подія була додана до обраного';
     cultureRes.RemoveFavorite = 'Подія була видалена с обраного';
 
