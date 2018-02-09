@@ -86,8 +86,10 @@ function addListenerToClickBuy() {
         var itemId = $(this).closest(".shopItem").find("input[name='shopItemId']").attr("value");
         workToClickBuy(itemId);
         event.stopPropagation();
+        //TotalRestCount();
+        //update counter
+        // TotalRestCount(1);
     });
-
 }
 
 function workToClickBuy(itemId) {
@@ -150,7 +152,7 @@ function workToClickBuy(itemId) {
 
             });
         });
-
+        TotalRestCount(1);
 
     }
     $("#shopItem").attr("id", "");
@@ -164,10 +166,12 @@ function workToClickBuy(itemId) {
 function addListenerToClickDelete() {
     $(".delete-cartItem").unbind("click");
     $(".delete-cartItem").on("click", function() {
+        var t = parseInt($(this).closest(".cartItem").find(".shopItem-count").html());
         $(this).closest(".cartItem").parent().remove();
         var curr = $(".totalPrice b").html().split(" ")[1];
         $(".totalPrice b").html("");
         $(".totalPrice b").append(totalPrice() + " " + curr); //add currency
+        TotalRestCount(-t);
     });
 }
 
@@ -182,6 +186,7 @@ function addListenerToChangeCount() {
         $(counter).val(count);
 
         updateCount(this, count);
+        TotalRestCount(-1);
     });
 
     $(".shopItemCount-increase").on("click", function() {
@@ -190,6 +195,7 @@ function addListenerToChangeCount() {
         $(counter).val(count);
 
         updateCount(this, count);
+        TotalRestCount(1);
     });
 
 }
