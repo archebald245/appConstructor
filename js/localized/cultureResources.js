@@ -29,11 +29,11 @@ function initCulture() {
     $(".container-selectFreeBookTime p span").html(cultureRes.offerTimes);
     $(".container-selectFreeBookTime #bookAfterConfirmFreeTime span").html(cultureRes.book);
     $(".dateTimePicker-container .cart-top-line span").html(cultureRes.selectDate);
-    $("label[for='dateTimePicker-time']").html(cultureRes.selectTime);
-    $("label[for='dateTimePicker-date']").html(cultureRes.selectDate);
-    $("label[for='nameOrder']").html(cultureRes.name);
-    $("label[for='confirmMethod']").html(cultureRes.phone);
-    $("label[for='commentOrder']").html(cultureRes.orderComments);
+    $("label[for='dateTimePicker-time'] span").html(cultureRes.selectTime);
+    $("label[for='dateTimePicker-date'] span").html(cultureRes.selectDate);
+    $("label[for='nameOrder'] span").html(cultureRes.name);
+    $("label[for='confirmMethod'] span").html(cultureRes.phone);
+    $("label[for='commentOrder'] span").html(cultureRes.orderComments);
     $(".dateTimePicker-container .btn-confirmDateForBook span").html(cultureRes.confirmMeth);
     $(".order-booking .cart-top-line span").html(cultureRes.orderInfo);
     $(".order-booking .btn-send-order-booking span ").html(cultureRes.book);
@@ -43,10 +43,10 @@ function initCulture() {
     $(".cart .go-to-menu").html(cultureRes.contShop);
     $("#orderInfo .go-to-menu-btn").html(cultureRes.contShop);
     $("#orderInfo .cart-top-line span ").html(cultureRes.orderInfo);
-    $("#orderInfo label[for='nameOrder']").html(cultureRes.name);
-    $("#orderInfo label[for='phoneOrder']").html(cultureRes.phone);
-    $("#orderInfo label[for='emailOrder']").html(cultureRes.email);
-    $("#orderInfo label[for='commentOrder']").html(cultureRes.orderComments);
+    $("#orderInfo label[for='nameOrder'] span").html(cultureRes.name);
+    $("#orderInfo label[for='phoneOrder'] span").html(cultureRes.phone);
+    $("#orderInfo label[for='emailOrder'] span").html(cultureRes.email);
+    $("#orderInfo label[for='commentOrder'] span").html(cultureRes.orderComments);
     $("#orderInfo .placeAnOrder span").html(cultureRes.buy);
 }
 
@@ -116,6 +116,7 @@ function initEnCulture() {
     cultureRes.confirmated = "Confirmated";
     cultureRes.pending = "Pending";
     cultureRes.sorryOnline = "Sorry, is only available online!";
+    cultureRes.beforeLogout = "For registration you need to sign out of your account";
     //render-booking
     cultureRes.displayInst = "Institution";
     cultureRes.displayInstTwo = "Institution - ";
@@ -194,6 +195,11 @@ function initEnCulture() {
     cultureRes.Card = 'Card';
     cultureRes.PayPal = 'PayPal';
 
+    //EventsWork
+    cultureRes.favoriteEvents = 'Favorites';
+    cultureRes.AddFavorite = 'Event was added to favorites';
+    cultureRes.RemoveFavorite = 'Event was removed to favorites';
+
 
 }
 
@@ -213,7 +219,7 @@ function initRuCulture() {
     cultureRes.email = "Email";
     cultureRes.orderComments = "Коментарии к заказу";
     cultureRes.confirmMeth = "Продолжить";
-    cultureRes.orderInfo = "Информация и заказе";
+    cultureRes.orderInfo = "Информация о заказе";
     cultureRes.yourOrder = "Ваш заказ";
     cultureRes.total = "Всего: ";
     cultureRes.order = "Заказ";
@@ -263,6 +269,7 @@ function initRuCulture() {
     cultureRes.confirmated = "Подтвержденно";
     cultureRes.pending = "В ожидании";
     cultureRes.sorryOnline = "Извинити, но требуется подключение к сети Интернет!";
+    cultureRes.beforeLogout = "Для реєстрації вам необхідно вийти з облікового запису";
     //render-booking
     cultureRes.displayInst = "Организация";
     cultureRes.displayInstTwo = "Организация - ";
@@ -344,6 +351,12 @@ function initRuCulture() {
     cultureRes.endingIn = 'Последние две цифры номера карты: XX{{lastTwoCardDigits}}';
     cultureRes.Card = 'Карта';
     cultureRes.PayPal = 'PayPal';
+
+    //EventsWork
+    cultureRes.favoriteEvents = 'Избранное';
+    cultureRes.AddFavorite = 'Событие добавленно в избранное';
+    cultureRes.RemoveFavorite = 'Событие было удаленно из избранного';
+
 }
 
 function initUaCulture() {
@@ -412,6 +425,7 @@ function initUaCulture() {
     cultureRes.confirmated = "Підтвердженно";
     cultureRes.pending = "В очікуванні";
     cultureRes.sorryOnline = "Вибачте, але для цього потрібне Інтернет з`єднання!";
+    cultureRes.beforeLogout = "Для реєстрації вам необхідно вийти з облікового запису";
     //render-booking
     cultureRes.displayInst = "Організація";
     cultureRes.displayInstTwo = "Організація - ";
@@ -492,5 +506,10 @@ function initUaCulture() {
     cultureRes.endingIn = 'Останні дві цифри номера карти: XX {{lastTwoCardDigits}}';
     cultureRes.Card = 'Картка';
     cultureRes.PayPal = 'PayPal';
+
+    //EventsWork
+    cultureRes.favoriteEvents = 'Обрані події';
+    cultureRes.AddFavorite = 'Подія була додана до обраного';
+    cultureRes.RemoveFavorite = 'Подія була видалена с обраного';
 
 }
