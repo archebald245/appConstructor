@@ -49,6 +49,41 @@ function setUseRestaurantMenu(id, use, restaurants) {
 function reactRender() {
     initCulture();
 
+    function initMapPreview(locationArr, zoom, mapContainer) {
+        var location = { lat: locationArr[0].lat, lng: locationArr[0].lng };
+        var map = new google.maps.Map(document.getElementById(mapContainer), {
+            zoom: zoom,
+            center: location
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+        for (var i = 0; i < locationArr.length; i++) {
+            if (locationArr[i].lat != 0 || locationArr[0].lng != 0) {
+                location = { lat: locationArr[i].lat, lng: locationArr[i].lng }
+
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+
+                if (locationArr[i].title != "" || locationArr[i].description != "") {
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent('<div>' +
+                                '<h3>' + locationArr[i].title + '</h3>' +
+                                '<p>' + locationArr[i].description + '</p>' +
+                                '</div>');
+                            infowindow.open(map, marker);
+                            map.panTo(this.getPosition());
+                            map.setZoom(16);
+                        }
+                    })(marker, i));
+                }
+            }
+        }
+    }
+
+
     function onYouTubeIframeAPIReady(element, id) {
         var player = new YT.Player(element, {
             height: 'auto',
@@ -67,6 +102,7 @@ function reactRender() {
     }
 
     function onPlayerStateChange(event) {}
+    var isEvent = false;
     var isBooking = false;
     var isRestaurant = false;
     var Rows = React.createClass({
@@ -170,6 +206,9 @@ function reactRender() {
                             if (element.ContentTypeId == 16) {
                                 isBooking = true;
                             }
+                            if (element.ContentTypeId == 19) {
+                                isEvent = true;
+                            }
                         });
                     });
                 }
@@ -239,6 +278,15 @@ function reactRender() {
                         'div',
                         null,
                         React.createElement('div', { className: 'cart-btn bottom-menu' }),
+                        React.createElement(
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
+                        )
+                    );
+                } else if (isEvent == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'event-btn bottom-menu' }),
                         React.createElement(
                             'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
@@ -327,7 +375,17 @@ function reactRender() {
                     return React.createElement(
                         'div',
                         null,
-                        React.createElement('div', { className: 'cart-btn' }),
+                        React.createElement('div', { className: 'cart-btn' }, React.createElement(
+                            'div', { className: 'cart-btn-counter hidden' })),
+                        React.createElement(
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
+                        )
+                    );
+                } else if (isEvent == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'event-btn' }),
                         React.createElement(
                             'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
@@ -455,6 +513,21 @@ function reactRender() {
             var id = url.match(reg);
             var player;
             onYouTubeIframeAPIReady(ReactDOM.findDOMNode(this), id[1]);
+        }
+    });
+
+    var GoogleMapContainer = React.createClass({
+        displayName: "GoogleMapContainer",
+        componentDidMount: function() {
+            var json = JSON.parse(Base64.decode(this.props.data.Json));
+            var idMap = "map-container-" + this.props.data.Id;
+            setTimeout(function() {
+                    initMapPreview(json.mapData, +json.zoom, idMap);
+                },
+                1000);
+        },
+        render: function() {
+            return React.createElement('div', { className: "map-container", id: "map-container-" + this.props.data.Id });
         }
     });
 
@@ -610,6 +683,9 @@ function reactRender() {
                         $("#form-container").attr("id", "");
                         if ($.jStorage.get('isLogin') && element.RegistrationForm) {
                             $(".form-container").find('input, button, textarea').prop("disabled", true);
+                            $(".form-container").on("click", function() {
+                                window.plugins.toast.showShortBottom(cultureRes.beforeLogout);
+                            });
                         }
                         if (data.CountFormColumn == 2) {
                             $(".formBlock").addClass("formHalf");
@@ -792,6 +868,7 @@ function reactRender() {
             if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
+
                     var options = {
                         openWith: {
                             enabled: true
@@ -802,10 +879,46 @@ function reactRender() {
                         window.console.log('document shown');
                         //e.g. track document usage
                     }
-                    cordova.plugins.SitewaertsDocumentViewer.viewDocument(
-                        url, 'application/pdf', options, onShow);
+
+                    if (device.platform === 'iOS') {
+                        //ios
+                        cordova.plugins.SitewaertsDocumentViewer.viewDocument(
+                            url, 'application/pdf', options, onShow);
+
+                    } else {
+                        //android
+                        window.resolveLocalFileSystemURL(url, function(fileEntry) {
+                            window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
+                                fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
+                                    cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf', {
+                                        error: function(e) {
+                                            if (e.message.indexOf("Activity not found: No Activity found to handle Intent") > -1) {
+                                                window.plugins.toast.showShortBottom("Please, install some PDF reader.");
+                                            }
+                                            console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
+                                        },
+                                        success: function() {
+                                            console.log('file opened successfully');
+                                        }
+                                    });
+                                });
+                            });
+                        });
+
+                    }
                 });
             }
+            if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
+                $(ReactDOM.findDOMNode(this)).append("<div id='event-container'></div>");
+
+                $(applicationData.MainEvents).each(function() {
+                    if (this.Id == data.Json.Id) {
+                        renderEvent(this);
+                    }
+                });
+                $("#event-container").attr("id", "");
+            }
+
             if (data.ContentTypeId == 2 || data.ContentTypeId == 4 || data.ContentTypeId == 9) {
                 $(ReactDOM.findDOMNode(this)).click(function(e) {
                     e.preventDefault();
@@ -1070,6 +1183,19 @@ function reactRender() {
             if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, dangerouslySetInnerHTML: { __html: data.Value } });
             } else if (data.ContentTypeId == 17) {
+                return null
+            }
+            if (data.ContentTypeId == 18 && this.checkDeniedTools(deniedTools, "googlemap-item") && this.checkInternetConnection()) {
+                return React.createElement(
+                    'div', { className: "googlemap-item cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell },
+                    React.createElement(GoogleMapContainer, { data: data })
+                );
+            } else if (data.ContentTypeId == 18) {
+                return null
+            }
+            if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
+                return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell });
+            } else if (data.ContentTypeId == 19) {
                 return null
             }
         }
