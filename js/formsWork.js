@@ -24,6 +24,7 @@ function submitFormListener() {
                     $(".spinner-container").addClass("hidden");
                     if (data.Success == true) {
                         $.jStorage.set('isLogin', data.UserId);
+                        $.jStorage.set('FavoriteEvents', GetEventsIds(data.FavoriteEvents));
                         alert(data.Message);
                         goToPage(indexPage);
                     } else {
@@ -66,6 +67,7 @@ function submitFormListener() {
 
     $(".formLogout").on("click", function() {
         $.jStorage.deleteKey('isLogin');
+        $.jStorage.deleteKey('FavoriteEvents');
         goToPage(indexPage);
     });
 }
@@ -99,6 +101,7 @@ function bindChangeValForms() {
                                     $(".spinner-container").addClass("hidden");
                                     if (data.Success == true) {
                                         $.jStorage.set('isLogin', data.UserId);
+                                        $.jStorage.set('FavoriteEvents', GetEventsIds(data.FavoriteEvents));
                                         alert(data.Message);
                                         goToPage(indexPage);
                                     } else {
