@@ -45,7 +45,10 @@ function onDeviceReady() {
     });
 
     appStart();
-    StatusBar.hide();
+
+    if (device.platform === 'iOS') {
+        StatusBar.hide();
+    }
     $('[data-toggle="tooltip"]').tooltip();
     if ('ontouchstart' in document.documentElement) {
         $('body').css('cursor', 'pointer');

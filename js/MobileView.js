@@ -683,6 +683,9 @@ function reactRender() {
                         $("#form-container").attr("id", "");
                         if ($.jStorage.get('isLogin') && element.RegistrationForm) {
                             $(".form-container").find('input, button, textarea').prop("disabled", true);
+                            $(".form-container").on("click", function() {
+                                window.plugins.toast.showShortBottom(cultureRes.beforeLogout);
+                            });
                         }
                         if (data.CountFormColumn == 2) {
                             $(".formBlock").addClass("formHalf");
@@ -865,6 +868,7 @@ function reactRender() {
             if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
+
                     var options = {
                         openWith: {
                             enabled: true
@@ -875,8 +879,33 @@ function reactRender() {
                         window.console.log('document shown');
                         //e.g. track document usage
                     }
-                    cordova.plugins.SitewaertsDocumentViewer.viewDocument(
-                        url, 'application/pdf', options, onShow);
+
+                    if (device.platform === 'iOS') {
+                        //ios
+                        cordova.plugins.SitewaertsDocumentViewer.viewDocument(
+                            url, 'application/pdf', options, onShow);
+
+                    } else {
+                        //android
+                        window.resolveLocalFileSystemURL(url, function(fileEntry) {
+                            window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
+                                fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
+                                    cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf', {
+                                        error: function(e) {
+                                            if (e.message.indexOf("Activity not found: No Activity found to handle Intent") > -1) {
+                                                window.plugins.toast.showShortBottom("Please, install some PDF reader.");
+                                            }
+                                            console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
+                                        },
+                                        success: function() {
+                                            console.log('file opened successfully');
+                                        }
+                                    });
+                                });
+                            });
+                        });
+
+                    }
                 });
             }
             if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
