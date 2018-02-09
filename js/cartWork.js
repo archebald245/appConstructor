@@ -118,6 +118,11 @@ function bindListenerToClickBtn() {
                 $(".rest-amount-count").html(restAmount + " " + curr);
 
                 InitRestarauntPayment();
+				
+				$(".placeAnOrder").unbind().on("click", function() {
+                    clickPlaceAnOrder();
+                });
+
             } else {
                 //RestOrderHandlers();
                 $("#orderInfo").removeClass("hidden");
@@ -150,8 +155,23 @@ function TotalRestAmount() {
     var total = 0;
     collectionOrderItems.forEach(function(element) {
         if (element.Price !== "") {
-            total = total + (parseInt(element.Price) * parseInt(element.Count));
+            total = total + (Number(element.Price) * parseInt(element.Count));
         }
     });
+
     return total;
+}
+
+function TotalRestCount(coef) {
+    var data = $(".cart-btn-counter").html();
+
+    if (data !== "") {
+        var count = parseInt(data);
+        $(".cart-btn-counter").html(count + coef);
+    } else {
+        $(".cart-btn-counter").removeClass("hidden")
+        $(".cart-btn-counter").html("1");
+    }
+
+    //window.plugins.toast.showShortBottom($("#cart>div").length);
 }

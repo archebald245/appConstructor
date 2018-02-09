@@ -102,6 +102,7 @@ function reactRender() {
     }
 
     function onPlayerStateChange(event) {}
+    var isEvent = false;
     var isBooking = false;
     var isRestaurant = false;
     var Rows = React.createClass({
@@ -205,6 +206,9 @@ function reactRender() {
                             if (element.ContentTypeId == 16) {
                                 isBooking = true;
                             }
+                            if (element.ContentTypeId == 19) {
+                                isEvent = true;
+                            }
                         });
                     });
                 }
@@ -274,6 +278,15 @@ function reactRender() {
                         'div',
                         null,
                         React.createElement('div', { className: 'cart-btn bottom-menu' }),
+                        React.createElement(
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
+                        )
+                    );
+                } else if (isEvent == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'event-btn bottom-menu' }),
                         React.createElement(
                             'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
@@ -362,7 +375,17 @@ function reactRender() {
                     return React.createElement(
                         'div',
                         null,
-                        React.createElement('div', { className: 'cart-btn' }),
+                        React.createElement('div', { className: 'cart-btn' }, React.createElement(
+                            'div', { className: 'cart-btn-counter hidden' })),
+                        React.createElement(
+                            'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
+                        )
+                    );
+                } else if (isEvent == true) {
+                    return React.createElement(
+                        'div',
+                        null,
+                        React.createElement('div', { className: 'event-btn' }),
                         React.createElement(
                             'div', { className: 'container-fluid' }, !pageIsLocked ? rowModels : React.createElement('span', null, cultureRes.lockedPage)
                         )
@@ -660,6 +683,9 @@ function reactRender() {
                         $("#form-container").attr("id", "");
                         if ($.jStorage.get('isLogin') && element.RegistrationForm) {
                             $(".form-container").find('input, button, textarea').prop("disabled", true);
+                            $(".form-container").on("click", function() {
+                                window.plugins.toast.showShortBottom(cultureRes.beforeLogout);
+                            });
                         }
                         if (data.CountFormColumn == 2) {
                             $(".formBlock").addClass("formHalf");
@@ -842,6 +868,7 @@ function reactRender() {
             if (data.ContentTypeId == 17 && this.checkDeniedTools(deniedTools, "pdf-item")) {
                 $(ReactDOM.findDOMNode(this)).find("span").click(function(e) {
                     var url = $(this).attr("data-locationpdf");
+
                     var options = {
                         openWith: {
                             enabled: true
@@ -852,10 +879,46 @@ function reactRender() {
                         window.console.log('document shown');
                         //e.g. track document usage
                     }
-                    cordova.plugins.SitewaertsDocumentViewer.viewDocument(
-                        url, 'application/pdf', options, onShow);
+
+                    if (device.platform === 'iOS') {
+                        //ios
+                        cordova.plugins.SitewaertsDocumentViewer.viewDocument(
+                            url, 'application/pdf', options, onShow);
+
+                    } else {
+                        //android
+                        window.resolveLocalFileSystemURL(url, function(fileEntry) {
+                            window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
+                                fileEntry.copyTo(dirEntry, 'file.pdf', function(newFileEntry) {
+                                    cordova.plugins.fileOpener2.open(newFileEntry.nativeURL, 'application/pdf', {
+                                        error: function(e) {
+                                            if (e.message.indexOf("Activity not found: No Activity found to handle Intent") > -1) {
+                                                window.plugins.toast.showShortBottom("Please, install some PDF reader.");
+                                            }
+                                            console.log('Error status: ' + e.status + ' - Error message: ' + e.message);
+                                        },
+                                        success: function() {
+                                            console.log('file opened successfully');
+                                        }
+                                    });
+                                });
+                            });
+                        });
+
+                    }
                 });
             }
+            if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
+                $(ReactDOM.findDOMNode(this)).append("<div id='event-container'></div>");
+
+                $(applicationData.MainEvents).each(function() {
+                    if (this.Id == data.Json.Id) {
+                        renderEvent(this);
+                    }
+                });
+                $("#event-container").attr("id", "");
+            }
+
             if (data.ContentTypeId == 2 || data.ContentTypeId == 4 || data.ContentTypeId == 9) {
                 $(ReactDOM.findDOMNode(this)).click(function(e) {
                     e.preventDefault();
@@ -1128,6 +1191,11 @@ function reactRender() {
                     React.createElement(GoogleMapContainer, { data: data })
                 );
             } else if (data.ContentTypeId == 18) {
+                return null
+            }
+            if (data.ContentTypeId == 19 && this.checkDeniedTools(deniedTools, "event-item")) {
+                return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell });
+            } else if (data.ContentTypeId == 19) {
                 return null
             }
         }
