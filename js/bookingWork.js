@@ -537,17 +537,17 @@ function BookingOrderHandlers(dateVal, timeVal, needConfirmation, bookResourceId
                     scrollTop();
                     selectFreeTimeBook.html("");
                     object.Times.forEach(function(time) {
-                        selectFreeTimeBook.append("<option>" + time + "</option>");
+                        selectFreeTimeBook.append("<option>" + time.replace("T", " ") + "</option>");
                     });
                     var selectDate = selectFreeTimeBook.val();
                     $("#bookAfterConfirmFreeTime").unbind().click(function() {
                         $(".spinner-container").removeClass("hidden");
-                        var hours = selectDate.split("T")[1].split(":")[0];
-                        var minutes = selectDate.split("T")[1].split(":")[1];
+                        var hours = selectDate.split(" ")[1].split(":")[0];
+                        var minutes = selectDate.split(" ")[1].split(":")[1];
                         var timeVal = hours + ":" + minutes;
-                        var year = selectDate.split("T")[0].split("-")[0];
-                        var month = selectDate.split("T")[0].split("-")[1];
-                        var date = selectDate.split("T")[0].split("-")[2];
+                        var year = selectDate.split(" ")[0].split("-")[0];
+                        var month = selectDate.split(" ")[0].split("-")[1];
+                        var date = selectDate.split(" ")[0].split("-")[2];
                         var dateVal = month + "/" + date + "/" + year;
                         var duration = 0;
                         listServiceForBooking.forEach(function(e, i) {
