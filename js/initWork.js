@@ -273,12 +273,11 @@ function checkApplicationId(sendPushNotificationTokenCallback) {
             sendPushNotificationTokenCallback();
         }
     }
-
 }
 
 function initMenuYoutunbe() {
-    createMenu();
     if (resources.length == 0) {
+        createMenu();
         reactRender();
         submitFormListener();
         unBlockUi()
@@ -290,6 +289,7 @@ function callback() {
     var jsonString = JSON.stringify(applicationData);
     $.jStorage.set('appData', jsonString);
     deleteResources();
+    createMenu();
     reactRender();
     initGallaryClick();
     submitFormListener();
