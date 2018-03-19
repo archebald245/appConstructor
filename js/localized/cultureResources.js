@@ -108,6 +108,7 @@ function initEnCulture() {
     cultureRes.noInternet = "Извините, проверте Интернет соединение!";
     cultureRes.requiredFields = "Please fill in all required fields!";
     cultureRes.validPhone = "Please enter valid phone number!";
+    cultureRes.validNumder = "Please enter valid data in number field!"
     cultureRes.validEmail = "Please enter valid email!";
     cultureRes.passLength = "Password must contain 4 or more characters!";
     cultureRes.pathNotMatgh = "Passwords do not match. Try again.";
@@ -259,6 +260,7 @@ function initRuCulture() {
     cultureRes.noInternet = "Извините, проверте Интернет соединение!";
     cultureRes.requiredFields = "Пожалуйста, заполните все обязательные поля!";
     cultureRes.validPhone = "Пожалуйста, введите номер правильного формата!";
+    cultureRes.validNumder = "Пожалуйста, введите правильные данные для числового поля!"
     cultureRes.validEmail = "Пожалуйста, введите правильный формат електронной почты!";
     cultureRes.passLength = "Пароль должен содержать 4 или более символов!";
     cultureRes.pathNotMatgh = "Пароли не совпадают. Попробуйте еще.";
@@ -415,6 +417,7 @@ function initUaCulture() {
     cultureRes.noInternet = "Вибачте, відсутнє Інтернет з`єднання!";
     cultureRes.requiredFields = "Будь ласка, заповніть все обов`язкові поля!";
     cultureRes.validPhone = "Будь ласка, вкажіть номер телефону у правильноve форматі!";
+    cultureRes.validNumder = "Будь ласка, вкажіть правильні дані для числового поля!"
     cultureRes.validEmail = "Будь ласка, вкажіть правильний формат електронної пошти!";
     cultureRes.passLength = "Пароль має містити 4 або більше символів!";
     cultureRes.pathNotMatgh = "Паролі не співпадають. Спробуйте знову.";
