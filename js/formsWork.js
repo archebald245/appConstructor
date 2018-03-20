@@ -190,6 +190,18 @@ function bindChangeValForms() {
 
 function checkValidationAndRequired(form) {
     var check = true;
+    //numberElement
+    $(form).find(".numberElement").each(function(index, e){
+        var numberInput = $(e).find("input").val();
+        if (isNaN(numberInput)) {
+            check = false;
+        }
+    }, this);
+    if (check == false) {
+        alert(cultureRes.validNumder);
+        return check;
+    }
+
     $(form).find(".required").each(function(i, element) {
         if ($(element).val() == "") {
             check = false;
@@ -199,6 +211,7 @@ function checkValidationAndRequired(form) {
         alert(cultureRes.requiredFields);
         return check;
     }
+
     if ($(form).find(".required-check").length > 0) {
         check = false;
         $(form).find(".required-check").each(function(i, element) {
@@ -211,16 +224,7 @@ function checkValidationAndRequired(form) {
             return check;
         }
     }
-    //numberElement
-    if ($(form).find(".numberElement").length > 0) {
-        var numberInput = $(form).find(".numberElement").find("input").val();
-        var numberValid = /^[0-9]*$/;
-        if ((!numberInput.match(numberValid)) && (!numberInput != "")) {
-            alert(cultureRes.validNumder);
-            check = false;
-            return check;
-        }
-    }
+
     if ($(form).find(".phoneNumberElement").length > 0) {
         var phoneInput = $(form).find(".phoneNumberElement").find(".phoneNumber").val();
         var phoneValid = /^\+\d{4}\d{3}\d{4}$/;
@@ -230,6 +234,7 @@ function checkValidationAndRequired(form) {
             return check;
         }
     }
+
     if ($(form).find(".emailElement").length > 0) {
         var emailInput = $(form).find(".emailElement").find(".email").val().toLowerCase();
         var emailValid = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,8})$/;
@@ -239,6 +244,7 @@ function checkValidationAndRequired(form) {
             return check;
         }
     }
+
     if ($(form).find(".passwordElement").length > 0) {
         if ($(form).find(".passwordElement").first().find(".passElement").val().length < 4) {
             alert(cultureRes.passLength);
@@ -260,11 +266,8 @@ function checkValidationAndRequired(form) {
             }
         }
     }
-
-
     return check;
 }
-
 function addPlaceholder() {
     $(".form-container, .custom-form-container").find("input[type='text'], input[type='number'], textarea").each(function() {
         if (($(this).attr("type") != "radio") || ($(this).attr("type") != "checkbox")) {
