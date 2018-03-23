@@ -26,6 +26,9 @@ function submitFormListener() {
                         $.jStorage.set('isLogin', data.UserId);
                         $.jStorage.set('FavoriteEvents', GetEventsIds(data.FavoriteEvents));
                         alert(data.Message);
+                        if($.jStorage.get('LastPrivatePage') != null){
+                            indexPage = $.jStorage.get('LastPrivatePage');
+                        }
                         goToPage(indexPage);
                     } else {
                         $(form).find(".formBlock").find(".passElement").val("");
@@ -103,6 +106,9 @@ function bindChangeValForms() {
                                         $.jStorage.set('isLogin', data.UserId);
                                         $.jStorage.set('FavoriteEvents', GetEventsIds(data.FavoriteEvents));
                                         alert(data.Message);
+                                        if($.jStorage.get('LastPrivatePage') != null){
+                                            indexPage = $.jStorage.get('LastPrivatePage');
+                                        }
                                         goToPage(indexPage);
                                     } else {
                                         $(elem).find(".formBlock").find(".passElement").val("");
