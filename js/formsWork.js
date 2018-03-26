@@ -11,6 +11,7 @@ function submitFormListener() {
                 $(".spinner-container").addClass("hidden");
                 return;
             }
+            saveRememberFields(form);
             var isLoginForm = $(form).find("input[name='LoginForm']").val();
             var isRegisterForm = $(form).find("input[name='RegistrationForm']").val();
             var idForm = $(form).find(".formId").attr("id");
@@ -42,7 +43,7 @@ function submitFormListener() {
                     $(".spinner-container").addClass("hidden");
                     if (data.Success == true) {
                         alert(data.Message + "\n" + cultureRes.loginPlease + ".");
-                        $(form).find(".formBlock").find("input, textarea").val("");
+                        $(form).find(".formBlock").find("input, textarea").not( ".remember" ).val("");
                         $(form).find("input[type='checkbox']").removeAttr("checked");
                     } else {
                         $(form).find(".formBlock").find(".passElement").val("");
@@ -54,11 +55,10 @@ function submitFormListener() {
                 $.post('' + siteUrl + '/Form/SaveFormData', $(form).serialize(), function() {
                     $(".spinner-container").addClass("hidden");
                     alert(cultureRes.thankYou);
-                    $(form).find(".formBlock").find("input, textarea").val("");
+                    $(form).find(".formBlock").find("input, textarea").not( ".remember").val("");
                     $(form).find("input[type='checkbox']").removeAttr("checked");
                 });
             }
-
         } else {
             alert(cultureRes.noInternet);
         }
@@ -121,7 +121,7 @@ function bindChangeValForms() {
                                     $(".spinner-container").addClass("hidden");
                                     if (data.Success == true) {
                                         alert(data.Message + "\n" + cultureRes.loginPlease + ".");
-                                        $(elem).find(".formBlock").find("input, textarea").val("");
+                                        $(elem).find(".formBlock").find("input, textarea").not( ".remember" ).val("");
                                         $(elem).find("input[type='checkbox']").removeAttr("checked");
                                         goToPage(indexPage);
                                     } else {
@@ -134,7 +134,7 @@ function bindChangeValForms() {
                                 $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                     $(".spinner-container").addClass("hidden");
                                     alert(cultureRes.thankYou);
-                                    $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                    $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember" ).val("");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
                                     $(elem).find("input[type='checkbox']").removeAttr("checked");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
@@ -164,7 +164,7 @@ function bindChangeValForms() {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                 $(".spinner-container").addClass("hidden");
                                 alert(cultureRes.thankYou);
-                                $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember").val("");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
 
                                 $(elem).find("input[type='checkbox']").removeAttr("checked");
@@ -281,6 +281,29 @@ function addPlaceholder() {
             $(this).attr("placeholder", placeholder).addClass("placeholderOfLable");
             $(this).siblings(".label-container").addClass("hidden");
         }
-
+    });
+}
+function saveRememberFields(form){
+    $(form).find(".remember").each(function(i, element) {
+       var fieldId = $(element).attr("id");
+       var fieldData = $(element).val();
+       var savedData = $.jStorage.get('fieldData');
+       if(savedData == null){
+           savedData = [];
+       }
+       var isFound = false;
+        savedData.forEach(function (e) {
+           if(e.id ===fieldId){
+                e.data = fieldData;
+                isFound = true;
+           }
+       });
+       if(!isFound){
+        savedData.push({
+            id:fieldId,
+            data:fieldData
+        });
+       }
+       $.jStorage.set('fieldData', savedData);
     });
 }
