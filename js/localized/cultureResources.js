@@ -108,6 +108,7 @@ function initEnCulture() {
     cultureRes.noInternet = "Извините, проверте Интернет соединение!";
     cultureRes.requiredFields = "Please fill in all required fields!";
     cultureRes.validPhone = "Please enter valid phone number!";
+    cultureRes.validNumder = "Please enter valid data in number field!"
     cultureRes.validEmail = "Please enter valid email!";
     cultureRes.passLength = "Password must contain 4 or more characters!";
     cultureRes.pathNotMatgh = "Passwords do not match. Try again.";
@@ -144,7 +145,7 @@ function initEnCulture() {
     cultureRes.logout = "Logout";
 
     //render-restaurant-menu
-    cultureRes.RestMenu = "RestaurantMenuBlock";
+    cultureRes.RestMenu = "CategoryBlock";
     cultureRes.add = "Add";
 
     //render-inst
@@ -156,12 +157,12 @@ function initEnCulture() {
     cultureRes.shopitemDesc = "Description:";
     cultureRes.addToCart = "Add to Cart";
     cultureRes.toCart = "To cart";
-    cultureRes.goToMenu = "Menu";
+    cultureRes.goToMenu = "Category";
 
     cultureRes.itemAdded = "Item add to cart!";
-    cultureRes.restConf = "Your shopping cart already has order from previous restaurant. If you add and confirm current order the order from previous restaurant will be removed. Continue?";
+    cultureRes.restConf = "Your shopping cart already has order from previous catalog. If you add and confirm current order the order from previous catalog will be removed. Continue?";
     cultureRes.sorryOnline = "Sorry, is only available online!";
-    cultureRes.noTime = "No time for this rest!";
+    cultureRes.noTime = "No time for this catalog!";
 
     //PAYMENT FORM
     cultureRes.payingWith = 'Paying with {{paymentSource}}';
@@ -199,8 +200,6 @@ function initEnCulture() {
     cultureRes.favoriteEvents = 'Favorites';
     cultureRes.AddFavorite = 'Event was added to favorites';
     cultureRes.RemoveFavorite = 'Event was removed to favorites';
-
-
 }
 
 function initRuCulture() {
@@ -261,6 +260,7 @@ function initRuCulture() {
     cultureRes.noInternet = "Извините, проверте Интернет соединение!";
     cultureRes.requiredFields = "Пожалуйста, заполните все обязательные поля!";
     cultureRes.validPhone = "Пожалуйста, введите номер правильного формата!";
+    cultureRes.validNumder = "Пожалуйста, введите правильные данные для числового поля!"
     cultureRes.validEmail = "Пожалуйста, введите правильный формат електронной почты!";
     cultureRes.passLength = "Пароль должен содержать 4 или более символов!";
     cultureRes.pathNotMatgh = "Пароли не совпадают. Попробуйте еще.";
@@ -297,7 +297,7 @@ function initRuCulture() {
     cultureRes.logout = "Выйти из системы";
 
     //render-restaurant-menu
-    cultureRes.RestMenu = "Меню ресторана";
+    cultureRes.RestMenu = "Категория";
     cultureRes.add = "Добавить";
 
     //render-inst
@@ -309,12 +309,12 @@ function initRuCulture() {
     cultureRes.shopitemDesc = "Описание:";
     cultureRes.addToCart = "Добавить в корзину";
     cultureRes.toCart = "В корзину";
-    cultureRes.goToMenu = "Перейти к меню";
+    cultureRes.goToMenu = "Перейти к категории";
 
     cultureRes.itemAdded = "Добавленно в корзину!";
-    cultureRes.restConf = "В Вашей корзине есть заказ и предыдущего ресторана. Если вы добавите и подтвердите текущий заказ, заказ из предыдущего ресторана будет удален. Продолжить?";
+    cultureRes.restConf = "В Вашей корзине есть заказ и предыдущего каталога. Если вы добавите и подтвердите текущий заказ, заказ из предыдущего каталога будет удален. Продолжить?";
     cultureRes.sorryOnline = "Извинити, но требуется подключение к сети Интернет!";
-    cultureRes.noTime = "В ресторане, нет свободного времени!";
+    cultureRes.noTime = "В каталоге, нет свободного времени!";
 
     //PAYMENT FORM
     cultureRes.payingWith = 'Способы оплаты:{{paymentSource}}';
@@ -394,7 +394,7 @@ function initUaCulture() {
     //bookingWork
     cultureRes.time = "Час";
     cultureRes.date = "Дата";
-    cultureRes.dontAnyBook = "Ви, не обрали сервісYou don't book any service!";
+    cultureRes.dontAnyBook = "Ви, не обрали сервіс!";
     cultureRes.bookConf = "Ви можете замовити тільки один графік! Якщо продовжити бронювання цієї послуги, інші послуги будуть вилучені зі списку бронювання?";
     cultureRes.book = "Бронювання";
     cultureRes.alreadyBook = "Ви, вже забронювали данний сервіс!";
@@ -417,6 +417,7 @@ function initUaCulture() {
     cultureRes.noInternet = "Вибачте, відсутнє Інтернет з`єднання!";
     cultureRes.requiredFields = "Будь ласка, заповніть все обов`язкові поля!";
     cultureRes.validPhone = "Будь ласка, вкажіть номер телефону у правильноve форматі!";
+    cultureRes.validNumder = "Будь ласка, вкажіть правильні дані для числового поля!"
     cultureRes.validEmail = "Будь ласка, вкажіть правильний формат електронної пошти!";
     cultureRes.passLength = "Пароль має містити 4 або більше символів!";
     cultureRes.pathNotMatgh = "Паролі не співпадають. Спробуйте знову.";
@@ -453,7 +454,7 @@ function initUaCulture() {
     cultureRes.logout = "Вийти з системи";
 
     //render-restaurant-menu
-    cultureRes.RestMenu = "Меню ресторана";
+    cultureRes.RestMenu = "Категорія";
     cultureRes.add = "Додати";
 
     //render-inst
@@ -465,9 +466,9 @@ function initUaCulture() {
     cultureRes.shopitemDesc = "Описання:";
     cultureRes.addToCart = "Додати в корзину";
     cultureRes.toCart = "В корзину";
-    cultureRes.goToMenu = "Перейти до меню";
+    cultureRes.goToMenu = "Перейти до категорії";
     cultureRes.itemAdded = "Додано в корзину!";
-    cultureRes.restConf = "У Вашій корзині є замовлення від попереднього ресторану. Якщо додати і підтвердити поточне замовлення, замовлення від попереднього ресторану буде видалено. Продовжити?";
+    cultureRes.restConf = "У Вашій корзині є замовлення з іншого каталогу. Якщо додати і підтвердити поточне замовлення, замовлення від попереднього каталогу буде видалено. Продовжити?";
     cultureRes.sorryOnline = "Вибачте, але для цього потрібне Інтернет з`єднання!";
     cultureRes.noTime = "Ресторан не має вільного часу!";
 
@@ -511,5 +512,4 @@ function initUaCulture() {
     cultureRes.favoriteEvents = 'Обрані події';
     cultureRes.AddFavorite = 'Подія була додана до обраного';
     cultureRes.RemoveFavorite = 'Подія була видалена с обраного';
-
 }
