@@ -122,7 +122,7 @@ function renderForm(form, id) {
                             if(field.Required){
                                 fieldEl =  React.createElement("textarea", { defaultValue:fieldValue, className: "remember required form-control", name: field.Name, id: field.Id })
                             }
-                            fieldEl = React.createElement("input", { defaultValue:fieldValue, className: "remember form-control", name: field.Name, type: "text", id: field.Id })
+                            fieldEl =  React.createElement("textarea", { defaultValue:fieldValue, className: "remember form-control", name: field.Name, id: field.Id })
                         }else if(field.Required){
                             fieldEl =  React.createElement("textarea", { className: "required form-control", name: field.Name, id: field.Id })
                         }
@@ -137,7 +137,7 @@ function renderForm(form, id) {
                                     field.Label
                                 )
                             ),
-                            field
+                            fieldEl
                         );
                     
                 }
