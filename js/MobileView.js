@@ -677,7 +677,7 @@ function reactRender() {
                 $(objectForm).each(function(i, element) {
                     if (element.Id == formId) {
                         renderForm(element);
-                        $("#form-container").find(".formSubmit").attr("style", styleSubmit);
+                        $("#form-container").find(".formSubmit, .formLogout").attr("style", styleSubmit);
                         $("#form-container").find("label").attr("style", styleLabel);
                         $("#form-container").find(".formSubmit").text(textSubmitButton);
                         $("#form-container").attr("id", "");
@@ -1166,7 +1166,7 @@ function reactRender() {
                 return null
             }
             if (data.ContentTypeId == 14 && this.checkDeniedTools(deniedTools, "custom-form-item")) {
-                return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: data.Value } });
+                return React.createElement('div', { className: "cell-container col-xs-" + data.Colspan + " col-sm-" + data.Colspan + " col-md-" + data.Colspan + " col-lg-" + data.Colspan, onClick: this.onClickCell, dangerouslySetInnerHTML: { __html: htmlDecode(data.Value) } });
             } else if (data.ContentTypeId == 14) {
                 return null
             }
