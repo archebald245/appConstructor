@@ -11,6 +11,7 @@ function submitFormListener() {
                 $(".spinner-container").addClass("hidden");
                 return;
             }
+            saveRememberFields(form);
             var isLoginForm = $(form).find("input[name='LoginForm']").val();
             var isRegisterForm = $(form).find("input[name='RegistrationForm']").val();
             var idForm = $(form).find(".formId").attr("id");
@@ -26,6 +27,9 @@ function submitFormListener() {
                         $.jStorage.set('isLogin', data.UserId);
                         $.jStorage.set('FavoriteEvents', GetEventsIds(data.FavoriteEvents));
                         alert(data.Message);
+                        if($.jStorage.get('LastPrivatePage') != null){
+                            indexPage = $.jStorage.get('LastPrivatePage');
+                        }
                         goToPage(indexPage);
                     } else {
                         $(form).find(".formBlock").find(".passElement").val("");
@@ -39,7 +43,7 @@ function submitFormListener() {
                     $(".spinner-container").addClass("hidden");
                     if (data.Success == true) {
                         alert(data.Message + "\n" + cultureRes.loginPlease + ".");
-                        $(form).find(".formBlock").find("input, textarea").val("");
+                        $(form).find(".formBlock").find("input, textarea").not( ".remember" ).val("");
                         $(form).find("input[type='checkbox']").removeAttr("checked");
                     } else {
                         $(form).find(".formBlock").find(".passElement").val("");
@@ -51,11 +55,10 @@ function submitFormListener() {
                 $.post('' + siteUrl + '/Form/SaveFormData', $(form).serialize(), function() {
                     $(".spinner-container").addClass("hidden");
                     alert(cultureRes.thankYou);
-                    $(form).find(".formBlock").find("input, textarea").val("");
+                    $(form).find(".formBlock").find("input, textarea").not( ".remember").val("");
                     $(form).find("input[type='checkbox']").removeAttr("checked");
                 });
             }
-
         } else {
             alert(cultureRes.noInternet);
         }
@@ -103,6 +106,9 @@ function bindChangeValForms() {
                                         $.jStorage.set('isLogin', data.UserId);
                                         $.jStorage.set('FavoriteEvents', GetEventsIds(data.FavoriteEvents));
                                         alert(data.Message);
+                                        if($.jStorage.get('LastPrivatePage') != null){
+                                            indexPage = $.jStorage.get('LastPrivatePage');
+                                        }
                                         goToPage(indexPage);
                                     } else {
                                         $(elem).find(".formBlock").find(".passElement").val("");
@@ -115,7 +121,7 @@ function bindChangeValForms() {
                                     $(".spinner-container").addClass("hidden");
                                     if (data.Success == true) {
                                         alert(data.Message + "\n" + cultureRes.loginPlease + ".");
-                                        $(elem).find(".formBlock").find("input, textarea").val("");
+                                        $(elem).find(".formBlock").find("input, textarea").not( ".remember" ).val("");
                                         $(elem).find("input[type='checkbox']").removeAttr("checked");
                                         goToPage(indexPage);
                                     } else {
@@ -128,7 +134,7 @@ function bindChangeValForms() {
                                 $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                     $(".spinner-container").addClass("hidden");
                                     alert(cultureRes.thankYou);
-                                    $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                    $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember" ).val("");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
                                     $(elem).find("input[type='checkbox']").removeAttr("checked");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
@@ -158,7 +164,7 @@ function bindChangeValForms() {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                 $(".spinner-container").addClass("hidden");
                                 alert(cultureRes.thankYou);
-                                $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember").val("");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
 
                                 $(elem).find("input[type='checkbox']").removeAttr("checked");
@@ -190,6 +196,18 @@ function bindChangeValForms() {
 
 function checkValidationAndRequired(form) {
     var check = true;
+    //numberElement
+    $(form).find(".numberElement").each(function(index, e){
+        var numberInput = $(e).find("input").val();
+        if (isNaN(numberInput)) {
+            check = false;
+        }
+    }, this);
+    if (check == false) {
+        alert(cultureRes.validNumder);
+        return check;
+    }
+
     $(form).find(".required").each(function(i, element) {
         if ($(element).val() == "") {
             check = false;
@@ -199,6 +217,7 @@ function checkValidationAndRequired(form) {
         alert(cultureRes.requiredFields);
         return check;
     }
+
     if ($(form).find(".required-check").length > 0) {
         check = false;
         $(form).find(".required-check").each(function(i, element) {
@@ -211,6 +230,7 @@ function checkValidationAndRequired(form) {
             return check;
         }
     }
+
     if ($(form).find(".phoneNumberElement").length > 0) {
         var phoneInput = $(form).find(".phoneNumberElement").find(".phoneNumber").val();
         var phoneValid = /^\+\d{4}\d{3}\d{4}$/;
@@ -220,6 +240,7 @@ function checkValidationAndRequired(form) {
             return check;
         }
     }
+
     if ($(form).find(".emailElement").length > 0) {
         var emailInput = $(form).find(".emailElement").find(".email").val().toLowerCase();
         var emailValid = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,8})$/;
@@ -229,6 +250,7 @@ function checkValidationAndRequired(form) {
             return check;
         }
     }
+
     if ($(form).find(".passwordElement").length > 0) {
         if ($(form).find(".passwordElement").first().find(".passElement").val().length < 4) {
             alert(cultureRes.passLength);
@@ -250,11 +272,8 @@ function checkValidationAndRequired(form) {
             }
         }
     }
-
-
     return check;
 }
-
 function addPlaceholder() {
     $(".form-container, .custom-form-container").find("input[type='text'], input[type='number'], textarea").each(function() {
         if (($(this).attr("type") != "radio") || ($(this).attr("type") != "checkbox")) {
@@ -262,6 +281,29 @@ function addPlaceholder() {
             $(this).attr("placeholder", placeholder).addClass("placeholderOfLable");
             $(this).siblings(".label-container").addClass("hidden");
         }
-
+    });
+}
+function saveRememberFields(form){
+    $(form).find(".remember").each(function(i, element) {
+       var fieldId = $(element).attr("id");
+       var fieldData = $(element).val();
+       var savedData = $.jStorage.get('fieldData');
+       if(savedData == null){
+           savedData = [];
+       }
+       var isFound = false;
+        savedData.forEach(function (e) {
+           if(e.id ===fieldId){
+                e.data = fieldData;
+                isFound = true;
+           }
+       });
+       if(!isFound){
+        savedData.push({
+            id:fieldId,
+            data:fieldData
+        });
+       }
+       $.jStorage.set('fieldData', savedData);
     });
 }

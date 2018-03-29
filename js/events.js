@@ -25,6 +25,7 @@ function goToPage(index) {
             pageWithForm.forEach(function(item) {
                 applicationData.Forms.forEach(function(form) {
                     if (form.Id == item.formId && form.LoginForm) {
+                        $.jStorage.set('LastPrivatePage', indexPage);
                         indexPage = item.pageId
                         findLoginForm = true;
                     }
