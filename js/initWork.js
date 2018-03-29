@@ -365,12 +365,6 @@ function InitPushNotification() {
         // });
 
         push.on('notification', function(data) {
-            // data.message,
-            // data.title,
-            // data.count,
-            // data.sound,
-            // data.image,
-            // data.additionalData
             window.plugins.toast.hide();
 
             window.plugins.toast.showWithOptions({
@@ -380,7 +374,14 @@ function InitPushNotification() {
                 addPixelsY: 50
             });
 
-        });
+        if(data.additionalData.command != null )
+        {
+            var command = data.additionalData.command;
+            if(command === "UpdateContent"){
+                checkConnection(InitPushNotification);
+            }
+        }
+    });
 
         push.on('error', function(e) {
             // e.message
