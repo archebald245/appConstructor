@@ -677,7 +677,7 @@ function reactRender() {
                 $(objectForm).each(function(i, element) {
                     if (element.Id == formId) {
                         renderForm(element);
-                        $("#form-container").find(".formSubmit").attr("style", styleSubmit);
+                        $("#form-container").find(".formSubmit, .formLogout").attr("style", styleSubmit);
                         $("#form-container").find("label").attr("style", styleLabel);
                         $("#form-container").find(".formSubmit").text(textSubmitButton);
                         $("#form-container").attr("id", "");

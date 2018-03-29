@@ -59,6 +59,7 @@ function searchResourcesAndReplacePatch(jsonObject) {
         jsonObject.MainEvents = resourcesOfEvents(jsonObject.MainEvents, storePath);
     }
     if (jsonObject.Menu != null) {
+        jsonObject.Menu = replaceImagePathOfMenu(jsonObject.Menu);
         jsonObject.Menu.MenuItems.forEach(function(item) {
             item = resourcesOfMenu(item, storePath);
         });
@@ -79,6 +80,15 @@ function resourcesOfMenu(item, storePath) {
         item.IconPath = replacementPath(item.IconPath, storePath);
     }
     return item;
+}
+
+function replaceImagePathOfMenu(menu) {
+    $(menu.MenuItems).each(function() {
+        if (this.IconPath) {
+            this.IconPath = applicationData.UrlForUpdateApp + this.IconPath;
+        }
+    });
+    return menu;
 }
 
 function resourcesOfCellContainer(cellContainer, storePath) {
