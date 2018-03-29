@@ -273,12 +273,11 @@ function checkApplicationId(sendPushNotificationTokenCallback) {
             sendPushNotificationTokenCallback();
         }
     }
-
 }
 
 function initMenuYoutunbe() {
-    createMenu();
     if (resources.length == 0) {
+        createMenu();
         reactRender();
         submitFormListener();
         unBlockUi()
@@ -290,6 +289,7 @@ function callback() {
     var jsonString = JSON.stringify(applicationData);
     $.jStorage.set('appData', jsonString);
     deleteResources();
+    createMenu();
     reactRender();
     initGallaryClick();
     submitFormListener();
@@ -365,12 +365,6 @@ function InitPushNotification() {
         // });
 
         push.on('notification', function(data) {
-            // data.message,
-            // data.title,
-            // data.count,
-            // data.sound,
-            // data.image,
-            // data.additionalData
             window.plugins.toast.hide();
 
             window.plugins.toast.showWithOptions({
@@ -380,7 +374,14 @@ function InitPushNotification() {
                 addPixelsY: 50
             });
 
-        });
+        if(data.additionalData.command != null )
+        {
+            var command = data.additionalData.command;
+            if(command === "UpdateContent"){
+                checkConnection(InitPushNotification);
+            }
+        }
+    });
 
         push.on('error', function(e) {
             // e.message

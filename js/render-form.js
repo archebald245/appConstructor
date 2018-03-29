@@ -5,6 +5,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function renderForm(form, id) {
     var idRadioBtn;
     var isDropdownName;
+    var fieldData = $.jStorage.get('fieldData')||[];
     var isLogin = $.jStorage.get('isLogin');
     var token = $.jStorage.get('notificationToken');
     var deviceId = $.jStorage.get('ApplicationId');
@@ -80,8 +81,21 @@ function renderForm(form, id) {
                     );
                 }
                 if (field.FieldTypeId == 4) {
-                    if (field.Required) {
-                        var _React$createElement;
+                    var fieldEl = React.createElement("input", { className: "form-control", name: field.Name, type: "text", id: field.Id })
+                        if(field.Remember){
+                        var fieldValue= "";
+                        fieldData.forEach(function(e){
+                            if(+e.id === field.Id){
+                                fieldValue = e.data;
+                            }
+                        });
+                            if(field.Required){
+                                fieldEl = React.createElement("input", { defaultValue:fieldValue, className: "remember required form-control", name: field.Name, type: "text", id: field.Id })
+                            }
+                            fieldEl = React.createElement("input", { defaultValue:fieldValue, className: "remember form-control", name: field.Name, type: "text", id: field.Id })
+                        }else if(field.Required){
+                            fieldEl = React.createElement("input", { className: "required form-control", name: field.Name, type: "text", id: field.Id })
+                        }
 
                         return React.createElement(
                             "div", { className: "textElement formBlock form-group" },
@@ -93,25 +107,25 @@ function renderForm(form, id) {
                                     field.Label
                                 )
                             ),
-                            React.createElement("input", (_React$createElement = { className: "form-control", name: field.Name, type: "text" }, _defineProperty(_React$createElement, "className", "required  form-control"), _defineProperty(_React$createElement, "id", field.Id), _React$createElement))
+                            fieldEl
                         );
-                    } else {
-                        return React.createElement(
-                            "div", { className: "textElement formBlock form-group" },
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            React.createElement("input", { className: "form-control", name: field.Name, type: "text", id: field.Id })
-                        );
-                    }
                 }
                 if (field.FieldTypeId == 5) {
-                    if (field.Required) {
+                    var fieldEl =  React.createElement("textarea", { className: "form-control", name: field.Name, id: field.Id })
+                        if(field.Remember){
+                            var fieldValue= "";
+                            fieldData.forEach(function(e){
+                                if(+e.id === field.Id){
+                                    fieldValue = e.data;
+                                }
+                            });
+                            if(field.Required){
+                                fieldEl =  React.createElement("textarea", { defaultValue:fieldValue, className: "remember required form-control", name: field.Name, id: field.Id })
+                            }
+                            fieldEl = React.createElement("input", { defaultValue:fieldValue, className: "remember form-control", name: field.Name, type: "text", id: field.Id })
+                        }else if(field.Required){
+                            fieldEl =  React.createElement("textarea", { className: "required form-control", name: field.Name, id: field.Id })
+                        }
                         return React.createElement(
                             "div", { className: "textAreaElement formBlock form-group" },
                             " ",
@@ -123,117 +137,100 @@ function renderForm(form, id) {
                                     field.Label
                                 )
                             ),
-                            React.createElement("textarea", { className: "required form-control", name: field.Name, id: field.Id })
+                            field
                         );
-                    } else {
-                        return React.createElement(
-                            "div", { className: "textAreaElement formBlock form-group" },
-                            " ",
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            React.createElement("textarea", { className: "form-control", name: field.Name, id: field.Id }),
-                            " "
-                        );
-                    }
+                    
                 }
                 if (field.FieldTypeId == 6) {
-                    if (field.Required) {
-                        return React.createElement(
-                            "div", { className: "emailElement formBlock form-group" },
-                            " ",
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            React.createElement("input", { type: "text", name: field.Name, className: "email required form-control", id: field.Id })
-                        );
-                    } else {
-                        return React.createElement(
-                            "div", { className: "emailElement formBlock form-group" },
-                            " ",
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            React.createElement("input", { type: "text", name: field.Name, className: "email form-control", id: field.Id })
-                        );
+                    var fieldEl =   React.createElement("input", { type: "text", name: field.Name, className: "email form-control", id: field.Id })
+                    if(field.Remember){
+                        var fieldValue= "";
+                        fieldData.forEach(function(e){
+                            if(+e.id === field.Id){
+                                fieldValue = e.data;
+                            }
+                        });
+                        if(field.Required){
+                            fieldEl =   React.createElement("input", { defaultValue:fieldValue, type: "text", name: field.Name, className: "email remember required form-control", id: field.Id })
+                        }
+                        fieldEl =  React.createElement("input", { defaultValue:fieldValue, type: "text", name: field.Name, className: "email remember required form-control", id: field.Id })
+                    }else if(field.Required){
+                        fieldEl =   React.createElement("input", { type: "text", name: field.Name, className: "email required form-control", id: field.Id })
                     }
+                        return React.createElement(
+                            "div", { className: "emailElement formBlock form-group" },
+                            " ",
+                            React.createElement(
+                                "div", { className: "label-container" },
+                                React.createElement(
+                                    "label",
+                                    null,
+                                    field.Label
+                                )
+                            ),
+                            fieldEl
+                        );
                 }
                 if (field.FieldTypeId == 7) {
-                    if (field.Required) {
-                        return React.createElement(
-                            "div", { className: "phoneNumberElement formBlock form-group" },
-                            " ",
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            React.createElement("input", { type: "text", name: field.Name, className: "phoneNumber required form-control", placeholder: cultureRes.telPlaceholder, id: field.Id })
-                        );
-                    } else {
-                        return React.createElement(
-                            "div", { className: "phoneNumberElement formBlock form-group" },
-                            " ",
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            React.createElement("input", { type: "text", name: field.Name, className: "phoneNumber form-control", placeholder: cultureRes.telPlaceholder, id: field.Id })
-                        );
+                    var fieldEl = React.createElement("input", { type: "text", name: field.Name, className: "phoneNumber form-control", placeholder: cultureRes.telPlaceholder, id: field.Id })
+                    if(field.Remember){
+                        var fieldValue= "";
+                        fieldData.forEach(function(e){
+                            if(+e.id === field.Id){
+                                fieldValue = e.data;
+                            }
+                        });
+                        if(field.Required){
+                            fieldEl = React.createElement("input", { defaultValue:fieldValue, type: "text", name: field.Name, className: "phoneNumber remember required form-control", placeholder: cultureRes.telPlaceholder, id: field.Id })
+                        }
+                        fieldEl = React.createElement("input", { defaultValue:fieldValue, type: "text", name: field.Name, className: "phoneNumber remember form-control", placeholder: cultureRes.telPlaceholder, id: field.Id })
+                    }else if(field.Required){
+                        fieldEl = React.createElement("input", { type: "text", name: field.Name, className: "phoneNumber required form-control", placeholder: cultureRes.telPlaceholder, id: field.Id })
                     }
+                        return React.createElement(
+                            "div", { className: "phoneNumberElement formBlock form-group" },
+                            " ",
+                            React.createElement(
+                                "div", { className: "label-container" },
+                                React.createElement(
+                                    "label",
+                                    null,
+                                    field.Label
+                                )
+                            ),
+                            fieldEl
+                        );
+                    
                 }
                 if (field.FieldTypeId == 8) {
-                    if (field.Required) {
-                        return React.createElement(
-                            "div", { className: "numberElement formBlock form-group" },
-                            " ",
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            React.createElement("input", { type: "number", name: field.Name, className: "required form-control", id: field.Id })
-                        );
-                    } else {
-                        return React.createElement(
-                            "div", { className: "numberElement formBlock form-group" },
-                            " ",
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            React.createElement("input", { className: "form-control", name: field.Name, type: "number", id: field.Id })
-                        );
+                    var fieldEl = React.createElement("input", { type: "text", name: field.Name, className: "form-control", id: field.Id });
+                    if(field.Remember){
+                        var fieldValue= "";
+                        fieldData.forEach(function(e){
+                            if(+e.id === field.Id){
+                                fieldValue = e.data;
+                            }
+                        });
+                        fieldEl = React.createElement("input", { defaultValue:fieldValue, type: "text", name: field.Name, className: "remember form-control", id: field.Id });
+                        if(field.Required){
+                            fieldEl = React.createElement("input", { defaultValue:fieldValue, type: "text", name: field.Name, className: "required remember form-control", id: field.Id });
+                        }
+                    }else if(field.Required){
+                        fieldEl = React.createElement("input", { type: "text", name: field.Name, className: "required remember form-control", id: field.Id });
                     }
+                        return React.createElement(
+                            "div", { className: "numberElement formBlock form-group" },
+                            " ",
+                            React.createElement(
+                                "div", { className: "label-container" },
+                                React.createElement(
+                                    "label",
+                                    null,
+                                    field.Label
+                                )
+                            ),
+                            fieldEl
+                        );
                 }
                 if (field.FieldTypeId == 9) {
                     return React.createElement(
