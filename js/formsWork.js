@@ -135,8 +135,7 @@ function bindChangeValForms() {
                                 $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                     $(".spinner-container").addClass("hidden");
                                     saveRememberFields(elem);
-                                    //alert(cultureRes.thankYou);
-                                    alert("success 1111");
+                                    alert(cultureRes.thankYou);
                                     $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember" ).val("");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").not(".remember").val("");
                                     $(elem).find("input[type='checkbox']").removeAttr("checked");
@@ -166,8 +165,7 @@ function bindChangeValForms() {
                         if (check != false) {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                 $(".spinner-container").addClass("hidden");
-                                //alert(cultureRes.thankYou); 
-                                alert("success .form_");
+                                alert(cultureRes.thankYou); 
                                 $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember").val("");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember").val("");
 

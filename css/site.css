@@ -260,6 +260,7 @@ form {
 }
 
 .button-block .btn-custom {
+    margin-top: 1px;
     display: block;
     width: 100%;
 }
