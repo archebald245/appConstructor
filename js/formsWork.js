@@ -91,6 +91,7 @@ function bindChangeValForms() {
         var formId = $(elem).attr("id").split("_")[1];
         $(".form-submit-item").find(".formSubmit").each(function(i, button) {
             if (formId == $(button).parent().attr("name")) {
+                $(button).unbind("click");
                 $(button).on("click", function() {
                     var networkState = navigator.connection.type;
                     if (networkState != Connection.NONE) {
@@ -133,9 +134,11 @@ function bindChangeValForms() {
                             } else {
                                 $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                     $(".spinner-container").addClass("hidden");
-                                    alert(cultureRes.thankYou);
+                                    saveRememberFields(elem);
+                                    //alert(cultureRes.thankYou);
+                                    alert("success 1111");
                                     $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember" ).val("");
-                                    $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                    $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").not(".remember").val("");
                                     $(elem).find("input[type='checkbox']").removeAttr("checked");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
                                 });
@@ -163,9 +166,10 @@ function bindChangeValForms() {
                         if (check != false) {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                 $(".spinner-container").addClass("hidden");
-                                alert(cultureRes.thankYou);
+                                //alert(cultureRes.thankYou); 
+                                alert("success .form_");
                                 $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember").val("");
-                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember").val("");
 
                                 $(elem).find("input[type='checkbox']").removeAttr("checked");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");

@@ -108,37 +108,6 @@ function renderCustomForm(form) {
                             fieldEl
                         );
                 }
-
-                if (field.FieldTypeId == 4) {
-                    var fieldEl = React.createElement("input", { className: "form-control", name: field.Name, type: "text", id: field.Id })
-                        if(field.Remember){
-                        var fieldValue= "";
-                        fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
-                                fieldValue = e.data;
-                            }
-                        });
-                            if(field.Required){
-                                fieldEl = React.createElement("input", { defaultValue:fieldValue, className: "remember required form-control", name: field.Name, type: "text", id: field.Id })
-                            }
-                            fieldEl = React.createElement("input", { defaultValue:fieldValue, className: "remember form-control", name: field.Name, type: "text", id: field.Id })
-                        }else if(field.Required){
-                            fieldEl = React.createElement("input", { className: "required form-control", name: field.Name, type: "text", id: field.Id })
-                        }
-
-                        return React.createElement(
-                            "div", { className: "textElement formBlock form-group" },
-                            React.createElement(
-                                "div", { className: "label-container" },
-                                React.createElement(
-                                    "label",
-                                    null,
-                                    field.Label
-                                )
-                            ),
-                            fieldEl
-                        );
-                }
                 if (field.FieldTypeId == 5) {
                     var fieldEl =  React.createElement("textarea", { className: "form-control", name: field.Name, id: field.Id })
                         if(field.Remember){
