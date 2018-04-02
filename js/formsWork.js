@@ -154,7 +154,6 @@ function bindChangeValForms() {
                 });
             }
         });
-//wtf
         $(".form_" + formId).each(function(i, element) {
             var field = $(element).siblings(".formBlock").find("input, textarea, select");
             var fieldName = $(field).attr("name");
