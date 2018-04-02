@@ -69,7 +69,6 @@ function goToPage(index) {
         pageStyles = pageWithGeneralBg[0].Style;
     }
 
-
     $("#container").attr("style", pageStyles);
     submitFormListener();
     initGallaryClick();
@@ -77,6 +76,17 @@ function goToPage(index) {
     addListenerToClickBuy();
     addListenerToClickOpenSingleItem();
     addListenerToClickTimeLine();
+
+    var objectForm = applicationData.Forms;
+    $("#custom-hide-container").html("");
+    $(objectForm).each(function(i, form) {
+        var idHideForm = "form_" + form.Id;
+        $("#custom-hide-container").append("<form id='custom-form-hide-container'></form>");
+        renderHideCustomForm(form);
+        $("#custom-form-hide-container").attr("id", idHideForm);
+    });
+
+
     $(".cart-btn").on("click", function() {
         $("#container").addClass("hidden");
         $(".classMenu").addClass("hidden");
