@@ -4,6 +4,9 @@ function renderHideCustomForm(form, id) {
     var idRadioBtn;
     var isDropdownName;
     var fieldData = $.jStorage.get('fieldData')||[];
+    var isLogin = $.jStorage.get('isLogin');
+    var token = $.jStorage.get('notificationToken');
+    var deviceId = $.jStorage.get('ApplicationId');
     var FormBlock = React.createClass({
         displayName: cultureRes.formBlock,
 
@@ -469,6 +472,9 @@ function renderHideCustomForm(form, id) {
                 React.createElement("input", { type: "hidden", name: "formId", value: this.state.data.Id }),
                 React.createElement("input", { className: "loginForm form-control", name: "LoginForm", type: "hidden", value: this.state.data.LoginForm }),
                 React.createElement("input", { className: "registrationForm form-control", name: "RegistrationForm", type: "hidden", value: this.state.data.RegistrationForm }),
+                React.createElement("input", { className: "form-control", name: "NotificationToken", type: "hidden", value: token }),
+                React.createElement("input", { className: "form-control", name: "DeviceId", type: "hidden", value: deviceId }),
+                React.createElement("input", { className: "form-control", name: "UserId", type: "hidden", value: isLogin }),
                 fieldModels,
                 React.createElement(
                     "button", { type: "button", className: "formSubmit btn btn-defoult" },

@@ -100,6 +100,9 @@ function bindChangeValForms() {
                         var isLoginForm = $(elem).find("input[name='LoginForm']").val();
                         var isRegisterForm = $(elem).find("input[name='RegistrationForm']").val();
                         if (check != false) {
+                            if ($.jStorage.get("isLogin") != null) {
+                                $(elem).find("[name='UserId']").val($.jStorage.get("isLogin"))///////////////////////////////////////////////////
+                            }
                             if (isLoginForm == "true") {
                                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(elem).serialize(), function(data) {
                                     $(".spinner-container").addClass("hidden");
@@ -151,7 +154,7 @@ function bindChangeValForms() {
                 });
             }
         });
-
+//wtf
         $(".form_" + formId).each(function(i, element) {
             var field = $(element).siblings(".formBlock").find("input, textarea, select");
             var fieldName = $(field).attr("name");
