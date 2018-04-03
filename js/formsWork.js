@@ -101,7 +101,9 @@ function bindChangeValForms() {
                         var isRegisterForm = $(elem).find("input[name='RegistrationForm']").val();
                         if (check != false) {
                             if ($.jStorage.get("isLogin") != null) {
-                                $(elem).find("[name='UserId']").val($.jStorage.get("isLogin"))///////////////////////////////////////////////////
+                                $(elem).find("[name='UserId']").val($.jStorage.get("isLogin"));
+                            }else{
+                                $(elem).find("[name='UserId']").val(null);
                             }
                             if (isLoginForm == "true") {
                                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(elem).serialize(), function(data) {
