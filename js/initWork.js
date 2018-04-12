@@ -320,12 +320,12 @@ function doOnOrientationChange() {
     switch (window.orientation) {
         case -90:
         case 90:
-            if (applicationData.Restaurants.length > 0) {
+            if (applicationData.Catalogs.length > 0) {
                 // restarauntMenuModelItems();
             }
             break;
         default:
-            if (applicationData.Restaurants.length > 0) {
+            if (applicationData.Catalogs.length > 0) {
                 // restarauntMenuModelItems();
             }
             break;

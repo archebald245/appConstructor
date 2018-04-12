@@ -120,7 +120,7 @@ function getLastOpenPage() {
 
 function checkRestarauntsAndEventsUpdate() {
     var eventCollection = [];
-    var collectionRestaurantMenu = [];
+    var collectionCatalogCategory = [];
 
     var userId = $.jStorage.get('isLogin');
 
@@ -130,9 +130,9 @@ function checkRestarauntsAndEventsUpdate() {
             Version: this.Version
         });
     });
-    $(applicationData.Restaurants).each(function(i, elem) {
-        $(elem.RestaurantMenus).each(function() {
-            collectionRestaurantMenu.push({
+    $(applicationData.Catalogs).each(function(i, elem) {
+        $(elem.CatalogCategories).each(function() {
+            collectionCatalogCategory.push({
                 Id: this.Id,
                 Version: this.Version
             });
@@ -142,17 +142,17 @@ function checkRestarauntsAndEventsUpdate() {
         //Restaraunt request
         $.ajax({
             type: "POST",
-            url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CheckUpdateRestaurantMenu",
+            url: applicationData.UrlForUpdateApp + "/Catalog/CheckUpdateCatalogCategory",
             data: {
-                model: collectionRestaurantMenu
+                model: collectionCatalogCategory
             },
             cache: false,
             success: function(object) {
                 object = JSON.parse(object);
                 if (object.IsUpdated == true) {
-                    applicationData.Restaurants = object.Restaurants;
+                    applicationData.Catalogs = object.Catalogs;
                     var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
-                    applicationData.Restaurants = resourcesOfRestaurantMenus(applicationData.Restaurants, storePath);
+                    applicationData.Catalogs = resourcesOfCatalogCategories(applicationData.Catalogs, storePath);
                 }
             }
         }),
