@@ -93,10 +93,10 @@ function addListenerToClickBuy() {
 }
 
 function workToClickBuy(itemId) {
-    var restaurantMenu = [];
-    $(applicationData.Restaurants).each(function() {
-        $(this.RestaurantMenus).each(function() {
-            restaurantMenu.push(this);
+    var catalogCategory = [];
+    $(applicationData.Catalogs).each(function() {
+        $(this.CatalogCategories).each(function() {
+            catalogCategory.push(this);
         });
     });
 
@@ -112,7 +112,7 @@ function workToClickBuy(itemId) {
         //  $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItemCount-visible").append(newItemCount);
 
         //  $(restaurantMenu).each(function(index, itemMenu) {
-        //      $(itemMenu.RestaurantMenuItems).each(function(i, e) {
+        //      $(itemMenu.ProductItems).each(function(i, e) {
         //          if (e.Id == itemId) {
         //              $("#cart").find("input[value='" + itemId + "']").siblings(".cartItem-info").find(".shopItem-price").text(Number(e.Price) * newItemCount);
         //              window.plugins.toast.showShortBottom(cultureRes.itemAdded);
@@ -120,16 +120,16 @@ function workToClickBuy(itemId) {
         //      });
         //  });
     } else {
-        var restaurantId;
-        $(restaurantMenu).each(function(index, itemMenu) {
-            restaurantId = itemMenu.RestaurantId;
-            $(itemMenu.RestaurantMenuItems).each(function(i, e) {
+        var catalogId;
+        $(catalogCategory).each(function(index, itemMenu) {
+            catalogId = itemMenu.CatalogId;
+            $(itemMenu.ProductItems).each(function(i, e) {
                 if (e.Id == itemId) {
                     if ($("#cart").children().length > 0) {
-                        if ($("[name=cartRestaurantId]").attr("value") != restaurantId) {
+                        if ($("[name=cartCatalogId]").attr("value") != catalogId) {
                             if (confirm(cultureRes.restConf)) {
                                 $("#cart").children().remove();
-                                $("[name=cartRestaurantId]").attr("value", restaurantId);
+                                $("[name=cartRestaurantId]").attr("value", catalogId);
                                 $("#cart").append("<div id='shopItem'></div>");
                                 renderCartItem(e);
                                 window.plugins.toast.showShortBottom(cultureRes.itemAdded);
@@ -137,13 +137,13 @@ function workToClickBuy(itemId) {
 
                             }
                         } else {
-                            $("[name=cartRestaurantId]").attr("value", restaurantId);
+                            $("[name=cartRestaurantId]").attr("value", catalogId);
                             $("#cart").append("<div id='shopItem'></div>");
                             renderCartItem(e);
                             window.plugins.toast.showShortBottom(cultureRes.itemAdded);
                         }
                     } else {
-                        $("[name=cartRestaurantId]").attr("value", restaurantId);
+                        $("[name=cartRestaurantId]").attr("value", catalogId);
                         $("#cart").append("<div id='shopItem'></div>");
                         renderCartItem(e);
                         window.plugins.toast.showShortBottom(cultureRes.itemAdded);
@@ -156,7 +156,7 @@ function workToClickBuy(itemId) {
 
     }
     $("#shopItem").attr("id", "");
-    var curr = restaurantMenu[0].Currency;
+    var curr = catalogCategory[0].Currency;
     $(".totalPrice b").html("");
     $(".totalPrice b").append(totalPrice() + " " + curr);
     addListenerToClickDelete();
@@ -226,8 +226,8 @@ function totalPrice() {
 function checkUpdateRestaurantMenu(isNewVersion) {
     var collectionRestaurantMenu = [];
 
-    $(applicationData.Restaurants).each(function(i, elem) {
-            $(elem.RestaurantMenus).each(function() {
+    $(applicationData.Catalogs).each(function(i, elem) {
+            $(elem.CatalogCategories).each(function() {
                 collectionRestaurantMenu.push({
                     Id: this.Id,
                     Version: this.Version
@@ -246,9 +246,9 @@ function checkUpdateRestaurantMenu(isNewVersion) {
         success: function(object) {
             object = JSON.parse(object);
             if (object.IsUpdated == true) {
-                applicationData.Restaurants = object.Restaurants;
+                applicationData.Catalogs = object.Catalogs;
                 var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
-                applicationData.Restaurants = resourcesOfRestaurantMenus(applicationData.Restaurants, storePath);
+                applicationData.Catalogs = resourcesOfCatalogCategories(applicationData.Catalogs, storePath);
                 var appJsonString = JSON.stringify(applicationData);
                 $.jStorage.set('replaceImagePachJson', appJsonString);
                 downloadResources();
@@ -293,13 +293,13 @@ function addListenerToClickOpenSingleItem() {
         scrollTop();
         var id = $(this).find("[name='shopItemId']").val();
         var menus = [];
-        $(applicationData.Restaurants).each(function() {
-            $(this.RestaurantMenus).each(function() {
+        $(applicationData.Catalogs).each(function() {
+            $(this.CatalogCategories).each(function() {
                 menus.push(this);
             });
         });
         $(menus).each(function(index, item) {
-            $(item.RestaurantMenuItems).each(function() {
+            $(item.ProductItems).each(function() {
                 if (this.Id == id) {
                     renderSingleShopItem(this);
                 }
@@ -339,19 +339,19 @@ function changeRestaurant() {
     $(".select-restaurant").on("change", function() {
         var idRest = $(this).val();
         var arrIdMenu = $(this).siblings("[name=arrIdMenu]").attr("value").split(',');
-        var restaurantCollection = applicationData.Restaurants;
-        // setUseRestaurantMenus(arrIdMenu, true,restaurantCollection);
-        var restaurantsArr = filterMenu(restaurantCollection, arrIdMenu);
-        var selectMenu = $(this).siblings(".select-menu");
-        $(selectMenu).children().remove();
+        var catalogCollection = applicationData.Catalogs;
+        // setUseCatalogCategories(arrIdMenu, true,restaurantCollection);
+        var catalogsArr = filterMenu(catalogCollection, arrIdMenu);
+        var selectCategor = $(this).siblings(".select-menu");
+        $(selectCategor).children().remove();
 
-        var restaurant;
-        $(restaurantsArr).each(function() {
+        var catalog;
+        $(catalogsArr).each(function() {
             if (idRest == this.Id) {
-                restaurant = this;
+                catalog = this;
             }
         });
-        var ThisRestaurantMenuBlock = $(this).siblings();
+        var ThisCatalogCategoryBlock = $(this).siblings();
         var weekday = new Array(7);
         weekday[0] = cultureRes.sunday;
         weekday[1] = cultureRes.monday;
@@ -362,39 +362,39 @@ function changeRestaurant() {
         weekday[6] = cultureRes.saturday;
         var dayNow = weekday[new Date().getDay()];
 
-        $(restaurant.RestaurantMenus).each(function() {
-            $(selectMenu).append("<option value='" + this.Id + "'>" + this.Name + "</option>");
+        $(catalog.CatalogCategories).each(function() {
+            $(selectCategor).append("<option value='" + this.Id + "'>" + this.Name + "</option>");
         });
         $(this).siblings(".custom-restaurant-menu-container").attr("id", "custom-restaurant-menu-container");
 
-        $(restaurant.RestaurantMenus).each(function(index, thisRestarauntMenu) {
+        $(catalog.CatalogCategories).each(function(index, thisCatalogCategory) {
 
 
-            if (thisRestarauntMenu.IsOnline == false) {
+            if (thisCatalogCategory.IsOnline == false) {
 
-                if (thisRestarauntMenu.UseDateTime == false) {
-                    renderRestaurantMenu(thisRestarauntMenu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                        ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                        ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                if (thisCatalogCategory.UseDateTime == false) {
+                    renderCatalogCategory(thisCatalogCategory, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                        ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                        ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                     $(".custom-restaurant-menu-container").removeClass("hidden");
-                    $(".select-menu").val(thisRestarauntMenu.Id);
+                    $(".select-menu").val(thisCatalogCategory.Id);
                 } else {
-                    $(thisRestarauntMenu.DateTimeRestaurantMenu).each(function(indexData, dataItem) {
+                    $(thisCatalogCategory.DateTimeCatalogCategory).each(function(indexData, dataItem) {
                         if (dataItem.IsChecked && dataItem.Day == dayNow && CheckRestarauntTime(dataItem.FromHour, dataItem.ToHour, GetClockTime())) {
-                            renderRestaurantMenu(thisRestarauntMenu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                                ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                                ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                            renderCatalogCategory(thisCatalogCategory, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                                ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                                ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                             $(".custom-restaurant-menu-container").removeClass("hidden");
-                            $(".select-menu").val(thisRestarauntMenu.Id);
+                            $(".select-menu").val(thisCatalogCategory.Id);
                         } else if (dataItem.IsChecked && dataItem.Day == cultureRes.date && CheckRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour, GetDateTime())) {
-                            renderRestaurantMenu(thisRestarauntMenu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                                ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                                ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                            renderCatalogCategory(thisCatalogCategory, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                                ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                                ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                             $(".custom-restaurant-menu-container").removeClass("hidden");
-                            $(".select-menu").val(thisRestarauntMenu.Id);
+                            $(".select-menu").val(thisCatalogCategory.Id);
                         } else {
                             $(".custom-restaurant-menu-container").addClass("hidden");
-                            $(".select-menu").val(thisRestarauntMenu.Id);
+                            $(".select-menu").val(thisCatalogCategory.Id);
                         }
                     });
                 }
@@ -404,27 +404,27 @@ function changeRestaurant() {
                 if (networkState == Connection.NONE) {
                     $("#custom-restaurant-menu-container").html(cultureRes.sorryOnline);
                 } else {
-                    if (thisRestarauntMenu.UseDateTime == false) {
-                        renderRestaurantMenu(thisRestarauntMenu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                            ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                            ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
-                        $(".select-menu").val(thisRestarauntMenu.Id);
+                    if (thisCatalogCategory.UseDateTime == false) {
+                        renderCatalogCategory(thisCatalogCategory, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                            ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                            ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
+                        $(".select-menu").val(thisCatalogCategory.Id);
                     } else {
-                        $(thisRestaurantMenu.DateTimeRestaurantMenu).each(function(indexData, dataItem) {
+                        $(thisRestaurantMenu.DateTimeCatalogCategory).each(function(indexData, dataItem) {
                             if (dataItem.IsChecked && dataItem.Day == dayNow && CheckRestarauntTime(dataItem.FromHour, dataItem.ToHour, GetClockTime())) {
-                                renderRestaurantMenu(thisRestarauntMenu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                                    ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                                    ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
-                                $(".select-menu").val(thisRestarauntMenu.Id);
+                                renderCatalogCategory(thisCatalogCategory, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                                    ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                                    ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
+                                $(".select-menu").val(thisCatalogCategory.Id);
                             } else if (dataItem.IsChecked && dataItem.Day == cultureRes.date && CheckRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour, GetDateTime())) {
-                                renderRestaurantMenu(thisRestarauntMenu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                                    ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                                    ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                                renderCatalogCategory(thisCatalogCategory, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                                    ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                                    ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                                 $(".custom-restaurant-menu-container").removeClass("hidden");
-                                $(".select-menu").val(thisRestarauntMenu.Id);
+                                $(".select-menu").val(thisCatalogCategory.Id);
                             } else {
                                 $(".custom-restaurant-menu-container").addClass("hidden");
-                                $(".select-menu").val(thisRestarauntMenu.Id);
+                                $(".select-menu").val(thisCatalogCategory.Id);
                             }
                         });
                     }
@@ -444,14 +444,14 @@ function changeMenu() {
     $(".select-menu").on("change", function() {
         var idMenu = $(this).val();
         var menu;
-        $(applicationData.Restaurants).each(function() {
-            $(this.RestaurantMenus).each(function() {
+        $(applicationData.Catalogs).each(function() {
+            $(this.CatalogCategories).each(function() {
                 if (this.Id == idMenu) {
                     menu = this;
                 }
             });
         });
-        var ThisRestaurantMenuBlock = $(this).siblings();
+        var ThisCatalogCategoryBlock = $(this).siblings();
         var weekday = new Array(7);
         weekday[0] = cultureRes.sunday;
         weekday[1] = cultureRes.monday;
@@ -465,21 +465,21 @@ function changeMenu() {
         $(this).siblings(".custom-restaurant-menu-container").attr("id", "custom-restaurant-menu-container");
         if (menu.IsOnline == false) {
             if (menu.UseDateTime == false) {
-                renderRestaurantMenu(menu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                    ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                    ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                renderCatalogCategory(menu, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                    ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                    ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                 $(".custom-restaurant-menu-container").removeClass("hidden");
             } else {
-                $(menu.DateTimeRestaurantMenu).each(function(indexData, dataItem) {
+                $(menu.DateTimeCatalogCategory).each(function(indexData, dataItem) {
                     if (dataItem.IsChecked && dataItem.Day == dayNow && CheckRestarauntTime(dataItem.FromHour, dataItem.ToHour, GetClockTime())) {
-                        renderRestaurantMenu(menu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                            ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                            ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                        renderCatalogCategory(menu, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                            ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                            ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                         $(".custom-restaurant-menu-container").removeClass("hidden");
                     } else if (dataItem.IsChecked && dataItem.Day == "Date" && CheckRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour, GetDateTime())) {
-                        renderRestaurantMenu(menu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                            ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                            ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                        renderCatalogCategory(menu, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                            ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                            ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                         $(".custom-restaurant-menu-container").removeClass("hidden");
                     } else {
                         $(".custom-restaurant-menu-container").addClass("hidden");
@@ -493,19 +493,19 @@ function changeMenu() {
                 // alert("Sorry, not time!");
             } else {
                 if (menu.UseDateTime == false) {
-                    renderRestaurantMenu(menu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                        ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                        ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                    renderCatalogCategory(menu, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                        ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                        ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                 } else {
-                    $(menu.DateTimeRestaurantMenu).each(function(indexData, dataItem) {
+                    $(menu.DateTimeCatalogCategory).each(function(indexData, dataItem) {
                         if (dataItem.IsChecked && dataItem.Day == dayNow && CheckRestarauntTime(dataItem.FromHour, dataItem.ToHour, GetClockTime())) {
-                            renderRestaurantMenu(menu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                                ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                                ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                            renderCatalogCategory(menu, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                                ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                                ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                         } else if (dataItem.IsChecked && dataItem.Day == cultureRes.date && CheckRestarauntTimeForDate(dataItem.FromHour, dataItem.ToHour, GetDateTime())) {
-                            renderRestaurantMenu(menu, ThisRestaurantMenuBlock.find("[name=restaurantMenuPosition]").attr("value"), ThisRestaurantMenuBlock.find("[name=responsiveModel]").attr("value"),
-                                ThisRestaurantMenuBlock.find("[name=stateName]").attr("value"), ThisRestaurantMenuBlock.find("[name=statePrice]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateDescription]").attr("value"),
-                                ThisRestaurantMenuBlock.find("[name=stateButton]").attr("value"), ThisRestaurantMenuBlock.find("[name=stateImage]").attr("value"));
+                            renderCatalogCategory(menu, ThisCatalogCategoryBlock.find("[name=catalogCategoryPosition]").attr("value"), ThisCatalogCategoryBlock.find("[name=responsiveModel]").attr("value"),
+                                ThisCatalogCategoryBlock.find("[name=stateName]").attr("value"), ThisCatalogCategoryBlock.find("[name=statePrice]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateDescription]").attr("value"),
+                                ThisCatalogCategoryBlock.find("[name=stateButton]").attr("value"), ThisCatalogCategoryBlock.find("[name=stateImage]").attr("value"));
                             $(".custom-restaurant-menu-container").removeClass("hidden");
                         }
                     });

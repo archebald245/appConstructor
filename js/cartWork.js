@@ -6,13 +6,13 @@ function clickOrder() {
     $(orderItems).each(function() {
         var id = $(this).find("[name=shopItemId]").val();
         var count = $(this).find("[name=shopItemCount]").val();
-        $(applicationData.Restaurants).each(function() {
-            $(this.RestaurantMenus).each(function() {
-                $(this.RestaurantMenuItems).each(function() {
+        $(applicationData.Catalogs).each(function() {
+            $(this.CatalogCategories).each(function() {
+                $(this.ProductItems).each(function() {
                     if (this.Id == id) {
                         var item = JSON.parse(JSON.stringify(this));
                         item.Count = count;
-                        item.RestaurantMenuImages = null;
+                        item.ProductItemImages = null;
                         collectionOrderItems.push(item);
                     }
                 });
@@ -33,7 +33,7 @@ function clickPlaceAnOrder() {
 
         $.ajax({
             type: "POST",
-            url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CreateOrder",
+            url: applicationData.UrlForUpdateApp + "/Catalog/CreateOrder",
             data: {
                 OrderItems: collectionOrderItems,
                 Name: name,
@@ -99,25 +99,25 @@ function bindListenerToClickBtn() {
     $(".btn-order").on("click", function() {
         if ($("#cart").children().length > 0) {
 
-            var restAmount = TotalRestAmount();
-            var restMenuId = $("input[name='restaurantMenuId']").val();
+            var catalogAmount = TotalCatalogAmount();
+            var catalogCategoryId = $("input[name='catalogCategoryId']").val();
             var isRestUsePayment = false;
 
-            applicationData.Restaurants.forEach(function(el) {
-                var rest = el;
-                el.RestaurantMenus.forEach(function(e) {
-                    if (e.Id == restMenuId) {
-                        isRestUsePayment = rest.UseCustomerPayment;
+            applicationData.Catalogs.forEach(function(el) {
+                var cat = el;
+                el.CatalogCategories.forEach(function(e) {
+                    if (e.Id == catalogCategoryId) {
+                        isCatUsePayment = cat.UseCustomerPayment;
                     }
                 });
             });
 
-            if (isRestUsePayment && restAmount >= 1) {
-                $("#restAmount").val(restAmount);
+            if (isCatUsePayment && catalogAmount >= 1) {
+                $("#restAmount").val(catalogAmount);
                 var curr = $(".totalPrice b").html().split(" ")[1];
-                $(".rest-amount-count").html(restAmount + " " + curr);
+                $(".rest-amount-count").html(catalogAmount + " " + curr);
 
-                InitRestarauntPayment();
+                InitCatalogPayment();
 				
 				$(".placeAnOrder").unbind().on("click", function() {
                     clickPlaceAnOrder();
@@ -128,7 +128,6 @@ function bindListenerToClickBtn() {
                 $("#orderInfo").removeClass("hidden");
                 $(".cart,.payment-method-container").addClass("hidden");
                 scrollTop();
-
 
                 $("#restAmount").val(restAmount);
                 var curr = $(".totalPrice b").html().split(" ")[1];
@@ -150,7 +149,7 @@ function bindListenerToClickBtn() {
     // });
 }
 
-function TotalRestAmount() {
+function TotalCatalogAmount() {
     clickOrder();
     var total = 0;
     collectionOrderItems.forEach(function(element) {
@@ -162,7 +161,7 @@ function TotalRestAmount() {
     return total;
 }
 
-function TotalRestCount(coef) {
+function TotalCatalogCount(coef) {
     var data = $(".cart-btn-counter").html();
 
     if (data !== "") {

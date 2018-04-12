@@ -130,8 +130,8 @@ function checkRestarauntsAndEventsUpdate() {
             Version: this.Version
         });
     });
-    $(applicationData.Restaurants).each(function(i, elem) {
-        $(elem.RestaurantMenus).each(function() {
+    $(applicationData.Catalogs).each(function(i, elem) {
+        $(elem.CatalogCategories).each(function() {
             collectionRestaurantMenu.push({
                 Id: this.Id,
                 Version: this.Version
@@ -150,9 +150,9 @@ function checkRestarauntsAndEventsUpdate() {
             success: function(object) {
                 object = JSON.parse(object);
                 if (object.IsUpdated == true) {
-                    applicationData.Restaurants = object.Restaurants;
+                    applicationData.Catalogs = object.Catalogs;
                     var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
-                    applicationData.Restaurants = resourcesOfRestaurantMenus(applicationData.Restaurants, storePath);
+                    applicationData.Catalogs = resourcesOfCatalogCategories(applicationData.Catalogs, storePath);
                 }
             }
         }),

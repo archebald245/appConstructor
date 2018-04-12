@@ -10,21 +10,21 @@ function renderCartItem(cartItem) {
         render: function render() {
             var data = this.state.data;
             var cartImg;
-            var restId = $("[name=cartRestaurantId]").val();
+            var catId = $("[name=cartCatalogId]").val();
             var curr;
-            applicationData.Restaurants.forEach(function(element) {
-                if (element.Id = restId) {
-                    element.RestaurantMenus.forEach(function(el) {
-                        if (el.Id == data.RestaurantMenuId) {
+            applicationData.Catalog.forEach(function(element) {
+                if (element.Id = catId) {
+                    element.CatalogCategories.forEach(function(el) {
+                        if (el.Id == data.CatalogCategoryId) {
                             curr = el.Currency;
                         }
                     });
                 }
             }, this);
-            if (data.RestaurantMenuImages.length == 0) {
+            if (data.ProductItemImages.length == 0) {
                 cartImg = React.createElement('img', { src: 'baseimages/cartItem.png', className: 'restaurantMenuNoImages ' });
             } else {
-                cartImg = React.createElement('img', { src: data.RestaurantMenuImages[0].Path });
+                cartImg = React.createElement('img', { src: data.ProductItemImages[0].Path });
             }
 
             return React.createElement(
@@ -89,10 +89,10 @@ function renderCartItem(cartItem) {
 //   render: function() {
 //   var data = this.state.data;
 //     var cartImg;
-//     if(data.RestaurantMenuImages[0].length == 0){
+//     if(data.ProductItemImages[0].length == 0){
 //       cartImg = "baseimages/";
 //     }else{
-//       cartImg = data.RestaurantMenuImages[0];
+//       cartImg = data.ProductItemImages[0];
 //     }
 //
 //           return(
