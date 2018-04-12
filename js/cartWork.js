@@ -45,9 +45,11 @@ function clickPlaceAnOrder() {
                 Nonce: ""
             },
             cache: false,
-            success: function() {
+            success: function(data) {
+                console.log(data);
                 $(".spinner-container").addClass("hidden");
                 alert(cultureRes.thankYou);
+                DropCatalogCount();
                 $("#cart").html("");
                 $(".totalPrice b").html("0");
                 $("#cart .cartItem").html("");
@@ -129,9 +131,9 @@ function bindListenerToClickBtn() {
                 $(".cart,.payment-method-container").addClass("hidden");
                 scrollTop();
 
-                $("#restAmount").val(restAmount);
+                $("#restAmount").val(catalogAmount);
                 var curr = $(".totalPrice b").html().split(" ")[1];
-                $(".rest-amount-count").html(restAmount + " " + curr);
+                $(".rest-amount-count").html(catalogAmount + " " + curr);
 
                 $(".placeAnOrder").unbind().on("click", function() {
                     clickPlaceAnOrder();
@@ -173,4 +175,8 @@ function TotalCatalogCount(coef) {
     }
 
     //window.plugins.toast.showShortBottom($("#cart>div").length);
+}
+function DropCatalogCount() {
+    var data = $(".cart-btn-counter").html("");
+        $(".cart-btn-counter").addClass("hidden")
 }

@@ -120,7 +120,7 @@ function getLastOpenPage() {
 
 function checkRestarauntsAndEventsUpdate() {
     var eventCollection = [];
-    var collectionRestaurantMenu = [];
+    var collectionCatalogCategory = [];
 
     var userId = $.jStorage.get('isLogin');
 
@@ -132,7 +132,7 @@ function checkRestarauntsAndEventsUpdate() {
     });
     $(applicationData.Catalogs).each(function(i, elem) {
         $(elem.CatalogCategories).each(function() {
-            collectionRestaurantMenu.push({
+            collectionCatalogCategory.push({
                 Id: this.Id,
                 Version: this.Version
             });
@@ -142,9 +142,9 @@ function checkRestarauntsAndEventsUpdate() {
         //Restaraunt request
         $.ajax({
             type: "POST",
-            url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CheckUpdateRestaurantMenu",
+            url: applicationData.UrlForUpdateApp + "/Catalog/CheckUpdateCatalogCategory",
             data: {
-                model: collectionRestaurantMenu
+                model: collectionCatalogCategory
             },
             cache: false,
             success: function(object) {

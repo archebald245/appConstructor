@@ -10,9 +10,9 @@ function renderCartItem(cartItem) {
         render: function render() {
             var data = this.state.data;
             var cartImg;
-            var catId = $("[name=cartCatalogId]").val();
+            var catId = $("[name=cartRestaurantId]").val();
             var curr;
-            applicationData.Catalog.forEach(function(element) {
+            applicationData.Catalogs.forEach(function(element) {
                 if (element.Id = catId) {
                     element.CatalogCategories.forEach(function(el) {
                         if (el.Id == data.CatalogCategoryId) {

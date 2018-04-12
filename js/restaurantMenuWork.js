@@ -86,9 +86,9 @@ function addListenerToClickBuy() {
         var itemId = $(this).closest(".shopItem").find("input[name='shopItemId']").attr("value");
         workToClickBuy(itemId);
         event.stopPropagation();
-        //TotalRestCount();
+        //TotalCatalogCount();
         //update counter
-        // TotalRestCount(1);
+        // TotalCatalogCount(1);
     });
 }
 
@@ -126,7 +126,7 @@ function workToClickBuy(itemId) {
             $(itemMenu.ProductItems).each(function(i, e) {
                 if (e.Id == itemId) {
                     if ($("#cart").children().length > 0) {
-                        if ($("[name=cartCatalogId]").attr("value") != catalogId) {
+                        if ($("[name=cartRestaurantId]").attr("value") != catalogId) {
                             if (confirm(cultureRes.restConf)) {
                                 $("#cart").children().remove();
                                 $("[name=cartRestaurantId]").attr("value", catalogId);
@@ -152,7 +152,7 @@ function workToClickBuy(itemId) {
 
             });
         });
-        TotalRestCount(1);
+        TotalCatalogCount(1);
 
     }
     $("#shopItem").attr("id", "");
@@ -171,7 +171,7 @@ function addListenerToClickDelete() {
         var curr = $(".totalPrice b").html().split(" ")[1];
         $(".totalPrice b").html("");
         $(".totalPrice b").append(totalPrice() + " " + curr); //add currency
-        TotalRestCount(-t);
+        TotalCatalogCount(-t);
     });
 }
 
@@ -186,7 +186,7 @@ function addListenerToChangeCount() {
         $(counter).val(count);
 
         updateCount(this, count);
-        TotalRestCount(-1);
+        TotalCatalogCount(-1);
     });
 
     $(".shopItemCount-increase").on("click", function() {
@@ -195,7 +195,7 @@ function addListenerToChangeCount() {
         $(counter).val(count);
 
         updateCount(this, count);
-        TotalRestCount(1);
+        TotalCatalogCount(1);
     });
 
 }

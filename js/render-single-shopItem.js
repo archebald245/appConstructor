@@ -4,7 +4,7 @@ function renderSingleShopItem(singleItem) {
     var currency = "";
     applicationData.Catalogs.forEach(function(e, i) {
         e.CatalogCategories.forEach(function(menu, id) {
-            if (menu.Id == singleItem.RestaurantMenuId) {
+            if (menu.Id == singleItem.CatalogCategoryId) {
                 currency = menu.Currency;
             }
         });
@@ -99,7 +99,7 @@ function renderSingleShopItem(singleItem) {
                     "div", { className: "singleShop-fixed-nav-bottom" },
                     React.createElement(
                         "div", { className: "goToMenu-btn" },
-                        "Перейти в меню"
+                        "Перейти к каталогу"
                     ),
                     React.createElement(
                         "div", { className: "singleShop-btn" },

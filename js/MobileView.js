@@ -726,10 +726,10 @@ function reactRender() {
                 // setUseCatalogCategories(arrIdsCategor, true,restaurantCollection);
                 var catalogArr = filterMenu(restaurantCollection, arrIdsCategor);
                 var restaurants = [];
-                var selectRest = $("<select class='select-restaurant'></select>");
-                var selectMenu = $("<select class='select-menu'></select>");
+                var selectCatalog = $("<select class='select-restaurant'></select>");
+                var selectCategor = $("<select class='select-menu'></select>");
                 $(catalogArr).each(function() {
-                    $(selectRest).append("<option value='" + this.Id + "'>" + this.Name + "</option>");
+                    $(selectCatalog).append("<option value='" + this.Id + "'>" + this.Name + "</option>");
                 });
                 restaurants = _.uniq(restaurants);
                 // $(restaurants).each(function(){
@@ -738,7 +738,7 @@ function reactRender() {
                 var div = $("<div><hidden name='arrIdMenu' value=" + data.Value + "/></div>");
                 var divContainer = "<div id='custom-restaurant-menu-container' class='custom-restaurant-menu-container'></div>";
 
-                div = $(div).append($(selectRest)).append($(selectMenu)).append($(divContainer));
+                div = $(div).append($(selectCatalog)).append($(selectCategor)).append($(divContainer));
                 $(ReactDOM.findDOMNode(this)).append($(div));
                 var ThisCatalogCategoryBlock = this;
                 var weekday = new Array(7);
@@ -752,35 +752,35 @@ function reactRender() {
                 var dayNow = weekday[new Date().getDay()];
                 //no working
                 $(catalogArr).each(function(i, thisCatalog) {
-                    $(thisCatalog.CatalogCategories).each(function(index, thisCatalogMenu) {
-                        var thisCatalogCategory = thisCatalogMenu;
-                        if (thisCatalogMenu.IsOnline == false) {
-                            if (thisCatalogMenu.UseDateTime == false) {
-                                renderCatalogCategory(thisCatalogMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                $(selectMenu).html("");
+                    $(thisCatalog.CatalogCategories).each(function(index, thisCatalogCategory) {
+                        var thisCatalogCategory = thisCatalogCategory;
+                        if (thisCatalogCategory.IsOnline == false) {
+                            if (thisCatalogCategory.UseDateTime == false) {
+                                renderCatalogCategory(thisCatalogCategory, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                $(selectCategor).html("");
                                 $(thisCatalog.CatalogCategories).each(function(count, option) {
-                                    $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
+                                    $(selectCategor).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                 });
                                 $(".select-restaurant").val(thisCatalog.Id);
-                                $(".select-menu").val(thisCatalogMenu.Id);
+                                $(".select-menu").val(thisCatalogCategory.Id);
                             } else {
                                 $(thisCatalogCategory.DateTimeCatalogCategory).each(function(indexData, dataItem) {
-                                    if (dataItem.IsChecked && dataItem.Day == dayNow && ThisCatalogCategoryBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisCatalogCategoryBlock.getClockTime())) {
+                                    if (dataItem.IsChecked && dataItem.Day == dayNow && ThisCatalogCategoryBlock.checkCatalogTime(dataItem.FromHour, dataItem.ToHour, ThisCatalogCategoryBlock.getClockTime())) {
                                         renderCatalogCategory(thisCatalogCategory, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                        $(selectMenu).html("");
+                                        $(selectCategor).html("");
                                         $(thisCatalog.CatalogCategories).each(function(count, option) {
-                                            $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
+                                            $(selectCategor).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                         });
                                         $(".select-restaurant").val(thisCatalog.Id);
-                                        $(".select-menu").val(thisCatalogMenu.Id);
+                                        $(".select-menu").val(thisCatalogCategory.Id);
                                     } else if (dataItem.IsChecked && dataItem.Day == cultureRes.date && ThisCatalogCategoryBlock.checkCatalogTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
                                         renderCatalogCategory(thisCatalogCategory, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                        $(selectMenu).html("");
+                                        $(selectCategor).html("");
                                         $(thisCatalog.CatalogCategories).each(function(count, option) {
-                                            $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
+                                            $(selectCategor).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                         });
                                         $(".select-restaurant").val(thisCatalog.Id);
-                                        $(".select-menu").val(thisCatalogMenu.Id);
+                                        $(".select-menu").val(thisCatalogCategory.Id);
                                     }
                                 });
                             }
@@ -789,32 +789,32 @@ function reactRender() {
                             if (networkState == Connection.NONE) {
                                 $("#custom-restaurant-menu-container").html(cultureRes.sorryOnline);
                             } else {
-                                if (thisCatalogMenu.UseDateTime == false) {
-                                    renderCatalogCategory(thisCatalogMenu, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                    $(selectMenu).html("");
+                                if (thisCatalogCategory.UseDateTime == false) {
+                                    renderCatalogCategory(thisCatalogCategory, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
+                                    $(selectCategor).html("");
                                     $(thisCatalog.CatalogCategories).each(function(count, option) {
-                                        $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
+                                        $(selectCategor).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                     });
                                     $(".select-restaurant").val(thisCatalog.Id);
-                                    $(".select-menu").val(thisCatalogMenu.Id);
+                                    $(".select-menu").val(thisCatalogCategory.Id);
                                 } else {
                                     $(thisCatalogCategory.DateTimeCatalogCategory).each(function(indexData, dataItem) {
-                                        if (dataItem.IsChecked && dataItem.Day == dayNow && ThisCatalogCategoryBlock.checkRestarauntTime(dataItem.FromHour, dataItem.ToHour, ThisCatalogCategoryBlock.getClockTime())) {
+                                        if (dataItem.IsChecked && dataItem.Day == dayNow && ThisCatalogCategoryBlock.checkCatalogTime(dataItem.FromHour, dataItem.ToHour, ThisCatalogCategoryBlock.getClockTime())) {
                                             renderCatalogCategory(thisCatalogCategory, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                            $(selectMenu).html("");
+                                            $(selectCategor).html("");
                                             $(thisCatalog.CatalogCategories).each(function(count, option) {
-                                                $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
+                                                $(selectCategor).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                             });
                                             $(".select-restaurant").val(thisCatalog.Id);
-                                            $(".select-menu").val(thisCatalogMenu.Id);
+                                            $(".select-menu").val(thisCatalogCategory.Id);
                                         } else if (dataItem.IsChecked && dataItem.Day == cultureRes.date && ThisCatalogCategoryBlock.checkCatalogTimeForDate(dataItem.FromHour, dataItem.ToHour)) {
                                             renderCatalogCategory(thisCatalogCategory, data.LablePosition, data.StateShopItemResponsiveModel, data.StateShopItemName, data.StateShopItemPrice, data.StateShopItemDescription, data.StateShopItemButton, data.StateShopItemImage);
-                                            $(selectMenu).html("");
+                                            $(selectCategor).html("");
                                             $(thisCatalog.CatalogCategories).each(function(count, option) {
-                                                $(selectMenu).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
+                                                $(selectCategor).append("<option value='" + option.Id + "'>" + option.Name + "</option>");
                                             });
                                             $(".select-restaurant").val(thisCatalog.Id);
-                                            $(".select-menu").val(thisCatalogMenu.Id);
+                                            $(".select-menu").val(thisCatalogCategory.Id);
                                         }
                                     });
                                 }
@@ -932,7 +932,7 @@ function reactRender() {
             //$(React.findDOMNode(this)).attr("style", styleCell);
             $(ReactDOM.findDOMNode(this)).attr("style", styleCell);
         },
-        checkRestarauntTime: function checkRestarauntTime(FromHourModel, ToHourModel, NowHoursModel) {
+        checkCatalogTime: function checkCatalogTime(FromHourModel, ToHourModel, NowHoursModel) {
             var FromDataArray = FromHourModel.split("T")[1].split(":");
             var ToDataArray = ToHourModel.split("T")[1].split(":");
             var NowDataArray = NowHoursModel.split("T")[1].split(":");
