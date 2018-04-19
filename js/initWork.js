@@ -28,6 +28,12 @@ function onDeviceReady() {
         checkConnection(InitPushNotification);
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
+
+    if(applicationData != null || applicationData != undefined){
+        if (applicationData.EnablePushNotification) {
+            push.setApplicationIconBadgeNumber( function(){}, function(){}, 0);//hide notification badge
+        }
+    }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
@@ -358,7 +364,6 @@ function InitPushNotification() {
             $.jStorage.set('notificationToken', data.registrationId);
         });
 
-        //OLD
         push.on('notification', function(data) {
             window.plugins.toast.hide();
 
@@ -376,6 +381,11 @@ function InitPushNotification() {
                 checkConnection(InitPushNotification);
             }
         }
+
+        push.getApplicationIconBadgeNumber(function(numBadges) {
+            console.log(numBadges);
+         });
+
         push.setApplicationIconBadgeNumber( function(){}, function(){}, 0)
     });
 
@@ -388,15 +398,7 @@ function InitPushNotification() {
 
 function onResume() {
     if (applicationData.EnablePushNotification) {
-        window.plugins.toast.showWithOptions({
-            message:"onResume" ,
-            duration: 7500,
-            position: "top",
-            addPixelsY: 50
-        });
-    
-        push.setApplicationIconBadgeNumber( function(){}, function(){}, 0)
+        push.setApplicationIconBadgeNumber( function(){}, function(){}, 0);//hide notification badge
     }
 }
-
 window.addEventListener('orientationchange', doOnOrientationChange);
