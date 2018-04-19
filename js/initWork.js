@@ -7,6 +7,7 @@ var countFileDownload = 0;
 var countFileDownloadFail = 0;
 var swipeMenuInGallary = false;
 var jsonStringify;
+var push;
 
 initYoutube();
 
@@ -334,7 +335,7 @@ function doOnOrientationChange() {
 
 function InitPushNotification() {
     if (applicationData.EnablePushNotification) {
-        var push = PushNotification.init({
+        push = PushNotification.init({
             android: {
                 //senderID: 418915081706
                 sound: true,
@@ -386,14 +387,16 @@ function InitPushNotification() {
 }
 
 function onResume() {
-    window.plugins.toast.showWithOptions({
-        message:"onResume" ,
-        duration: 7500,
-        position: "top",
-        addPixelsY: 50
-    });
-
-    push.setApplicationIconBadgeNumber( function(){}, function(){}, 0)
+    if (applicationData.EnablePushNotification) {
+        window.plugins.toast.showWithOptions({
+            message:"onResume" ,
+            duration: 7500,
+            position: "top",
+            addPixelsY: 50
+        });
+    
+        push.setApplicationIconBadgeNumber( function(){}, function(){}, 0)
+    }
 }
 
 window.addEventListener('orientationchange', doOnOrientationChange);
