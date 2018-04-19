@@ -355,15 +355,16 @@ function InitPushNotification() {
             $.jStorage.set('notificationToken', data.registrationId);
         });
 
-        // PushNotification.hasPermission(function(data) {
-
-        //     if (data.isEnabled) {
-        //         alert("is enabled");
-        //     } else {
-        //         alert("is disabled");
-        //     }
+        // push.on('notification', function(data) {
+        //     console.log(data.count);
+        //     push.setApplicationIconBadgeNumber(function() {
+        //         console.log('success');
+        //     }, function() {
+        //         console.log('error');
+        //     }, data.count + 1);
         // });
 
+        //OLD
         push.on('notification', function(data) {
             window.plugins.toast.hide();
 
@@ -381,6 +382,7 @@ function InitPushNotification() {
                 checkConnection(InitPushNotification);
             }
         }
+        push.setApplicationIconBadgeNumber( function(){}, function(){}, 0)
     });
 
         push.on('error', function(e) {
