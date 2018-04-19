@@ -14,8 +14,8 @@ function ReplaceResourcesPatchByLocal(jsonObject) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
         }
     }
-    if (jsonObject.Restaurants != null) {
-        jsonObject.Restaurants = resourcesOfRestaurantMenus(jsonObject.Restaurants, storePath);
+    if (jsonObject.Catalogs != null) {
+        jsonObject.Catalogs = resourcesOfCatalogCategories(jsonObject.Catalogs, storePath);
     }
     if (jsonObject.Institutions != null) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
@@ -48,8 +48,8 @@ function searchResourcesAndReplacePatch(jsonObject) {
             jsonObject.Pages[i] = resourcesOfBackground(jsonObject.Pages[i], storePath);
         }
     }
-    if (jsonObject.Restaurants != null) {
-        jsonObject.Restaurants = resourcesOfRestaurantMenus(jsonObject.Restaurants, storePath);
+    if (jsonObject.Catalogs != null) {
+        jsonObject.Catalogs = resourcesOfCatalogCategories(jsonObject.Catalogs, storePath);
     }
     if (jsonObject.Institutions != null) {
         jsonObject.Institutions = resourcesOfBooking(jsonObject.Institutions, storePath);
@@ -139,13 +139,13 @@ function resourcesOfBackground(page, storePath) {
 
 
 
-function resourcesOfRestaurantMenus(restaurants, storePath) {
+function resourcesOfCatalogCategories(restaurants, storePath) {
     restaurants = replacePathToImageRestaurantMenu(restaurants);
     $(restaurants).each(function() {
-        $(this.RestaurantMenus).each(function() {
+        $(this.CatalogCategories).each(function() {
             if (this.IsOnline == false) {
-                $(this.RestaurantMenuItems).each(function() {
-                    $(this.RestaurantMenuImages).each(function() {
+                $(this.ProductItems).each(function() {
+                    $(this.ProductItemImages).each(function() {
                         resources.push(this.Path);
                         this.Path = replacementPathImagesRestaurantMenu(this.Path, storePath);
 
@@ -355,9 +355,9 @@ function fail(error) {
 
 function replacePathToImageRestaurantMenu(restaurants) {
     $(restaurants).each(function() {
-        $(this.RestaurantMenus).each(function() {
-            $(this.RestaurantMenuItems).each(function() {
-                $(this.RestaurantMenuImages).each(function() {
+        $(this.CatalogCategories).each(function() {
+            $(this.ProductItems).each(function() {
+                $(this.ProductItemImages).each(function() {
                     this.Path = applicationData.UrlForUpdateApp + this.Path;
                 });
             });
