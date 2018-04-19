@@ -199,6 +199,11 @@ function checkConnection(callbackInitPN) {
                 }
             }
         });
+        if(applicationData != null || applicationData != "undefined" || push != "undefined"){
+            if (applicationData.EnablePushNotification) {
+                push.setApplicationIconBadgeNumber( function(){}, function(){}, 0);//hide notification badge
+            }
+        }
     } else {
         //without internet
         if ($.jStorage.get('appData') != null) {
