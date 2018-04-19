@@ -351,18 +351,11 @@ function InitPushNotification() {
             windows: {}
         });
 
+        document.addEventListener("resume", onResume, false);
+
         push.on('registration', function(data) {
             $.jStorage.set('notificationToken', data.registrationId);
         });
-
-        // push.on('notification', function(data) {
-        //     console.log(data.count);
-        //     push.setApplicationIconBadgeNumber(function() {
-        //         console.log('success');
-        //     }, function() {
-        //         console.log('error');
-        //     }, data.count + 1);
-        // });
 
         //OLD
         push.on('notification', function(data) {
@@ -391,4 +384,16 @@ function InitPushNotification() {
         });
     }
 }
+
+function onResume() {
+    window.plugins.toast.showWithOptions({
+        message:"onResume" ,
+        duration: 7500,
+        position: "top",
+        addPixelsY: 50
+    });
+
+    push.setApplicationIconBadgeNumber( function(){}, function(){}, 0)
+}
+
 window.addEventListener('orientationchange', doOnOrientationChange);
