@@ -7,6 +7,7 @@ var countFileDownload = 0;
 var countFileDownloadFail = 0;
 var swipeMenuInGallary = false;
 var jsonStringify;
+var push;
 
 initYoutube();
 
@@ -27,6 +28,12 @@ function onDeviceReady() {
         checkConnection(InitPushNotification);
         store = fileSystem.root.nativeURL + "Phonegap/";
     });
+
+    if(applicationData != null || applicationData != undefined){
+        if (applicationData.EnablePushNotification) {
+            push.setApplicationIconBadgeNumber( function(){}, function(){}, 0);//hide notification badge
+        }
+    }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
@@ -192,6 +199,11 @@ function checkConnection(callbackInitPN) {
                 }
             }
         });
+        if(applicationData != null || applicationData != "undefined" || push != "undefined"){
+            if (applicationData.EnablePushNotification) {
+                push.setApplicationIconBadgeNumber( function(){}, function(){}, 0);//hide notification badge
+            }
+        }
     } else {
         //without internet
         if ($.jStorage.get('appData') != null) {
@@ -320,12 +332,12 @@ function doOnOrientationChange() {
     switch (window.orientation) {
         case -90:
         case 90:
-            if (applicationData.Restaurants.length > 0) {
+            if (applicationData.Catalogs.length > 0) {
                 // restarauntMenuModelItems();
             }
             break;
         default:
-            if (applicationData.Restaurants.length > 0) {
+            if (applicationData.Catalogs.length > 0) {
                 // restarauntMenuModelItems();
             }
             break;
@@ -334,7 +346,7 @@ function doOnOrientationChange() {
 
 function InitPushNotification() {
     if (applicationData.EnablePushNotification) {
-        var push = PushNotification.init({
+        push = PushNotification.init({
             android: {
                 //senderID: 418915081706
                 sound: true,
@@ -351,18 +363,11 @@ function InitPushNotification() {
             windows: {}
         });
 
+        document.addEventListener("resume", onResume, false);
+
         push.on('registration', function(data) {
             $.jStorage.set('notificationToken', data.registrationId);
         });
-
-        // PushNotification.hasPermission(function(data) {
-
-        //     if (data.isEnabled) {
-        //         alert("is enabled");
-        //     } else {
-        //         alert("is disabled");
-        //     }
-        // });
 
         push.on('notification', function(data) {
             window.plugins.toast.hide();
@@ -381,12 +386,24 @@ function InitPushNotification() {
                 checkConnection(InitPushNotification);
             }
         }
+
+        push.getApplicationIconBadgeNumber(function(numBadges) {
+            console.log(numBadges);
+         });
+
+        push.setApplicationIconBadgeNumber( function(){}, function(){}, 0)
     });
 
         push.on('error', function(e) {
             // e.message
             // alert("Error " + e.message);
         });
+    }
+}
+
+function onResume() {
+    if (applicationData.EnablePushNotification) {
+        push.setApplicationIconBadgeNumber( function(){}, function(){}, 0);//hide notification badge
     }
 }
 window.addEventListener('orientationchange', doOnOrientationChange);

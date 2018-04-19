@@ -2,9 +2,9 @@
 
 function renderSingleShopItem(singleItem) {
     var currency = "";
-    applicationData.Restaurants.forEach(function(e, i) {
-        e.RestaurantMenus.forEach(function(menu, id) {
-            if (menu.Id == singleItem.RestaurantMenuId) {
+    applicationData.Catalogs.forEach(function(e, i) {
+        e.CatalogCategories.forEach(function(menu, id) {
+            if (menu.Id == singleItem.CatalogCategoryId) {
                 currency = menu.Currency;
             }
         });
@@ -37,8 +37,8 @@ function renderSingleShopItem(singleItem) {
         render: function render() {
             var data = this.state.data;
             var sliderItem;
-            if (data.RestaurantMenuImages.length > 0) {
-                sliderItem = data.RestaurantMenuImages.map(function(item) {
+            if (data.ProductItemImages.length > 0) {
+                sliderItem = data.ProductItemImages.map(function(item) {
                     return React.createElement(
                         "div", { className: "swiper-slide" },
                         React.createElement("img", { src: item.Path })
@@ -99,7 +99,7 @@ function renderSingleShopItem(singleItem) {
                     "div", { className: "singleShop-fixed-nav-bottom" },
                     React.createElement(
                         "div", { className: "goToMenu-btn" },
-                        "Перейти в меню"
+                        "Перейти к каталогу"
                     ),
                     React.createElement(
                         "div", { className: "singleShop-btn" },
@@ -128,7 +128,7 @@ function renderSingleShopItem(singleItem) {
 //     },
 //     render: function() {
 //       var data = this.state.data;
-//       var sliderItem = data.RestaurantMenuImages.map(function(item){
+//       var sliderItem = data.ProductItemImages.map(function(item){
 //         return(
 //         <div className="swiper-slide"><img src={item.Path} /></div>
 //             );
