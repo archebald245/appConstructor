@@ -34,10 +34,15 @@ function onDeviceReady() {
             push.setApplicationIconBadgeNumber( function(){}, function(){}, 0);//hide notification badge
         }
     }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
-
+   if(device.model.indexOf("iPhone10")>=0){
+        document.body.classList.add('is-' + "iPhone10");
+   }else{
+        if (device.platform === 'iOS') {
+            StatusBar.hide();
+        }
+   }
+    
     $("#dateTimePicker-date").dateDropper({
         dropBorder: "1px solid #939393",
         dropPrimaryColor: "#939393",
@@ -53,9 +58,7 @@ function onDeviceReady() {
 
     appStart();
 
-    if (device.platform === 'iOS') {
-        StatusBar.hide();
-    }
+
     $('[data-toggle="tooltip"]').tooltip();
     if ('ontouchstart' in document.documentElement) {
         $('body').css('cursor', 'pointer');
