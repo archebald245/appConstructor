@@ -159,7 +159,7 @@ function checkRestarauntsAndEventsUpdate() {
         //Event request
         $.ajax({
             type: "POST",
-            url: applicationData.UrlForUpdateApp + "/api/Event/GetUpdatedEvents",
+            url: applicationData.UrlForUpdateApp + "/api/v1/Events/GetUpdatedEvents",
             data: JSON.stringify(eventCollection),
             cache: false,
             contentType: "application/json",
@@ -174,11 +174,10 @@ function checkRestarauntsAndEventsUpdate() {
             }
         }),
         //get favorites
-
+        
         $.ajax({
-            url: applicationData.UrlForUpdateApp + '/api/FavoriteEvent',
+            url: applicationData.UrlForUpdateApp + '/api/v1/favoritevents/'+userId,
             type: "get",
-            data: { userId: userId },
             contentType: "application/json",
             datatype: 'json',
             success: function(data) {
@@ -193,7 +192,7 @@ function checkRestarauntsAndEventsUpdate() {
                 console.error(xhr, status, err.toString());
             }.bind(this)
         })
-
+    
     ).then(function() {
         var appJsonString = JSON.stringify(applicationData);
         $.jStorage.set('replaceImagePachJson', appJsonString);
