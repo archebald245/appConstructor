@@ -35,6 +35,9 @@ function onDeviceReady() {
         }
     }
 
+    StatusBar.overlaysWebView(false);
+    StatusBar.backgroundColorByHexString('#000');
+
    if(device.model.indexOf("iPhone10")>=0){
         document.body.classList.add('is-' + "iPhone10");
    }else{
@@ -335,14 +338,14 @@ function doOnOrientationChange() {
     switch (window.orientation) {
         case -90:
         case 90:
-            if (applicationData.Catalogs.length > 0) {
-                // restarauntMenuModelItems();
-            }
-            break;
+            $("body").addClass("change-orientation");
+           break;
+        case 0:
+        case 180:
+            $("body").removeClass("change-orientation");
+        break;
         default:
-            if (applicationData.Catalogs.length > 0) {
-                // restarauntMenuModelItems();
-            }
+            
             break;
     }
 }
