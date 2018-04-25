@@ -34,10 +34,18 @@ function onDeviceReady() {
             push.setApplicationIconBadgeNumber( function(){}, function(){}, 0);//hide notification badge
         }
     }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area Start
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Notification Area End
+    StatusBar.overlaysWebView(false);
+    StatusBar.backgroundColorByHexString('#000');
 
+   if(device.model.indexOf("iPhone10")>=0){
+        document.body.classList.add('is-' + "iPhone10");
+   }else{
+        if (device.platform === 'iOS') {
+            StatusBar.hide();
+        }
+   }
+    
     $("#dateTimePicker-date").dateDropper({
         dropBorder: "1px solid #939393",
         dropPrimaryColor: "#939393",
@@ -53,9 +61,7 @@ function onDeviceReady() {
 
     appStart();
 
-    if (device.platform === 'iOS') {
-        StatusBar.hide();
-    }
+
     $('[data-toggle="tooltip"]').tooltip();
     if ('ontouchstart' in document.documentElement) {
         $('body').css('cursor', 'pointer');
@@ -332,14 +338,14 @@ function doOnOrientationChange() {
     switch (window.orientation) {
         case -90:
         case 90:
-            if (applicationData.Catalogs.length > 0) {
-                // restarauntMenuModelItems();
-            }
-            break;
+            $("body").addClass("change-orientation");
+           break;
+        case 0:
+        case 180:
+            $("body").removeClass("change-orientation");
+        break;
         default:
-            if (applicationData.Catalogs.length > 0) {
-                // restarauntMenuModelItems();
-            }
+            
             break;
     }
 }
