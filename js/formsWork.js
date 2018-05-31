@@ -70,6 +70,7 @@ function submitFormListener() {
 
     $(".formLogout").on("click", function() {
         $.jStorage.deleteKey('isLogin');
+        $.jStorage.deleteKey('fieldData');
         $.jStorage.deleteKey('FavoriteEvents');
         goToPage(indexPage);
     });
