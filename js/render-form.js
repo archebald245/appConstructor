@@ -85,7 +85,7 @@ function renderForm(form, id) {
                         if(field.Remember){
                         var fieldValue= "";
                         fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
+                            if(+e.id === field.Id && e.userId=== isLogin){
                                 fieldValue = e.data;
                             }
                         });
@@ -115,7 +115,7 @@ function renderForm(form, id) {
                         if(field.Remember){
                             var fieldValue= "";
                             fieldData.forEach(function(e){
-                                if(+e.id === field.Id){
+                                if(+e.id === field.Id && e.userId=== isLogin){
                                     fieldValue = e.data;
                                 }
                             });
@@ -146,7 +146,7 @@ function renderForm(form, id) {
                     if(field.Remember){
                         var fieldValue= "";
                         fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
+                            if(+e.id === field.Id && e.userId=== isLogin){
                                 fieldValue = e.data;
                             }
                         });
@@ -176,7 +176,7 @@ function renderForm(form, id) {
                     if(field.Remember){
                         var fieldValue= "";
                         fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
+                            if(+e.id === field.Id && e.userId=== isLogin){
                                 fieldValue = e.data;
                             }
                         });
@@ -207,7 +207,7 @@ function renderForm(form, id) {
                     if(field.Remember){
                         var fieldValue= "";
                         fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
+                            if(+e.id === field.Id && e.userId=== isLogin){
                                 fieldValue = e.data;
                             }
                         });
