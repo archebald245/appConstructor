@@ -290,6 +290,7 @@ function addPlaceholder() {
     });
 }
 function saveRememberFields(form){
+    var userId = $.jStorage.get('isLogin');
     $(form).find(".remember").each(function(i, element) {
        var fieldId = $(element).attr("id");
        var fieldData = $(element).val();
@@ -299,7 +300,7 @@ function saveRememberFields(form){
        }
        var isFound = false;
         savedData.forEach(function (e) {
-           if(e.id ===fieldId){
+           if(e.id ===fieldId && e.userId === userId){
                 e.data = fieldData;
                 isFound = true;
            }
@@ -307,7 +308,8 @@ function saveRememberFields(form){
        if(!isFound){
         savedData.push({
             id:fieldId,
-            data:fieldData
+            data:fieldData,
+            userId: userId
         });
        }
        $.jStorage.set('fieldData', savedData);

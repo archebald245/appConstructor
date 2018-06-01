@@ -6,6 +6,7 @@ function renderCustomForm(form) {
     var idRadioBtn;
     var isDropdownName;
     var fieldData = $.jStorage.get('fieldData')||[];
+    var isLogin = $.jStorage.get('isLogin');
     var FormBlock = React.createClass({
         displayName: cultureRes.formBlock,
 
@@ -83,7 +84,7 @@ function renderCustomForm(form) {
                         if(field.Remember){
                         var fieldValue= "";
                         fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
+                            if(+e.id === field.Id && e.userId=== isLogin){
                                 fieldValue = e.data;
                             }
                         });
@@ -113,7 +114,7 @@ function renderCustomForm(form) {
                         if(field.Remember){
                             var fieldValue= "";
                             fieldData.forEach(function(e){
-                                if(+e.id === field.Id){
+                                if(+e.id === field.Id && e.userId=== isLogin){
                                     fieldValue = e.data;
                                 }
                             });
@@ -144,7 +145,7 @@ function renderCustomForm(form) {
                     if(field.Remember){
                         var fieldValue= "";
                         fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
+                            if(+e.id === field.Id && e.userId=== isLogin){
                                 fieldValue = e.data;
                             }
                         });
@@ -174,7 +175,7 @@ function renderCustomForm(form) {
                     if(field.Remember){
                         var fieldValue= "";
                         fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
+                            if(+e.id === field.Id && e.userId=== isLogin){
                                 fieldValue = e.data;
                             }
                         });
@@ -205,7 +206,7 @@ function renderCustomForm(form) {
                     if(field.Remember){
                         var fieldValue= "";
                         fieldData.forEach(function(e){
-                            if(+e.id === field.Id){
+                            if(+e.id === field.Id && e.userId=== isLogin){
                                 fieldValue = e.data;
                             }
                         });
@@ -230,163 +231,7 @@ function renderCustomForm(form) {
                             fieldEl
                         );
                 }
-
-                // if (field.FieldTypeId == 4) {
-                //     if (field.Required) {
-                //         var _React$createElement;
-
-                //         return React.createElement(
-                //             "div", { className: "textElement formBlock form-group" },
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("input", (_React$createElement = { className: "form-control", name: field.Name, type: "text" }, _defineProperty(_React$createElement, "className", "required  form-control"), _defineProperty(_React$createElement, "id", field.Id), _React$createElement))
-                //         );
-                //     } else {
-                //         return React.createElement(
-                //             "div", { className: "textElement formBlock form-group" },
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("input", { className: "form-control", name: field.Name, type: "text", id: field.Id })
-                //         );
-                //     }
-                // }
-                // if (field.FieldTypeId == 5) {
-                //     if (field.Required) {
-                //         return React.createElement(
-                //             "div", { className: "textAreaElement formBlock form-group" },
-                //             " ",
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("textarea", { className: "required form-control", name: field.Name, id: field.Id })
-                //         );
-                //     } else {
-                //         return React.createElement(
-                //             "div", { className: "textAreaElement formBlock form-group" },
-                //             " ",
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("textarea", { className: "form-control", name: field.Name, id: field.Id }),
-                //             " "
-                //         );
-                //     }
-                // }
-                // if (field.FieldTypeId == 6) {
-                //     if (field.Required) {
-                //         return React.createElement(
-                //             "div", { className: "emailElement formBlock form-group" },
-                //             " ",
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("input", { type: "text", name: field.Name, className: "email required form-control", id: field.Id })
-                //         );
-                //     } else {
-                //         return React.createElement(
-                //             "div", { className: "emailElement formBlock form-group" },
-                //             " ",
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("input", { type: "text", name: field.Name, className: "email form-control", id: field.Id })
-                //         );
-                //     }
-                // }
-                // if (field.FieldTypeId == 7) {
-                //     if (field.Required) {
-                //         return React.createElement(
-                //             "div", { className: "phoneNumberElement formBlock form-group" },
-                //             " ",
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("input", { type: "text", name: field.Name, className: "phoneNumber required form-control", placeholder: cultureRes.telPlaceholder, id: field.Id })
-                //         );
-                //     } else {
-                //         return React.createElement(
-                //             "div", { className: "phoneNumberElement formBlock form-group" },
-                //             " ",
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("input", { type: "text", name: field.Name, className: "phoneNumber form-control", placeholder: cultureRes.telPlaceholder, id: field.Id })
-                //         );
-                //     }
-                // }
-                // if (field.FieldTypeId == 8) {
-                //     if (field.Required) {
-                //         return React.createElement(
-                //             "div", { className: "numberElement formBlock form-group" },
-                //             " ",
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("input", { type: "number", name: field.Name, className: "required form-control", id: field.Id })
-                //         );
-                //     } else {
-                //         return React.createElement(
-                //             "div", { className: "numberElement formBlock form-group" },
-                //             " ",
-                //             React.createElement(
-                //                 "div", { className: "label-container" },
-                //                 React.createElement(
-                //                     "label",
-                //                     null,
-                //                     field.Label
-                //                 )
-                //             ),
-                //             React.createElement("input", { className: "form-control", name: field.Name, type: "number", id: field.Id })
-                //         );
-                //     }
-                // }
+              
                 if (field.FieldTypeId == 9) {
                     return React.createElement(
                         "div", { className: "switcherFormBlock formBlock form-group" },
