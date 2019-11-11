@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    padding: 0px 0 0 0;
+    padding: 0 0 0 0;
 }
 
 html,
@@ -33,6 +33,7 @@ form {
     margin-top: -1px;
     display: none;
 }
+
 
 .classMenuTop {
     top: 0;
@@ -68,7 +69,6 @@ form {
     background: #E5E5E5;
     overflow: scroll;
 }
-
 .classDropdownList-topMenu {
     top: 54px;
     -webkit-box-shadow: 0px 20px 10px -10px rgba(0, 0, 0, 1);
@@ -260,6 +260,7 @@ form {
 }
 
 .button-block .btn-custom {
+    margin-top: 1px;
     display: block;
     width: 100%;
 }
@@ -554,6 +555,9 @@ p.item-shop-description {
     width: 100%;
     height: 100%;
 }
+.singleItem .cart-top-line {
+    height: 50px;
+}
 
 .cart-top-line {
     position: fixed;
@@ -567,6 +571,7 @@ p.item-shop-description {
     text-align: center;
     z-index: 10;
 }
+
 
 .braintree-container {
     margin: 50px 0 100px;
@@ -597,9 +602,8 @@ p.item-shop-description {
     margin-left: 30px;
     background-repeat: no-repeat;
 }
-
-.cart-top-line .to-cart {
-    position: absolute;
+.cart-top-line .to-cart,
+{    position: absolute;
     right: 0;
     top: 10px;
     background-image: url(../baseimages/bag.png);
@@ -1010,9 +1014,9 @@ form#payment-form-booking {
     overflow: auto;
     text-align: center;
     z-index: 30;
-    -webkit-box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
-    -moz-box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
-    box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
+    box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
 }
 
 .goToMenu-btn {
@@ -1033,10 +1037,6 @@ form#payment-form-booking {
     z-index: 30;
     background-color: #4a8b23;
     color: #fff;
-}
-
-.singleItem .cart-top-line {
-    height: 50px;
 }
 
 .singleShop-wrapper .swiper-container {
@@ -1391,9 +1391,9 @@ select#payMethod {
     text-transform: uppercase;
     line-height: 65px;
     text-align: center;
-    -webkit-box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
-    -moz-box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
-    box-shadow: 0px -1px 3px 0px rgba(74, 74, 74, 1);
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
+    box-shadow: 0px 0px 3px 0px rgba(74, 74, 74, 1);
 }
 
 
@@ -2407,3 +2407,110 @@ input[type="checkbox"].SwitcherFormElement:checked+div>div {
     text-align: left;
     color: #484848;
 }
+/*iPhoneX SECTION START*/
+body {
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+}
+
+.footer-class {
+    padding-bottom: constant(safe-area-inset-bottom); 
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+body.change-orientation{
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
+
+    padding-top:0;
+}
+/* body.change-orientation .footer-class {
+    padding-bottom: 0; 
+}
+.change-orientation.is-iPhone10
+*/
+
+.is-iPhone10 .classMenu{
+    height: 95px;
+}
+.change-orientation.is-iPhone10 .is-iPhone10 .classMenu{
+    height: 55px;
+}
+
+.is-iPhone10 .menu-icon{
+    top:40px;
+}
+.change-orientation.is-iPhone10 .is-iPhone10 .menu-icon{
+    top:0px;
+}
+
+.is-iPhone10 .classDropdownList-topMenu{
+    top: 94px;
+}
+.change-orientation.is-iPhone10 .is-iPhone10 .classDropdownList-topMenu{
+    top: 54px;
+}
+
+.is-iPhone10 .cart-top-line{
+    height: 85px;
+    padding-top: 50px;
+}
+.change-orientation.is-iPhone10 .is-iPhone10 .cart-top-line{
+    height: 45px;
+    padding-top: 10px;
+}
+
+.is-iPhone10 .cart-top-line .back-to-container,
+.is-iPhone10 .cart-top-line .back-to-timelines,
+.is-iPhone10 .back-to-container-from-book,
+.is-iPhone10 .btn-back-toservices,
+.is-iPhone10 .back-to-services,
+.is-iPhone10 .back-to-cart,
+.is-iPhone10 .cart-top-line .to-cart {
+    top: 50px;
+}
+.change-orientation.is-iPhone10 .cart-top-line .back-to-container,
+.change-orientation.is-iPhone10 .cart-top-line .back-to-timelines,
+.change-orientation.is-iPhone10 .back-to-container-from-book,
+.change-orientation.is-iPhone10 .btn-back-toservices,
+.change-orientation.is-iPhone10 .back-to-services,
+.change-orientation.is-iPhone10 .back-to-cart,
+.change-orientation.is-iPhone10 .cart-top-line .to-cart {
+    top: 10px;
+}
+
+.is-iPhone10 .btn-confirmDateForBook,
+.is-iPhone10 .btn-order-booking,
+.is-iPhone10 .btn-order-booking-ForFreeTime,
+.is-iPhone10 .btn-send-order-booking {
+    height: 85px;
+    padding-bottom: 20px
+}
+.change-orientation.is-iPhone10 .btn-confirmDateForBook,
+.change-orientation.is-iPhone10 .btn-order-booking,
+.change-orientation.is-iPhone10 .btn-order-booking-ForFreeTime,
+.change-orientation.is-iPhone10 .btn-send-order-booking {
+    height: 65px;
+    padding-bottom: 0px
+}
+
+.is-iPhone10 .menuOrder-fixed-nav-bottom,
+.is-iPhone10 .menuCart-fixed-nav-bottom,
+.is-iPhone10 .singleShop-fixed-nav-bottom{
+    height: 85px;
+}
+.change-orientation.is-iPhone10 .menuOrder-fixed-nav-bottom,
+.change-orientation.is-iPhone10 .menuCart-fixed-nav-bottom,
+.change-orientation.is-iPhone10 .singleShop-fixed-nav-bottom{
+    height: 65px;
+}
+
+.is-iPhone10  .lg-toolbar{
+    top: constant(safe-area-inset-top); 
+    top: env(safe-area-inset-top);
+}
+
+/*iPhoneX SECTION END*/

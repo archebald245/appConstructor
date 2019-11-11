@@ -15,7 +15,7 @@ function blockUi() {
 
 function unBlockUi() {
     createCustomHideForms();
-    bindChangeValForms();
+    bindChangeValForms(); //posible custom form submit twice
     addListenerToClickBuy();
     addListenerToClickOpenSingleItem();
     bindListenerToClickBtn();

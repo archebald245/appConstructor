@@ -91,6 +91,7 @@ function bindChangeValForms() {
         var formId = $(elem).attr("id").split("_")[1];
         $(".form-submit-item").find(".formSubmit").each(function(i, button) {
             if (formId == $(button).parent().attr("name")) {
+                $(button).unbind("click");
                 $(button).on("click", function() {
                     var networkState = navigator.connection.type;
                     if (networkState != Connection.NONE) {
@@ -99,6 +100,11 @@ function bindChangeValForms() {
                         var isLoginForm = $(elem).find("input[name='LoginForm']").val();
                         var isRegisterForm = $(elem).find("input[name='RegistrationForm']").val();
                         if (check != false) {
+                            if ($.jStorage.get("isLogin") != null) {
+                                $(elem).find("[name='UserId']").val($.jStorage.get("isLogin"));
+                            }else{
+                                $(elem).find("[name='UserId']").val(null);
+                            }
                             if (isLoginForm == "true") {
                                 $.post('' + siteUrl + '/MobileUserAuth/Login/', $(elem).serialize(), function(data) {
                                     $(".spinner-container").addClass("hidden");
@@ -133,9 +139,10 @@ function bindChangeValForms() {
                             } else {
                                 $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                     $(".spinner-container").addClass("hidden");
+                                    saveRememberFields(elem);
                                     alert(cultureRes.thankYou);
                                     $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember" ).val("");
-                                    $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                    $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").not(".remember").val("");
                                     $(elem).find("input[type='checkbox']").removeAttr("checked");
                                     $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");
                                 });
@@ -149,7 +156,6 @@ function bindChangeValForms() {
                 });
             }
         });
-
         $(".form_" + formId).each(function(i, element) {
             var field = $(element).siblings(".formBlock").find("input, textarea, select");
             var fieldName = $(field).attr("name");
@@ -163,9 +169,9 @@ function bindChangeValForms() {
                         if (check != false) {
                             $.post('' + siteUrl + '/Form/SaveFormData', $(elem).serialize(), function() {
                                 $(".spinner-container").addClass("hidden");
-                                alert(cultureRes.thankYou);
+                                alert(cultureRes.thankYou); 
                                 $(elem).find(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember").val("");
-                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").val("");
+                                $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='number'], input[type='text'], textarea").not( ".remember").val("");
 
                                 $(elem).find("input[type='checkbox']").removeAttr("checked");
                                 $("." + $(elem).attr("id")).siblings(".formBlock").find("input[type='checkbox']").removeAttr("checked");

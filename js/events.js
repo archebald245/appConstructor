@@ -69,7 +69,6 @@ function goToPage(index) {
         pageStyles = pageWithGeneralBg[0].Style;
     }
 
-
     $("#container").attr("style", pageStyles);
     submitFormListener();
     initGallaryClick();
@@ -77,6 +76,17 @@ function goToPage(index) {
     addListenerToClickBuy();
     addListenerToClickOpenSingleItem();
     addListenerToClickTimeLine();
+
+    var objectForm = applicationData.Forms;
+    $("#custom-hide-container").html("");
+    $(objectForm).each(function(i, form) {
+        var idHideForm = "form_" + form.Id;
+        $("#custom-hide-container").append("<form id='custom-form-hide-container'></form>");
+        renderHideCustomForm(form);
+        $("#custom-form-hide-container").attr("id", idHideForm);
+    });
+
+
     $(".cart-btn").on("click", function() {
         $("#container").addClass("hidden");
         $(".classMenu").addClass("hidden");
@@ -110,7 +120,7 @@ function getLastOpenPage() {
 
 function checkRestarauntsAndEventsUpdate() {
     var eventCollection = [];
-    var collectionRestaurantMenu = [];
+    var collectionCatalogCategory = [];
 
     var userId = $.jStorage.get('isLogin');
 
@@ -120,9 +130,9 @@ function checkRestarauntsAndEventsUpdate() {
             Version: this.Version
         });
     });
-    $(applicationData.Restaurants).each(function(i, elem) {
-        $(elem.RestaurantMenus).each(function() {
-            collectionRestaurantMenu.push({
+    $(applicationData.Catalogs).each(function(i, elem) {
+        $(elem.CatalogCategories).each(function() {
+            collectionCatalogCategory.push({
                 Id: this.Id,
                 Version: this.Version
             });
@@ -132,24 +142,24 @@ function checkRestarauntsAndEventsUpdate() {
         //Restaraunt request
         $.ajax({
             type: "POST",
-            url: applicationData.UrlForUpdateApp + "/RestaurantMenu/CheckUpdateRestaurantMenu",
+            url: applicationData.UrlForUpdateApp + "/Catalog/CheckUpdateCatalogCategory",
             data: {
-                model: collectionRestaurantMenu
+                model: collectionCatalogCategory
             },
             cache: false,
             success: function(object) {
                 object = JSON.parse(object);
                 if (object.IsUpdated == true) {
-                    applicationData.Restaurants = object.Restaurants;
+                    applicationData.Catalogs = object.Catalogs;
                     var storePath = window.myFileSystem.root.nativeURL + "Phonegap/";
-                    applicationData.Restaurants = resourcesOfRestaurantMenus(applicationData.Restaurants, storePath);
+                    applicationData.Catalogs = resourcesOfCatalogCategories(applicationData.Catalogs, storePath);
                 }
             }
         }),
         //Event request
         $.ajax({
             type: "POST",
-            url: applicationData.UrlForUpdateApp + "/api/Event/GetUpdatedEvents",
+            url: applicationData.UrlForUpdateApp + "/api/v1/Events/GetUpdatedEvents",
             data: JSON.stringify(eventCollection),
             cache: false,
             contentType: "application/json",
@@ -164,11 +174,10 @@ function checkRestarauntsAndEventsUpdate() {
             }
         }),
         //get favorites
-
+        
         $.ajax({
-            url: applicationData.UrlForUpdateApp + '/api/FavoriteEvent',
+            url: applicationData.UrlForUpdateApp + '/api/v1/favoritevents/'+userId,
             type: "get",
-            data: { userId: userId },
             contentType: "application/json",
             datatype: 'json',
             success: function(data) {
@@ -183,7 +192,7 @@ function checkRestarauntsAndEventsUpdate() {
                 console.error(xhr, status, err.toString());
             }.bind(this)
         })
-
+    
     ).then(function() {
         var appJsonString = JSON.stringify(applicationData);
         $.jStorage.set('replaceImagePachJson', appJsonString);
